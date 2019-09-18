@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, newRot));
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Movement();
         MousePoint();
