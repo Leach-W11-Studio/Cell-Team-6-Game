@@ -6,6 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
 
+    //Added - Ben Shackman
+    public PlayerGunScript gun;
+
+    private void Start()
+    {
+        gun = transform.GetComponentInChildren<PlayerGunScript>();
+    }
+
     void Movement()
     {
         //Makes object move in an absolute fashion in all 4 directions
@@ -26,9 +34,18 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, newRot));
     }
 
+    void Firing()
+    {
+        if(Input.GetAxis("Fire1") != 0)
+        {
+            gun.Shoot();
+        }
+    }
+
     void FixedUpdate()
     {
         Movement();
         MousePoint();
+        Firing();
     }
 }

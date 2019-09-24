@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleBullet : MonoBehaviour
+public class SimpleBullet : MonoBehaviour, IShootable
 {
     public float power = 10;
     private Rigidbody2D rb;
@@ -13,9 +13,10 @@ public class SimpleBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Shoot() {
+    void IShootable.Shoot()
+    {
         rb.velocity = Vector2.zero;
-        rb.AddForce(transform.right * power);
+        rb.AddForce(transform.up * power);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
