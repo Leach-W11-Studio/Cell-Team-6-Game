@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public float walkModifier;
     public float explosionBufferTime;
 
+    //Added - Ben Shackman
+    public PlayerGunScript gun;
+    
     public bool isWalking;
     public bool canExplode = true;
 
@@ -19,13 +22,14 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        gun = transform.GetComponentInChildren<PlayerGunScript>();
         hitboxHighlight = transform.Find("Hitbox Highlight").gameObject;
         inventory = GetComponent<PlayerInventory>();
     }
 
     void Movement()
     {
-        float targetSpeed = isWalking ? moveSpeed / walkModifier : moveSpeed;
+      float targetSpeed = isWalking ? moveSpeed / walkModifier : moveSpeed;
         //Makes object move in an absolute fashion in all 4 directions
         float horizontal = Input.GetAxis("Horizontal") * targetSpeed/10;
         float vertical = Input.GetAxis("Vertical") * targetSpeed/10;
@@ -44,6 +48,14 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, newRot));
     }
 
+    void Firing()
+    {
+        if(Input.GetAxis("Fire1") != 0)
+        {
+            gun.Shoot();
+        }
+    }
+    
     void CreateExplosion(string cellType) {
         // check if canExplode and the amount of this particular cell is greater than 0
         if (canExplode && inventory.whiteBloodCells[cellType] > 0) {
@@ -55,7 +67,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ExplosionBuffer());
         }
     }
-
+    
     private void Update()
     {
         if (Input.GetButton("Walk")) { isWalking = true; }
@@ -77,8 +89,9 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         MousePoint();
+        Firing();
     }
-
+    
     IEnumerator ExplosionBuffer() {
         canExplode = false;
         yield return new WaitForSeconds(explosionBufferTime);
