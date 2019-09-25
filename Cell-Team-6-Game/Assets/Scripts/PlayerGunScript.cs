@@ -10,6 +10,13 @@ public class PlayerGunScript : MonoBehaviour
     [Tooltip("Describes the delay between shots of the player's weapon.")]
     public float fireRate;
 
+    //Used to control how many fire intervals pass between each of these shot types.
+    public int megaRateMod;
+    public int stunRateMod;
+
+    public int megaCountDown;
+    private int stunCountDown;
+
     //Bools for various gun types
     public bool spreadActive;
     public bool doubleActive;
@@ -26,6 +33,8 @@ public class PlayerGunScript : MonoBehaviour
     void Start()
     {
         canShoot = true;
+        megaCountDown = 0;
+        stunCountDown = 0;
     }
 
     // Update is called once per frame
@@ -40,7 +49,15 @@ public class PlayerGunScript : MonoBehaviour
         {
             if(spreadActive) { ObjectQueue.Instance.SpawnFromPool("SpreadBullet", transform.position, transform.rotation); }
             if(doubleActive) { ObjectQueue.Instance.SpawnFromPool("DoubleBullet", transform.position, transform.rotation); }
-            if(megaActive) { }
+            if(megaActive)
+            {
+                if(megaCountDown == megaRateMod)
+                {
+                    ObjectQueue.Instance.SpawnFromPool("MegaBullet", transform.position, transform.rotation);
+                    megaCountDown = 0;
+                }
+                megaCountDown += 1;
+            }
             if(stunActive) { }
             if(ricochetActive) { }
 

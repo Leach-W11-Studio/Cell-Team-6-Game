@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SimpleBullet : MonoBehaviour, IShootable
 {
+    //Added as placeholder, not used right now.
+    public float damage = 1f;
+
     public float power = 10;
     private Rigidbody2D rb;
 
