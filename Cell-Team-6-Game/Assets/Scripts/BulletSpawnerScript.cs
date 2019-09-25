@@ -6,17 +6,24 @@ public class BulletSpawnerScript : MonoBehaviour
 {
     public bool shoot;
     public Vector3 force;
+    public float fireRate;
+
+    bool canShoot = true;
 
     private void FixedUpdate()
     {
         if (!shoot) { return; }
-        Shoot();
+        StartCoroutine(Shoot());
     }
 
-    public void Shoot() {
-        SimpleBullet bullet = ObjectQueue.Instance.SpawnFromPool("Bullet", transform.position, transform.rotation).GetComponent<SimpleBullet>();
-        
-    }
+    IEnumerator Shoot() {
+        if (canShoot) {
+            canShoot = false;
+            SimpleBullet bullet = ObjectQueue.Instance.SpawnFromPool("Bullet", transform.position, transform.rotation).GetComponent<SimpleBullet>();
+            yield return new WaitForSeconds(fireRate);
+            canShoot = true;
+        }
 
-    
+        yield return null;
+    }
 }
