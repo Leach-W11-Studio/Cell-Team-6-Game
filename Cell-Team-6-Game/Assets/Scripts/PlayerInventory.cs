@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public Dictionary<BulletType, int> whiteBloodCells;
 
+    //Changed bullet types to Enum - Ben
     public enum BulletType
     {
         DualShot,
@@ -24,6 +25,12 @@ public class PlayerInventory : MonoBehaviour
         CreateCellType(BulletType.RicochetShot, 5);
         CreateCellType(BulletType.MegaShot, 5);
         CreateCellType(BulletType.StunShot, 5);
+    }
+
+    //Created helper function for checking if bullet type is present, Not nessarry, but speeds up work a bit - Ben
+    public bool ContainsBullet(BulletType type)
+    {
+        return !(whiteBloodCells[type] == 0);
     }
 
     public void CreateCellType(BulletType cellType, int initialAmount = 0) {

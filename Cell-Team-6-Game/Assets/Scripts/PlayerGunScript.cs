@@ -17,12 +17,18 @@ public class PlayerGunScript : MonoBehaviour
     public int megaCountDown;
     private int stunCountDown;
 
+    private PlayerInventory inventory;
+
+    #region Depricated Variables
+    /*
     //Bools for various gun types
     public bool spreadActive;
     public bool doubleActive;
     public bool megaActive;
     public bool stunActive;
     public bool ricochetActive;
+    */
+    #endregion
 
     //public for debug purposes, will be set to private later
     public bool shooting;
@@ -35,6 +41,7 @@ public class PlayerGunScript : MonoBehaviour
         canShoot = true;
         megaCountDown = 0;
         stunCountDown = 0;
+        inventory = GetComponentInParent<PlayerInventory>();
     }
 
     // Update is called once per frame
@@ -47,9 +54,9 @@ public class PlayerGunScript : MonoBehaviour
     {
         if(canShoot)
         {
-            if(spreadActive) { ObjectQueue.Instance.SpawnFromPool("SpreadBullet", transform.position, transform.rotation); }
-            if(doubleActive) { ObjectQueue.Instance.SpawnFromPool("DoubleBullet", transform.position, transform.rotation); }
-            if(megaActive)
+            if(inventory.ContainsBullet(PlayerInventory.BulletType.SpreadShot)) { ObjectQueue.Instance.SpawnFromPool("SpreadBullet", transform.position, transform.rotation); }
+            if(inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) { ObjectQueue.Instance.SpawnFromPool("DoubleBullet", transform.position, transform.rotation); }
+            if(inventory.ContainsBullet(PlayerInventory.BulletType.MegaShot))
             {
                 if(megaCountDown == megaRateMod)
                 {
@@ -58,10 +65,10 @@ public class PlayerGunScript : MonoBehaviour
                 }
                 megaCountDown += 1;
             }
-            if(stunActive) { }
-            if(ricochetActive) { }
+            if(inventory.ContainsBullet(PlayerInventory.BulletType.StunShot)) { }
+            if(inventory.ContainsBullet(PlayerInventory.BulletType.RicochetShot)) { }
 
-            if(!doubleActive) { ObjectQueue.Instance.SpawnFromPool("PlayerBullet", transform.position, transform.rotation); }
+            if(!inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) { ObjectQueue.Instance.SpawnFromPool("PlayerBullet", transform.position, transform.rotation); }
 
             canShoot = false;
             StartCoroutine(FireRateCheck());
