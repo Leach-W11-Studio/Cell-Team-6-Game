@@ -4,30 +4,39 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public Dictionary<string, int> whiteBloodCells;
+    public Dictionary<BulletType, int> whiteBloodCells;
+
+    public enum BulletType
+    {
+        DualShot,
+        SpreadShot,
+        RicochetShot,
+        MegaShot,
+        StunShot,
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        whiteBloodCells = new Dictionary<string, int>();
-        CreateCellType("Dual Shot", 5);
-        CreateCellType("Spread Shot", 5);
-        CreateCellType("Ricochet", 5);
-        CreateCellType("Mega Shot", 5);
-        CreateCellType("Stun", 5);
+        whiteBloodCells = new Dictionary<BulletType, int>();
+        CreateCellType(BulletType.DualShot, 5);
+        CreateCellType(BulletType.SpreadShot, 5);
+        CreateCellType(BulletType.RicochetShot, 5);
+        CreateCellType(BulletType.MegaShot, 5);
+        CreateCellType(BulletType.StunShot, 5);
     }
 
-    public void CreateCellType(string cellType, int initialAmount = 0) {
+    public void CreateCellType(BulletType cellType, int initialAmount = 0) {
         if (initialAmount < 0) { initialAmount = 0; }
         whiteBloodCells.Add(cellType, initialAmount);
     }
 
-    public void AddBloodCell(string cellType, int amount = 1) {
+    public void AddBloodCell(BulletType cellType, int amount = 1) {
         if (!whiteBloodCells.ContainsKey(cellType)) { return; }
         whiteBloodCells[cellType] = whiteBloodCells[cellType] + amount;
     }
 
-    public void RemoveBloodCell(string cellType, int amount = 1) {
+    public void RemoveBloodCell(BulletType cellType, int amount = 1) {
         if (!whiteBloodCells.ContainsKey(cellType)) { return; }
 
         if (whiteBloodCells[cellType] - amount < 0)

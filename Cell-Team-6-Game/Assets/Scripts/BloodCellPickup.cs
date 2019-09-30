@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BloodCellPickup : MonoBehaviour
 {
-    public string cellType;
+    public PlayerInventory.BulletType cellType;
     public int amount = 1;
 
     private void OnTriggerEnter2D(Collider2D collision)
