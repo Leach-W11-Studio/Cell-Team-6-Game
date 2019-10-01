@@ -19,12 +19,16 @@ public class PlayerController : MonoBehaviour
 
     GameObject hitboxHighlight;
     PlayerInventory inventory;
+    HealthScript playerHealth;
+    GameObject sheild;
 
     private void Start()
     {
         gun = transform.GetComponentInChildren<PlayerGunScript>();
         hitboxHighlight = transform.Find("Hitbox Highlight").gameObject;
         inventory = GetComponent<PlayerInventory>();
+        sheild = transform.Find("sheild").gameObject;
+        playerHealth = GetComponent<HealthScript>();
     }
 
     void Movement()
@@ -83,6 +87,14 @@ public class PlayerController : MonoBehaviour
         else { hitboxHighlight.SetActive(false); }
 
         if (Input.GetButtonDown("Cancel")) { Application.Quit(); }
+
+        if (playerHealth.sheild)
+        {
+            sheild.SetActive(true);
+        }
+        else {
+            sheild.SetActive(false);
+        }
     }
 
     void FixedUpdate()
