@@ -9,13 +9,20 @@ public class HealthScript : MonoBehaviour
     public Slider Playerhealth;
     public Text Healthtext;
     public int currentHealth;
+    public bool sheild;
+    public Color healthColor;
+    public Color sheildColor;
     private bool isplayer = false;
     private int Damage;
+
+    private Image healthbarFill;
 
     void Start()
     {
         Playerhealth = FindObjectOfType<Slider>();
         Healthtext = FindObjectOfType<Text>();
+        healthbarFill = Playerhealth.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
+        healthbarFill.color = healthColor;
         //Tells the script wether to treat the gameobject as a player or an enemy, and set the health accordingly
         if (gameObject.CompareTag("Player"))
         {
@@ -27,6 +34,17 @@ public class HealthScript : MonoBehaviour
         Playerhealth.maxValue = currentHealth;
     }
 
+    public void ActivateSheild() {
+        sheild = true;
+        healthbarFill.color = sheildColor;
+        Healthtext.text = "SHEILD";
+    }
+
+    public void DeactivateSheild() {
+        sheild = false;
+        healthbarFill.color = healthColor;
+    }
+
     //Can be called to restore 1 heart to the player
     public void Restore_Health()
     {
@@ -36,6 +54,7 @@ public class HealthScript : MonoBehaviour
     //Is called to remove one heart from the player
     private void Player_Take_Damage()
     {
+        if (sheild) { DeactivateSheild(); return; }
         if (currentHealth > 0)
             currentHealth--;
         else
@@ -77,7 +96,10 @@ public class HealthScript : MonoBehaviour
     private void Update()
     {
         Playerhealth.value = currentHealth;
-        Healthtext.text = "Health: " + currentHealth;
+        if (!sheild)
+        {
+            Healthtext.text = "Health: " + currentHealth;
+        }
     }
 
 }
