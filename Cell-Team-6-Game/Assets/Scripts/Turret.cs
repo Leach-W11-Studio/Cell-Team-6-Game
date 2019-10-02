@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,19 +34,25 @@ public class Turret : MonoBehaviour
     }
 
     void Aim() {
+        if (!player) { return; }
         Vector2 heading = player.position - transform.position;
         heading.Normalize();
         float zRot = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * rotationSpeed);
     }
 
-    void FindPlayer() {
+    void FindPlayer()
+    {
         if (player) { return; }
 
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        if (!player) {
+        try
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            spawner.shoot = true;
+        }
+        catch (Exception e) {
             Debug.LogWarning("Could not find player...");
+            spawner.shoot = false;
         }
     }
 }
