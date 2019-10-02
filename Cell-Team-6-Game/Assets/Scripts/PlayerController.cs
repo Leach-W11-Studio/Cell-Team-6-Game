@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The number to divide the moveSpeed by when walking")]
     public float walkModifier;
     public float explosionBufferTime;
+    public float invincebilityTime;
 
     //Added - Ben Shackman
     public PlayerGunScript gun;
@@ -19,12 +20,22 @@ public class PlayerController : MonoBehaviour
 
     GameObject hitboxHighlight;
     PlayerInventory inventory;
+    HealthScript playerHealth;
+    GameObject sheild;
+    SpriteRenderer playerSprite;
 
     private void Start()
     {
         gun = transform.GetComponentInChildren<PlayerGunScript>();
         hitboxHighlight = transform.Find("Hitbox Highlight").gameObject;
         inventory = GetComponent<PlayerInventory>();
+        sheild = transform.Find("sheild").gameObject;
+        playerHealth = GetComponent<HealthScript>();
+        playerSprite = GetComponent<SpriteRenderer>();
+
+        playerHealth.onTakeDamage.AddListener(() => {
+            StartCoroutine(Invincible());
+        });
     }
 
     void Movement()
@@ -83,6 +94,14 @@ public class PlayerController : MonoBehaviour
         else { hitboxHighlight.SetActive(false); }
 
         if (Input.GetButtonDown("Cancel")) { Application.Quit(); }
+
+        if (playerHealth.sheild)
+        {
+            sheild.SetActive(true);
+        }
+        else {
+            sheild.SetActive(false);
+        }
     }
 
     void FixedUpdate()
@@ -96,5 +115,24 @@ public class PlayerController : MonoBehaviour
         canExplode = false;
         yield return new WaitForSeconds(explosionBufferTime);
         canExplode = true;
+    }
+
+    IEnumerator Invincible() {
+        playerHealth.invincible = true;
+        float elapsed = 0f;
+        while (elapsed < invincebilityTime) {
+            if (playerSprite.enabled)
+            {
+                playerSprite.enabled = false;
+            }
+            else {
+                playerSprite.enabled = true;
+            }
+            yield return new WaitForSeconds(0.05f);
+            elapsed += 0.05f;
+        }
+        yield return new WaitForEndOfFrame();
+        playerSprite.enabled = true;
+        playerHealth.invincible = false;
     }
 }

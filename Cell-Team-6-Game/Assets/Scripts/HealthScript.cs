@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HealthScript : MonoBehaviour
 {
@@ -9,13 +10,23 @@ public class HealthScript : MonoBehaviour
     public Slider Playerhealth;
     public Text Healthtext;
     public int currentHealth;
+    public bool sheild = false;
+    public bool invincible = false;
+    public Color healthColor;
+    public Color sheildColor;
+    public UnityEvent onTakeDamage;
     private bool isplayer = false;
     private int Damage;
 
+    private Image healthbarFill;
+
     void Start()
     {
+        onTakeDamage = new UnityEvent();
         Playerhealth = FindObjectOfType<Slider>();
         Healthtext = FindObjectOfType<Text>();
+        healthbarFill = Playerhealth.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
+        healthbarFill.color = healthColor;
         //Tells the script wether to treat the gameobject as a player or an enemy, and set the health accordingly
         if (gameObject.CompareTag("Player"))
         {
@@ -27,6 +38,17 @@ public class HealthScript : MonoBehaviour
         Playerhealth.maxValue = currentHealth;
     }
 
+    public void ActivateSheild() {
+        sheild = true;
+        healthbarFill.color = sheildColor;
+        Healthtext.text = "SHEILD";
+    }
+
+    public void DeactivateSheild() {
+        sheild = false;
+        healthbarFill.color = healthColor;
+    }
+
     //Can be called to restore 1 heart to the player
     public void Restore_Health()
     {
@@ -36,8 +58,13 @@ public class HealthScript : MonoBehaviour
     //Is called to remove one heart from the player
     private void Player_Take_Damage()
     {
+        if (invincible) { return; }
+        if (sheild) { DeactivateSheild(); return; }
         if (currentHealth > 0)
+        {
+            onTakeDamage.Invoke();
             currentHealth--;
+        }
         else
             Die();
     }
@@ -45,8 +72,12 @@ public class HealthScript : MonoBehaviour
     //Is passed a damage value from the collision function, and subtracts the damage from the current health of the enemy
     private void Enemy_Take_Damage(int damageValue)
     {
+        if (invincible) { return; }
         if (currentHealth > 0)
+        {
+            onTakeDamage.Invoke();
             currentHealth -= damageValue;
+        }
         else
             Die();
     }
@@ -77,7 +108,10 @@ public class HealthScript : MonoBehaviour
     private void Update()
     {
         Playerhealth.value = currentHealth;
-        Healthtext.text = "Health: " + currentHealth;
+        if (!sheild)
+        {
+            Healthtext.text = "Health: " + currentHealth;
+        }
     }
 
 }
