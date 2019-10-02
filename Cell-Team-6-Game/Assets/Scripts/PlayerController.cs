@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void CreateExplosion(string cellType) {
+    void CreateExplosion(PlayerInventory.BulletType cellType) {
         // check if canExplode and the amount of this particular cell is greater than 0
         if (canExplode && inventory.whiteBloodCells[cellType] > 0) {
             // decrement cell by 1
@@ -84,11 +84,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Walk")) { isWalking = true; }
         else { isWalking = false; }
 
-        if (Input.GetButtonDown("Explosion1")) { CreateExplosion("Dual Shot"); }
-        else if (Input.GetButtonDown("Explosion2")) { CreateExplosion("Spread Shot"); }
-        else if (Input.GetButtonDown("Explosion3")) { CreateExplosion("Ricochet"); }
-        else if (Input.GetButtonDown("Explosion4")) { CreateExplosion("Mega Shot"); }
-        else if (Input.GetButtonDown("Explosion5")) { CreateExplosion("Stun"); }
+        if (Input.GetButtonDown("Explosion1")) { CreateExplosion(PlayerInventory.BulletType.DualShot); }
+        else if (Input.GetButtonDown("Explosion2")) { CreateExplosion(PlayerInventory.BulletType.SpreadShot); }
+        else if (Input.GetButtonDown("Explosion3")) { CreateExplosion(PlayerInventory.BulletType.RicochetShot); }
+        else if (Input.GetButtonDown("Explosion4")) { CreateExplosion(PlayerInventory.BulletType.MegaShot); }
+        else if (Input.GetButtonDown("Explosion5")) { CreateExplosion(PlayerInventory.BulletType.StunShot); }
 
         if (isWalking) { hitboxHighlight.SetActive(true); }
         else { hitboxHighlight.SetActive(false); }
