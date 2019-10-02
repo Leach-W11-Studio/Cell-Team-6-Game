@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BloodCellUI : MonoBehaviour
 {
-    public string cellType;
+    public PlayerInventory.BulletType cellType;
 
     Text amountText;
     Text cellTypeText;
@@ -21,7 +21,7 @@ public class BloodCellUI : MonoBehaviour
 
     private void UpdateUI() {
         amountText.text = playerInventory.whiteBloodCells [cellType].ToString();
-        cellTypeText.text = cellType;
+        cellTypeText.text = cellType.ToString();
     }
 
     // Update is called once per frame

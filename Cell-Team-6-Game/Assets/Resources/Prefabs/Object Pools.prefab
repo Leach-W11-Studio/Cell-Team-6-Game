@@ -44,6 +44,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: Projectile
-    prefab: {fileID: 0}
-    size: 1000
+  - tag: Bullet
+    prefab: {fileID: 6576466730651800169, guid: 83d4a893221056744a7e5383ab569b4a,
+      type: 3}
+    size: 100
+  - tag: PlayerBullet
+    prefab: {fileID: 6576466730651800169, guid: 83d4a893221056744a7e5383ab569b4a,
+      type: 3}
+    size: 200
+  - tag: DoubleBullet
+    prefab: {fileID: 2665330704865779302, guid: f03d109790c29764caa9be5918aedd47,
+      type: 3}
+    size: 3
+  - tag: SpreadBullet
+    prefab: {fileID: 5747052449422300957, guid: 15de70adb1add4c4ea638ee5807188c8,
+      type: 3}
+    size: 3
+  - tag: MegaBullet
+    prefab: {fileID: 1988737336566540124, guid: dd50b153b003e694e91825ae469c3c36,
+      type: 3}
+    size: 50
