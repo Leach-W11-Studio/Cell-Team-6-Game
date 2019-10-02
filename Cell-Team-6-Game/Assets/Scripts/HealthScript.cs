@@ -10,12 +10,18 @@ public class HealthScript : MonoBehaviour
     public Text Healthtext;
     public int currentHealth;
     private bool isplayer = false;
+    private GameObject Shield;
+    private bool Shielded;
     private int Damage;
+    private float InvincibilityTime;
 
     void Start()
     {
         Playerhealth = FindObjectOfType<Slider>();
         Healthtext = FindObjectOfType<Text>();
+        Shield = GameObject.Find("Bubble");
+        Shield.SetActive(false);
+        InvincibilityTime = 2.0f;
         //Tells the script wether to treat the gameobject as a player or an enemy, and set the health accordingly
         if (gameObject.CompareTag("Player"))
         {
@@ -33,11 +39,31 @@ public class HealthScript : MonoBehaviour
         currentHealth++;
     }
 
+    public void Shield_Player()
+    {
+        Shielded = true;
+        Shield.SetActive(true); 
+    }
+
+    IEnumerator Invincibility()
+    {
+        Shielded = true;
+        yield return new WaitForSeconds(InvincibilityTime);
+        Shielded = false;
+    }
     //Is called to remove one heart from the player
     private void Player_Take_Damage()
     {
-        if (currentHealth > 0)
+        if (currentHealth > 0 && !Shielded)
+        {
             currentHealth--;
+            StartCoroutine("Invincibility");
+        }
+        else if (currentHealth > 0 && Shielded)
+        {
+            Shielded = false;
+            Shield.SetActive(false);
+        }
         else
             Die();
     }
