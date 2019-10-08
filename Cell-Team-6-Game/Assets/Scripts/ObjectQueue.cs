@@ -12,7 +12,7 @@ public class ObjectQueue : MonoBehaviour
         if(Instance != null) { Destroy(gameObject); }
         else { Instance = this; }
 
-        DontDestroyOnLoad(Instance);
+        //DontDestroyOnLoad(Instance);
     }
 
     #endregion
