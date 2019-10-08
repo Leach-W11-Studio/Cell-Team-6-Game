@@ -82,26 +82,29 @@ public class HealthScript : MonoBehaviour
             Die();
     }
 
-    //On collision
-    private void OnCollisionEnter2D(Collision2D collision)
+    // On trigger
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //If this is attatched to the player, and the object colliding is an enemy or an enemy bullet, subract a heart, and destroy the object that hit it
-        if(isplayer && (collision.gameObject.CompareTag("EnemyBullet")|| collision.gameObject.CompareTag("Enemy")))
-        {   
-            if(collision.gameObject.CompareTag("Enemy"))
+        if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
                 Destroy(collision.gameObject);
             Player_Take_Damage();
         }
         //If it is not a player, and the collision is a player bullet, pass in the damage value from the bullet and call the enemy damage function
-        else if(!isplayer && collision.gameObject.CompareTag("PlayerBullet"))
+        else if (!isplayer && collision.gameObject.CompareTag("PlayerBullet"))
         {
             Damage = collision.gameObject.GetComponent<SimpleBullet>().Damage();
-            Enemy_Take_Damage(Damage);  
+            Enemy_Take_Damage(Damage);
         }
     }
 
     public void Die()
     {
+        if (isplayer) {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
         Destroy(gameObject);
     }
 
