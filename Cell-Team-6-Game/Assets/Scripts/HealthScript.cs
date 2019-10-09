@@ -61,7 +61,7 @@ public class HealthScript : MonoBehaviour
     private void Player_Take_Damage()
     {
         if (invincible) { return; }
-        if (sheild) { DeactivateSheild(); return; }
+        if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); return; }
         if (currentHealth > 0)
         {
             onTakeDamage.Invoke();
