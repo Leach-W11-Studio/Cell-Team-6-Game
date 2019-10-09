@@ -16,7 +16,11 @@ public class HealthScript : MonoBehaviour
     public Color sheildColor;
     public UnityEvent onTakeDamage;
     private bool isplayer = false;
+    private GameObject Shield;
+    private bool Shielded;
+    private bool Invincible;
     private int Damage;
+    private float InvincibilityTime;
 
     private Image healthbarFill;
 
@@ -25,8 +29,10 @@ public class HealthScript : MonoBehaviour
         onTakeDamage = new UnityEvent();
         Playerhealth = FindObjectOfType<Slider>();
         Healthtext = FindObjectOfType<Text>();
-        healthbarFill = Playerhealth.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
-        healthbarFill.color = healthColor;
+        Shield = gameObject.transform.GetChild(1).gameObject;
+        Shield.SetActive(false);
+        InvincibilityTime = 2.0f;
+
         //Tells the script wether to treat the gameobject as a player or an enemy, and set the health accordingly
         if (gameObject.CompareTag("Player"))
         {
@@ -55,15 +61,38 @@ public class HealthScript : MonoBehaviour
         currentHealth++;
     }
 
+    public void Shield_Player()
+    {
+        Shielded = true;
+        Shield.SetActive(true); 
+    }
+
+    IEnumerator Invincibility()
+    {
+        yield return new WaitForSeconds(InvincibilityTime);
+        Invincible = false;
+    }
     //Is called to remove one heart from the player
     private void Player_Take_Damage()
     {
-        if (invincible) { return; }
-        if (sheild) { DeactivateSheild(); return; }
-        if (currentHealth > 0)
+        if (currentHealth > 0 && !Shielded)
         {
-            onTakeDamage.Invoke();
-            currentHealth--;
+            if (Invincible == false)
+            {
+                currentHealth--;
+                Invincible = true;
+                StartCoroutine("Invincibility");
+            }
+        }
+        else if (currentHealth > 0 && Shielded)
+        {
+            if (Invincible == false)
+            {
+                Invincible = true;
+                Shielded = false;
+                Shield.SetActive(false);
+                StartCoroutine("Invincibility");
+            }
         }
         else
             Die();
