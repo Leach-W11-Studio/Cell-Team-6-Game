@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The number to divide the moveSpeed by when walking")]
     public float walkModifier;
     public float explosionBufferTime;
+    public float invincebilityTime;
 
     //Added - Ben Shackman
     public PlayerGunScript gun;
@@ -19,12 +20,22 @@ public class PlayerController : MonoBehaviour
 
     GameObject hitboxHighlight;
     PlayerInventory inventory;
+    HealthScript playerHealth;
+    GameObject sheild;
+    SpriteRenderer playerSprite;
 
     private void Start()
     {
         gun = transform.GetComponentInChildren<PlayerGunScript>();
         hitboxHighlight = transform.Find("Hitbox Highlight").gameObject;
         inventory = GetComponent<PlayerInventory>();
+        sheild = transform.Find("sheild").gameObject;
+        playerHealth = GetComponent<HealthScript>();
+        playerSprite = GetComponent<SpriteRenderer>();
+
+        playerHealth.onTakeDamage.AddListener(() => {
+            StartCoroutine(Invincible());
+        });
     }
 
     void Movement()
@@ -56,7 +67,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void CreateExplosion(string cellType) {
+    void CreateExplosion(PlayerInventory.BulletType cellType) {
         // check if canExplode and the amount of this particular cell is greater than 0
         if (canExplode && inventory.whiteBloodCells[cellType] > 0) {
             // decrement cell by 1
@@ -73,16 +84,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Walk")) { isWalking = true; }
         else { isWalking = false; }
 
-        if (Input.GetButtonDown("Explosion1")) { CreateExplosion("Dual Shot"); }
-        else if (Input.GetButtonDown("Explosion2")) { CreateExplosion("Spread Shot"); }
-        else if (Input.GetButtonDown("Explosion3")) { CreateExplosion("Ricochet"); }
-        else if (Input.GetButtonDown("Explosion4")) { CreateExplosion("Mega Shot"); }
-        else if (Input.GetButtonDown("Explosion5")) { CreateExplosion("Stun"); }
+        if (Input.GetButtonDown("Explosion1")) { CreateExplosion(PlayerInventory.BulletType.DualShot); }
+        else if (Input.GetButtonDown("Explosion2")) { CreateExplosion(PlayerInventory.BulletType.SpreadShot); }
+        else if (Input.GetButtonDown("Explosion3")) { CreateExplosion(PlayerInventory.BulletType.RicochetShot); }
+        else if (Input.GetButtonDown("Explosion4")) { CreateExplosion(PlayerInventory.BulletType.MegaShot); }
+        else if (Input.GetButtonDown("Explosion5")) { CreateExplosion(PlayerInventory.BulletType.StunShot); }
 
         if (isWalking) { hitboxHighlight.SetActive(true); }
         else { hitboxHighlight.SetActive(false); }
 
         if (Input.GetButtonDown("Cancel")) { Application.Quit(); }
+
+        if (playerHealth.sheild)
+        {
+            sheild.SetActive(true);
+        }
+        else {
+            sheild.SetActive(false);
+        }
     }
 
     void FixedUpdate()
@@ -96,5 +115,24 @@ public class PlayerController : MonoBehaviour
         canExplode = false;
         yield return new WaitForSeconds(explosionBufferTime);
         canExplode = true;
+    }
+
+    IEnumerator Invincible() {
+        playerHealth.invincible = true;
+        float elapsed = 0f;
+        while (elapsed < invincebilityTime) {
+            if (playerSprite.enabled)
+            {
+                playerSprite.enabled = false;
+            }
+            else {
+                playerSprite.enabled = true;
+            }
+            yield return new WaitForSeconds(0.05f);
+            elapsed += 0.05f;
+        }
+        yield return new WaitForEndOfFrame();
+        playerSprite.enabled = true;
+        playerHealth.invincible = false;
     }
 }
