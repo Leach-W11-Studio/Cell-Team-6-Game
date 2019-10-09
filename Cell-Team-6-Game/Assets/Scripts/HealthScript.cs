@@ -16,11 +16,7 @@ public class HealthScript : MonoBehaviour
     public Color sheildColor;
     public UnityEvent onTakeDamage;
     private bool isplayer = false;
-    private GameObject Shield;
-    private bool Shielded;
-    private bool Invincible;
     private int Damage;
-    private float InvincibilityTime;
 
     private Image healthbarFill;
 
@@ -29,10 +25,8 @@ public class HealthScript : MonoBehaviour
         onTakeDamage = new UnityEvent();
         Playerhealth = FindObjectOfType<Slider>();
         Healthtext = FindObjectOfType<Text>();
-        Shield = gameObject.transform.GetChild(1).gameObject;
-        Shield.SetActive(false);
-        InvincibilityTime = 2.0f;
-
+        healthbarFill = Playerhealth.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
+        healthbarFill.color = healthColor;
         //Tells the script wether to treat the gameobject as a player or an enemy, and set the health accordingly
         if (gameObject.CompareTag("Player"))
         {
@@ -44,13 +38,15 @@ public class HealthScript : MonoBehaviour
         Playerhealth.maxValue = currentHealth;
     }
 
-    public void ActivateSheild() {
+    public void ActivateSheild()
+    {
         sheild = true;
         healthbarFill.color = sheildColor;
         Healthtext.text = "SHEILD";
     }
 
-    public void DeactivateSheild() {
+    public void DeactivateSheild()
+    {
         sheild = false;
         healthbarFill.color = healthColor;
     }
@@ -61,38 +57,15 @@ public class HealthScript : MonoBehaviour
         currentHealth++;
     }
 
-    public void Shield_Player()
-    {
-        Shielded = true;
-        Shield.SetActive(true); 
-    }
-
-    IEnumerator Invincibility()
-    {
-        yield return new WaitForSeconds(InvincibilityTime);
-        Invincible = false;
-    }
     //Is called to remove one heart from the player
     private void Player_Take_Damage()
     {
-        if (currentHealth > 0 && !Shielded)
+        if (invincible) { return; }
+        if (sheild) { DeactivateSheild(); return; }
+        if (currentHealth > 0)
         {
-            if (Invincible == false)
-            {
-                currentHealth--;
-                Invincible = true;
-                StartCoroutine("Invincibility");
-            }
-        }
-        else if (currentHealth > 0 && Shielded)
-        {
-            if (Invincible == false)
-            {
-                Invincible = true;
-                Shielded = false;
-                Shield.SetActive(false);
-                StartCoroutine("Invincibility");
-            }
+            onTakeDamage.Invoke();
+            currentHealth--;
         }
         else
             Die();
@@ -111,7 +84,7 @@ public class HealthScript : MonoBehaviour
             Die();
     }
 
-    // On trigger
+    //On collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //If this is attatched to the player, and the object colliding is an enemy or an enemy bullet, subract a heart, and destroy the object that hit it
@@ -131,9 +104,6 @@ public class HealthScript : MonoBehaviour
 
     public void Die()
     {
-        if (isplayer) {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-        }
         Destroy(gameObject);
     }
 
