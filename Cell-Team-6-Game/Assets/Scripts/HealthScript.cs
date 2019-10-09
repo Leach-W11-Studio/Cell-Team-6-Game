@@ -12,6 +12,7 @@ public class HealthScript : MonoBehaviour
     private bool isplayer = false;
     private GameObject Shield;
     private bool Shielded;
+    private bool Invincible;
     private int Damage;
     private float InvincibilityTime;
 
@@ -19,7 +20,7 @@ public class HealthScript : MonoBehaviour
     {
         Playerhealth = FindObjectOfType<Slider>();
         Healthtext = FindObjectOfType<Text>();
-        Shield = GameObject.Find("Bubble");
+        Shield = gameObject.transform.GetChild(1).gameObject;
         Shield.SetActive(false);
         InvincibilityTime = 2.0f;
         //Tells the script wether to treat the gameobject as a player or an enemy, and set the health accordingly
@@ -47,22 +48,28 @@ public class HealthScript : MonoBehaviour
 
     IEnumerator Invincibility()
     {
-        Shielded = true;
         yield return new WaitForSeconds(InvincibilityTime);
-        Shielded = false;
+        Invincible = false;
     }
     //Is called to remove one heart from the player
     private void Player_Take_Damage()
     {
         if (currentHealth > 0 && !Shielded)
         {
-            currentHealth--;
-            StartCoroutine("Invincibility");
+            if (Invincible == false)
+            {
+                currentHealth--;
+                Invincible = true;
+                StartCoroutine("Invincibility");
+            }
         }
         else if (currentHealth > 0 && Shielded)
         {
-            Shielded = false;
-            Shield.SetActive(false);
+            if (Invincible == false)
+            {
+                Shielded = false;
+                Shield.SetActive(false);
+            }
         }
         else
             Die();
