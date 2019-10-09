@@ -11,7 +11,7 @@ public class ShieldPickup : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Shield = collision.gameObject.GetComponent<HealthScript>();
-            Shield.Shield_Player();
+            Shield.ActivateSheild();
             Destroy(gameObject);
         }
     }
