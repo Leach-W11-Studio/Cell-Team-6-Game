@@ -67,8 +67,10 @@ public class HealthScript : MonoBehaviour
         {
             if (Invincible == false)
             {
+                Invincible = true;
                 Shielded = false;
                 Shield.SetActive(false);
+                StartCoroutine("Invincibility");
             }
         }
         else
