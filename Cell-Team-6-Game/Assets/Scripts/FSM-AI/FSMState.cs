@@ -33,7 +33,7 @@ public abstract class FSMState : MonoBehaviour
     /// <returns>Returns transition to be transitioned to if legal, otherwise returns current state</returns>
     public FSMStateID CheckTransition(FSMTransitions transition)
     {
-        if(transitions.ContainsKey(transition))
+        if (transitions.ContainsKey(transition))
         {
             return transitions[transition];
         }
@@ -51,8 +51,16 @@ public abstract class FSMState : MonoBehaviour
     /// <param name="trans">transition selected to transition to above state</param>
     public void AddTransitionState(FSMStateID transitionState, FSMTransitions trans)
     {
-        if (transitionState == FSMStateID.none) { Debug.LogError("Null Transition not allowed"); return; }
-        if (transitions.ContainsKey(trans)) { Debug.LogError(trans.ToString() + " transition already listed as Transitionable"); return; }
+        if (transitionState == FSMStateID.none)
+        {
+            Debug.LogError("Null Transition not allowed");
+            return;
+        }
+        if (transitions.ContainsKey(trans))
+        {
+            Debug.LogError(trans.ToString() + " transition already listed as Transitionable");
+            return;
+        }
         transitions.Add(trans, transitionState);
         Debug.Log("Transition state " + transitionState.ToString() + " has been added as a transitionable state of " + stateID.ToString() + " using transition " + trans.ToString());
     }
@@ -63,7 +71,11 @@ public abstract class FSMState : MonoBehaviour
     /// <param name="trans">Transition indented to be removed</param>
     public void RemoveTransitionState(FSMTransitions trans)
     {
-        if (trans == FSMTransitions.none) { Debug.LogError("Null Transition not allowed"); return; }
+        if (trans == FSMTransitions.none)
+        {
+            Debug.LogError("Null Transition not allowed");
+            return;
+        }
         if (transitions.ContainsKey(trans))
         {
             transitions.Remove(trans);

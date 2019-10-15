@@ -84,12 +84,20 @@ public abstract class FSM : MonoBehaviour
     /// <param name="trans">Transition to be set to given state</param>
     public void SetTransition(FSMTransitions trans)
     {
-        if (trans == FSMTransitions.none) { Debug.LogError("Null transition is not allowed"); return; }
+        if (trans == FSMTransitions.none)
+        {
+            Debug.LogError("Null transition is not allowed");
+            return;
+        }
         FSMStateID newID = currentState.CheckTransition(trans);
-        if (newID == FSMStateID.none) { Debug.LogError("There is no state bound to " + trans.ToString()); return; }
+        if (newID == FSMStateID.none)
+        {
+            Debug.LogError("There is no state bound to " + trans.ToString());
+            return;
+        }
         foreach (var state in FSMStates)
         {
-            if(newID == state.StateID)
+            if (newID == state.StateID)
             {
                 Debug.Log("State changed to " + newID.ToString());
                 currentState = state;
