@@ -54,8 +54,12 @@ public class PlayerGunScript : MonoBehaviour
     {
         if(canShoot)
         {
-            if(inventory.ContainsBullet(PlayerInventory.BulletType.SpreadShot)) { ObjectQueue.Instance.SpawnFromPool("SpreadBullet", transform.position, transform.rotation); }
-            if(inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) { ObjectQueue.Instance.SpawnFromPool("DoubleBullet", transform.position, transform.rotation); }
+            if(inventory.ContainsBullet(PlayerInventory.BulletType.SpreadShot)) {
+                ObjectQueue.Instance.SpawnFromPool("SpreadBullet", transform.position, transform.rotation);
+            }
+            if(inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) {
+                ObjectQueue.Instance.SpawnFromPool("DoubleBullet", transform.position, transform.rotation);
+            }
             if(inventory.ContainsBullet(PlayerInventory.BulletType.MegaShot))
             {
                 if(megaCountDown == megaRateMod)
