@@ -23,8 +23,8 @@ public class HealthScript : MonoBehaviour
     void Start()
     {
         onTakeDamage = new UnityEvent();
-        Playerhealth = FindObjectOfType<Slider>();
-        Healthtext = FindObjectOfType<Text>();
+        Playerhealth = GameObject.Find("Health").GetComponent<Slider>();
+        Healthtext = GameObject.Find("Health").GetComponentInChildren<Text>();
         healthbarFill = Playerhealth.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
         healthbarFill.color = healthColor;
         //Tells the script wether to treat the gameobject as a player or an enemy, and set the health accordingly
