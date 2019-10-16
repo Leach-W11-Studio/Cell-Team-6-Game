@@ -8,14 +8,17 @@ using UnityEngine;
 public enum FSMStateID
 {
     none = 0,
-    PlaceholderState,
+    Idle,
+    Shoot,
+    Dead,
 }
 
 public enum FSMTransitions
 {
     none = 0,
-    PlaceholderTrans1,
-    PlaceholderTrans2,
+    SawPlayer,
+    PlayerOutOfRange,
+    OutOfHealth,
 }
 
 public abstract class FSM : MonoBehaviour
