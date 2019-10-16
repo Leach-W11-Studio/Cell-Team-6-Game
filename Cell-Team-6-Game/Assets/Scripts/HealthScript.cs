@@ -38,13 +38,15 @@ public class HealthScript : MonoBehaviour
         Playerhealth.maxValue = currentHealth;
     }
 
-    public void ActivateSheild() {
+    public void ActivateSheild()
+    {
         sheild = true;
         healthbarFill.color = sheildColor;
         Healthtext.text = "SHEILD";
     }
 
-    public void DeactivateSheild() {
+    public void DeactivateSheild()
+    {
         sheild = false;
         healthbarFill.color = healthColor;
     }
@@ -59,7 +61,7 @@ public class HealthScript : MonoBehaviour
     private void Player_Take_Damage()
     {
         if (invincible) { return; }
-        if (sheild) { DeactivateSheild(); return; }
+        if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); return; }
         if (currentHealth > 0)
         {
             onTakeDamage.Invoke();
@@ -83,20 +85,20 @@ public class HealthScript : MonoBehaviour
     }
 
     //On collision
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //If this is attatched to the player, and the object colliding is an enemy or an enemy bullet, subract a heart, and destroy the object that hit it
-        if(isplayer && (collision.gameObject.CompareTag("EnemyBullet")|| collision.gameObject.CompareTag("Enemy")))
-        {   
-            if(collision.gameObject.CompareTag("Enemy"))
+        if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
                 Destroy(collision.gameObject);
             Player_Take_Damage();
         }
         //If it is not a player, and the collision is a player bullet, pass in the damage value from the bullet and call the enemy damage function
-        else if(!isplayer && collision.gameObject.CompareTag("PlayerBullet"))
+        else if (!isplayer && collision.gameObject.CompareTag("PlayerBullet"))
         {
             Damage = collision.gameObject.GetComponent<SimpleBullet>().Damage();
-            Enemy_Take_Damage(Damage);  
+            Enemy_Take_Damage(Damage);
         }
     }
 
