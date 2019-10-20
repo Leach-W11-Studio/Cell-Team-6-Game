@@ -22,7 +22,6 @@ public class IdleState : FSMState
         }
         else if(Vector2.Distance(self.transform.position, player.position) <= self.GetComponent<BaseEnemy>().agroDistance)
         {
-            self.GetComponent<BaseEnemy>().spawnerScript.shoot = true;
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.SawPlayer);
         }
     }

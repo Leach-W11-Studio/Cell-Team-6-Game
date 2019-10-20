@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimpleBullet : MonoBehaviour, IShootable
 {
 
-    private int CurrentDamage = 10;
+    private int CurrentDamage = 1;
     public float power = 10;
     private Rigidbody2D rb;
 
