@@ -6,6 +6,10 @@ public class ChaseEnemy : BaseEnemy
 {
     protected override void BuildFSM()
     {
+        PassiveState passive = new PassiveState(activateRaidus);
+        passive.AddTransitionState(FSMStateID.Chase, FSMTransitions.Awoken);
+        passive.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
+
         IdleState idle = new IdleState();
         idle.AddTransitionState(FSMStateID.Chase, FSMTransitions.SawPlayer);
         idle.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
@@ -16,6 +20,7 @@ public class ChaseEnemy : BaseEnemy
 
         DeadState dead = new DeadState();
 
+        AddFSMState(passive);
         AddFSMState(idle);
         AddFSMState(chase);
         AddFSMState(dead);

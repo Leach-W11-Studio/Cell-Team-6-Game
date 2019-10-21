@@ -12,6 +12,7 @@ public enum FSMStateID
     Shoot,
     Dead,
     Chase,
+    Passive,
 }
 
 public enum FSMTransitions
@@ -20,6 +21,7 @@ public enum FSMTransitions
     SawPlayer,
     PlayerOutOfRange,
     OutOfHealth,
+    Awoken,
 }
 
 public abstract class FSM : MonoBehaviour

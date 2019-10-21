@@ -15,6 +15,10 @@ public class BaseEnemy : FSM//, IDamageable
     public float rotationSpeed = 5f;
     public float agroDistance = 5f;
 
+    [Tooltip("Raidus at which nearby enemies are activated upon exiting passive state. Set to 0 for no activation")]
+    public float activateRaidus = 0f;
+    public bool isAwake = false;
+
     public BulletSpawnerScript spawnerScript;
 
     protected override void Initalize()
