@@ -16,7 +16,7 @@ public class IdleState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if(self.GetComponent<BaseEnemy>().currentHealth <= 0)
+        if(self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
         {
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }

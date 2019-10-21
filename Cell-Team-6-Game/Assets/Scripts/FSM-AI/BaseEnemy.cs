@@ -7,10 +7,11 @@ public interface IDamageable
     void takeDamage(int damage);
 }
 
-public class BaseEnemy : FSM, IDamageable
+public class BaseEnemy : FSM//, IDamageable
 {
-    public int initalHealth = 10;
-    public int currentHealth;
+    //public int initalHealth = 10;
+    //public int currentHealth;
+    public HealthScript healthScript;
     public float rotationSpeed = 5f;
     public float agroDistance = 5f;
 
@@ -18,7 +19,8 @@ public class BaseEnemy : FSM, IDamageable
 
     protected override void Initalize()
     {
-        currentHealth = initalHealth;
+        //currentHealth = initalHealth;
+        healthScript = GetComponent<HealthScript>();
         spawnerScript = gameObject.GetComponentInChildren<BulletSpawnerScript>();
         spawnerScript.shoot = false;
 
@@ -52,9 +54,9 @@ public class BaseEnemy : FSM, IDamageable
         AddFSMState(dead);
     }
 
-    public void takeDamage(int damage)
+    /* public void takeDamage(int damage)
     {
         Debug.Log("Taking Damage");
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, initalHealth);
-    }
+    } */
 }

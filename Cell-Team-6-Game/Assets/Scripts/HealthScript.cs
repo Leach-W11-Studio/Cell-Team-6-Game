@@ -15,7 +15,7 @@ public class HealthScript : MonoBehaviour
     public Color healthColor;
     public Color sheildColor;
     public UnityEvent onTakeDamage;
-    private bool isplayer = false;
+    public bool isplayer = false; //Testing Remove Later
     private int Damage;
 
     void Start()
@@ -73,6 +73,7 @@ public class HealthScript : MonoBehaviour
     //On collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("PlayerBullet")) { Debug.Log("Bonk"); }
         //If this is attatched to the player, and the object colliding is an enemy or an enemy bullet, subract a heart, and destroy the object that hit it
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
@@ -91,7 +92,7 @@ public class HealthScript : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, .1f);
     }
 
     private void Update()

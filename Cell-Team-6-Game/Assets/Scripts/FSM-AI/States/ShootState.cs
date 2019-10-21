@@ -21,7 +21,7 @@ public class ShootState : FSMState
     {
         if (self.GetComponent<BaseEnemy>().spawnerScript.shoot != true) { self.GetComponent<BaseEnemy>().spawnerScript.shoot = true; }
 
-        if (self.GetComponent<BaseEnemy>().currentHealth <= 0)
+        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
         {
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }

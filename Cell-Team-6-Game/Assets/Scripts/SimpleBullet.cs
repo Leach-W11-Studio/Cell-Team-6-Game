@@ -28,12 +28,12 @@ public class SimpleBullet : MonoBehaviour, IShootable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
+        /* IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
         //Debug.Log(hitObject);
         if (hitObject != null)
         {
             hitObject.takeDamage(CurrentDamage);
-        }
+        } */
 
         gameObject.SetActive(false);
     }
