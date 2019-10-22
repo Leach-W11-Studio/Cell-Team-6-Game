@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class ShootState : FSMState
 {
+    float retreatDistance;
+
     public ShootState()
     {
         stateID = FSMStateID.Shoot;
+        retreatDistance = 0;
+    }
+
+    /// <param name="distance">Distance at which this enemy begins to retreat, Set to 0 or do not include for no retreating.</param>
+    public ShootState(float distance)
+    {
+        stateID = FSMStateID.Shoot;
+        retreatDistance = distance;
     }
 
     public override void Act(Transform player, GameObject self)
@@ -29,6 +39,10 @@ public class ShootState : FSMState
         {
             self.GetComponent<BaseEnemy>().spawnerScript.shoot = false;
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);
+        }
+        else if(retreatDistance != 0 && Vector2.Distance(self.transform.position, player.position) <= retreatDistance)
+        {
+            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerTooClose);
         }
     }
 }

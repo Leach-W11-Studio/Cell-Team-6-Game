@@ -14,6 +14,7 @@ public enum FSMStateID
     Chase,
     Passive,
     Patrol,
+    Retreat,
 }
 
 public enum FSMTransitions
@@ -23,6 +24,8 @@ public enum FSMTransitions
     PlayerOutOfRange,
     OutOfHealth,
     Awoken,
+    PlayerTooClose,
+    RetreatDistanceReached,
 }
 
 public abstract class FSM : MonoBehaviour
@@ -113,6 +116,7 @@ public abstract class FSM : MonoBehaviour
                 return;
             }
         }
+        Debug.LogError("Unidentified error with state transition");
     }
 
     // Start is called before the first frame update

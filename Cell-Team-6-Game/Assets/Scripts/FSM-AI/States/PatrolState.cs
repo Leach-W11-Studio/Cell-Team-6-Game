@@ -18,7 +18,7 @@ public class PatrolState : FSMState
 
     public override void Act(Transform player, GameObject self)
     {
-        if(!agent.pathPending)
+        if(agent.remainingDistance <= .1f)
         {
             DestPos = SelectPatrolPoint();
             agent.SetDestination(DestPos);
@@ -45,6 +45,7 @@ public class PatrolState : FSMState
         }
         else if(Vector2.Distance(self.transform.position, player.position) <= self.GetComponent<BaseEnemy>().agroDistance)
         {
+            agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.SawPlayer);
         }
     }
