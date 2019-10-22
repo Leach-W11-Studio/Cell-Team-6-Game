@@ -19,12 +19,13 @@ public class PlayerInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Emptied at start for easier testing - Ben Shackman
         whiteBloodCells = new Dictionary<BulletType, int>();
-        CreateCellType(BulletType.DualShot, 5);
-        CreateCellType(BulletType.SpreadShot, 5);
-        CreateCellType(BulletType.RicochetShot, 5);
-        CreateCellType(BulletType.MegaShot, 5);
-        CreateCellType(BulletType.StunShot, 5);
+        CreateCellType(BulletType.DualShot, 0);
+        CreateCellType(BulletType.SpreadShot, 0);
+        CreateCellType(BulletType.RicochetShot, 0);
+        CreateCellType(BulletType.MegaShot, 0);
+        CreateCellType(BulletType.StunShot, 0);
     }
 
     //Created helper function for checking if bullet type is present, Not nessarry, but speeds up work a bit - Ben
