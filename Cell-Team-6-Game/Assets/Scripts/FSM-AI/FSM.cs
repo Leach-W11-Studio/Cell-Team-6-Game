@@ -13,6 +13,7 @@ public enum FSMStateID
     Dead,
     Chase,
     Passive,
+    Patrol,
 }
 
 public enum FSMTransitions
