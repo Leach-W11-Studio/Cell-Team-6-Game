@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public abstract class FSMState : MonoBehaviour
+public abstract class FSMState
 {
     protected FSMStateID stateID;
     public FSMStateID StateID { get { return stateID; } }

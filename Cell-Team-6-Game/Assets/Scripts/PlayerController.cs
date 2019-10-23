@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     HealthScript playerHealth;
     GameObject sheild;
     SpriteRenderer playerSprite;
+    private Animator PlayerAnim;
 
     private void Start()
     {
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
         sheild = transform.Find("sheild").gameObject;
         playerHealth = GetComponent<HealthScript>();
         playerSprite = GetComponent<SpriteRenderer>();
-
+        PlayerAnim = gameObject.GetComponent<Animator>();
         playerHealth.onTakeDamage.AddListener(() => {
             StartCoroutine(Invincible());
         });
