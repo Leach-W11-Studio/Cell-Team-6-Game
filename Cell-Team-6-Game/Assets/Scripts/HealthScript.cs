@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class HealthScript : MonoBehaviour
 {
     //Created necessary Variables
-    public Text Healthtext;
     public int maxHealth;
     public int currentHealth;
     public bool sheild = false;
@@ -21,7 +20,6 @@ public class HealthScript : MonoBehaviour
     void Start()
     {
         onTakeDamage = new UnityEvent();
-        Healthtext = FindObjectOfType<Text>();
         currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
     }
@@ -29,7 +27,6 @@ public class HealthScript : MonoBehaviour
     public void ActivateSheild()
     {
         sheild = true;
-        Healthtext.text = "SHEILD";
     }
 
     public void DeactivateSheild()
@@ -92,14 +89,6 @@ public class HealthScript : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        if (!sheild)
-        {
-            Healthtext.text = "Health: " + currentHealth;
-        }
     }
 
 }
