@@ -25,7 +25,7 @@ public enum FSMTransitions
     OutOfHealth,
     Awoken,
     PlayerTooClose,
-    RetreatDistanceReached,
+    CloserDistanceReached,
 }
 
 public abstract class FSM : MonoBehaviour

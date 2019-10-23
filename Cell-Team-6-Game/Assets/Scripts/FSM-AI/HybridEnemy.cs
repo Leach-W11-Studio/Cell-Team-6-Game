@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootEnemy : BaseEnemy
+public class HybridEnemy : BaseEnemy
 {
     public List<GameObject> PatrolPoints;
-    public float retreatDistance = 4f;
+    public float chargeDistance = 4f;
 
     protected override void BuildFSM()
     {
@@ -13,20 +13,20 @@ public class ShootEnemy : BaseEnemy
         patrol.AddTransitionState(FSMStateID.Shoot, FSMTransitions.SawPlayer);
         patrol.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
 
-        ShootState shoot = new ShootState(retreatDistance);
+        ShootState shoot = new ShootState(chargeDistance);
         shoot.AddTransitionState(FSMStateID.Patrol, FSMTransitions.PlayerOutOfRange);
-        shoot.AddTransitionState(FSMStateID.Retreat, FSMTransitions.PlayerTooClose);
+        shoot.AddTransitionState(FSMStateID.Chase, FSMTransitions.PlayerTooClose);
         shoot.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
 
-        RetreatState retreat = new RetreatState(navAgent, retreatDistance);
-        retreat.AddTransitionState(FSMStateID.Shoot, FSMTransitions.CloserDistanceReached);
-        retreat.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
+        ChaseState chase = new ChaseState(navAgent, chargeDistance);
+        chase.AddTransitionState(FSMStateID.Shoot, FSMTransitions.PlayerOutOfRange);
+        chase.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
 
         DeadState dead = new DeadState();
 
         AddFSMState(patrol);
         AddFSMState(shoot);
-        AddFSMState(retreat);
+        AddFSMState(chase);
         AddFSMState(dead);
     }
 }

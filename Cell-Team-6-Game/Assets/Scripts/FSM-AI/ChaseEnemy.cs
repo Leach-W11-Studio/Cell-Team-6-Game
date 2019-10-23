@@ -14,7 +14,7 @@ public class ChaseEnemy : BaseEnemy
         idle.AddTransitionState(FSMStateID.Chase, FSMTransitions.SawPlayer);
         idle.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
 
-        ChaseState chase = new ChaseState(navAgent);
+        ChaseState chase = new ChaseState(navAgent, agroDistance);
         chase.AddTransitionState(FSMStateID.Idle, FSMTransitions.PlayerOutOfRange);
         chase.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
 

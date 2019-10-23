@@ -44,7 +44,7 @@ public class RetreatState : FSMState
         {
             agent.slowingDistance = normalSlowingDistance;
             agent.Stop();
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.RetreatDistanceReached);
+            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.CloserDistanceReached);
         }
     }
 }

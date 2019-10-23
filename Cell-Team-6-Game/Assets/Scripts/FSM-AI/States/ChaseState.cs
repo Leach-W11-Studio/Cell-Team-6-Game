@@ -5,11 +5,14 @@ using UnityEngine;
 public class ChaseState : FSMState
 {
     private PolyNavAgent agent;
+    private float agroRange;
 
-    public ChaseState(PolyNavAgent navAgent)
+    public ChaseState(PolyNavAgent navAgent, float terminalDistance)
     {
         stateID = FSMStateID.Chase;
         agent = navAgent;
+
+        agroRange = terminalDistance;
     }
 
     public override void Act(Transform player, GameObject self)
@@ -29,7 +32,7 @@ public class ChaseState : FSMState
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
-        else if(Vector2.Distance(self.transform.position, player.position) > self.GetComponent<BaseEnemy>().agroDistance)
+        else if(Vector2.Distance(self.transform.position, player.position) > agroRange)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);
