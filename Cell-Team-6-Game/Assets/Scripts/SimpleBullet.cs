@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimpleBullet : MonoBehaviour, IShootable
 {
 
-    private int CurrentDamage = 10;
+    private int CurrentDamage = 1;
     public float power = 10;
     private Rigidbody2D rb;
 
@@ -28,12 +28,12 @@ public class SimpleBullet : MonoBehaviour, IShootable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
+        /* IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
         //Debug.Log(hitObject);
         if (hitObject != null)
         {
             hitObject.takeDamage(CurrentDamage);
-        }
+        } */
 
         gameObject.SetActive(false);
     }

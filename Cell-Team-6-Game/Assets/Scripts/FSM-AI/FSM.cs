@@ -11,6 +11,10 @@ public enum FSMStateID
     Idle,
     Shoot,
     Dead,
+    Chase,
+    Passive,
+    Patrol,
+    Retreat,
 }
 
 public enum FSMTransitions
@@ -19,6 +23,9 @@ public enum FSMTransitions
     SawPlayer,
     PlayerOutOfRange,
     OutOfHealth,
+    Awoken,
+    PlayerTooClose,
+    CloserDistanceReached,
 }
 
 public abstract class FSM : MonoBehaviour
@@ -31,6 +38,8 @@ public abstract class FSM : MonoBehaviour
     protected abstract void Initalize();
     protected abstract void FSMUpdate();
     protected abstract void FSMFixedUpdate();
+
+    public PolyNavAgent navAgent;
 
     private FSMState currentState;
     public FSMState CurrentState { get { return currentState; } }
@@ -107,12 +116,14 @@ public abstract class FSM : MonoBehaviour
                 return;
             }
         }
+        Debug.LogError("Unidentified error with state transition");
     }
 
     // Start is called before the first frame update
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        navAgent = gameObject.GetComponent<PolyNavAgent>();
         Initalize();
     }
 
