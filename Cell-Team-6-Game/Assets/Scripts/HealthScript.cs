@@ -22,7 +22,6 @@ public class HealthScript : MonoBehaviour
     void Start()
     {
         onTakeDamage = new UnityEvent();
-        Healthtext = FindObjectOfType<Text>();
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
     }
