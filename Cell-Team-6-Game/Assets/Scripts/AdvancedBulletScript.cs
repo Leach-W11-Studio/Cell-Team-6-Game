@@ -63,4 +63,16 @@ public class AdvancedBulletScript : MonoBehaviour, IShootable
         bullet = ObjectQueue.Instance.SpawnFromPool("PlayerBullet", transform.position, transform.rotation);
         bullet.transform.Translate(-doubleStartPoint, 0, 0);
     }
+
+    public float ricochetAmount = 0;
+
+    void RicochetAction() {
+        GameObject bullet = ObjectQueue.Instance.SpawnFromPool("PlayerBullet", transform.position, transform.rotation);
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Environment")) {
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, other.transform.position, (1 << LayerMask.NameToLayer("Environment")));
+        }
+    }
 }
