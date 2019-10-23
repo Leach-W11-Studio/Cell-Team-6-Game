@@ -11,7 +11,7 @@ public class DeadState : FSMState
 
     public override void Act(Transform player, GameObject self)
     {
-        Destroy(self, 1f);
+        //Destroy(self, 1f);
     }
 
     public override void Reason(Transform player, GameObject self)
