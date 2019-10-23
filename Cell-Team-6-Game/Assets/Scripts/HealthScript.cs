@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class HealthScript : MonoBehaviour
 {
     //Created necessary Variables
-    public Slider Playerhealth;
     public Text Healthtext;
+    public int maxHealth;
     public int currentHealth;
     public bool sheild = false;
     public bool invincible = false;
@@ -18,37 +18,23 @@ public class HealthScript : MonoBehaviour
     private bool isplayer = false;
     private int Damage;
 
-    private Image healthbarFill;
-
     void Start()
     {
         onTakeDamage = new UnityEvent();
-        Playerhealth = FindObjectOfType<Slider>();
         Healthtext = FindObjectOfType<Text>();
-        healthbarFill = Playerhealth.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
-        healthbarFill.color = healthColor;
-        //Tells the script wether to treat the gameobject as a player or an enemy, and set the health accordingly
-        if (gameObject.CompareTag("Player"))
-        {
-            isplayer = true;
-            currentHealth = 5;
-        }
-        else
-            currentHealth = 100;
-        Playerhealth.maxValue = currentHealth;
+        currentHealth = maxHealth;
+        if (transform.tag == "Player") { isplayer = true; }
     }
 
     public void ActivateSheild()
     {
         sheild = true;
-        healthbarFill.color = sheildColor;
         Healthtext.text = "SHEILD";
     }
 
     public void DeactivateSheild()
     {
         sheild = false;
-        healthbarFill.color = healthColor;
     }
 
     //Can be called to restore 1 heart to the player
@@ -90,6 +76,7 @@ public class HealthScript : MonoBehaviour
         //If this is attatched to the player, and the object colliding is an enemy or an enemy bullet, subract a heart, and destroy the object that hit it
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
+            Debug.Log("being hit");
             if (collision.gameObject.CompareTag("Enemy"))
                 Destroy(collision.gameObject);
             Player_Take_Damage();
@@ -109,7 +96,6 @@ public class HealthScript : MonoBehaviour
 
     private void Update()
     {
-        Playerhealth.value = currentHealth;
         if (!sheild)
         {
             Healthtext.text = "Health: " + currentHealth;
