@@ -26,6 +26,8 @@ public class HealthScript : MonoBehaviour
         onTakeDamage = new UnityEvent();
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
+
+        if (!isplayer) { currentHealth = maxHealth; }
     }
 
     public void ActivateSheild()
@@ -51,7 +53,7 @@ public class HealthScript : MonoBehaviour
         if (invincible) { return; }
         if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); return; }
         if (currentHealth > 0)
-        { 
+        {
             onTakeDamage.Invoke();
             currentHealth--;
         }
@@ -99,9 +101,9 @@ public class HealthScript : MonoBehaviour
 
     private void Update()
     {
-        if (!sheild)
+        /* if (!sheild)
         {
             Healthtext.text = "Health: " + currentHealth;
-        }
+        } */
     }
 }
