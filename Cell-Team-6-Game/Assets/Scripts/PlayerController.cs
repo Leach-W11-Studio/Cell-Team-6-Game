@@ -93,7 +93,14 @@ public class PlayerController : MonoBehaviour
         if (isWalking) { hitboxHighlight.SetActive(true); }
         else { hitboxHighlight.SetActive(false); }
 
-        if (Input.GetButtonDown("Cancel")) { Application.Quit(); }
+        if (Input.GetButtonDown("Cancel")) {
+            if (GameMaster.gameMaster.paused && !GameMaster.gameMaster.defeated) {
+                GameMaster.gameMaster.UnPauseGame();
+            }
+            else if (!GameMaster.gameMaster.paused && !GameMaster.gameMaster.defeated) {
+                GameMaster.gameMaster.PauseGame();
+            }
+        }
 
         if (playerHealth.sheild)
         {

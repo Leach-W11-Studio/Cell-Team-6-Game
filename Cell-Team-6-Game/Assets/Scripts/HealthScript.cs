@@ -91,6 +91,7 @@ public class HealthScript : MonoBehaviour
 
     public void Die()
     {
+        if (isplayer) { GameMaster.gameMaster.LoseGame(); }
         Destroy(gameObject);
     }
 

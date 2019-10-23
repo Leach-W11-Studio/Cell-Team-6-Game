@@ -63,7 +63,6 @@ public class TimerUI : MonoBehaviour
         }
 
         float percentage = (elapsedTime / duration) * 100;
-        Debug.Log(percentage);
         if (percentage > warningPercent && !animator.GetBool("blink"))
         {
             animator.SetTrigger("blink");
