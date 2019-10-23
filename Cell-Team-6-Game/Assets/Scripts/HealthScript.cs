@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +11,7 @@ public class HealthScript : MonoBehaviour
     public Text Healthtext;
     public int maxHealth;
     public int currentHealth;
-    public bool sheild = false;
+    public bool sheild;
     public bool invincible = false;
     public Color healthColor;
     public Color sheildColor;
@@ -22,7 +23,7 @@ public class HealthScript : MonoBehaviour
     {
         onTakeDamage = new UnityEvent();
         Healthtext = FindObjectOfType<Text>();
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
     }
 
@@ -49,7 +50,7 @@ public class HealthScript : MonoBehaviour
         if (invincible) { return; }
         if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); return; }
         if (currentHealth > 0)
-        {
+        { 
             onTakeDamage.Invoke();
             currentHealth--;
         }
@@ -101,5 +102,4 @@ public class HealthScript : MonoBehaviour
             Healthtext.text = "Health: " + currentHealth;
         }
     }
-
 }
