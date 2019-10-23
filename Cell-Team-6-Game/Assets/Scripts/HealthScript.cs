@@ -16,7 +16,7 @@ public class HealthScript : MonoBehaviour
     public Color healthColor;
     public Color sheildColor;
     public UnityEvent onTakeDamage;
-    private bool isplayer = false;
+    public bool isplayer = false; //Testing Remove Later
     private int Damage;
     private Animator PlayerAnim;
 
@@ -26,6 +26,8 @@ public class HealthScript : MonoBehaviour
         onTakeDamage = new UnityEvent();
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
+
+        if (!isplayer) { currentHealth = maxHealth; }
     }
 
     public void ActivateSheild()
@@ -51,7 +53,7 @@ public class HealthScript : MonoBehaviour
         if (invincible) { return; }
         if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); return; }
         if (currentHealth > 0)
-        { 
+        {
             onTakeDamage.Invoke();
             currentHealth--;
         }
@@ -75,10 +77,11 @@ public class HealthScript : MonoBehaviour
     //On collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //if (collision.CompareTag("PlayerBullet")) { Debug.Log("Bonk"); }
         //If this is attatched to the player, and the object colliding is an enemy or an enemy bullet, subract a heart, and destroy the object that hit it
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
-            Debug.Log("being hit");
+            //Debug.Log("being hit");
             if (collision.gameObject.CompareTag("Enemy"))
                 Destroy(collision.gameObject);
             Player_Take_Damage();
@@ -93,14 +96,14 @@ public class HealthScript : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, .1f);
     }
 
     private void Update()
     {
-        if (!sheild)
+        /* if (!sheild)
         {
             Healthtext.text = "Health: " + currentHealth;
-        }
+        } */
     }
 }
