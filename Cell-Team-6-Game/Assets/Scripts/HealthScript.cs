@@ -18,9 +18,11 @@ public class HealthScript : MonoBehaviour
     public UnityEvent onTakeDamage;
     private bool isplayer = false;
     private int Damage;
+    private Animator PlayerAnim;
 
     void Start()
     {
+        PlayerAnim = gameObject.GetComponent<Animator>();
         onTakeDamage = new UnityEvent();
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
