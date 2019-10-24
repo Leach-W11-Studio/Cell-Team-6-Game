@@ -15,7 +15,6 @@ public class AdvancedBulletScript : MonoBehaviour, IShootable
     {
         SPREAD,
         DOUBLE,
-        RICOCHET,
         MEGA,
         STUN,
     };
@@ -63,4 +62,5 @@ public class AdvancedBulletScript : MonoBehaviour, IShootable
         bullet = ObjectQueue.Instance.SpawnFromPool("PlayerBullet", transform.position, transform.rotation);
         bullet.transform.Translate(-doubleStartPoint, 0, 0);
     }
+
 }

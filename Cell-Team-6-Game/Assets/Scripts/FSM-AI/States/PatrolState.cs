@@ -11,6 +11,10 @@ public class PatrolState : FSMState
     public PatrolState(List<GameObject> points, PolyNavAgent navAgent)
     {
         stateID = FSMStateID.Patrol;
+        if(points.Count == 0)
+        {
+            Debug.LogError("No patrol points are listed. Add patrol points to this enemy in the inspector");
+        }
         PatrolPoints = points;
         agent = navAgent;
         DestPos = SelectPatrolPoint();
