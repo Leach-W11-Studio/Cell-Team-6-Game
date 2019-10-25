@@ -1,35 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class HealthScript : MonoBehaviour
 {
     //Created necessary Variables
-    public Text Healthtext;
     public int maxHealth;
     public int currentHealth;
-    public bool sheild = false;
+    public bool sheild;
     public bool invincible = false;
     public Color healthColor;
     public Color sheildColor;
     public UnityEvent onTakeDamage;
-    private bool isplayer = false;
+    public bool isplayer = false; //Testing Remove Later
     private int Damage;
+    private Animator PlayerAnim;
 
     void Start()
     {
+        PlayerAnim = gameObject.GetComponent<Animator>();
         onTakeDamage = new UnityEvent();
-        Healthtext = FindObjectOfType<Text>();
         currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
+
+        if (!isplayer) { currentHealth = maxHealth; }
     }
 
     public void ActivateSheild()
     {
         sheild = true;
-        Healthtext.text = "SHEILD";
     }
 
     public void DeactivateSheild()
@@ -73,10 +75,11 @@ public class HealthScript : MonoBehaviour
     //On collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //if (collision.CompareTag("PlayerBullet")) { Debug.Log("Bonk"); }
         //If this is attatched to the player, and the object colliding is an enemy or an enemy bullet, subract a heart, and destroy the object that hit it
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
-            Debug.Log("being hit");
+            //Debug.Log("being hit");
             if (collision.gameObject.CompareTag("Enemy"))
                 Destroy(collision.gameObject);
             Player_Take_Damage();
@@ -91,15 +94,7 @@ public class HealthScript : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        if (!sheild)
-        {
-            Healthtext.text = "Health: " + currentHealth;
-        }
+        Destroy(gameObject, .1f);
     }
 
 }

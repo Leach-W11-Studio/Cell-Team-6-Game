@@ -5,9 +5,9 @@ using UnityEngine;
 public class SimpleBullet : MonoBehaviour, IShootable
 {
 
-    private int CurrentDamage = 10;
+    protected int CurrentDamage = 10;
     public float power = 10;
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Awake()
@@ -26,14 +26,14 @@ public class SimpleBullet : MonoBehaviour, IShootable
         return CurrentDamage;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
+        /* IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
         //Debug.Log(hitObject);
         if (hitObject != null)
         {
             hitObject.takeDamage(CurrentDamage);
-        }
+        } */
 
         gameObject.SetActive(false);
     }

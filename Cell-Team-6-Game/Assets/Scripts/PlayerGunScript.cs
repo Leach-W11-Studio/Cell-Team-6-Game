@@ -70,7 +70,9 @@ public class PlayerGunScript : MonoBehaviour
                 megaCountDown += 1;
             }
             if(inventory.ContainsBullet(PlayerInventory.BulletType.StunShot)) { }
-            if(inventory.ContainsBullet(PlayerInventory.BulletType.RicochetShot)) { }
+            if(inventory.ContainsBullet(PlayerInventory.BulletType.RicochetShot)) {
+                ObjectQueue.Instance.SpawnFromPool("RicochetBullet", transform.position, transform.rotation);
+            }
 
             if(!inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) { ObjectQueue.Instance.SpawnFromPool("PlayerBullet", transform.position, transform.rotation); }
 
