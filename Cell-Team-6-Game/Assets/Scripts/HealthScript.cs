@@ -98,7 +98,10 @@ public class HealthScript : MonoBehaviour
 
     public void Die()
     {
-        if (isplayer) { PlayerAnim.SetTrigger("died"); }
+        if (isplayer) { 
+            GameMaster.gameMaster.LoseGame();
+            PlayerAnim.SetTrigger("died"); 
+        }
         StartCoroutine("DieWait");
     }
 
