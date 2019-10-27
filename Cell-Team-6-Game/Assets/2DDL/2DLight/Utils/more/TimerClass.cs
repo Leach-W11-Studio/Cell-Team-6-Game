@@ -13,7 +13,6 @@ public class TimerClass : MonoBehaviour {
 
 	public delegate void OnTimerUpdateDelegate(float currentDelta);
 	public event OnTimerUpdateDelegate OnUpdateTimerEvent;
-
 	
 	public float Delay = 0;
 	public bool Loop = false;
