@@ -59,8 +59,7 @@ public class HealthScript : MonoBehaviour
             onTakeDamage.Invoke();
             currentHealth--;
         }
-        else
-            Die();
+        if (currentHealth == 0) { Die(); }
     }
 
     //Is passed a damage value from the collision function, and subtracts the damage from the current health of the enemy
