@@ -98,11 +98,11 @@ public class HealthScript : MonoBehaviour
 
     public void Die()
     {
-        PlayerAnim.SetTrigger("died");
+        if (isplayer) { PlayerAnim.SetTrigger("died"); }
         StartCoroutine("DieWait");
     }
 
-   IEnumerator DieWait()
+    IEnumerator DieWait()
     {
         yield return new WaitForSeconds(Deathtime);
         Destroy(gameObject, .1f);
