@@ -11,7 +11,7 @@ public class PatrolState : FSMState
     public PatrolState(List<GameObject> points, PolyNavAgent navAgent)
     {
         stateID = FSMStateID.Patrol;
-        if(points.Count == 0)
+        if (points.Count == 0)
         {
             Debug.LogError("No patrol points are listed. Add patrol points to this enemy in the inspector");
         }
@@ -22,7 +22,7 @@ public class PatrolState : FSMState
 
     public override void Act(Transform player, GameObject self)
     {
-        if(agent.remainingDistance <= .1f)
+        if (agent.remainingDistance <= .1f)
         {
             DestPos = SelectPatrolPoint();
             agent.SetDestination(DestPos);
@@ -42,15 +42,25 @@ public class PatrolState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if(self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
+        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
-        else if(Vector2.Distance(self.transform.position, player.position) <= self.GetComponent<BaseEnemy>().agroDistance)
+        else if (Vector2.Distance(self.transform.position, player.position) <= self.GetComponent<BaseEnemy>().agroDistance)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.SawPlayer);
         }
+    }
+
+    public override void OnStateEnter(Transform player, GameObject self)
+    {
+
+    }
+
+    public override void OnStateExit(Transform player, GameObject self)
+    {
+
     }
 }

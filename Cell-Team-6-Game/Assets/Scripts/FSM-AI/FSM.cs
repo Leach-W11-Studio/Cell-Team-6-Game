@@ -112,7 +112,10 @@ public abstract class FSM : MonoBehaviour
             if (newID == state.StateID)
             {
                 Debug.Log("State changed to " + newID.ToString());
+                currentState.OnStateExit(playerTransform, gameObject);
+                
                 currentState = state;
+                currentState.OnStateEnter(playerTransform, gameObject);
                 return;
             }
         }

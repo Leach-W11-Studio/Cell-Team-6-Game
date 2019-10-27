@@ -43,4 +43,14 @@ public class PassiveState : FSMState
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.Awoken);
         }
     }
+
+    public override void OnStateEnter(Transform player, GameObject self)
+    {
+
+    }
+
+    public override void OnStateExit(Transform player, GameObject self)
+    {
+
+    }
 }

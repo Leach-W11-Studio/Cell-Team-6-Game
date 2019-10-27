@@ -18,7 +18,7 @@ public class ChaseState : FSMState
     public override void Act(Transform player, GameObject self)
     {
         agent.SetDestination(player.position);
-        
+
         Vector2 heading = player.position - self.transform.position;
         heading.Normalize();
         float zRot = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
@@ -27,15 +27,25 @@ public class ChaseState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if(self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
+        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
-        else if(Vector2.Distance(self.transform.position, player.position) > agroRange)
+        else if (Vector2.Distance(self.transform.position, player.position) > agroRange)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);
         }
+    }
+
+    public override void OnStateEnter(Transform player, GameObject self)
+    {
+        Debug.Log("EnterTest");
+    }
+
+    public override void OnStateExit(Transform player, GameObject self)
+    {
+        Debug.Log("ExitTest");
     }
 }
