@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
         playerHealth = GetComponent<HealthScript>();
         playerSprite = GetComponent<SpriteRenderer>();
         PlayerAnim = gameObject.GetComponent<Animator>();
-
         playerHealth.onTakeDamage.AddListener(() => {
             StartCoroutine(Invincible());
         });
@@ -95,7 +94,14 @@ public class PlayerController : MonoBehaviour
         if (isWalking) { hitboxHighlight.SetActive(true); }
         else { hitboxHighlight.SetActive(false); }
 
-        if (Input.GetButtonDown("Cancel")) { Application.Quit(); }
+        if (Input.GetButtonDown("Cancel")) {
+            if (GameMaster.gameMaster.paused && !GameMaster.gameMaster.defeated) {
+                GameMaster.gameMaster.UnPauseGame();
+            }
+            else if (!GameMaster.gameMaster.paused && !GameMaster.gameMaster.defeated) {
+                GameMaster.gameMaster.PauseGame();
+            }
+        }
 
         if (playerHealth.sheild)
         {
