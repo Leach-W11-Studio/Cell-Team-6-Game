@@ -35,6 +35,9 @@ public class SimpleBullet : MonoBehaviour, IShootable
             hitObject.takeDamage(CurrentDamage);
         } */
 
-        gameObject.SetActive(false);
+        if(!collision.gameObject.CompareTag("onlyTrigger"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -24,9 +24,12 @@ public class SceneChanger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerPrefs.SetInt("PlayerHealth", Variables.currentHealth);
-        SetBool("PlayerShield", Variables.sheild);
-        loadnext();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerPrefs.SetInt("PlayerHealth", Variables.currentHealth);
+            SetBool("PlayerShield", Variables.sheild);
+            loadnext();
+        }
     }
 
     public static void SetBool(string name, bool booleanValue)
@@ -37,7 +40,7 @@ public class SceneChanger : MonoBehaviour
     //This and below could also be in the health script, However I am not sure if that is what we want
     private void OnSceneLoaded(Scene thescene, LoadSceneMode amode)
     {
-        Variables = GameObject.Find("Player").GetComponent<HealthScript>();
+        Variables = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthScript>();
         Variables.currentHealth = PlayerPrefs.GetInt("PlayerHealth");
         Variables.sheild = GetBool("PlayerShield");
         PlayerPrefs.SetInt("PlayerHealth", Variables.maxHealth);

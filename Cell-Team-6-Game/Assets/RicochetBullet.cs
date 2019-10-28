@@ -21,7 +21,7 @@ public class RicochetBullet : SimpleBullet
             if (bounces < maxBounces)
             {
                 Debug.Log("should ricochet");
-                RaycastHit2D surface = Physics2D.Linecast(transform.position, collision.transform.position, layers);
+                RaycastHit2D surface = Physics2D.Raycast(transform.position, rb.velocity.normalized, layers);
                 Debug.DrawRay(surface.point, surface.normal, Color.blue);
                 Bounce(surface.normal);
             }

@@ -16,13 +16,23 @@ public class IdleState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if(self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
+        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
         {
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
-        else if(Vector2.Distance(self.transform.position, player.position) <= self.GetComponent<BaseEnemy>().agroDistance)
+        else if (Vector2.Distance(self.transform.position, player.position) <= self.GetComponent<BaseEnemy>().agroDistance)
         {
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.SawPlayer);
         }
+    }
+
+    public override void OnStateEnter(Transform player, GameObject self)
+    {
+
+    }
+
+    public override void OnStateExit(Transform player, GameObject self)
+    {
+
     }
 }
