@@ -41,11 +41,11 @@ public class ChaseState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        Debug.Log("EnterTest");
+        //Debug.Log("EnterTest");
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        Debug.Log("ExitTest");
+        //Debug.Log("ExitTest");
     }
 }
