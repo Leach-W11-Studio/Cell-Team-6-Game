@@ -41,6 +41,11 @@ public abstract class FSM : MonoBehaviour
 
     public PolyNavAgent navAgent;
 
+    /// <summary>
+    /// Whether or not the enemy is active and executing their relevent functions
+    /// </summary>
+    public bool Active;
+
     private FSMState currentState;
     public FSMState CurrentState { get { return currentState; } }
 
@@ -112,7 +117,10 @@ public abstract class FSM : MonoBehaviour
             if (newID == state.StateID)
             {
                 Debug.Log("State changed to " + newID.ToString());
+                currentState.OnStateExit(playerTransform, gameObject);
+
                 currentState = state;
+                currentState.OnStateEnter(playerTransform, gameObject);
                 return;
             }
         }
@@ -122,6 +130,7 @@ public abstract class FSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Active = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = gameObject.GetComponent<PolyNavAgent>();
         Initalize();
@@ -130,13 +139,19 @@ public abstract class FSM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentState.Reason(playerTransform, gameObject);
-        FSMUpdate();
+        if (Active)
+        {
+            currentState.Reason(playerTransform, gameObject);
+            FSMUpdate();
+        }
     }
 
     void FixedUpdate()
     {
-        currentState.Act(playerTransform, gameObject);
-        FSMFixedUpdate();
+        if (Active)
+        {
+            currentState.Act(playerTransform, gameObject);
+            FSMFixedUpdate();
+        }
     }
 }

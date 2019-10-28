@@ -27,6 +27,20 @@ public abstract class FSMState
     public abstract void Reason(Transform player, GameObject self);
 
     /// <summary>
+    /// Performs all single operations that are to be performed upon switching to a state. Called once upon entering state.
+    /// </summary>
+    /// <param name="player">The transform assigned to the player object</param>
+    /// <param name="self">The GameObject of the object this perticular state is assigned to</param>
+    public abstract void OnStateEnter(Transform player, GameObject self);
+
+    /// <summary>
+    /// Performs all single operations that are to be performed upon switching out of a state. Called once upon exiting state.
+    /// </summary>
+    /// <param name="player">The transform assigned to the player object</param>
+    /// <param name="self">The GameObject of the object this perticular state is assigned to</param>
+    public abstract void OnStateExit(Transform player, GameObject self);
+
+    /// <summary>
     /// Checks if transition is avalable for use
     /// </summary>
     /// <param name="transition">Transition to be set</param>

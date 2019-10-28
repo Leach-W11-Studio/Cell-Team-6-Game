@@ -24,9 +24,12 @@ public class SceneChanger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerPrefs.SetInt("PlayerHealth", Variables.currentHealth);
-        SetBool("PlayerShield", Variables.sheild);
-        loadnext();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerPrefs.SetInt("PlayerHealth", Variables.currentHealth);
+            SetBool("PlayerShield", Variables.sheild);
+            loadnext();
+        }
     }
 
     public static void SetBool(string name, bool booleanValue)

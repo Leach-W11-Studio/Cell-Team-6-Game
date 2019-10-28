@@ -18,4 +18,14 @@ public class DeadState : FSMState
     {
         //Can Never Leave DeadState - No Transitions
     }
+
+    public override void OnStateEnter(Transform player, GameObject self)
+    {
+
+    }
+
+    public override void OnStateExit(Transform player, GameObject self)
+    {
+
+    }
 }

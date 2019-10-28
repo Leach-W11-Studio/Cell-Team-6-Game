@@ -40,9 +40,19 @@ public class ShootState : FSMState
             self.GetComponent<BaseEnemy>().spawnerScript.shoot = false;
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);
         }
-        else if(retreatDistance != 0 && Vector2.Distance(self.transform.position, player.position) <= retreatDistance)
+        else if (retreatDistance != 0 && Vector2.Distance(self.transform.position, player.position) <= retreatDistance)
         {
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerTooClose);
         }
+    }
+
+    public override void OnStateEnter(Transform player, GameObject self)
+    {
+
+    }
+
+    public override void OnStateExit(Transform player, GameObject self)
+    {
+
     }
 }
