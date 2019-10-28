@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         inventory = GetComponent<PlayerInventory>();
         sheild = transform.Find("sheild").gameObject;
         playerHealth = GetComponent<HealthScript>();
-        playerSprite = GetComponent<SpriteRenderer>();
+        playerSprite = transform.Find("PlayerSprite").GetComponent<SpriteRenderer>();
         PlayerAnim = gameObject.GetComponent<Animator>();
         playerHealth.onTakeDamage.AddListener(() => {
             StartCoroutine(Invincible());
@@ -41,7 +41,16 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-      float targetSpeed = isWalking ? moveSpeed / walkModifier : moveSpeed;
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            PlayerAnim.SetBool("isWalking", true);
+        }
+        else
+        {
+            PlayerAnim.SetBool("isWalking", false);
+        }
+
+        float targetSpeed = isWalking ? moveSpeed / walkModifier : moveSpeed;
         //Makes object move in an absolute fashion in all 4 directions
         float horizontal = Input.GetAxis("Horizontal") * targetSpeed/10;
         float vertical = Input.GetAxis("Vertical") * targetSpeed/10;
@@ -62,10 +71,13 @@ public class PlayerController : MonoBehaviour
 
     void Firing()
     {
-        if(Input.GetAxis("Fire1") != 0)
+        if (Input.GetAxis("Fire1") != 0)
         {
+            PlayerAnim.SetBool("isShooting", true);
             gun.Shoot();
         }
+        else
+            PlayerAnim.SetBool("isShooting", false);
     }
     
     void CreateExplosion(PlayerInventory.BulletType cellType) {

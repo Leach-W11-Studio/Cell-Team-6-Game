@@ -18,12 +18,14 @@ public class HealthScript : MonoBehaviour
     public UnityEvent onTakeDamage;
     public bool isplayer = false; //Testing Remove Later
     private int Damage;
+    private int Deathtime;
     private Animator PlayerAnim;
 
     void Start()
     {
         PlayerAnim = gameObject.GetComponent<Animator>();
         onTakeDamage = new UnityEvent();
+        Deathtime = 1;
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
 
@@ -57,8 +59,7 @@ public class HealthScript : MonoBehaviour
             onTakeDamage.Invoke();
             currentHealth--;
         }
-        else
-            Die();
+        if (currentHealth == 0) { Die(); }
     }
 
     //Is passed a damage value from the collision function, and subtracts the damage from the current health of the enemy
@@ -96,14 +97,16 @@ public class HealthScript : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject, .1f);
+        if (isplayer) { 
+            GameMaster.gameMaster.LoseGame();
+            PlayerAnim.SetTrigger("died"); 
+        }
+        StartCoroutine("DieWait");
     }
 
-    private void Update()
+    IEnumerator DieWait()
     {
-        /* if (!sheild)
-        {
-            Healthtext.text = "Health: " + currentHealth;
-        } */
+        yield return new WaitForSeconds(Deathtime);
+        Destroy(gameObject, .1f);
     }
 }
