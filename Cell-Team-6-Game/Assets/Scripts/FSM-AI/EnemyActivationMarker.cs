@@ -16,7 +16,18 @@ public class EnemyActivationMarker : MonoBehaviour
     void WakeEnemies()
     {
         LayerMask mask = LayerMask.GetMask("Character");
-        var enemiesToWake = Physics2D.OverlapCircleAll(transform.position, activationRaidus, mask);
+
+        var enemiesToWake = Physics2D.OverlapCircleAll(transform.position, activationRaidus * 1.5f, mask);
+
+        foreach (var character in enemiesToWake)
+        {
+            if(character.gameObject.CompareTag("Enemy"))
+            {
+                character.gameObject.GetComponent<FSM>().Active = false;
+            }
+        }
+
+        enemiesToWake = Physics2D.OverlapCircleAll(transform.position, activationRaidus, mask);
 
         foreach (var character in enemiesToWake)
         {
