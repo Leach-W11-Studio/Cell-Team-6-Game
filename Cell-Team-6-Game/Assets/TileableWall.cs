@@ -18,7 +18,6 @@ public class TileableWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("execute in edit");
          if (!boxCollider2D) {
             boxCollider2D = GetComponent<BoxCollider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
