@@ -50,6 +50,23 @@ public class PolyNavObstacle : MonoBehaviour {
 				return tempPoints;			
 			}
 
+            if (myCollider is CompositeCollider2D) {
+                CompositeCollider2D composite = ((CompositeCollider2D)myCollider);
+                Vector2[] tempPoints = new Vector2[composite.pointCount];
+
+                for (int x = 0; x < composite.pathCount; x++) {
+                    Vector2[] pathPoints = new Vector2[composite.GetPathPointCount(x)];
+                    var path = composite.GetPath(x, pathPoints);
+                    for (int y = 0; y < composite)
+                }
+
+                if (invertPolygon)
+                {
+                    System.Array.Reverse(tempPoints);
+                }
+                return tempPoints;
+            }
+
 			return null;
 		}
 	}

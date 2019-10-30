@@ -223,38 +223,63 @@ public class PolyNav2D : MonoBehaviour {
 		}
 
 		if (generateMaster){
+            if (masterCollider is PolygonCollider2D)
+            {
+                var polyCollider = (PolygonCollider2D)masterCollider;
+                //invert the main polygon points so that we save checking for inward/outward later (for Inflate)
+                var reversed = new List<Vector2>();
 
-			if (masterCollider is PolygonCollider2D){
+                for (int i = 0; i < polyCollider.pathCount; ++i)
+                {
 
-				var polyCollider = (PolygonCollider2D)masterCollider;
-				//invert the main polygon points so that we save checking for inward/outward later (for Inflate)
-				var reversed = new List<Vector2>();
-				
-				for (int i = 0; i < polyCollider.pathCount; ++i){
+                    for (int p = 0; p < polyCollider.GetPath(i).Length; ++p)
+                    {
+                        reversed.Add(polyCollider.GetPath(i)[p]);
+                    }
 
-					for (int p = 0; p < polyCollider.GetPath(i).Length; ++p){
-						reversed.Add( polyCollider.GetPath(i)[p] );
-					}
-					
-					reversed.Reverse();
+                    reversed.Reverse();
 
-					var transformed = TransformPoints(reversed.ToArray(), polyCollider.transform);
-					var inflated = InflatePolygon(transformed, Mathf.Max(0.01f, radiusOffset) );
-				
-					masterPolys.Add(new Polygon(inflated));
-					reversed.Clear();
-				}
+                    var transformed = TransformPoints(reversed.ToArray(), polyCollider.transform);
+                    var inflated = InflatePolygon(transformed, Mathf.Max(0.01f, radiusOffset));
 
-			} else if (masterCollider is BoxCollider2D){
-				var box = (BoxCollider2D)masterCollider;
-				var tl = box.offset + new Vector2(-box.size.x, box.size.y)/2;
-				var tr = box.offset + new Vector2(box.size.x, box.size.y)/2;
-				var br = box.offset + new Vector2(box.size.x, -box.size.y)/2;
-				var bl = box.offset + new Vector2(-box.size.x, -box.size.y)/2;
-				var transformed = TransformPoints(new Vector2[]{tl, bl, br, tr}, masterCollider.transform);
-				var inflated = InflatePolygon(transformed, Mathf.Max(0.01f, radiusOffset));
-				masterPolys.Add(new Polygon(inflated) );
-			}
+                    masterPolys.Add(new Polygon(inflated));
+                    reversed.Clear();
+                }
+
+            }
+            else if (masterCollider is BoxCollider2D)
+            {
+                var box = (BoxCollider2D)masterCollider;
+                var tl = box.offset + new Vector2(-box.size.x, box.size.y) / 2;
+                var tr = box.offset + new Vector2(box.size.x, box.size.y) / 2;
+                var br = box.offset + new Vector2(box.size.x, -box.size.y) / 2;
+                var bl = box.offset + new Vector2(-box.size.x, -box.size.y) / 2;
+                var transformed = TransformPoints(new Vector2[] { tl, bl, br, tr }, masterCollider.transform);
+                var inflated = InflatePolygon(transformed, Mathf.Max(0.01f, radiusOffset));
+                masterPolys.Add(new Polygon(inflated));
+            }
+            else if (masterCollider is CompositeCollider2D) {
+                var polyCollider = (PolygonCollider2D)masterCollider;
+                //invert the main polygon points so that we save checking for inward/outward later (for Inflate)
+                var reversed = new List<Vector2>();
+
+                for (int i = 0; i < polyCollider.pathCount; ++i)
+                {
+
+                    for (int p = 0; p < polyCollider.GetPath(i).Length; ++p)
+                    {
+                        reversed.Add(polyCollider.GetPath(i)[p]);
+                    }
+
+                    reversed.Reverse();
+
+                    var transformed = TransformPoints(reversed.ToArray(), polyCollider.transform);
+                    var inflated = InflatePolygon(transformed, Mathf.Max(0.01f, radiusOffset));
+
+                    masterPolys.Add(new Polygon(inflated));
+                    reversed.Clear();
+                }
+            }
 		
 		} else {
 
