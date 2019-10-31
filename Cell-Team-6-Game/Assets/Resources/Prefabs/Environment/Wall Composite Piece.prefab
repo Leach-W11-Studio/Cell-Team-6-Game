@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2830283804157691175}
   - component: {fileID: 6568998784486183679}
-  - component: {fileID: 1562023837500063816}
   - component: {fileID: 3329510992705330100}
   m_Layer: 9
   m_Name: Wall Composite Piece
@@ -82,21 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1562023837500063816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180685271773604896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shapeType: 1
-  extraOffset: 0
-  invertPolygon: 0
 --- !u!61 &3329510992705330100
 BoxCollider2D:
   m_ObjectHideFlags: 0

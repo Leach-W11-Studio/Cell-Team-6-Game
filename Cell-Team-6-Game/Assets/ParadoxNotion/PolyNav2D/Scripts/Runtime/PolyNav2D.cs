@@ -258,42 +258,43 @@ public class PolyNav2D : MonoBehaviour {
                 var inflated = InflatePolygon(transformed, Mathf.Max(0.01f, radiusOffset));
                 masterPolys.Add(new Polygon(inflated));
             }
-            else if (masterCollider is CompositeCollider2D) {
-                var polyCollider = (PolygonCollider2D)masterCollider;
-                //invert the main polygon points so that we save checking for inward/outward later (for Inflate)
-                var reversed = new List<Vector2>();
+            // else if (masterCollider is CompositeCollider2D) {
+			// 	CompositeCollider2D composite = ((CompositeCollider2D)masterCollider);
+            //     for (int i = 0; i < composite.pathCount; i++) {
+			// 		Vector2[] path = new Vector2[composite.GetPathPointCount(i)];
+			// 		composite.GetPath(i, path);
 
-                for (int i = 0; i < polyCollider.pathCount; ++i)
-                {
+			// 		//invert the main polygon points so that we save checking for inward/outward later (for Inflate)
+			// 		var reversed = new List<Vector2>();
 
-                    for (int p = 0; p < polyCollider.GetPath(i).Length; ++p)
-                    {
-                        reversed.Add(polyCollider.GetPath(i)[p]);
-                    }
+			// 		for (int p = 0; p < path.Length; ++p)
+			// 		{
+			// 			reversed.Add(path[p]);
+			// 		}
 
-                    reversed.Reverse();
+			// 		reversed.Reverse();
 
-                    var transformed = TransformPoints(reversed.ToArray(), polyCollider.transform);
-                    var inflated = InflatePolygon(transformed, Mathf.Max(0.01f, radiusOffset));
+			// 		var transformed = TransformPoints(reversed.ToArray(), composite.transform);
+			// 		var inflated = InflatePolygon(transformed, Mathf.Max(0.01f, radiusOffset));
 
-                    masterPolys.Add(new Polygon(inflated));
-                    reversed.Clear();
-                }
-            }
-		
-		} else {
+			// 		masterPolys.Add(new Polygon(inflated));
+			// 		reversed.Clear();
+			// 	}		
+			// } 
+			else {
 
-			if (map != null){
-				masterPolys = map.masterPolygons.ToList();
+				if (map != null){
+					masterPolys = map.masterPolygons.ToList();
+				}
 			}
+
+			//create the main polygon map (based on inverted) also containing the obstacle polygons
+			map = new PolyMap(masterPolys.ToArray(), obstaclePolys.ToArray());
+
+			//
+			//The colliders are never used again after this point. They are simply a drawing method.
+			//
 		}
-
-		//create the main polygon map (based on inverted) also containing the obstacle polygons
-		map = new PolyMap(masterPolys.ToArray(), obstaclePolys.ToArray());
-
-		//
-		//The colliders are never used again after this point. They are simply a drawing method.
-		//
 	}
 
 

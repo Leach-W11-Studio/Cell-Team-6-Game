@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 [DisallowMultipleComponent]
@@ -10,6 +11,7 @@ public class PolyNavObstacle : MonoBehaviour {
 	public enum ShapeType
 	{
 		Polygon,
+		Composite,
 		Box
 	}
 
@@ -52,19 +54,19 @@ public class PolyNavObstacle : MonoBehaviour {
 
             if (myCollider is CompositeCollider2D) {
                 CompositeCollider2D composite = ((CompositeCollider2D)myCollider);
-                Vector2[] tempPoints = new Vector2[composite.pointCount];
+            	List<Vector2> tempPoints = new List<Vector2>();
 
-                for (int x = 0; x < composite.pathCount; x++) {
-                    Vector2[] pathPoints = new Vector2[composite.GetPathPointCount(x)];
-                    var path = composite.GetPath(x, pathPoints);
-                    for (int y = 0; y < composite)
-                }
+                for(int i = 0; i < composite.pathCount; i++){
+					Vector2[] pathVerts = new Vector2[composite.GetPathPointCount(i)];
+					composite.GetPath(i, pathVerts);
+					tempPoints.AddRange(pathVerts);
+				}
 
                 if (invertPolygon)
                 {
-                    System.Array.Reverse(tempPoints);
+                    tempPoints.Reverse();
                 }
-                return tempPoints;
+                return tempPoints.ToArray();
             }
 
 			return null;
@@ -72,6 +74,7 @@ public class PolyNavObstacle : MonoBehaviour {
 	}
 
 	void Reset(){
+		Debug.Log(myCollider);
 		
 		if (myCollider == null){
 			gameObject.AddComponent<PolygonCollider2D>();
@@ -79,6 +82,10 @@ public class PolyNavObstacle : MonoBehaviour {
 
 		if (myCollider is PolygonCollider2D){
 			shapeType = ShapeType.Polygon;
+		}
+
+		if (myCollider is CompositeCollider2D) {
+			shapeType = ShapeType.Composite;
 		}
 		
 		if (myCollider is BoxCollider2D){
