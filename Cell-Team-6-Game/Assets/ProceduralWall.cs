@@ -21,7 +21,6 @@ public class ProceduralWall : MonoBehaviour
 
     void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        CreateWall();
     }
     // Update is called once per frame
     void Update()
