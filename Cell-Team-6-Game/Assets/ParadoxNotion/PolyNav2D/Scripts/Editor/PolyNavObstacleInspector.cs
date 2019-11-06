@@ -26,6 +26,12 @@ public class PolyNavObstacleInspector : Editor {
 			UnityEditor.Undo.RegisterCreatedObjectUndo(col, "Change Shape Type");
 		}
 
+		if (obstacle.shapeType == PolyNavObstacle.ShapeType.Composite && !(collider is CompositeCollider2D)) {
+			UnityEditor.Undo.DestroyObjectImmediate(collider);
+			var col = obstacle.gameObject.AddComponent<CompositeCollider2D>();
+			UnityEditor.Undo.RegisterCreatedObjectUndo(col, "Change Shape Type");
+		}
+
 		if (obstacle.shapeType == PolyNavObstacle.ShapeType.Box && !(collider is BoxCollider2D) ){
 			UnityEditor.Undo.DestroyObjectImmediate(collider);
 			var col = obstacle.gameObject.AddComponent<BoxCollider2D>();
