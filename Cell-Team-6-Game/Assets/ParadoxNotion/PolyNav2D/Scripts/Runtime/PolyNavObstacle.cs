@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 [DisallowMultipleComponent]
@@ -10,6 +11,7 @@ public class PolyNavObstacle : MonoBehaviour {
 	public enum ShapeType
 	{
 		Polygon,
+		Composite,
 		Box
 	}
 
@@ -50,11 +52,29 @@ public class PolyNavObstacle : MonoBehaviour {
 				return tempPoints;			
 			}
 
+            if (myCollider is CompositeCollider2D) {
+                CompositeCollider2D composite = ((CompositeCollider2D)myCollider);
+            	List<Vector2> tempPoints = new List<Vector2>();
+
+                for(int i = 0; i < composite.pathCount; i++){
+					Vector2[] pathVerts = new Vector2[composite.GetPathPointCount(i)];
+					composite.GetPath(i, pathVerts);
+					tempPoints.AddRange(pathVerts);
+				}
+
+                if (invertPolygon)
+                {
+                    tempPoints.Reverse();
+                }
+                return tempPoints.ToArray();
+            }
+
 			return null;
 		}
 	}
 
 	void Reset(){
+		Debug.Log(myCollider);
 		
 		if (myCollider == null){
 			gameObject.AddComponent<PolygonCollider2D>();
@@ -62,6 +82,10 @@ public class PolyNavObstacle : MonoBehaviour {
 
 		if (myCollider is PolygonCollider2D){
 			shapeType = ShapeType.Polygon;
+		}
+
+		if (myCollider is CompositeCollider2D) {
+			shapeType = ShapeType.Composite;
 		}
 		
 		if (myCollider is BoxCollider2D){
