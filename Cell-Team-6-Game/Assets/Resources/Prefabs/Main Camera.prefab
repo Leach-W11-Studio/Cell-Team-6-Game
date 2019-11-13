@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943273198779000142}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.3770654, y: -2.0874703, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -100,8 +100,9 @@ MonoBehaviour:
   acceleration: 10
   lookAhead: 1
   followPlayer: 1
-  shakeMag: 0.5
-  shakeDur: 0.5
+  shakeMag: 2
+  shakeDur: 0.4
+  shakeSpeed: 10
   target: {fileID: 0}
 --- !u!1001 &1456659700109181431
 PrefabInstance:
@@ -223,27 +224,7 @@ PrefabInstance:
     - target: {fileID: 7147860639180288386, guid: 1822ca5d886d9a24b8310af5354846b6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -14.800049
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147860639291376672, guid: 1822ca5d886d9a24b8310af5354846b6,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147860639291376672, guid: 1822ca5d886d9a24b8310af5354846b6,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147860639291376672, guid: 1822ca5d886d9a24b8310af5354846b6,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147860639291376672, guid: 1822ca5d886d9a24b8310af5354846b6,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
+      value: -14.799805
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1822ca5d886d9a24b8310af5354846b6, type: 3}

@@ -9,6 +9,7 @@ public class FollowCamera : MonoBehaviour
     public bool followPlayer;
     public float shakeMag;
     public float shakeDur;
+    public float shakeSpeed;
 
     public Transform target;
 
@@ -43,10 +44,10 @@ public class FollowCamera : MonoBehaviour
         {
             float x = original.x + (Random.Range(-1f, 1f) * magnitude);
             float y = original.y + (Random.Range(-1f, 1f) * magnitude);
-            transform.position = new Vector3(x, y, original.z);
-
+            transform.position = Vector3.Lerp(transform.position, new Vector3(x,y, original.z), Time.deltaTime*shakeSpeed);
+            //transform.position = new Vector3(x, y, original.z);
             elapsed += Time.deltaTime;
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
         transform.position = original;
     }
