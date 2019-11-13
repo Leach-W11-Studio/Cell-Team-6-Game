@@ -44,7 +44,7 @@ public class FollowCamera : MonoBehaviour
         {
             float x = original.x + (Random.Range(-1f, 1f) * magnitude);
             float y = original.y + (Random.Range(-1f, 1f) * magnitude);
-            transform.position = Vector3.Lerp(transform.position, new Vector3(x,y, original.z), Time.deltaTime*shakeSpeed);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(x,y, original.z), Time.fixedDeltaTime*shakeSpeed);
             //transform.position = new Vector3(x, y, original.z);
             elapsed += Time.deltaTime;
             yield return new WaitForEndOfFrame();
