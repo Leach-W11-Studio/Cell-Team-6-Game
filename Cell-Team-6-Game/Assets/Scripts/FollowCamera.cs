@@ -7,6 +7,8 @@ public class FollowCamera : MonoBehaviour
     public float acceleration;
     public float lookAhead;
     public bool followPlayer;
+    public float shakeMag;
+    public float shakeDur;
 
     public Transform target;
 
@@ -30,6 +32,23 @@ public class FollowCamera : MonoBehaviour
         Debug.DrawLine(target.position, targetPos, Color.yellow);
 
         transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, targetPos.y, transform.position.z), Time.fixedDeltaTime * acceleration);
+    }
+
+    public IEnumerator Shake(float duration, float magnitude)
+    {
+        Vector3 original = transform.position;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = original.x + (Random.Range(-1f, 1f) * magnitude);
+            float y = original.y + (Random.Range(-1f, 1f) * magnitude);
+            transform.position = new Vector3(x, y, original.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = original;
     }
 
     public Transform FindPlayer()
