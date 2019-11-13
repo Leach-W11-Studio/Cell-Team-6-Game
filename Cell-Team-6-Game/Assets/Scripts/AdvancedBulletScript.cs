@@ -7,7 +7,7 @@ public interface IShootable
     void Shoot();
 }
 
-public class AdvancedBulletScript : MonoBehaviour, IShootable
+public class AdvancedBulletScript : SimpleBullet, IShootable
 {
     //ObjectQueue queue;
 
@@ -26,6 +26,10 @@ public class AdvancedBulletScript : MonoBehaviour, IShootable
     void Start()
     {
         //queue = ObjectQueue.Instance;
+    }
+
+    protected void Update() {
+        base.Update();
     }
 
     void IShootable.Shoot()
