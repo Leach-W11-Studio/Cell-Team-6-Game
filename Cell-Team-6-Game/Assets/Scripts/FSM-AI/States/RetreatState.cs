@@ -7,6 +7,8 @@ public class RetreatState : FSMState
     private float retreatEndDistance;
     private PolyNavAgent agent;
     private float normalSlowingDistance;
+    private HealthScript curHealthScript;
+    private float rotSpeed;
 
     /// <param name="p_retreatEndDistance">Should always be less than agro range</param>
     public RetreatState(PolyNavAgent navAgent, float p_retreatEndDistance)
@@ -30,12 +32,12 @@ public class RetreatState : FSMState
         Vector2 heading = player.position - self.transform.position;
         heading.Normalize();
         float zRot = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
-        self.transform.rotation = Quaternion.Lerp(self.transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * self.GetComponent<BaseEnemy>().rotationSpeed);
+        self.transform.rotation = Quaternion.Lerp(self.transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * rotSpeed);
     }
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
+        if (curHealthScript.currentHealth <= 0)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
@@ -50,7 +52,8 @@ public class RetreatState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-
+        curHealthScript = self.GetComponent<BaseEnemy>().healthScript;
+        rotSpeed = self.GetComponent<BaseEnemy>().rotationSpeed;
     }
 
     public override void OnStateExit(Transform player, GameObject self)

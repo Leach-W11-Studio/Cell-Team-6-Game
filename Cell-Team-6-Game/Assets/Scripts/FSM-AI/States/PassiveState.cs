@@ -5,6 +5,7 @@ using UnityEngine;
 public class PassiveState : FSMState
 {
     private float activateRaidus;
+    private HealthScript curHealthScript;
 
     public PassiveState(float callRaidus)
     {
@@ -19,7 +20,7 @@ public class PassiveState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth != self.GetComponent<BaseEnemy>().healthScript.maxHealth)
+        if (curHealthScript.currentHealth != curHealthScript.maxHealth)
         {
             self.GetComponent<BaseEnemy>().isAwake = true;
 
@@ -46,7 +47,7 @@ public class PassiveState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-
+        curHealthScript = self.GetComponent<BaseEnemy>().healthScript;
     }
 
     public override void OnStateExit(Transform player, GameObject self)

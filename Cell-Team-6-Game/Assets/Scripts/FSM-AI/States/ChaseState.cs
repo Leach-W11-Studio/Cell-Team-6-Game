@@ -6,6 +6,8 @@ public class ChaseState : FSMState
 {
     private PolyNavAgent agent;
     private float agroRange;
+    private HealthScript selfHealthScript;
+    private float rotationSpeed;
 
     public ChaseState(PolyNavAgent navAgent, float terminalDistance)
     {
@@ -22,12 +24,12 @@ public class ChaseState : FSMState
         Vector2 heading = player.position - self.transform.position;
         heading.Normalize();
         float zRot = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
-        self.transform.rotation = Quaternion.Lerp(self.transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * self.GetComponent<BaseEnemy>().rotationSpeed);
+        self.transform.rotation = Quaternion.Lerp(self.transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * rotationSpeed);
     }
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
+        if (selfHealthScript.currentHealth <= 0)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
@@ -41,7 +43,8 @@ public class ChaseState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        //Debug.Log("EnterTest");
+        selfHealthScript = self.GetComponent<BaseEnemy>().healthScript;
+        rotationSpeed = self.GetComponent<BaseEnemy>().rotationSpeed;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
