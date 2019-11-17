@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//All abilities must inherit from Ability and impliment a constructor with the ability name, and the two abstract classes below.
 public class TestAbility : Ability
 {
     public TestAbility()
