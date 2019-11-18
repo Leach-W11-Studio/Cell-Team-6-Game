@@ -44,6 +44,13 @@ public class PlaySounds : MonoBehaviour
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
     }
 
+    public void PlayHurtSound()
+    {
+        string snd = gameObject.name + "_hurt";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
+
 
 
 
