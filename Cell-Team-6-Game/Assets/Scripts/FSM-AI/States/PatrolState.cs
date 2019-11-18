@@ -7,8 +7,11 @@ public class PatrolState : FSMState
     private List<GameObject> PatrolPoints;
     private Vector3 DestPos;
     private PolyNavAgent agent;
+    private HealthScript selfHealthScript;
+    private float rotationSpeed;
+    private float agroDistance;
 
-    public PatrolState(List<GameObject> points, PolyNavAgent navAgent)
+    public PatrolState(List<GameObject> points, PolyNavAgent navAgent, float agroRange)
     {
         stateID = FSMStateID.Patrol;
         if (points.Count == 0)
@@ -18,6 +21,7 @@ public class PatrolState : FSMState
         PatrolPoints = points;
         agent = navAgent;
         DestPos = SelectPatrolPoint();
+        agroDistance = agroRange;
     }
 
     public override void Act(Transform player, GameObject self)
@@ -31,7 +35,7 @@ public class PatrolState : FSMState
         Vector2 heading = DestPos - self.transform.position;
         heading.Normalize();
         float zRot = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
-        self.transform.rotation = Quaternion.Lerp(self.transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * self.GetComponent<BaseEnemy>().rotationSpeed);
+        self.transform.rotation = Quaternion.Lerp(self.transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * rotationSpeed);
     }
 
     private Vector3 SelectPatrolPoint()
@@ -42,12 +46,12 @@ public class PatrolState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
+        if (selfHealthScript.currentHealth <= 0)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
-        else if (Vector2.Distance(self.transform.position, player.position) <= self.GetComponent<BaseEnemy>().agroDistance)
+        else if (Vector2.Distance(self.transform.position, player.position) <= agroDistance)
         {
             agent.Stop();
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.SawPlayer);
@@ -56,7 +60,8 @@ public class PatrolState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-
+        selfHealthScript = self.GetComponent<BaseEnemy>().healthScript;
+        rotationSpeed = self.GetComponent<BaseEnemy>().rotationSpeed;
     }
 
     public override void OnStateExit(Transform player, GameObject self)

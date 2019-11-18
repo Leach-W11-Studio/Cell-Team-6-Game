@@ -5,18 +5,23 @@ using UnityEngine;
 public class ShootState : FSMState
 {
     float retreatDistance;
+    private BulletSpawnerScript gun;
+    private HealthScript selfHealthScript;
+    private float rotationSpeed;
 
-    public ShootState()
+    public ShootState(BulletSpawnerScript bulletSpawner)
     {
         stateID = FSMStateID.Shoot;
         retreatDistance = 0;
+        gun = bulletSpawner;
     }
 
     /// <param name="distance">Distance at which this enemy begins to retreat, Set to 0 or do not include for no retreating.</param>
-    public ShootState(float distance)
+    public ShootState(float distance, BulletSpawnerScript bulletSpawner)
     {
         stateID = FSMStateID.Shoot;
         retreatDistance = distance;
+        gun = bulletSpawner;
     }
 
     public override void Act(Transform player, GameObject self)
@@ -24,14 +29,12 @@ public class ShootState : FSMState
         Vector2 heading = player.position - self.transform.position;
         heading.Normalize();
         float zRot = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
-        self.transform.rotation = Quaternion.Lerp(self.transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * self.GetComponent<BaseEnemy>().rotationSpeed);
+        self.transform.rotation = Quaternion.Lerp(self.transform.rotation, Quaternion.Euler(0f, 0f, zRot), Time.fixedDeltaTime * rotationSpeed);
     }
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (self.GetComponent<BaseEnemy>().spawnerScript.shoot != true) { self.GetComponent<BaseEnemy>().spawnerScript.shoot = true; }
-
-        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
+        if (selfHealthScript.currentHealth <= 0)
         {
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
@@ -48,7 +51,10 @@ public class ShootState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
+        gun.shoot = true;
 
+        selfHealthScript = self.GetComponent<BaseEnemy>().healthScript;
+        rotationSpeed = self.GetComponent<BaseEnemy>().rotationSpeed;
     }
 
     public override void OnStateExit(Transform player, GameObject self)

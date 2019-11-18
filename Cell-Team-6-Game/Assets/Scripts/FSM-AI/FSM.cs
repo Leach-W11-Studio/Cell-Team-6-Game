@@ -134,6 +134,7 @@ public abstract class FSM : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = gameObject.GetComponent<PolyNavAgent>();
         Initalize();
+        currentState.OnStateEnter(playerTransform, gameObject);
     }
 
     // Update is called once per frame
