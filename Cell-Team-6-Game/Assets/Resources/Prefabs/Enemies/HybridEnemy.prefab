@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4557409455426215387}
   - component: {fileID: 4557409455426215386}
   - component: {fileID: 4557409455426215385}
+  - component: {fileID: 7550456553943117313}
   m_Layer: 12
   m_Name: HybridEnemy
   m_TagString: Enemy
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   navAgent: {fileID: 0}
+  Active: 0
   healthScript: {fileID: 0}
   rotationSpeed: 5
   agroDistance: 8
@@ -160,6 +162,24 @@ MonoBehaviour:
   restrict: 0
   closerPointOnInvalid: 1
   debugPath: 1
+--- !u!114 &7550456553943117313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092146454515914570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a7f8aa391944f4883f52e1ddb8e758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseColor:
+    serializedVersion: 2
+    rgba: 4281983487
+  colorVariance: 40
+  alpha: 255
+  finalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &3092146455126591869
 GameObject:
   m_ObjectHideFlags: 0
