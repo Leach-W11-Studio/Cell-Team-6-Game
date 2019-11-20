@@ -13,11 +13,16 @@ public class RiotShield : MonoBehaviour
     private GameObject collidedBullet;
     public float Countdown = 5f;
 
+    private void OnEnable()
+    {
+        StartCoroutine("ShieldTimer");
+    }
+
     private void Start()
     {
+        //gameObject.SetActive(false);
         //Needed in order to get the power value of the bullet that we are using
         playbull = playerBullet.GetComponent<SimpleBullet>();
-        StartCoroutine("ShieldTimer");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

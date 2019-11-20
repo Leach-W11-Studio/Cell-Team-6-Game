@@ -5,19 +5,27 @@ using UnityEngine;
 //All abilities must inherit from Ability and impliment a constructor with the ability name, and the two abstract classes below.
 public class RiotShieldAbility : Ability
 {
-    private GameObject RiotShield;
+    public GameObject RiotShield;
+    public GameObject RiotChild;
+    private GameObject RiotShieldObject;
     private GameObject RiotShieldUI;
+    private GameObject player;
+
     public RiotShieldAbility()
     {
         abilityName = "RiotShield";
     }
 
     public override void OnPickup()
-    {
-        RiotShield = GameObject.Find("RiotShield");
-        RiotShieldUI = GameObject.Find("RiotshieldUI");
+    { 
         //All functionality to be activated imidately on pickup of this ability to be placed in here
         Debug.Log("OnPickup called on ability: " + abilityName);
+        player = GameObject.FindWithTag("Player");
+
+        RiotShieldObject = Instantiate(RiotShield, player.transform);
+        RiotShieldObject.transform.SetParent(player.transform);
+        RiotChild = RiotShieldObject.transform.GetChild(0).gameObject;
+        RiotChild.SetActive(false);
         //RiotShieldUI.SetActive(true);
     }
 
@@ -25,7 +33,7 @@ public class RiotShieldAbility : Ability
     {
         //All actions to be taken upon a successful cast of this ability are to be placed here
         Debug.Log("CastAction called on ability: " + abilityName);
-        RiotShield.SetActive(true);
+        RiotChild.SetActive(true);
     }
 
     protected override bool CastCondition()
