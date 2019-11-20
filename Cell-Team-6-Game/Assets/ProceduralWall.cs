@@ -21,6 +21,8 @@ public class ProceduralWall : MonoBehaviour
 
     void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        CompositeCollider2D collider = GetComponent<CompositeCollider2D>();
+        collider.GenerateGeometry();
     }
     // Update is called once per frame
     void Update()
@@ -87,6 +89,8 @@ public class ProceduralWallEditor : Editor {
 
         if (GUILayout.Button("Build Wall")) {
             scriptTarget.CreateWall();
+            CompositeCollider2D collider = scriptTarget.gameObject.GetComponent<CompositeCollider2D>();
+            collider.GenerateGeometry();
         }
     }
 }
