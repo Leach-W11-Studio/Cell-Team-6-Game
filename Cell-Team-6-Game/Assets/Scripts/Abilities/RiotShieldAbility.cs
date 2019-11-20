@@ -31,7 +31,7 @@ public class RiotShieldAbility : Ability
     protected override bool CastCondition()
     {
         //Any checks needed to be cast are placed here, return true if the conditions are met, false otherwise.
-        if (Input.GetKey(KeyCode.U)) { return false; }
-        else { return true; }
+        //if (Input.GetKey(KeyCode.U)) { return false; }
+        return true;
     }
 }
