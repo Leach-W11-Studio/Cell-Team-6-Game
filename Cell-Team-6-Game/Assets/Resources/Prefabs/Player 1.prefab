@@ -135,7 +135,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4160563246533637595}
   - component: {fileID: 4160563246533637594}
-  - component: {fileID: 978362702505674186}
   m_Layer: 12
   m_Name: Gun
   m_TagString: Untagged
@@ -172,23 +171,10 @@ MonoBehaviour:
   fireRate: 0.025
   megaRateMod: 3
   stunRateMod: 0
+  bulletTypeToFire: 
+  standardBulletType: PlayerBullet
   megaCountDown: 0
   shooting: 0
---- !u!114 &978362702505674186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4160563246533637596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38acae9c1f0e16045b5b035375d3e0e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeAbilities:
-  - {fileID: 1415924250188502021, guid: d618f1c1bd116ae428885a9f703f9b3a, type: 3}
-  maxAbilities: 3
 --- !u!1 &4160563247024806012
 GameObject:
   m_ObjectHideFlags: 0
