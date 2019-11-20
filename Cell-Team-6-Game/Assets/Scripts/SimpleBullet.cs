@@ -26,7 +26,7 @@ public class SimpleBullet : MonoBehaviour, IShootable
         return CurrentDamage;
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         /* IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
         //Debug.Log(hitObject);

@@ -59,6 +59,10 @@ public class PlayerGunScript : MonoBehaviour
         //Shoot();
     }
 
+    public void Shoot (string bulletType) {
+        ObjectQueue.Instance.SpawnFromPool(bulletType, transform.position, transform.rotation);
+    }
+
     public void Shoot()
     {
         if (canShoot)

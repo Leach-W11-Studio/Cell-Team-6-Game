@@ -51,15 +51,24 @@ public class HealthScript : MonoBehaviour
         currentHealth++;
     }
 
+    public void TakeDamage(int damage) {
+        if (CompareTag("Player")) {
+            Player_Take_Damage(damage);
+        }
+        else if (CompareTag("Enemy")) {
+            Enemy_Take_Damage(damage);
+        }
+    }
+
     //Is called to remove one heart from the player
-    private void Player_Take_Damage()
+    private void Player_Take_Damage(int damage = 1)
     {
         if (invincible) { return; }
         if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag)); return; }
         if (currentHealth > 0)
         {
             onTakeDamage.Invoke();
-            currentHealth--;
+            currentHealth -= damage;
             StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag));
         }
         if (currentHealth == 0) { StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag)); Die(); }
