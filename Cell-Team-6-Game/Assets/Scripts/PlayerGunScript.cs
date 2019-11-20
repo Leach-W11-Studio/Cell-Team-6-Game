@@ -14,6 +14,14 @@ public class PlayerGunScript : MonoBehaviour
     public int megaRateMod;
     public int stunRateMod;
 
+    /// <summary>
+    /// The bullet type that is to be actualy fired.
+    /// </summary>
+    [HideInInspector]
+    public string bulletTypeToFire;
+    [Tooltip("The name of the bullet in the Object Queue that is to be fired by default")]
+    public string standardBulletType = "PlayerBullet";
+
     public int megaCountDown;
     private int stunCountDown;
 
@@ -39,6 +47,7 @@ public class PlayerGunScript : MonoBehaviour
     void Start()
     {
         canShoot = true;
+        bulletTypeToFire = standardBulletType;
         megaCountDown = 0;
         stunCountDown = 0;
         inventory = GetComponentInParent<PlayerInventory>();
@@ -50,31 +59,38 @@ public class PlayerGunScript : MonoBehaviour
         //Shoot();
     }
 
+    public void Shoot (string bulletType) {
+        ObjectQueue.Instance.SpawnFromPool(bulletType, transform.position, transform.rotation);
+    }
+
     public void Shoot()
     {
-        if(canShoot)
+        if (canShoot)
         {
-            if(inventory.ContainsBullet(PlayerInventory.BulletType.SpreadShot)) {
+            if (inventory.ContainsBullet(PlayerInventory.BulletType.SpreadShot))
+            {
                 ObjectQueue.Instance.SpawnFromPool("SpreadBullet", transform.position, transform.rotation);
             }
-            if(inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) {
+            if (inventory.ContainsBullet(PlayerInventory.BulletType.DualShot))
+            {
                 ObjectQueue.Instance.SpawnFromPool("DoubleBullet", transform.position, transform.rotation);
             }
-            if(inventory.ContainsBullet(PlayerInventory.BulletType.MegaShot))
+            if (inventory.ContainsBullet(PlayerInventory.BulletType.MegaShot))
             {
-                if(megaCountDown == megaRateMod)
+                if (megaCountDown == megaRateMod)
                 {
                     ObjectQueue.Instance.SpawnFromPool("MegaBullet", transform.position, transform.rotation);
                     megaCountDown = 0;
                 }
                 megaCountDown += 1;
             }
-            if(inventory.ContainsBullet(PlayerInventory.BulletType.StunShot)) { }
-            if(inventory.ContainsBullet(PlayerInventory.BulletType.RicochetShot)) {
+            if (inventory.ContainsBullet(PlayerInventory.BulletType.StunShot)) { }
+            //Depricated due to new ability system
+            /* if(inventory.ContainsBullet(PlayerInventory.BulletType.RicochetShot)) {
                 ObjectQueue.Instance.SpawnFromPool("RicochetBullet", transform.position, transform.rotation);
-            }
+            } */
 
-            if(!inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) { ObjectQueue.Instance.SpawnFromPool("PlayerBullet", transform.position, transform.rotation); }
+            if (!inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) { ObjectQueue.Instance.SpawnFromPool(bulletTypeToFire, transform.position, transform.rotation); }
 
             canShoot = false;
             StartCoroutine(FireRateCheck());
@@ -85,5 +101,14 @@ public class PlayerGunScript : MonoBehaviour
     {
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
+    }
+
+    public void ResetBulletType(float timeDelay) { StartCoroutine(BulletTypeReset(timeDelay)); }
+    IEnumerator BulletTypeReset(float timeDelay)
+    {
+        //Debug.Log("Waiting " + timeDelay + "Seconds");
+        yield return new WaitForSeconds(timeDelay);
+        //Debug.Log("Waited " + timeDelay + "Seconds");
+        bulletTypeToFire = standardBulletType;
     }
 }

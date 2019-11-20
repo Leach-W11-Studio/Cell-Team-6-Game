@@ -87,6 +87,8 @@ public class ProceduralWallEditor : Editor {
 
         if (GUILayout.Button("Build Wall")) {
             scriptTarget.CreateWall();
+            CompositeCollider2D collider = scriptTarget.gameObject.GetComponent<CompositeCollider2D>();
+            collider.GenerateGeometry();
         }
     }
 }
