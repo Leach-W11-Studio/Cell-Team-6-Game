@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9facbe3b9328c4d8636edd59ea039d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentDamage: 10
-  power: 10
+  power: 1000
   instantKill: 0
 --- !u!58 &8408583795142468846
 CircleCollider2D:
@@ -262,6 +261,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9facbe3b9328c4d8636edd59ea039d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentDamage: 10
   power: 10
   instantKill: 0

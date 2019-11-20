@@ -5,6 +5,8 @@ using UnityEngine;
 public class WaterBullet : SimpleBullet
 {
     public bool instantKill = false;
+    public float explodeRadius;
+    public LayerMask layerMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,10 @@ public class WaterBullet : SimpleBullet
     void Update()
     {
         
+    }
+
+    private IEnumerator ExplodeGroup(List<Collider2D> targetList) {
+
     }
 
     protected override void OnCollisionEnter2D (Collision2D collision) {
@@ -28,6 +34,15 @@ public class WaterBullet : SimpleBullet
             else {
                 hs.TakeDamage(Damage());
             }
+
+            List<Collider2D> objects = new List<Collider2D>(Physics2D.OverlapCircleAll(transform.position, explodeRadius, layerMask));
+
+
+            gameObject.SetActive(false);
+        }
+
+        if (collision.gameObject.CompareTag("Environment")) {
+            gameObject.SetActive(false);
         }
     }
 }
