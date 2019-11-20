@@ -10,15 +10,15 @@ public class RiotShieldAbility : Ability
     public RiotShieldAbility()
     {
         abilityName = "RiotShield";
-        RiotShield = GameObject.Find("RiotShield");
-        RiotShieldUI = GameObject.Find("RiotshieldUI");
     }
 
     public override void OnPickup()
     {
+        RiotShield = GameObject.Find("RiotShield");
+        RiotShieldUI = GameObject.Find("RiotshieldUI");
         //All functionality to be activated imidately on pickup of this ability to be placed in here
         Debug.Log("OnPickup called on ability: " + abilityName);
-        RiotShieldUI.SetActive(true);
+        //RiotShieldUI.SetActive(true);
     }
 
     protected override void CastAction()
