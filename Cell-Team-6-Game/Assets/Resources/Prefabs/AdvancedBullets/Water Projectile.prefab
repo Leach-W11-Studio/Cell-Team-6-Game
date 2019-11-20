@@ -47,7 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 1000
-  instantKill: 0
+  instantKill: 1
+  explodeRadius: 5
+  explosionTime: 1
+  explosionAmount: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!58 &8408583795142468846
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -263,3 +269,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   power: 10
   instantKill: 0
+  explodeRadius: 0
+  explosionTime: 0
+  explosionAmount: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0

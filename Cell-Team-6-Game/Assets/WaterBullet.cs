@@ -6,6 +6,8 @@ public class WaterBullet : SimpleBullet
 {
     public bool instantKill = false;
     public float explodeRadius;
+    public float explosionTime;
+    public float explosionAmount = 2;
     public LayerMask layerMask;
     // Start is called before the first frame update
     void Start()
@@ -19,29 +21,42 @@ public class WaterBullet : SimpleBullet
         
     }
 
-    private IEnumerator ExplodeGroup(List<Collider2D> targetList) {
-
+    private IEnumerator ExplodeGroup (List<Collider2D> targetList) {
+        foreach (Collider2D collider in targetList) {
+            StartCoroutine(Explode(collider));
+            yield return new WaitForSeconds(Random.Range(0, explosionTime/targetList.Count));
+        }
     }
 
-    protected override void OnCollisionEnter2D (Collision2D collision) {
+    private IEnumerator Explode (Collider2D target) {
+        Vector3 targetScale = target.transform.localScale*explosionAmount;
+        for (float elapsedTime = 0; elapsedTime < explosionTime; elapsedTime += Time.deltaTime) {
+            float percent = elapsedTime/explosionTime;
+            target.transform.localScale = Vector3.Lerp(target.transform.localScale, targetScale, percent);
+            yield return new WaitForEndOfFrame();
+        }
+
+        target.GetComponent<HealthScript>().Die();
+    }
+
+    protected void OnTriggerEnter2D (Collision2D collision) {
         if (collision.gameObject.CompareTag("Enemy")) {
             HealthScript hs = collision.gameObject.GetComponent<HealthScript>();
 
+            List<Collider2D> objects = new List<Collider2D>(Physics2D.OverlapCircleAll(transform.position, explodeRadius, layerMask));
+            for (int i = 0; i < objects.Count; i++) {
+                if (!objects[i].CompareTag("Enemy")) {
+                    objects.Remove(objects[i]);
+                }
+            }
+
             if (instantKill) {
-                int damage = hs.currentHealth;
-                hs.TakeDamage(damage);
+                StartCoroutine(ExplodeGroup(objects));
             }
             else {
                 hs.TakeDamage(Damage());
             }
 
-            List<Collider2D> objects = new List<Collider2D>(Physics2D.OverlapCircleAll(transform.position, explodeRadius, layerMask));
-
-
-            gameObject.SetActive(false);
-        }
-
-        if (collision.gameObject.CompareTag("Environment")) {
             gameObject.SetActive(false);
         }
     }
