@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class Heart_Sound : MonoBehaviour
 {
-    
-        // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-  
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //If the player enters the bounds of the heart, restore health to the player and destroy the heart
         if (collision.gameObject.CompareTag("Player"))
         {
-            SoundManager.PlaySound(gameObject.GetHashCode(), "PickUp_Health");
+            Debug.Log("SND play");
+            SoundManager.PlaySound(collision.gameObject.GetHashCode(),"Pickup_Health");
         }
     }
 }
