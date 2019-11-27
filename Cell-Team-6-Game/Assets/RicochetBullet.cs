@@ -17,13 +17,14 @@ public class RicochetBullet : SimpleBullet
     {
         if (collision.gameObject.CompareTag("Environment"))
         {
+            // Debug.Break();
             Debug.Log("bounces is: " + bounces + " and maxBounces is: " + maxBounces);
             if (bounces < maxBounces)
             {
                 Debug.Log("should ricochet");
-                RaycastHit2D surface = Physics2D.Raycast(transform.position, rb.velocity.normalized, layers);
-                Debug.DrawRay(surface.point, surface.normal, Color.blue);
-                Bounce(surface.normal);
+                Debug.Log(collision.contacts[0].normal);
+                Debug.DrawRay(collision.contacts[0].point, collision.contacts[0].normal, Color.blue);
+                Bounce(collision.contacts[0].normal);
             }
             else {
                 gameObject.SetActive(false);
@@ -47,8 +48,8 @@ public class RicochetBullet : SimpleBullet
 
     private void Bounce(Vector2 surfaceNormal)
     {
-        transform.up = Vector2.Reflect(transform.up, surfaceNormal);
-        Debug.DrawRay(transform.position, transform.up, Color.yellow);
+        transform.up = Vector2.Reflect(velocity.normalized, surfaceNormal);
+        // Debug.DrawRay(transform.position, transform.up, Color.yellow);
         GetComponent<IShootable>().Shoot();
         bounces++;
     }
