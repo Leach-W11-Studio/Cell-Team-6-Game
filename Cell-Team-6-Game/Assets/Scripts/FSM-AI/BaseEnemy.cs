@@ -47,7 +47,7 @@ public class BaseEnemy : FSM//, IDamageable
         idle.AddTransitionState(FSMStateID.Shoot, FSMTransitions.SawPlayer);
         idle.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
 
-        ShootState shoot = new ShootState();
+        ShootState shoot = new ShootState(spawnerScript);
         shoot.AddTransitionState(FSMStateID.Idle, FSMTransitions.PlayerOutOfRange);
         shoot.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
 
