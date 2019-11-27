@@ -10,6 +10,8 @@ public class WaterBullet : SimpleBullet
     public float explosionAmount = 2;
     public LayerMask layerMask;
 
+    private float destroyWait = 1;
+
     // Update is called once per frame
     void Update()
     {
@@ -28,20 +30,22 @@ public class WaterBullet : SimpleBullet
                 StartCoroutine(Explode(collider));
             }
 
-            yield return new WaitForSeconds(Random.Range(0, explosionTime/targetList.Count));
+            float randomWait = Random.Range(0, explosionTime/targetList.Count);
+            destroyWait += randomWait;
+            yield return new WaitForSeconds(randomWait);
         }
-        gameObject.SetActive(false);
     }
 
     public IEnumerator Explode (Collider2D target) {
         Vector3 targetScale = target.transform.localScale * explosionAmount;
+        target.GetComponent<HealthScript>().Die(explosionTime);
+
         for (float elapsedTime = 0; elapsedTime < explosionTime; elapsedTime += Time.deltaTime) {
             float percent = elapsedTime/explosionTime;
             target.transform.localScale = Vector3.Lerp(target.transform.localScale, targetScale, percent);
             yield return new WaitForEndOfFrame();
         }
 
-        target.GetComponent<HealthScript>().Die();
     }
 
     protected void OnTriggerEnter2D (Collider2D collision) {
@@ -57,7 +61,16 @@ public class WaterBullet : SimpleBullet
                 i--;
             }
         }
-
+        StartCoroutine(destroy());
         StartCoroutine(ExplodeGroup(objects));
+    }
+
+    IEnumerator destroy () {
+        rb.isKinematic = true;
+        GetComponentInChildren<TrailRenderer>().enabled = false;
+        for (float elapsedTime = 0; elapsedTime < destroyWait; elapsedTime += Time.deltaTime){
+            yield return new WaitForEndOfFrame();
+        }
+        gameObject.SetActive(false);
     }
 }
