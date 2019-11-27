@@ -46,9 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9facbe3b9328c4d8636edd59ea039d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentDamage: 10
-  power: 10
-  instantKill: 0
+  power: 1000
+  instantKill: 1
+  explodeRadius: 5
+  explosionTime: 1
+  explosionAmount: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!58 &8408583795142468846
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -157,7 +162,7 @@ TrailRenderer:
   m_SortingLayerID: -342839153
   m_SortingLayer: 5
   m_SortingOrder: 100
-  m_Time: 0.5
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.5
@@ -174,40 +179,22 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.26168224
       - serializedVersion: 3
-        time: 0.117440745
-        value: 1
-        inSlope: 0.5663795
-        outSlope: 0.5663795
+        time: 0.49739647
+        value: 0.43341374
+        inSlope: -2.584029
+        outSlope: -2.584029
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.35075343
-        value: 1
-        inSlope: -1.7088697
-        outSlope: -1.7088697
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.6136488
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.6656246
-        value: 0.27249455
-        inSlope: -1.0559069
-        outSlope: -1.0559069
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.3956702
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -2.5228412
-        outSlope: -2.5228412
+        inSlope: -0.037269242
+        outSlope: -0.037269242
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.18224299
+        inWeight: 0.92235035
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -248,7 +235,7 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
 --- !u!114 &3675604847852511640
 MonoBehaviour:
@@ -262,6 +249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9facbe3b9328c4d8636edd59ea039d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentDamage: 10
   power: 10
   instantKill: 0
+  explodeRadius: 0
+  explosionTime: 0
+  explosionAmount: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0

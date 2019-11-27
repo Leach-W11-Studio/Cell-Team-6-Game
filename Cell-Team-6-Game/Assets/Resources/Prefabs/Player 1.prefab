@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 4160563247024806014}
   m_Layer: 12
   m_Name: sheild
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,6 +438,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  isDead: 0
   isplayer: 0
 --- !u!50 &4160563246998496866
 Rigidbody2D:
