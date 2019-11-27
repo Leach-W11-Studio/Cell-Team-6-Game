@@ -101,10 +101,13 @@ public class HealthScript : MonoBehaviour
                 if (enemyHealth) {
                     if (!enemyHealth.isDead) {
                         Destroy(collision.gameObject);
+                        Player_Take_Damage();
                     }
                 }
             }
-            Player_Take_Damage();
+            else {
+                Player_Take_Damage();
+            }
         }
         //If it is not a player, and the collision is a player bullet, pass in the damage value from the bullet and call the enemy damage function
         else if (!isplayer && collision.gameObject.CompareTag("PlayerBullet"))
