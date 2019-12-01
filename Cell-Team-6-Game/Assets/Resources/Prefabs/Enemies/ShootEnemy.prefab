@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 656598631287045766}
   - component: {fileID: 656598631287045771}
   - component: {fileID: 656598631287045770}
-  - component: {fileID: -6641084189974191577}
-  - component: {fileID: -7180332222521506763}
   - component: {fileID: -5360888793577445360}
   - component: {fileID: -1347824291252611936}
   - component: {fileID: 4968325341505428672}
@@ -146,32 +144,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   isplayer: 0
---- !u!114 &-6641084189974191577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656598630538206238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc880f3efda5c28428bf9d4f6a90b7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 0}
-  snapshots: []
---- !u!114 &-7180332222521506763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656598630538206238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df1bab9efc91784c97fd8a5a574bbef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &-5360888793577445360
 AudioSource:
   m_ObjectHideFlags: 0

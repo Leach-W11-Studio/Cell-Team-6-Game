@@ -44,8 +44,6 @@ GameObject:
   - component: {fileID: 4557409455426215387}
   - component: {fileID: 4557409455426215386}
   - component: {fileID: 4557409455426215385}
-  - component: {fileID: -1866176430474627354}
-  - component: {fileID: -8127161423617690285}
   - component: {fileID: -3169461548909186214}
   - component: {fileID: -3323522234016233689}
   - component: {fileID: -207919481001573416}
@@ -166,32 +164,6 @@ MonoBehaviour:
   restrict: 0
   closerPointOnInvalid: 1
   debugPath: 1
---- !u!114 &-1866176430474627354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3092146454515914570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df1bab9efc91784c97fd8a5a574bbef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-8127161423617690285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3092146454515914570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc880f3efda5c28428bf9d4f6a90b7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 0}
-  snapshots: []
 --- !u!82 &-3169461548909186214
 AudioSource:
   m_ObjectHideFlags: 0
