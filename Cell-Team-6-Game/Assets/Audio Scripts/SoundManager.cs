@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
             Debug.Log("Source error.");
             return false;
         }
-        Debug.Log("Ready.");
+       // Debug.Log("Ready.");
         toPlay.clip = clip2play;
         toPlay.Stop();
         toPlay.Play();
