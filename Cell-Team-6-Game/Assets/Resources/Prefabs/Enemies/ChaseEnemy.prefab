@@ -41,8 +41,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 944293d088f2aa44288efc2f68ebde9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   shoot: 1
   force: {x: 0, y: 0, z: 0}
   fireRate: 0.2
@@ -59,9 +59,8 @@ GameObject:
   - component: {fileID: 928416514380308638}
   - component: {fileID: 928416514380308637}
   - component: {fileID: 2538470988449376801}
-  - component: {fileID: 891761823426947047}
-  - component: {fileID: 805469725103673452}
-  - component: {fileID: 7190751639837633850}
+  - component: {fileID: 950798808}
+  - component: {fileID: 3015052967004357314}
   m_Layer: 12
   m_Name: ChaseEnemy
   m_TagString: Enemy
@@ -95,8 +94,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93cc6a4987f7c684798156c56d545838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   _map: {fileID: 0}
   maxSpeed: 3.5
   mass: 20
@@ -123,16 +122,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 272ef45f6c95b464691a69e25de3c6e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   playerTransform: {fileID: 0}
   navAgent: {fileID: 0}
   Active: 0
   healthScript: {fileID: 0}
   rotationSpeed: 5
-  agroDistance: 10
-  activateRaidus: 10
-  isAwake: 0
+  agroDistance: 100
+  activateRaidus: 10.27
+  isAwake: 1
   spawnerScript: {fileID: 0}
 --- !u!114 &928416514380308637
 MonoBehaviour:
@@ -144,8 +143,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Healthtext: {fileID: 0}
   maxHealth: 10
   currentHealth: 0
@@ -164,7 +163,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -302,8 +301,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df1bab9efc91784c97fd8a5a574bbef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &7190751639837633850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,8 +313,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc880f3efda5c28428bf9d4f6a90b7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   mixer: {fileID: 0}
   snapshots: []
 --- !u!1 &1816301911787857857

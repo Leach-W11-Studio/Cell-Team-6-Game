@@ -16,16 +16,19 @@ public class HealthScript : MonoBehaviour
     public Color healthColor;
     public Color sheildColor;
     public UnityEvent onTakeDamage;
+    public bool isDead = false;
     public bool isplayer = false; //Testing Remove Later
     private int Damage;
     private int Deathtime;
     private Animator PlayerAnim;
+    FollowCamera Shaker;
 
     void Start()
     {
+        Shaker = GameObject.Find("Main Camera").GetComponent<FollowCamera>();
         PlayerAnim = gameObject.GetComponent<Animator>();
         onTakeDamage = new UnityEvent();
-        Deathtime = 1;
+        Deathtime = 0;
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
 
@@ -49,17 +52,27 @@ public class HealthScript : MonoBehaviour
         currentHealth++;
     }
 
+    public void TakeDamage(int damage) {
+        if (CompareTag("Player")) {
+            Player_Take_Damage(damage);
+        }
+        else if (CompareTag("Enemy")) {
+            Enemy_Take_Damage(damage);
+        }
+    }
+
     //Is called to remove one heart from the player
-    private void Player_Take_Damage()
+    private void Player_Take_Damage(int damage = 1)
     {
         if (invincible) { return; }
-        if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); return; }
+        if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag)); return; }
         if (currentHealth > 0)
         {
             onTakeDamage.Invoke();
-            currentHealth--;
+            currentHealth -= damage;
+            StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag));
         }
-        if (currentHealth == 0) { Die(); }
+        if (currentHealth == 0) { StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag)); Die(); }
     }
 
     //Is passed a damage value from the collision function, and subtracts the damage from the current health of the enemy
@@ -83,9 +96,18 @@ public class HealthScript : MonoBehaviour
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
             //Debug.Log("being hit");
-            if (collision.gameObject.CompareTag("Enemy"))
-                Destroy(collision.gameObject);
-            Player_Take_Damage();
+            if (collision.gameObject.CompareTag("Enemy")) {
+                HealthScript enemyHealth = collision.gameObject.GetComponent<HealthScript>();
+                if (enemyHealth) {
+                    if (!enemyHealth.isDead) {
+                        Destroy(collision.gameObject);
+                        Player_Take_Damage();
+                    }
+                }
+            }
+            else {
+                Player_Take_Damage();
+            }
         }
         //If it is not a player, and the collision is a player bullet, pass in the damage value from the bullet and call the enemy damage function
         else if (!isplayer && collision.gameObject.CompareTag("PlayerBullet"))
@@ -95,18 +117,20 @@ public class HealthScript : MonoBehaviour
         }
     }
 
-    public void Die()
+    public void Die(float waitTime = 0)
     {
         if (isplayer) { 
             GameMaster.gameMaster.LoseGame();
             PlayerAnim.SetTrigger("died"); 
         }
-        StartCoroutine("DieWait");
+        StartCoroutine("DieWait", waitTime);
     }
 
-    IEnumerator DieWait()
+    IEnumerator DieWait(float waitTime = 0)
     {
+        isDead = true;
         yield return new WaitForSeconds(Deathtime);
-        Destroy(gameObject, .1f);
+        // Debug.Break();
+        Destroy(gameObject, waitTime);
     }
 }

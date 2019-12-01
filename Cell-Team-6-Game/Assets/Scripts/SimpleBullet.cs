@@ -9,6 +9,10 @@ public class SimpleBullet : MonoBehaviour, IShootable
     public float power = 10;
     protected Rigidbody2D rb;
 
+    public Vector3 velocity;
+    //ObjectQueue queue;
+    private Vector3 lastPosition;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,12 +25,19 @@ public class SimpleBullet : MonoBehaviour, IShootable
         rb.AddForce(transform.up * power);
     }
 
+    protected void Update() {
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+
+        // Debug.DrawRay(transform.position, velocity, Color.green);
+        lastPosition = transform.position;
+    }
+
     public int Damage()
     {
         return CurrentDamage;
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         /* IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
         //Debug.Log(hitObject);
