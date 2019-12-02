@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 8502041469574969391}
   - component: {fileID: 8502041469574969388}
   - component: {fileID: 8502041469574969385}
+  - component: {fileID: 7861978633569865554}
   m_Layer: 0
   m_Name: Sheild Pickup
   m_TagString: Untagged
@@ -241,5 +242,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd2b419b8774b5f4fa23ee0a161b63e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7861978633569865554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8502041469574969389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f5b080dd5a91e458711ea08f662a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -28,7 +28,7 @@ public class PlaySounds : MonoBehaviour
 
     public void PlayUISound()
     {
-        SoundManager.PlaySound(gameObject.GetHashCode() , "ring");
+        SoundManager.PlaySound(gameObject.GetHashCode() , "UI Sound");
     }
 
     public void PlayVocalization()
