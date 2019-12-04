@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     void MousePoint()
     {
         //Makes player rotate towards the mouse
+        Debug.Log("MousePoint1");
         Vector2 mousePos = Input.mousePosition;
         Vector3 objPos = Camera.main.WorldToScreenPoint(transform.position);
         mousePos.x = mousePos.x - objPos.x;
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
         float newRot = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         newRot -= 90.0f;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, newRot));
+        Debug.Log("MousePoint2");
     }
 
     void Firing()

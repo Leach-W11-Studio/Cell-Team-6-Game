@@ -1325,11 +1325,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8021293493718099003, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
-        type: 3}
-      propertyPath: m_Name
-      value: Tileable wall
-      objectReference: {fileID: 0}
     - target: {fileID: 6373940439098953020, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1385,10 +1380,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 2601458289386740452, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
+    - target: {fileID: 8021293493718099003, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
-      propertyPath: m_Size.x
-      value: 11.78369
+      propertyPath: m_Name
+      value: Tileable wall
       objectReference: {fileID: 0}
     - target: {fileID: 2441706109544492245, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
@@ -1396,6 +1391,11 @@ PrefabInstance:
       value: 11.78369
       objectReference: {fileID: 0}
     - target: {fileID: 2441706109544492245, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 11.78369
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601458289386740452, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
       propertyPath: m_Size.x
       value: 11.78369
@@ -2181,11 +2181,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8021293493718099003, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
-        type: 3}
-      propertyPath: m_Name
-      value: Tileable wall (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 6373940439098953020, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2241,10 +2236,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2601458289386740452, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
+    - target: {fileID: 8021293493718099003, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
-      propertyPath: m_Size.x
-      value: 25.85072
+      propertyPath: m_Name
+      value: Tileable wall (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2441706109544492245, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
@@ -2252,6 +2247,11 @@ PrefabInstance:
       value: 25.85072
       objectReference: {fileID: 0}
     - target: {fileID: 2441706109544492245, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 25.85072
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601458289386740452, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
       propertyPath: m_Size.x
       value: 25.85072
@@ -6056,11 +6056,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8021293493718099003, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
-        type: 3}
-      propertyPath: m_Name
-      value: Tileable wall (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 6373940439098953020, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6116,10 +6111,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 2601458289386740452, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
+    - target: {fileID: 8021293493718099003, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
-      propertyPath: m_Size.x
-      value: 11.78369
+      propertyPath: m_Name
+      value: Tileable wall (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2441706109544492245, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
@@ -6127,6 +6122,11 @@ PrefabInstance:
       value: 11.78369
       objectReference: {fileID: 0}
     - target: {fileID: 2441706109544492245, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 11.78369
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601458289386740452, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
       propertyPath: m_Size.x
       value: 11.78369
@@ -8810,7 +8810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1077345966
 Transform:
   m_ObjectHideFlags: 0
@@ -11848,11 +11848,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8021293493718099003, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
-        type: 3}
-      propertyPath: m_Name
-      value: Tileable wall (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 6373940439098953020, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11908,10 +11903,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2601458289386740452, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
+    - target: {fileID: 8021293493718099003, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
-      propertyPath: m_Size.x
-      value: 25.85072
+      propertyPath: m_Name
+      value: Tileable wall (3)
       objectReference: {fileID: 0}
     - target: {fileID: 2441706109544492245, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
@@ -11919,6 +11914,11 @@ PrefabInstance:
       value: 25.85072
       objectReference: {fileID: 0}
     - target: {fileID: 2441706109544492245, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 25.85072
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601458289386740452, guid: 48bdf2c3fbab2d44ebf20bd7ecb99c1c,
         type: 3}
       propertyPath: m_Size.x
       value: 25.85072
@@ -12233,7 +12233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1758177240
 Transform:
   m_ObjectHideFlags: 0
