@@ -35,19 +35,19 @@ public class RiotShield : MonoBehaviour
         {
             Debug.Log("should ricochet");
             //Used adams racast ricocchet script to get the surface angle
-            RaycastHit2D surface = Physics2D.Raycast(collidedBullet.transform.position, rb.velocity.normalized,layers);
+            RaycastHit2D surface = Physics2D.Raycast(collidedBullet.transform.position, rb.velocity.normalized, layers);
 
             //Set a variable to the up direction of the bullet that collided
             bulletTrans = collidedBullet.transform.up;
 
-            collidedBullet.SetActive(false);
-
             //Sets an instanitation to instantiate a bullet in the inverse direction that the bullet came from
-            RicochetBullet = Instantiate(playerBullet, Vector2.Reflect(bulletTrans, surface.normal), Quaternion.identity);
+            RicochetBullet = Instantiate(playerBullet, collidedBullet.transform.position, Quaternion.identity);
 
+            RicochetBullet.transform.up = Vector2.Reflect(bulletTrans, surface.normal);
             //Instantiates a player bullet and adds force based on its power value
-            RicochetBullet.GetComponent<Rigidbody2D>().AddForce(transform.up * playbull.power);
+            RicochetBullet.GetComponent<Rigidbody2D>().AddForce(RicochetBullet.transform.up * playbull.power);
 
+            collidedBullet.SetActive(false);
         }
     }
 

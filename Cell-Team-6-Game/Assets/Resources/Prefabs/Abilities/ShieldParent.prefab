@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4051628322760482384}
   - component: {fileID: 4051628322760482389}
   - component: {fileID: 4051628322760482387}
-  - component: {fileID: 4051628322760482386}
+  - component: {fileID: 4423153828714385212}
   m_Layer: 12
   m_Name: RiotShield
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   playerBullet: {fileID: 6044363271187527088, guid: a10e76e8133bb9646b1a96c168883145,
     type: 3}
   Countdown: 5
---- !u!60 &4051628322760482386
+--- !u!60 &4423153828714385212
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +111,7 @@ PolygonCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 4051628322970827767}
   m_Layer: 12
   m_Name: ShieldParent
-  m_TagString: Untagged
+  m_TagString: RiotShield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
