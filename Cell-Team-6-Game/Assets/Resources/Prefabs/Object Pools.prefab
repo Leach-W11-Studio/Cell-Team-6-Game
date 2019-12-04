@@ -49,8 +49,7 @@ MonoBehaviour:
       type: 3}
     size: 100
   - tag: PlayerBullet
-    prefab: {fileID: 6044363271187527088, guid: a10e76e8133bb9646b1a96c168883145,
-      type: 3}
+    prefab: {fileID: 623091019853866928, guid: a10e76e8133bb9646b1a96c168883145, type: 3}
     size: 200
   - tag: DoubleBullet
     prefab: {fileID: 2665330704865779302, guid: f03d109790c29764caa9be5918aedd47,
@@ -67,7 +66,4 @@ MonoBehaviour:
   - tag: RicochetBullet
     prefab: {fileID: 6576466730651800169, guid: 361492069517cf44081bf83607b4b6ab,
       type: 3}
-    size: 50
-  - tag: WaterBullet
-    prefab: {fileID: 770023900752319132, guid: d8933158051d0a54f8d4f5a05d603bea, type: 3}
-    size: 50
+    size: 100

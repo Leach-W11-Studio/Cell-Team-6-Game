@@ -41,20 +41,10 @@ public class SceneChanger : MonoBehaviour
     private void OnSceneLoaded(Scene thescene, LoadSceneMode amode)
     {
         Variables = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthScript>();
-        if (PlayerPrefs.GetInt("PlayerHealth") != 0)
-        {
-            Variables.currentHealth = PlayerPrefs.GetInt("PlayerHealth");
-            Variables.sheild = GetBool("PlayerShield");
-            PlayerPrefs.SetInt("PlayerHealth", Variables.maxHealth);
-            SetBool("PlayerShield", false);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("PlayerHealth", Variables.maxHealth);
-            SetBool("PlayerShield", false);
-            Variables.currentHealth = PlayerPrefs.GetInt("PlayerHealth");
-            Variables.sheild = GetBool("PlayerShield");
-        }
+        Variables.currentHealth = PlayerPrefs.GetInt("PlayerHealth");
+        Variables.sheild = GetBool("PlayerShield");
+        PlayerPrefs.SetInt("PlayerHealth", Variables.maxHealth);
+        SetBool("PlayerShield", false);
     }
 
     public static bool GetBool(string name)

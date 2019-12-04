@@ -21,11 +21,9 @@ public class HealthScript : MonoBehaviour
     private int Damage;
     private int Deathtime;
     private Animator PlayerAnim;
-    FollowCamera Shaker;
 
     void Start()
     {
-        Shaker = GameObject.Find("Main Camera").GetComponent<FollowCamera>();
         PlayerAnim = gameObject.GetComponent<Animator>();
         onTakeDamage = new UnityEvent();
         Deathtime = 0;
@@ -52,12 +50,12 @@ public class HealthScript : MonoBehaviour
         currentHealth++;
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage (int damage = 1) {
         if (CompareTag("Player")) {
             Player_Take_Damage(damage);
         }
-        else if (CompareTag("Enemy")) {
-            Enemy_Take_Damage(damage);
+        else {
+            Enemy_Take_Damage (damage);
         }
     }
 
@@ -65,14 +63,13 @@ public class HealthScript : MonoBehaviour
     private void Player_Take_Damage(int damage = 1)
     {
         if (invincible) { return; }
-        if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag)); return; }
+        if (sheild) { DeactivateSheild(); onTakeDamage.Invoke(); return; }
         if (currentHealth > 0)
         {
             onTakeDamage.Invoke();
             currentHealth -= damage;
-            StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag));
         }
-        if (currentHealth == 0) { StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag)); Die(); }
+        if (currentHealth == 0) { Die(); }
     }
 
     //Is passed a damage value from the collision function, and subtracts the damage from the current health of the enemy
