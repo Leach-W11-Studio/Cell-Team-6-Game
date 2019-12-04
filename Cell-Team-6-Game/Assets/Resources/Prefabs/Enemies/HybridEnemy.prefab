@@ -46,6 +46,8 @@ GameObject:
   - component: {fileID: 4557409455426215385}
   - component: {fileID: 7550456553943117313}
   - component: {fileID: -3746645333544898482}
+  - component: {fileID: 7671848567603547440}
+  - component: {fileID: -6469508349664533264}
   m_Layer: 12
   m_Name: HybridEnemy
   m_TagString: Enemy
@@ -95,8 +97,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5f97dba3570dec4eb81862cfcacfdd2, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   navAgent: {fileID: 0}
   Active: 0
@@ -120,8 +122,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Healthtext: {fileID: 0}
   maxHealth: 10
   currentHealth: 0
@@ -134,6 +136,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  isDead: 0
   isplayer: 1
 --- !u!114 &4557409455426215385
 MonoBehaviour:
@@ -145,8 +148,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93cc6a4987f7c684798156c56d545838, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   _map: {fileID: 0}
   maxSpeed: 3.5
   mass: 20
@@ -173,8 +176,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20a7f8aa391944f4883f52e1ddb8e758, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   baseColor:
     serializedVersion: 2
     rgba: 4281983487
@@ -202,6 +205,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7671848567603547440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092146454515914570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc880f3efda5c28428bf9d4f6a90b7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 0}
+  snapshots: []
+--- !u!114 &-6469508349664533264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092146454515914570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df1bab9efc91784c97fd8a5a574bbef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3092146455126591869
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,8 +272,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 944293d088f2aa44288efc2f68ebde9a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   shoot: 1
   force: {x: 0, y: 0, z: 0}
   fireRate: 0.2

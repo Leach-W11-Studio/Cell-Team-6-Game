@@ -51,9 +51,19 @@ public class PlaySounds : MonoBehaviour
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
     }
 
+    public void PlaySelfDestructSound()
+    {
+        string snd = gameObject.name + "_sd";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
+
+    public void PlayIdleSound()
+    {
+        string snd = gameObject.name + "_idle";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
 
 
-
-    
-   
 }
