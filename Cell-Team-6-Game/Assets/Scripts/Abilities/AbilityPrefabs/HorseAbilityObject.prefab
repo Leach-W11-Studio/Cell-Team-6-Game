@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9160560261032176634
+--- !u!1 &4211573881852460634
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9160560261032176630}
-  - component: {fileID: 9160560261032176629}
-  - component: {fileID: 9160560261032176628}
-  - component: {fileID: 9160560261032176635}
+  - component: {fileID: 4211573881852460630}
+  - component: {fileID: 4211573881852460629}
+  - component: {fileID: 4211573881852460628}
+  - component: {fileID: 4211573881852460635}
   m_Layer: 0
-  m_Name: RicochetAbilityObject
+  m_Name: HorseAbilityObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9160560261032176630
+--- !u!4 &4211573881852460630
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9160560261032176634}
+  m_GameObject: {fileID: 4211573881852460634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.37, y: 5.17, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 8.87, y: 5.17, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9160560261032176629
+--- !u!212 &4211573881852460629
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9160560261032176634}
+  m_GameObject: {fileID: 4211573881852460634}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 610b045f812ef2f49ae13abf36a6b17e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc7b2f6bafd9b204d8e6e5fd1fad312a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,13 +82,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &9160560261032176628
+--- !u!58 &4211573881852460628
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9160560261032176634}
+  m_GameObject: {fileID: 4211573881852460634}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -97,18 +97,18 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
---- !u!114 &9160560261032176635
+  m_Radius: 5
+--- !u!114 &4211573881852460635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9160560261032176634}
+  m_GameObject: {fileID: 4211573881852460634}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce3bbe99176fa9e4eb827c1b13a801b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityObject: {fileID: 884546724813912708, guid: 4f03de7b0e025f84fb8f4bb820bb35e1,
+  abilityObject: {fileID: 6142895199981535421, guid: df3c098d18c738542b99e3bf3cbcc99a,
     type: 3}
