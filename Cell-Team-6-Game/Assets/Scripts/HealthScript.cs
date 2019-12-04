@@ -35,6 +35,11 @@ public class HealthScript : MonoBehaviour
         if (!isplayer) { currentHealth = maxHealth; }
     }
 
+    private void FixedUpdate()
+    {
+        if (currentHealth == 0) { Die();}
+    }
+
     public void ActivateSheild()
     {
         sheild = true;
@@ -72,7 +77,6 @@ public class HealthScript : MonoBehaviour
             currentHealth -= damage;
             StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag));
         }
-        if (currentHealth == 0) { StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag)); Die(); }
     }
 
     //Is passed a damage value from the collision function, and subtracts the damage from the current health of the enemy
@@ -106,6 +110,7 @@ public class HealthScript : MonoBehaviour
                 }
             }
             else {
+                collision.gameObject.SetActive(false);
                 Player_Take_Damage();
             }
         }
@@ -117,7 +122,7 @@ public class HealthScript : MonoBehaviour
         }
     }
 
-    public void Die(float waitTime = 0)
+    public void Die(float waitTime = 1)
     {
         if (isplayer) { 
             GameMaster.gameMaster.LoseGame();
