@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class HealthScript : MonoBehaviour
 {
     //Created necessary Variables
-    public Text Healthtext;
+    //public Text Healthtext;
     public int maxHealth;
     public int currentHealth;
     public bool sheild;
@@ -38,7 +38,7 @@ public class HealthScript : MonoBehaviour
     public void ActivateSheild()
     {
         sheild = true;
-        Healthtext.text = "SHEILD";
+        //Healthtext.text = "SHEILD";
     }
 
     public void DeactivateSheild()
