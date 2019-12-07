@@ -124,14 +124,14 @@ public class HealthScript : MonoBehaviour
 
     public void Die(float waitTime = 1)
     {
-        if (isplayer) { 
-            GameMaster.gameMaster.LoseGame();
-            PlayerAnim.SetTrigger("died"); 
+        if (isplayer) {
+            PlayerAnim.SetTrigger("died");
+            GameMaster.gameMaster.LoseGame(); 
         }
         StartCoroutine("DieWait", waitTime);
     }
 
-    IEnumerator DieWait(float waitTime = 0)
+    IEnumerator DieWait(float waitTime)
     {
         isDead = true;
         yield return new WaitForSeconds(Deathtime);
