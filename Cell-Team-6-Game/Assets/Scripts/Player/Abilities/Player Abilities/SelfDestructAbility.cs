@@ -47,12 +47,13 @@ public class SelfDestructAbility : Ability
         playerHealth.invincible = true;
         StartCoroutine(PlayerControlDelay());
         foreach (Collider2D collider in colliders) {
-            if (! collider.gameObject.CompareTag("Enemy")) {
+            if (collider.gameObject.CompareTag("Enemy")) {
                 HealthScript enemyHealth = collider.gameObject.GetComponent<HealthScript>();
                 PolyNavAgent agent = collider.gameObject.GetComponentInChildren<PolyNavAgent>();
                 Rigidbody2D rb = collider.gameObject.GetComponent<Rigidbody2D>();
                 if (enemyHealth) {
                     enemyHealth.TakeDamage(damage);
+                    //Debug.Log("Enemy Taking Damage");
                 }
                 if (agent) {
                     agent.enabled = false;
