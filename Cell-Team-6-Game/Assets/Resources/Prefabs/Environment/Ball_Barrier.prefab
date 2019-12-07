@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2310306367153896609}
   - component: {fileID: 7985655926099827682}
   - component: {fileID: 1956370774465706475}
+  - component: {fileID: 7573559946476884290}
   m_Layer: 0
   m_Name: Ball_Barrier
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8483738257458619341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -209,3 +210,18 @@ PolygonCollider2D:
       - {x: 0.10546875, y: -0.4140625}
       - {x: 0.123046875, y: -0.40234375}
       - {x: 0.140625, y: -0.38867188}
+--- !u!114 &7573559946476884290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8483738257458619341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1

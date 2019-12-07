@@ -98,9 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallPrefabs:
   - {fileID: 6140272830311504626, guid: 890e6790ea313c84a8128de465f0891b, type: 3}
-  - {fileID: 1180685271773604896, guid: 5b760abe69831234bb806b392a64991d, type: 3}
-  density: 0.5
-  objectDilation: 1.5
+  - {fileID: 3713849724946572492, guid: d3c4b60c7e2ee9949aa91657474ec046, type: 3}
+  density: 1
+  objectDilation: 3
   randomDelta: {x: 1.3, y: 2}
 --- !u!50 &3215062462460188958
 Rigidbody2D:
