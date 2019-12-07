@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclesMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  autoRegenerateInterval: 60
+    m_Bits: 512
+  autoRegenerateInterval: 0
   radiusOffset: 0.1
 --- !u!60 &8262104424087882694
 PolygonCollider2D:
@@ -74,7 +74,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 9.452679, y: 4.485943}
-      - {x: -9.526902, y: 4.485943}
-      - {x: -9.526902, y: -4.4874353}
-      - {x: 9.452679, y: -4.487435}
+    - - {x: 44.66016, y: 18.602146}
+      - {x: -43.73795, y: 20.096806}
+      - {x: -44.402233, y: -46.00569}
+      - {x: 45.490517, y: -47.002136}
