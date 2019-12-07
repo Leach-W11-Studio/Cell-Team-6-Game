@@ -79,9 +79,11 @@ public class ProceduralWall : MonoBehaviour
     
 }
 
+[CanEditMultipleObjects]
 [CustomEditor(typeof(ProceduralWall))]
 public class ProceduralWallEditor : Editor {
     public override void OnInspectorGUI () {
+        serializedObject.Update();
         ProceduralWall scriptTarget = (ProceduralWall)target;
         base.OnInspectorGUI();
 
@@ -90,5 +92,7 @@ public class ProceduralWallEditor : Editor {
             CompositeCollider2D collider = scriptTarget.gameObject.GetComponent<CompositeCollider2D>();
             collider.GenerateGeometry();
         }
+
+        serializedObject.ApplyModifiedProperties();
     }
 }
