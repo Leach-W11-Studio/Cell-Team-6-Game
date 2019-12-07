@@ -129,8 +129,9 @@ public class HealthScript : MonoBehaviour
             PlayerAnim.SetTrigger("died");
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             StartCoroutine("DieWait", waitTime);
-            GameMaster.gameMaster.LoseGame(); 
+            //GameMaster.gameMaster.LoseGame(); 
         }
+        StartCoroutine("DieWait", waitTime);
     }
 
     IEnumerator DieWait(float waitTime)
