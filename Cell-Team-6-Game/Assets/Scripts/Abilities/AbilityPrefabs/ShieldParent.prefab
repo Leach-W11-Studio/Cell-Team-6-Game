@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5544247048053453209}
   - component: {fileID: 6042992048274714552}
   - component: {fileID: 7589133734754836060}
+  - component: {fileID: 3522134524821317469}
   m_Layer: 0
   m_Name: RiotShield
   m_TagString: RiotShield
@@ -99,7 +100,7 @@ MonoBehaviour:
     m_Bits: 4096
   playerBullet: {fileID: 6044363271187527088, guid: a10e76e8133bb9646b1a96c168883145,
     type: 3}
-  Countdown: 5
+  Countdown: 8
 --- !u!60 &7589133734754836060
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773793534948616176}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -274,6 +275,32 @@ PolygonCollider2D:
       - {x: 0.5491803, y: 0.050819673}
       - {x: 0.4622951, y: 0.04262295}
       - {x: 0.447541, y: 0.040983606}
+--- !u!61 &3522134524821317469
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773793534948616176}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03690183, y: -0.0685325}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.357377, y: 0.83934426}
+    newSize: {x: 20.48, y: 5.12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.482272, y: 0.4703248}
+  m_EdgeRadius: 0
 --- !u!1 &4051628322970827764
 GameObject:
   m_ObjectHideFlags: 0
