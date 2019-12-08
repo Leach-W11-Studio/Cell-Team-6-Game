@@ -369,6 +369,7 @@ GameObject:
   - component: {fileID: 4160563246998496864}
   - component: {fileID: 4160563246998496865}
   - component: {fileID: 5650575861138662417}
+  - component: {fileID: 404911391}
   m_Layer: 12
   m_Name: Player 1
   m_TagString: Player
@@ -426,7 +427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Healthtext: {fileID: 0}
   maxHealth: 4
   currentHealth: 4
   sheild: 0
@@ -571,3 +571,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activationRaidus: 20
   activationTick: 0.25
+--- !u!58 &404911391
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7385883957339648771}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6

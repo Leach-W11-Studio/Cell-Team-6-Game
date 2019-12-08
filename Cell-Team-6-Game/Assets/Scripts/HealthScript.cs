@@ -96,7 +96,7 @@ public class HealthScript : MonoBehaviour
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
             //Debug.Log("being hit");
-            if (collision.gameObject.CompareTag("Enemy")) {
+            if (collision.gameObject.CompareTag("Enemy") && !invincible) {
                 HealthScript enemyHealth = collision.gameObject.GetComponent<HealthScript>();
                 if (enemyHealth) {
                     if (!enemyHealth.isDead) {
