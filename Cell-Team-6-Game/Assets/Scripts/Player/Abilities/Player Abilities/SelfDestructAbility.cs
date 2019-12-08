@@ -9,6 +9,8 @@ public class SelfDestructAbility : Ability
     public int damage;
     public int selfDamage;
     public float force;
+    public float controlDelay = 1;
+    public float destructDelay = 1;
     
     PlayerController player;
     HealthScript playerHealth;
@@ -46,7 +48,35 @@ public class SelfDestructAbility : Ability
         player.enabled = false;
         playerHealth.TakeDamage(selfDamage);
         playerHealth.invincible = true;
-        StartCoroutine(PlayerControlDelay());
+        //StartCoroutine(PlayerControlDelay());
+        StartCoroutine(DelayDamageTick(colliders));
+        /* foreach (Collider2D collider in colliders) {
+            Debug.Log("In Foreach Loop");
+            if (collider.gameObject.CompareTag("Enemy")) {
+                Debug.Log("thing");
+                HealthScript enemyHealth = collider.gameObject.GetComponent<HealthScript>();
+                PolyNavAgent agent = collider.gameObject.GetComponentInChildren<PolyNavAgent>();
+                Rigidbody2D rb = collider.gameObject.GetComponent<Rigidbody2D>();
+                if (enemyHealth) {
+                    enemyHealth.TakeDamage(damage);
+                    //Debug.Log("Enemy Taking Damage");
+                }
+                if (agent) {
+                    agent.enabled = false;
+                    StartCoroutine(EnemyPathfindDelay(agent));
+                }
+                if (rb) {
+                    Vector2 forceVector = (transform.position - collider.gameObject.transform.position).normalized;
+                    rb.AddForce(forceVector * force);
+                }
+            }
+        } */
+    }
+
+    IEnumerator DelayDamageTick(Collider2D[] colliders)
+    {
+        yield return new WaitForSeconds(destructDelay);
+
         foreach (Collider2D collider in colliders) {
             Debug.Log("In Foreach Loop");
             if (collider.gameObject.CompareTag("Enemy")) {
@@ -68,6 +98,8 @@ public class SelfDestructAbility : Ability
                 }
             }
         }
+        
+        StartCoroutine(PlayerControlDelay());
     }
 
     IEnumerator EnemyPathfindDelay (PolyNavAgent agent) {
