@@ -53,7 +53,7 @@ public class SelfDestructAbility : Ability
                 Rigidbody2D rb = collider.gameObject.GetComponent<Rigidbody2D>();
                 if (enemyHealth) {
                     enemyHealth.TakeDamage(damage);
-                    //Debug.Log("Enemy Taking Damage");
+                    Debug.Log("Enemy Taking Damage");
                 }
                 if (agent) {
                     agent.enabled = false;
