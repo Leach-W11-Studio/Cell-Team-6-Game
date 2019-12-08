@@ -125,6 +125,7 @@ public class HealthScript : MonoBehaviour
         {
             Damage = collision.gameObject.GetComponent<SimpleBullet>().Damage();
             Enemy_Take_Damage(Damage);
+            collision.gameObject.SetActive(false);
         }
     }
 
