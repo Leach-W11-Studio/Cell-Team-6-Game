@@ -21,7 +21,7 @@ public class RandomColorSelector : MonoBehaviour
         r = baseColor.r + Random.Range(-colorVariance, colorVariance);
         g = baseColor.g + Random.Range(-colorVariance, colorVariance);
         b = baseColor.b + Random.Range(-colorVariance, colorVariance);
-        Debug.Log(r + " " + g + " " + b);
+        //Debug.Log(r + " " + g + " " + b);
 
         finalColor = new Color32((byte)r, (byte)g, (byte)b, (byte)alpha);
         gameObject.GetComponentInChildren<SpriteRenderer>().color = finalColor;

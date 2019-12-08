@@ -41,19 +41,22 @@ public class SelfDestructAbility : Ability
     protected override void CastAction() {
         Debug.Log("Casting self destruct");
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
+        Debug.Log("Colliders.Length = " + colliders.Length);
         animator.SetTrigger("selfDestruct");
         player.enabled = false;
         playerHealth.TakeDamage(selfDamage);
         playerHealth.invincible = true;
         StartCoroutine(PlayerControlDelay());
         foreach (Collider2D collider in colliders) {
+            Debug.Log("In Foreach Loop");
             if (collider.gameObject.CompareTag("Enemy")) {
+                Debug.Log("thing");
                 HealthScript enemyHealth = collider.gameObject.GetComponent<HealthScript>();
                 PolyNavAgent agent = collider.gameObject.GetComponentInChildren<PolyNavAgent>();
                 Rigidbody2D rb = collider.gameObject.GetComponent<Rigidbody2D>();
                 if (enemyHealth) {
                     enemyHealth.TakeDamage(damage);
-                    Debug.Log("Enemy Taking Damage");
+                    //Debug.Log("Enemy Taking Damage");
                 }
                 if (agent) {
                     agent.enabled = false;
