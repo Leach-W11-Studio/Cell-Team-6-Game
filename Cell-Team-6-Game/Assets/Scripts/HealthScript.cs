@@ -59,6 +59,10 @@ public class HealthScript : MonoBehaviour
         else if (CompareTag("Enemy")) {
             Enemy_Take_Damage(damage);
         }
+
+        if (currentHealth <= 0) {
+            Die();
+        }
     }
 
     //Is called to remove one heart from the player
