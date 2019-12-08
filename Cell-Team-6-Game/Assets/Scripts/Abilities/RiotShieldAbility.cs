@@ -22,8 +22,8 @@ public class RiotShieldAbility : Ability
         Debug.Log("OnPickup called on ability: " + abilityName);
         player = GameObject.FindWithTag("Player");
 
-        RiotShieldObject = Instantiate(RiotShield, player.transform);
-        RiotShieldObject.transform.SetParent(player.transform);
+        RiotShieldObject = Instantiate(RiotShield, player.transform.position, player.transform.rotation);
+        //RiotShieldObject.transform.SetParent(player.transform);
         RiotChild = RiotShieldObject.transform.GetChild(0).gameObject;
         RiotChild.SetActive(false);
         //RiotShieldUI.SetActive(true);

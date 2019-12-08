@@ -12,10 +12,7 @@ public class RiotShield : MonoBehaviour
     private Rigidbody2D rb;
     private GameObject collidedBullet;
     public float Countdown = 5f;
-    private Vector2 offset;
-    //private Vector2 shieldpos;
-    //private Vector2 playerpos;
-    //private GameObject mainplayer;
+    private GameObject mainplayer;
 
     private void OnEnable()
     {
@@ -25,27 +22,25 @@ public class RiotShield : MonoBehaviour
     private void Start()
     {
         //gameObject.SetActive(false)
-        //mainplayer = GameObject.FindGameObjectWithTag("Player");
-        //shieldpos = new Vector2(transform.position.x, transform.position.y);
-        //playerpos = new Vector2(mainplayer.transform.position.x, mainplayer.transform.position.y);
+        mainplayer = GameObject.FindGameObjectWithTag("Player");
         //Needed in order to get the power value of the bullet that we are using
         playbull = playerBullet.GetComponent<SimpleBullet>();
-        //offset = shieldpos - playerpos;
     }
 
     private void Update()
     {
         //playerpos = new Vector2(mainplayer.transform.position.x, mainplayer.transform.position.y);
-        //transform.position = playerpos + offset;
+        transform.parent.position = mainplayer.transform.position;
+        transform.parent.up = mainplayer.transform.up;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //Finding the components of the bullet that collided
         collidedBullet = collision.gameObject;
         rb = collidedBullet.GetComponent<Rigidbody2D>();
 
-        if (collision.gameObject.CompareTag("EnemyBullet"))
+        if (collision.CompareTag("EnemyBullet"))
         {
             Debug.Log("should ricochet");
             //Used adams racast ricocchet script to get the surface angle

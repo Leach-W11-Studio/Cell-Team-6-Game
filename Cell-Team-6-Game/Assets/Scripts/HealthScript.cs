@@ -77,6 +77,8 @@ public class HealthScript : MonoBehaviour
             currentHealth -= damage;
             StartCoroutine(Shaker.Shake(Shaker.shakeDur, Shaker.shakeMag));
         }
+        else
+            Die();
     }
 
     //Is passed a damage value from the collision function, and subtracts the damage from the current health of the enemy
@@ -127,7 +129,7 @@ public class HealthScript : MonoBehaviour
         if (isplayer)
         {
             PlayerAnim.SetTrigger("died");
-            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             StartCoroutine("DieWait", waitTime);
             //GameMaster.gameMaster.LoseGame(); 
         }
