@@ -13,9 +13,9 @@ public class RicochetBullet : SimpleBullet
         rb = GetComponent<Rigidbody2D>();
     }
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Environment"))
+        if (collision.CompareTag("Environment"))
         {
             Debug.Log("bounces is: " + bounces + " and maxBounces is: " + maxBounces);
             if (bounces < maxBounces)
@@ -30,7 +30,7 @@ public class RicochetBullet : SimpleBullet
             }
         }
         else {
-            IDamageable hitObject = collision.gameObject.GetComponent(typeof(IDamageable)) as IDamageable;
+            IDamageable hitObject = collision.GetComponent(typeof(IDamageable)) as IDamageable;
             //Debug.Log(hitObject);
             if (hitObject != null)
             {
