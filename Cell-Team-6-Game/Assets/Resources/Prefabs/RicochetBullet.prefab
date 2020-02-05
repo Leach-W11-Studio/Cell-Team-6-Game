@@ -45,6 +45,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 306142707
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6930124ec517d6448897e777d130a967, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20cfc181c9099fd4894d690a79ac2d7e, type: 3}
   m_Color: {r: 0.9529412, g: 0.9137255, b: 0.9137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48831a3b65f127344af62e6be157c711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentDamage: 10
   power: 0.04
   velocity: {x: 0, y: 0, z: 0}
   layers:
