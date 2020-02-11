@@ -13,7 +13,7 @@ public abstract class Ability : MonoBehaviour
 
     public bool castable;
 
-    public Image abilityIcon;
+    public Sprite abilityIcon;
 
     private void Start()
     {
