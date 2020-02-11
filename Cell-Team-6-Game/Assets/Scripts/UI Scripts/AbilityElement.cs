@@ -8,18 +8,34 @@ public class AbilityElement : MonoBehaviour
 {
     private Sprite abilitySprite;
     private float abilityCooldown;
+    private Ability abilityObject;
+    private bool currentState;
 
-    public void Build(Sprite sprite, float cooldown)
+    public Color OnCooldownColor = Color.gray;
+
+    public void Build(Sprite sprite, float cooldown, Ability ability)
     {
         abilitySprite = sprite;
         abilityCooldown = cooldown;
+        abilityObject = ability;
 
         gameObject.GetComponent<Image>().sprite = abilitySprite;
+        currentState = true;
     }
 
-
-    public void SetVisualCooldown(float seconds)
+    private void Update()
     {
-        //Implimentation
+        if(currentState != abilityObject.castable)
+        {
+            currentState = abilityObject.castable;
+            if(currentState)
+            {
+                gameObject.GetComponent<Image>().color = Color.white;
+            }
+            else
+            {
+                gameObject.GetComponent<Image>().color = OnCooldownColor;
+            }
+        }
     }
 }

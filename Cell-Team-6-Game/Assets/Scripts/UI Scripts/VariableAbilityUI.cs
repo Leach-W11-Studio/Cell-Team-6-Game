@@ -35,7 +35,7 @@ public class VariableAbilityUI : MonoBehaviour
         var tempElement = addedAbility.GetComponent<AbilityElement>();
 
         abilityElements.Add(tempElement);
-        tempElement.Build(toAdd.abilityIcon, toAdd.abilityCooldown);
+        tempElement.Build(toAdd.abilityIcon, toAdd.abilityCooldown, toAdd);
     }
 
     private void ClearAbilityDisplay()
