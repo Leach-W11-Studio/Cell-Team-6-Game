@@ -15,6 +15,14 @@ public enum FSMStateID
     Passive,
     Patrol,
     Retreat,
+
+    //Boss States
+    BossIdle,
+    Lash,
+    GrappleLash,
+    Projectile,
+    Tracking,
+    WallSpawn,
 }
 
 public enum FSMTransitions
@@ -26,6 +34,12 @@ public enum FSMTransitions
     Awoken,
     PlayerTooClose,
     CloserDistanceReached,
+
+    //BossTransitions
+    InLashRange,
+    InProjectileRange,
+    WallTime,
+    OutOfRange,
 }
 
 public abstract class FSM : MonoBehaviour
