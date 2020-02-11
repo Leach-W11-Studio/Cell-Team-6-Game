@@ -7,13 +7,13 @@ public class VariableAbilityUI : MonoBehaviour
 {
     public GameObject abilityUIPanel;
     public GameObject basicAbilityElement;
-    
-    private List<AbilityElement> abilityElements;
+
+    private List<AbilityElement> abilityElements = new List<AbilityElement>();
 
     // Start is called before the first frame update
     void Start()
     {
-        abilityUIPanel = GameObject.Find("AbilityUIPanel");
+        abilityUIPanel = this.gameObject;
     }
 
     public void UpdateAbilityUI(List<Ability> abilities)
@@ -40,11 +40,13 @@ public class VariableAbilityUI : MonoBehaviour
 
     private void ClearAbilityDisplay()
     {
-        foreach(AbilityElement element in abilityElements)
+        if (abilityElements.Count > 0)
         {
-            Destroy(element.gameObject);
-            abilityElements.Remove(element);
+            foreach (Transform child in abilityUIPanel.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            abilityElements.Clear();
         }
-        abilityElements.Clear();
     }
 }
