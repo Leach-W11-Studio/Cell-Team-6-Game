@@ -49,6 +49,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -97,8 +98,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefabs:
+  - {fileID: 816130671044824928, guid: 7788747a523045a42a1aa93ec6d0daa7, type: 3}
+  - {fileID: 8390156557597025379, guid: 0d92bbb1d3401d343bea8f185f2e3bf8, type: 3}
+  - {fileID: 3047916582685436352, guid: cfbe7dfe8d7dc0c4c9f38a940a85c024, type: 3}
+  - {fileID: 1741742616434965030, guid: f1885001700212c4eb338d36f1cb2d85, type: 3}
+  - {fileID: 7662525955306884133, guid: 267bb71384d6cf0459893898ada16093, type: 3}
   - {fileID: 6140272830311504626, guid: 890e6790ea313c84a8128de465f0891b, type: 3}
   - {fileID: 3713849724946572492, guid: d3c4b60c7e2ee9949aa91657474ec046, type: 3}
+  - {fileID: 8793187637547058530, guid: 848fa72c073b1ee4ba2e3b640f8e3bc1, type: 3}
+  - {fileID: 3279211670425210597, guid: 93ba5393ad9b9324bb65e517671794b5, type: 3}
+  - {fileID: 8108393779095318590, guid: 50886768040a59c479bf1bd017f4b8ab, type: 3}
+  - {fileID: 6781825240609057055, guid: ba640b1346be131479d199c7247d8705, type: 3}
+  - {fileID: 6188184322649389739, guid: 6eb41f1659c1f1a45ba8478a97b3393e, type: 3}
+  - {fileID: 7280198383018552155, guid: 673f1c42a1d6f3648a4e90ce11fd0363, type: 3}
+  - {fileID: 8541697695980971226, guid: d48ee4cd505f8784c92dc6d39e7850a4, type: 3}
   density: 1
   objectDilation: 3
   randomDelta: {x: 1.3, y: 2}
