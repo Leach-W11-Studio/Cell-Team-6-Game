@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Ability : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public abstract class Ability : MonoBehaviour
     public float AbilityCooldown { get { return abilityCooldown; } }
 
     public bool castable;
+
+    public Sprite abilityIcon;
 
     private void Start()
     {
