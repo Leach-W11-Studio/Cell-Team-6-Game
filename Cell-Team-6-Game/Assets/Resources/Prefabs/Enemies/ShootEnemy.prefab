@@ -100,9 +100,11 @@ MonoBehaviour:
   decelerationRate: 2
   lookAheadDistance: 1
   avoidRadius: 0.2
-  centerOffset: {x: 0, y: 0}
+  avoidanceConsiderStuckedTime: 3
+  avoidanceConsiderReachedDistance: 1
   rotateTransform: 0
   rotateSpeed: 350
+  centerOffset: {x: 0, y: 0}
   repath: 1
   restrict: 0
   closerPointOnInvalid: 1
@@ -119,9 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Healthtext: {fileID: 0}
   maxHealth: 10
-  currentHealth: 0
+  currentHealth: 10
   sheild: 0
   invincible: 0
   healthColor: {r: 0, g: 0, b: 0, a: 0}
@@ -129,8 +130,7 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  isDead: 0
   isplayer: 0
 --- !u!114 &3786160377498269637
 MonoBehaviour:
@@ -293,6 +293,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
