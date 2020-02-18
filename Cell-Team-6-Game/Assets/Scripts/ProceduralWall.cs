@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PolyNav;
 
 using UnityEditor;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(CompositeCollider2D))]
+[RequireComponent(typeof(PolyNav.PolyNavObstacle))]
 public class ProceduralWall : MonoBehaviour
 {
+    public Vector2 areaSize;
     public List<GameObject> wallPrefabs = new List<GameObject>();
     public float density;
     public float objectDilation;
     public Vector2 randomDelta;
-
-    SpriteRenderer spriteRenderer;
 
     private Vector2 lastScale;
     private Vector2 lastRandomDelta;
@@ -20,7 +21,6 @@ public class ProceduralWall : MonoBehaviour
     private float lastDilation;
 
     void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     // Update is called once per frame
     void Update()
@@ -29,17 +29,13 @@ public class ProceduralWall : MonoBehaviour
 
     public void CreateWall() {
         if (wallPrefabs.Count == 0) { return; }
-        if (!spriteRenderer) {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-        spriteRenderer.sprite = null;
         
-        float startX = transform.position.x - (spriteRenderer.size.x/2);
-        float endX = transform.position.x + (spriteRenderer.size.x/2);
-        float startY = transform.position.y - (spriteRenderer.size.y/2);
-        float endY = transform.position.y + (spriteRenderer.size.y/2);
+        float startX = transform.position.x - (areaSize.x/2);
+        float endX = transform.position.x + (areaSize.x/2);
+        float startY = transform.position.y - (areaSize.y/2);
+        float endY = transform.position.y + (areaSize.y/2);
         float children = transform.childCount;
-        // Vector2 positionDelta = new Vector2((density * spriteRenderer.size.x), density * spriteRenderer.size.y);
+        // Vector2 positionDelta = new Vector2((density * areaSize.x), density * areaSize.y);
         for(int i = 0; i < children; i++) {
             if (Application.isEditor) {
                 DestroyImmediate(transform.GetChild(0).gameObject);
@@ -60,17 +56,14 @@ public class ProceduralWall : MonoBehaviour
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.blue;
-        if (!spriteRenderer) {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-        Gizmos.DrawWireCube(transform.position, spriteRenderer.size);
-        // if (lastScale != spriteRenderer.size ||
+        Gizmos.DrawWireCube(transform.position, areaSize);
+        // if (lastScale != areaSize ||
         //     lastRandomDelta != randomDelta ||
         //     lastDilation != objectDilation ||
         //     lastDensity != density) {
         //         CreateWall();
         //     }
-        // lastScale = spriteRenderer.size;
+        // lastScale = areaSize;
         // lastRandomDelta = randomDelta;
         // lastDensity = density;
         // lastDilation = objectDilation;
@@ -84,13 +77,14 @@ public class ProceduralWall : MonoBehaviour
 public class ProceduralWallEditor : Editor {
     public override void OnInspectorGUI () {
         serializedObject.Update();
-        ProceduralWall scriptTarget = (ProceduralWall)target;
+        MonoBehaviour mono = (MonoBehaviour)target;
+        ProceduralWall scriptTarget = mono.GetComponent<ProceduralWall>();
+        PolyNavObstacle pObstacle = mono.GetComponent<PolyNavObstacle>();
+        CompositeCollider2D collider = mono.GetComponent<CompositeCollider2D>();
         base.OnInspectorGUI();
 
         if (GUILayout.Button("Build Wall")) {
             scriptTarget.CreateWall();
-            CompositeCollider2D collider = scriptTarget.gameObject.GetComponent<CompositeCollider2D>();
-            collider.GenerateGeometry();
         }
 
         serializedObject.ApplyModifiedProperties();
