@@ -11,11 +11,15 @@ public class SelfDestructAbility : Ability
     public float force;
     public float controlDelay = 1;
     public float destructDelay = 1;
-    
+
     PlayerController player;
     HealthScript playerHealth;
     Animator animator;
 
+    public SelfDestructAbility()
+    {
+        abilityName = "SelfDestructAbility";
+    }
     // Start is called before the first frame update
     void Start()
     {

@@ -15,6 +15,10 @@ public class AbilityCaster : MonoBehaviour
             Debug.LogError("maxAbilities should not be set to greater than 5");
             maxAbilities = 5;
         }
+        
+    }
+    private void Awake()
+    {
         abilityContainer = gameObject;
     }
     private void Update()
