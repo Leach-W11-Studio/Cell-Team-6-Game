@@ -21,7 +21,7 @@ public class HuntersMark : Ability
 
     protected override void CastAction()
     {
-
+        
     }
 
     protected override bool CastCondition()
