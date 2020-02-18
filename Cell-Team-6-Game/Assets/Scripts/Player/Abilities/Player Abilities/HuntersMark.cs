@@ -13,6 +13,7 @@ public class HuntersMark : Ability
     private GameObject closestEnemy;
 
     public float maximumMarkDistance = 20;
+    public GameObject itemDropper;
 
     public override void OnPickup()
     {
@@ -21,7 +22,13 @@ public class HuntersMark : Ability
 
     protected override void CastAction()
     {
-        
+        if (closestEnemy)
+        {
+            var spawnedDropper = Instantiate(itemDropper);
+            spawnedDropper.transform.parent = closestEnemy.transform;
+            spawnedDropper.transform.localPosition = Vector2.zero;
+        }
+        else { Debug.LogError("Ability casted without enemy target"); }
     }
 
     protected override bool CastCondition()
