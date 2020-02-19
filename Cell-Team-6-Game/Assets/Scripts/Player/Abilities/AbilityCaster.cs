@@ -7,6 +7,7 @@ public class AbilityCaster : MonoBehaviour
     public List<Ability> activeAbilities = new List<Ability>();
     public float maxAbilities;
     private GameObject abilityContainer;
+    private VariableAbilityUI abilityUI;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class AbilityCaster : MonoBehaviour
     private void Awake()
     {
         abilityContainer = gameObject;
+        abilityUI = GameObject.Find("AbilityUIPanel").GetComponent<VariableAbilityUI>();
     }
     private void Update()
     {
@@ -38,6 +40,7 @@ public class AbilityCaster : MonoBehaviour
             newAbility.GetComponent<Ability>().OnPickup();
             activeAbilities.Add(newAbility.GetComponent<Ability>());
 
+            abilityUI.UpdateAbilityUI(activeAbilities);
         }
         else
         {
