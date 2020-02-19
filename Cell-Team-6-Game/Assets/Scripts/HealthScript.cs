@@ -133,17 +133,30 @@ public class HealthScript : MonoBehaviour
     {
         if (isplayer)
         {
-            PlayerAnim.SetTrigger("died");
-            //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            StartCoroutine("DieWait", waitTime);
-            //GameMaster.gameMaster.LoseGame(); 
+            if (isDead == false)
+            {
+                PlayerAnim.SetTrigger("died");
+                isDead = true;
+                //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                StartCoroutine("DieWait", waitTime);
+                //GameMaster.gameMaster.LoseGame();
+            }
         }
-        StartCoroutine("DieWait", waitTime);
+        else
+        {
+            if (isDead == false)
+            {
+                PlayerAnim.SetTrigger("IsDead");
+                isDead = true;
+                //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                StartCoroutine("DieWait", waitTime);
+                //GameMaster.gameMaster.LoseGame();
+            }
+        }
     }
 
     IEnumerator DieWait(float waitTime)
     {
-        isDead = true;
         yield return new WaitForSeconds(Deathtime);
         // Debug.Break();
         Destroy(gameObject, waitTime);
