@@ -10,6 +10,8 @@ public class ConditionalDoorArea : MonoBehaviour
     public List<Collider2D> enemies;
     private ConditionalDoor door;
     private PolygonCollider2D myCollider;
+
+    public List<Collider2D> oldEnemies;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,7 @@ public class ConditionalDoorArea : MonoBehaviour
 
         if (enemies != oldEnemies) {
             door.onEnemiesChanged.Invoke();
+            Debug.Log("enemies changed");
         }
     }
 
