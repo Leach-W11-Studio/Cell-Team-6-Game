@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace PolyNav
 {
@@ -33,12 +34,20 @@ namespace PolyNav
             get { return _collider != null ? _collider : _collider = GetComponent<Collider2D>(); }
         }
 
+        public Mesh shapeMesh;
+
+        private void Start() {
+            if(myCollider is EdgeCollider2D) {
+                shapeMesh = myCollider.CreateMesh(true, true);
+            }
+        }
+
         ///The number of paths defining the obstacle
         public int GetPathCount() {
             if ( myCollider is BoxCollider2D ) { return 1; }
             if ( myCollider is PolygonCollider2D ) { return ( myCollider as PolygonCollider2D ).pathCount; }
             if ( myCollider is CompositeCollider2D ) { return ( myCollider as CompositeCollider2D ).pathCount; }
-            if ( myCollider is EdgeCollider2D ) { return ( myCollider as EdgeCollider2D ).pointCount; }
+            if ( myCollider is EdgeCollider2D ) { return 1; }
             return 0;
         }
 
@@ -122,6 +131,25 @@ namespace PolyNav
 
         void Awake() {
             transform.hasChanged = false;
+        }
+
+        void OnDrawGizmos() {
+            if (shapeMesh) {
+                Gizmos.color = Color.blue;
+
+                int index = 0;
+                // Debug.LogWarning(shapeMesh.vertices.Length, gameObject);
+                foreach(Vector3 vert in shapeMesh.vertices) {
+                    if (index < shapeMesh.vertices.Length -1){
+                        if (vert == shapeMesh.vertices[index+1]) {
+                            Debug.LogWarning("Verts are the same", gameObject);
+                        }
+                    }
+                    Gizmos.DrawWireSphere(vert, 0.1f);
+                    // Gizmos.DrawRay(vert, shapeMesh.normals[index]);
+                    index++;
+                }
+            }
         }
     }
 }
