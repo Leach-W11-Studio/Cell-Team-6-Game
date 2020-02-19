@@ -20,6 +20,7 @@ public class ConditionalDoorArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GetEnemies();
         foreach (var enemy in enemies) {
             if (enemy == null) {
                 enemies.Remove(enemy);
@@ -29,28 +30,34 @@ public class ConditionalDoorArea : MonoBehaviour
         if (enemies.Count == 0) {
             door.Defeat();
         }
+
     }
 
     private void GetEnemies() {
+        List<Collider2D> oldEnemies = enemies;
         enemies.Clear();
         List<Collider2D> colliders = new List<Collider2D>(); 
-        myCollider.OverlapCollider(contactFilter, colliders);
+        Physics2D.OverlapCollider(myCollider, contactFilter, colliders);
         foreach (Collider2D collider in colliders) {
             if (collider.CompareTag("Enemy")) {
                 enemies.Add(collider);
             }
         }
+
+        if (enemies != oldEnemies) {
+            door.onEnemiesChanged.Invoke();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            playerInArea = true;
+            door.playerInArea = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            playerInArea = false;
+            door.playerInArea = false;
         }
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    private Animator DoorAnim;
+    public Animator DoorAnim;
     
-    private void Start()
+    protected virtual void Start()
     {
         DoorAnim = gameObject.GetComponent<Animator>();
     }

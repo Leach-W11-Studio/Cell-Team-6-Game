@@ -147,9 +147,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2381975529314305067}
-  - component: {fileID: 2381975529314305070}
   - component: {fileID: 2381975529314305069}
   - component: {fileID: 2381975529314305068}
+  - component: {fileID: 7899338701174689386}
+  - component: {fileID: 2298156824025249040}
   m_Layer: 9
   m_Name: Conditional Door
   m_TagString: Untagged
@@ -164,7 +165,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2381975529314305066}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7246895, w: 0.68907565}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7246892, w: 0.6890759}
   m_LocalPosition: {x: -1.6, y: 8.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -175,18 +176,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 92.886}
---- !u!114 &2381975529314305070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2381975529314305066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b631f0852e1423b971f8c993fe7f47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &2381975529314305069
 Animator:
   serializedVersion: 3
@@ -232,6 +221,65 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.5095322, y: 1.77}
   m_EdgeRadius: 0
+--- !u!114 &7899338701174689386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2381975529314305066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a81e5b19b6dd548418b10f4b4e2c9bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoorAnim: {fileID: 0}
+  onEnemiesDefeated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7899338701174689386}
+        m_MethodName: Unlock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onEnemiesChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: Die
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  playerInArea: 0
+  defeated: 0
+  locked: 0
+--- !u!114 &2298156824025249040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2381975529314305066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 1
+  extraOffset: 0
+  invertPolygon: 0
 --- !u!1 &2381975530667578347
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +348,7 @@ GameObject:
   - component: {fileID: 4093502087840875524}
   - component: {fileID: 1358900498773255629}
   - component: {fileID: 767584829778117729}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Condition Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,3 +419,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5f042265a3b8647a305353c0413b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 4096
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  enemies: []

@@ -7,12 +7,15 @@ public class ConditionalDoor : DoorScript
 {
     public UnityEvent onEnemiesDefeated;
     public UnityEvent onEnemiesChanged;
-    public bool playerInArea;
+
+    public bool playerInArea = false;
     public bool defeated = false;
     public bool locked = false;
     private PolygonCollider2D conditionalArea;
+
     private void Start()
     {
+        base.Start();
         conditionalArea = transform.Find("Condition Area").GetComponent<PolygonCollider2D>();
     }
 
@@ -25,8 +28,13 @@ public class ConditionalDoor : DoorScript
     public override void Close() {
         if (!defeated) {
             locked = true;
+            base.Close();
+        }
+        else {
+            base.Close();
         }
     }
+    
     public virtual void Defeat() {
         if (!defeated) {
             defeated = true;
