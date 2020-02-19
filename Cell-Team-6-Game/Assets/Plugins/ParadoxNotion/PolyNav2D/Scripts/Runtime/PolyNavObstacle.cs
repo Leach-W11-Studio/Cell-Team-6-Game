@@ -14,7 +14,8 @@ namespace PolyNav
         {
             Polygon,
             Box,
-            Composite
+            Composite,
+            Edge
         }
 
         ///Raised when the state of the obstacle is changed (enabled/disabled).
@@ -37,6 +38,7 @@ namespace PolyNav
             if ( myCollider is BoxCollider2D ) { return 1; }
             if ( myCollider is PolygonCollider2D ) { return ( myCollider as PolygonCollider2D ).pathCount; }
             if ( myCollider is CompositeCollider2D ) { return ( myCollider as CompositeCollider2D ).pathCount; }
+            if ( myCollider is EdgeCollider2D ) { return ( myCollider as EdgeCollider2D ).pointCount; }
             return 0;
         }
 
@@ -63,6 +65,16 @@ namespace PolyNav
                 comp.GetPath(index, points);
             }
 
+            if (myCollider is EdgeCollider2D) {
+                var edge = (EdgeCollider2D)myCollider;
+                points = new Vector2[4];
+                var point = edge.points[index];
+                points[0] = new Vector2(point.x - edge.edgeRadius, point.y);
+                points[1] = new Vector2(point.x, point.y - edge.edgeRadius);
+                points[2] = new Vector2(point.x + edge.edgeRadius, point.y);
+                points[3] = new Vector2(point.x, point.y + edge.edgeRadius);
+            }
+
             if ( invertPolygon && points != null ) { System.Array.Reverse(points); }
             return points;
         }
@@ -84,6 +96,10 @@ namespace PolyNav
 
             if ( myCollider is CompositeCollider2D ) {
                 shapeType = ShapeType.Composite;
+            }
+
+            if (myCollider is EdgeCollider2D) {
+                shapeType = ShapeType.Edge;
             }
 
             myCollider.isTrigger = true;

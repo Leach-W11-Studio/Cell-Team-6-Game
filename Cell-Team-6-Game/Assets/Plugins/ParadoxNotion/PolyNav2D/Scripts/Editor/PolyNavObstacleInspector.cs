@@ -38,6 +38,13 @@ namespace PolyNav
                 obstacle.invertPolygon = false;
             }
 
+            if ( obstacle.shapeType == PolyNavObstacle.ShapeType.Edge && !( collider is EdgeCollider2D ) ) {
+                if ( collider != null ) { UnityEditor.Undo.DestroyObjectImmediate(collider); }
+                var col = obstacle.gameObject.AddComponent<EdgeCollider2D>();
+                UnityEditor.Undo.RegisterCreatedObjectUndo(col, "Change Shape Type");
+                obstacle.invertPolygon = false;
+            }
+
             if ( obstacle.shapeType == PolyNavObstacle.ShapeType.Composite && !( collider is CompositeCollider2D ) ) {
                 if ( collider != null ) { UnityEditor.Undo.DestroyObjectImmediate(collider); }
                 var col = obstacle.gameObject.AddComponent<CompositeCollider2D>();
