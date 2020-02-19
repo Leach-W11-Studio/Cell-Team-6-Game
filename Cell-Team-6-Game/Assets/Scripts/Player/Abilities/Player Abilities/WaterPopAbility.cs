@@ -6,6 +6,10 @@ public class WaterPopAbility : Ability
 {
     PlayerGunScript gunScript;
 
+    public WaterPopAbility()
+    {
+        abilityName = "WaterPopAbility";
+    }
     // Start is called before the first frame update
     void Start()
     {
