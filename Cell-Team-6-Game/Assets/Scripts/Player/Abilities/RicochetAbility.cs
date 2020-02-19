@@ -10,7 +10,7 @@ public class RicochetAbility : Ability
 
     public RicochetAbility()
     {
-        abilityName = "Ricochet";
+        abilityName = "RicochetAbility";
     }
 
     // Start is called before the first frame update
