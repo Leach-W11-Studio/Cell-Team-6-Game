@@ -17,6 +17,8 @@ public class ConditionalDoorArea : MonoBehaviour
     {
         door = transform.parent.GetComponent<ConditionalDoor>();
         myCollider = GetComponent<PolygonCollider2D>();
+        GetEnemies();
+        oldEnemies = new List<Collider2D>(enemies);
     }
 
     // Update is called once per frame
@@ -36,7 +38,11 @@ public class ConditionalDoorArea : MonoBehaviour
     }
 
     private void GetEnemies() {
-        List<Collider2D> oldEnemies = enemies;
+        bool start = false;
+        if (enemies.Count == 0) {
+            start = true;
+        }
+        oldEnemies = new List<Collider2D>(enemies);
         enemies.Clear();
         List<Collider2D> colliders = new List<Collider2D>(); 
         Physics2D.OverlapCollider(myCollider, contactFilter, colliders);
@@ -46,9 +52,8 @@ public class ConditionalDoorArea : MonoBehaviour
             }
         }
 
-        if (enemies != oldEnemies) {
+        if (enemies.Count != oldEnemies.Count && !start) {
             door.onEnemiesChanged.Invoke();
-            Debug.Log("enemies changed");
         }
     }
 
