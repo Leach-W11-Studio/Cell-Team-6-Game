@@ -46,6 +46,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -143,6 +144,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -295,6 +297,8 @@ GameObject:
   - component: {fileID: 6067103280202254456}
   - component: {fileID: 6067103280202254457}
   - component: {fileID: 6714333438418076444}
+  - component: {fileID: 3538050440442800537}
+  - component: {fileID: 7759677286553757161}
   m_Layer: 12
   m_Name: TurretEnemy
   m_TagString: Enemy
@@ -355,9 +359,11 @@ MonoBehaviour:
   decelerationRate: 2
   lookAheadDistance: 1
   avoidRadius: 0.2
-  centerOffset: {x: 0, y: 0}
+  avoidanceConsiderStuckedTime: 3
+  avoidanceConsiderReachedDistance: 1
   rotateTransform: 0
   rotateSpeed: 350
+  centerOffset: {x: 0, y: 0}
   repath: 1
   restrict: 0
   closerPointOnInvalid: 1
@@ -383,8 +389,6 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   isDead: 0
   isplayer: 0
 --- !u!114 &6714333438418076444
@@ -408,3 +412,29 @@ MonoBehaviour:
   activateRaidus: 0
   isAwake: 0
   spawnerScript: {fileID: 0}
+--- !u!114 &3538050440442800537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067103280552733421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3a2abc86a79474184bebcdd5406f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 0}
+  snapshots: []
+--- !u!114 &7759677286553757161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067103280552733421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef6a9569e99e284092aa65a7dbd897f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
