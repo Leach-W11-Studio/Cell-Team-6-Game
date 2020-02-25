@@ -98,4 +98,25 @@ public abstract class FSMState
         }
         Debug.LogError(trans.ToString() + " transition is not present within the transitionable states of " + stateID.ToString());
     }
+
+    /// <summary>
+    /// Modifies a transition of the state to transition to a different state
+    /// </summary>
+    /// <param name="transitionState">New state that is to be transitioned to when calling this transition</param>
+    /// <param name="trans">previously added transition that is to be modified</param>
+    /// <returns></returns>
+    public bool EditTransitionState(FSMStateID transitionState, FSMTransitions trans)
+    {
+        if (transitions.ContainsKey(trans))
+        {
+            transitions[trans] = transitionState;
+            Debug.Log("Transition " + trans.ToString() + " of state " + stateID.ToString() + " has been modified to transition to stateID " + transitionState.ToString());
+            return true;
+        }
+        else
+        {
+            Debug.LogError("Current state " + stateID.ToString() + " does not contain transition " + trans.ToString() + ". Did you mean to use AddTransitionState()");
+            return false;
+        }
+    }
 }

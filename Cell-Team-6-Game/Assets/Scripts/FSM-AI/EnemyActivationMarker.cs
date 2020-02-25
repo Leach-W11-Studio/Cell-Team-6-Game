@@ -33,8 +33,9 @@ public class EnemyActivationMarker : MonoBehaviour
         {
             if(character.gameObject.CompareTag("Enemy"))
             {
-                character.gameObject.GetComponent<FSM>().Active = true;
-                character.gameObject.GetComponent<FSM>().enemyAnim.SetTrigger("IsActive");
+                FSM enemyObject = character.gameObject.GetComponent<FSM>();
+                enemyObject.Active = true;
+                enemyObject.enemyAnim.SetTrigger("IsActive");
             }
         }
     }
