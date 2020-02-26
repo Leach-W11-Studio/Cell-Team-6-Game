@@ -16,6 +16,14 @@ public enum FSMStateID
     Passive,
     Patrol,
     Retreat,
+
+    //Boss States
+    BossIdle,
+    Lash,
+    GrappleLash,
+    Projectile,
+    Tracking,
+    WallSpawn,
 }
 
 public enum FSMTransitions
@@ -27,6 +35,12 @@ public enum FSMTransitions
     Awoken,
     PlayerTooClose,
     CloserDistanceReached,
+
+    //BossTransitions
+    InLashRange,
+    InProjectileRange,
+    WallTime,
+    OutOfRange,
 }
 
 public abstract class FSM : MonoBehaviour
@@ -41,7 +55,8 @@ public abstract class FSM : MonoBehaviour
     protected abstract void FSMFixedUpdate();
 
     public PolyNavAgent navAgent;
-
+    public Animator enemyAnim;
+    
     /// <summary>
     /// Whether or not the enemy is active and executing their relevent functions
     /// </summary>
@@ -134,6 +149,7 @@ public abstract class FSM : MonoBehaviour
         Active = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = gameObject.GetComponent<PolyNavAgent>();
+        enemyAnim = gameObject.GetComponent<Animator>();
         Initalize();
         currentState.OnStateEnter(playerTransform, gameObject);
     }
