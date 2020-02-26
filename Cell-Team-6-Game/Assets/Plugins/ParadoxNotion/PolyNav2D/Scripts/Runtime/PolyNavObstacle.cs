@@ -49,6 +49,14 @@ namespace PolyNav
             get { return _collider != null ? _collider : _collider = GetComponent<Collider2D>(); }
         }
 
+        public Mesh shapeMesh;
+
+        private void Start() {
+            if(myCollider is EdgeCollider2D) {
+                shapeMesh = myCollider.CreateMesh(true, true);
+            }
+        }
+
         ///The number of paths defining the obstacle
         public int GetPathCount() {
             if ( myCollider is BoxCollider2D ) { return 1; }
