@@ -54,7 +54,7 @@ namespace PolyNav
             if ( myCollider is BoxCollider2D ) { return 1; }
             if ( myCollider is PolygonCollider2D ) { return ( myCollider as PolygonCollider2D ).pathCount; }
             if ( myCollider is CompositeCollider2D ) { return ( myCollider as CompositeCollider2D ).pathCount; }
-            if ( myCollider is EdgeCollider2D ) { return (spline.isOpenEnded) ? 1 : 2; }
+            if ( myCollider is EdgeCollider2D ) { return 1; }
             return 0;
         }
 
@@ -82,7 +82,7 @@ namespace PolyNav
             }
 
             if (myCollider is EdgeCollider2D) {
-                return GetEdgePath()[index];
+                return GetEdgePath();
             }
 
             if ( invertPolygon && points != null ) { System.Array.Reverse(points); }
@@ -180,12 +180,12 @@ namespace PolyNav
             return normals;
         }
 
-        private Vector2[][] GetEdgePath () {
+        private Vector2[] GetEdgePath () {
             List<Vector2> normals = GetEdgeNormals();
             Vector2[] colliderPoints = ((EdgeCollider2D) myCollider).points;
             Vector2[] edgePoints = new Vector2[colliderPoints.Length];
             Vector2[] innerPoints = new Vector2[colliderPoints.Length];
-            Vector2[][] path;
+            Vector2[] path;
             bool open = spline.isOpenEnded;
 
             int index = 0;
@@ -195,19 +195,11 @@ namespace PolyNav
                 index++;
             }
 
-            // System.Array.Reverse(innerPoints);
+            System.Array.Reverse(innerPoints);
 
-            if (open) {
-                path = new Vector2[1][];
-                path[0] = new Vector2[edgePoints.Length * 2];
-                edgePoints.CopyTo(path[0], 0);
-                innerPoints.CopyTo(path[0], edgePoints.Length);
-            }
-            else {
-                path = new Vector2[2][];
-                path[0] = edgePoints;
-                path[1] = innerPoints;
-            }
+            path = new Vector2[edgePoints.Length * 2];
+            edgePoints.CopyTo(path, 0);
+            innerPoints.CopyTo(path, edgePoints.Length);
 
             System.Array.Reverse(path);
 
