@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 2538470988449376801}
   - component: {fileID: 950798808}
   - component: {fileID: 3015052967004357314}
+  - component: {fileID: 7544034619591615167}
   m_Layer: 12
   m_Name: ChaseEnemy
   m_TagString: Enemy
@@ -105,9 +106,11 @@ MonoBehaviour:
   decelerationRate: 2
   lookAheadDistance: 1
   avoidRadius: 0.5
-  centerOffset: {x: 0, y: 0}
+  avoidanceConsiderStuckedTime: 3
+  avoidanceConsiderReachedDistance: 1
   rotateTransform: 0
   rotateSpeed: 350
+  centerOffset: {x: 0, y: 0}
   repath: 1
   restrict: 0
   closerPointOnInvalid: 1
@@ -145,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Healthtext: {fileID: 0}
   maxHealth: 10
   currentHealth: 0
   sheild: 0
@@ -155,8 +157,6 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   isDead: 0
   isplayer: 0
 --- !u!61 &2538470988449376801
@@ -224,6 +224,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &7544034619591615167
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816301911787820825}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2e4aa3ec0adb64e519d5356c4c61006b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1816301911787857857
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +319,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

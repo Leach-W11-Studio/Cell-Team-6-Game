@@ -30,6 +30,10 @@ public abstract class Ability : MonoBehaviour
             CastAction();
             StartCoroutine(resetCooldown());
         }
+        else
+        {
+            //Debug.Log("Cast attempted on " + abilityName + " but failed");
+        }
     }
     protected abstract void CastAction();
     public abstract void OnPickup();
