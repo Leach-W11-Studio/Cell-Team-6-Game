@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.U2D;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,6 +29,20 @@ namespace PolyNav
         public float extraOffset;
         [Tooltip("Inverts the polygon (done automatically if collider already exists due to a sprite).")]
         public bool invertPolygon = false;
+        public float edgeWidth = 1;
+
+        public SpriteShapeController spriteShapeController;
+        private Spline spline {
+            get { 
+                    if (spriteShapeController) {
+                        return spriteShapeController.spline;
+                    }
+                    else {
+                        spriteShapeController = GetComponent<SpriteShapeController>();
+                        return spriteShapeController.spline;
+                    }
+                }
+        }
 
         private Collider2D _collider;
         private Collider2D myCollider {
@@ -75,13 +90,7 @@ namespace PolyNav
             }
 
             if (myCollider is EdgeCollider2D) {
-                var edge = (EdgeCollider2D)myCollider;
-                points = new Vector2[4];
-                var point = edge.points[index];
-                points[0] = new Vector2(point.x - edge.edgeRadius, point.y);
-                points[1] = new Vector2(point.x, point.y - edge.edgeRadius);
-                points[2] = new Vector2(point.x + edge.edgeRadius, point.y);
-                points[3] = new Vector2(point.x, point.y + edge.edgeRadius);
+                return GetEdgePath();
             }
 
             if ( invertPolygon && points != null ) { System.Array.Reverse(points); }
@@ -131,25 +140,93 @@ namespace PolyNav
 
         void Awake() {
             transform.hasChanged = false;
-        }
 
-        void OnDrawGizmos() {
-            if (shapeMesh) {
-                Gizmos.color = Color.blue;
-
-                int index = 0;
-                // Debug.LogWarning(shapeMesh.vertices.Length, gameObject);
-                foreach(Vector3 vert in shapeMesh.vertices) {
-                    if (index < shapeMesh.vertices.Length -1){
-                        if (vert == shapeMesh.vertices[index+1]) {
-                            Debug.LogWarning("Verts are the same", gameObject);
-                        }
-                    }
-                    Gizmos.DrawWireSphere(vert, 0.1f);
-                    // Gizmos.DrawRay(vert, shapeMesh.normals[index]);
-                    index++;
-                }
+            if (myCollider is EdgeCollider2D) {
+                spriteShapeController = GetComponent<SpriteShapeController>();
             }
         }
+
+        List<Vector2> GetEdgeNormals () {
+            List<Vector2> normals = new List<Vector2>();
+            if (!(myCollider is EdgeCollider2D)) { return normals;}
+            EdgeCollider2D edgeCollider = (EdgeCollider2D) myCollider;
+
+            bool open = spline.isOpenEnded;
+
+            int index = 0;
+            foreach (var point in edgeCollider.points) {
+                var normal = new Vector2();
+                if ( index == 0 ) {
+                    if (open) {
+                        normal = Vector2.Perpendicular(edgeCollider.points[index + 1] - point).normalized;
+                    }
+                    else {
+                        var perp1 = Vector2.Perpendicular(point - edgeCollider.points[edgeCollider.pointCount - 1]).normalized;
+                        var perp2 = Vector2.Perpendicular(edgeCollider.points[index + 1] - point).normalized;
+                        normal = Vector2.Lerp(perp1, perp2, 0.5f);
+                    }
+                }
+                else if ( index == edgeCollider.pointCount-1 ) {
+                    if (open) {
+                        normal = Vector2.Perpendicular(point - edgeCollider.points[index - 1]).normalized;
+                    }
+                    else {
+                        var perp1 = Vector2.Perpendicular(point - edgeCollider.points[index - 1]).normalized;
+                        var perp2 = Vector2.Perpendicular(edgeCollider.points[0] - point).normalized;
+                        normal = Vector2.Lerp(perp1, perp2, 0.5f);
+                    }
+                }
+                else {
+                    normal = Vector2.Perpendicular(edgeCollider.points[index + 1] - edgeCollider.points[index - 1]).normalized;
+                }
+
+                normals.Add(normal);
+                index++;
+                Debug.DrawRay(transform.TransformPoint(point), normal, Color.green);
+            }
+
+            return normals;
+        }
+
+        private Vector2[] GetEdgePath () {
+            List<Vector2> normals = GetEdgeNormals();
+            Vector2[] colliderPoints = ((EdgeCollider2D) myCollider).points;
+            Vector2[] edgePoints = new Vector2[colliderPoints.Length];
+            Vector2[] innerPoints = new Vector2[colliderPoints.Length];
+            Vector2[] path;
+            bool open = spline.isOpenEnded;
+
+            int index = 0;
+            foreach (Vector2 colliderPoint in colliderPoints) {
+                edgePoints[index] = colliderPoint;
+                innerPoints[index] = colliderPoint - (normals[index] * edgeWidth);
+                index++;
+            }
+
+            System.Array.Reverse(innerPoints);
+
+            path = new Vector2[edgePoints.Length * 2];
+            edgePoints.CopyTo(path, 0);
+            innerPoints.CopyTo(path, edgePoints.Length);
+
+            System.Array.Reverse(path);
+
+            return path;
+        }
+
+        // void OnDrawGizmos() {
+        //     if (myCollider is EdgeCollider2D) {
+        //         if (!spriteShapeController) {Awake();}
+        //         Gizmos.color = Color.white;
+        //         List<Vector2> normals = GetEdgeNormals();
+        //         int index = 0;
+        //         foreach (var point in ((EdgeCollider2D) myCollider).points) {
+        //             Gizmos.DrawWireSphere(transform.TransformPoint(point), 0.2f);
+        //             Vector2 otherPoint = (Vector2) transform.TransformPoint(point - normals[index]);
+        //             Gizmos.DrawWireSphere(otherPoint, 0.2f);
+        //             index++;
+        //         }
+        //     }
+        // }
     }
 }
