@@ -41,13 +41,13 @@ public class RetreatState : FSMState
         if (curHealthScript.currentHealth <= 0)
         {
             agent.Stop();
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
         else if (Vector2.Distance(self.transform.position, player.position) >= retreatEndDistance)
         {
             agent.slowingDistance = normalSlowingDistance;
             agent.Stop();
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.CloserDistanceReached);
+            parentFSM.SetTransition(FSMTransitions.CloserDistanceReached);
         }
     }
 
@@ -55,10 +55,11 @@ public class RetreatState : FSMState
     {
         curHealthScript = self.GetComponent<BaseEnemy>().healthScript;
         rotSpeed = self.GetComponent<BaseEnemy>().rotationSpeed;
+        self.GetComponent<BaseEnemy>().spawnerScript.shoot = true;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-
+        self.GetComponent<BaseEnemy>().spawnerScript.shoot = false;
     }
 }

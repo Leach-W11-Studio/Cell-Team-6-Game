@@ -9,6 +9,10 @@ public abstract class FSMState
     public FSMStateID StateID { get { return stateID; } }
     //protected List<FSMStateID> transitionableStates = new List<FSMStateID>(); Depricated due to code update
     protected Dictionary<FSMTransitions, FSMStateID> transitions = new Dictionary<FSMTransitions, FSMStateID>();
+    /// <summary>
+    /// Parent fsm of this state. Used for reference reasons.
+    /// </summary>
+    protected FSM parentFSM = null;
 
     //[Reserved space for navmesh integration]
 
@@ -39,6 +43,16 @@ public abstract class FSMState
     /// <param name="player">The transform assigned to the player object</param>
     /// <param name="self">The GameObject of the object this perticular state is assigned to</param>
     public abstract void OnStateExit(Transform player, GameObject self);
+
+    public void SetParentFSM(FSM pFSM)
+    {
+        if(parentFSM != null)
+        {
+            Debug.LogError("Parent FSM is already set. Modifying parent fms is not supported.");
+            return;
+        }
+        parentFSM = pFSM;
+    }
 
     /// <summary>
     /// Checks if transition is avalable for use

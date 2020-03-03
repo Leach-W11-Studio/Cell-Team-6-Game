@@ -5,7 +5,8 @@ using UnityEngine;
 public class PassiveState : FSMState
 {
     private float activateRaidus;
-    private HealthScript curHealthScript;
+    //private HealthScript curHealthScript; - Depricated
+    private BaseEnemy parentEnemyReference;
 
     public PassiveState(float callRaidus)
     {
@@ -20,9 +21,9 @@ public class PassiveState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (curHealthScript.currentHealth != curHealthScript.maxHealth)
+        if (parentEnemyReference.healthScript.currentHealth != parentEnemyReference.healthScript.maxHealth)
         {
-            self.GetComponent<BaseEnemy>().isAwake = true;
+            parentEnemyReference.isAwake = true;
 
             LayerMask charMask = LayerMask.GetMask("Character");
             if (activateRaidus > 0)
@@ -37,17 +38,18 @@ public class PassiveState : FSMState
                 }
             }
 
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.Awoken);
+            parentFSM.SetTransition(FSMTransitions.Awoken);
         }
-        else if (self.GetComponent<BaseEnemy>().isAwake)
+        else if (parentEnemyReference.isAwake)
         {
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.Awoken);
+            parentFSM.SetTransition(FSMTransitions.Awoken);
         }
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        curHealthScript = self.GetComponent<BaseEnemy>().healthScript;
+        //curHealthScript = self.GetComponent<BaseEnemy>().healthScript; - Depricated
+        parentEnemyReference = self.GetComponent<BaseEnemy>();
     }
 
     public override void OnStateExit(Transform player, GameObject self)
