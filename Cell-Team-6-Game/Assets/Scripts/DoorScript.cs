@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    private Animator DoorAnim;
+    public Animator DoorAnim;
     
-    private void Start()
+    protected virtual void Start()
     {
         DoorAnim = gameObject.GetComponent<Animator>();
     }
+
+    public virtual void Open() {
+        DoorAnim.SetBool("isopen", true);
+    }
+
+    public virtual void Close() {
+        DoorAnim.SetBool("isopen", false);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
-            DoorAnim.SetBool("isopen", true);
+            Open();
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-            DoorAnim.SetBool("isopen", false);
+            Close();
     }
 }

@@ -55,7 +55,8 @@ public abstract class FSM : MonoBehaviour
     protected abstract void FSMFixedUpdate();
 
     public PolyNavAgent navAgent;
-
+    public Animator enemyAnim;
+    
     /// <summary>
     /// Whether or not the enemy is active and executing their relevent functions
     /// </summary>
@@ -148,6 +149,7 @@ public abstract class FSM : MonoBehaviour
         Active = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = gameObject.GetComponent<PolyNavAgent>();
+        enemyAnim = gameObject.GetComponent<Animator>();
         Initalize();
         currentState.OnStateEnter(playerTransform, gameObject);
     }
