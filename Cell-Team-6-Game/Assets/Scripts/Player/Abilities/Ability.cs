@@ -14,7 +14,10 @@ public abstract class Ability : MonoBehaviour
     public bool castable;
 
     public Sprite abilityIcon;
+    public Sprite abilityNull;
 
+    //public sound variable
+       
     private void Start()
     {
         castable = true;
@@ -29,6 +32,7 @@ public abstract class Ability : MonoBehaviour
             castable = false;
             CastAction();
             StartCoroutine(resetCooldown());
+            //@BP insert code here
         }
         else
         {

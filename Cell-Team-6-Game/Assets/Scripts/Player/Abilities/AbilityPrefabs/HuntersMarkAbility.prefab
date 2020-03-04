@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6830135063275774334}
   - component: {fileID: 5566067888854727012}
+  - component: {fileID: 8021881566387631504}
   m_Layer: 0
   m_Name: HuntersMarkAbility
   m_TagString: Untagged
@@ -45,7 +46,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityCooldown: 15
   castable: 0
-  abilityIcon: {fileID: 21300000, guid: 90cb867892b9e5d4f8722bf64b7f0847, type: 3}
+  abilityIcon: {fileID: 21300000, guid: 5b66f7fc0b5b5fc4d94f3498f3a3de05, type: 3}
+  abilityNull: {fileID: 21300000, guid: e68c7079593d96b45b7f430ed9a29ac1, type: 3}
   maximumMarkDistance: 20
   itemDropper: {fileID: 3874710228885814230, guid: c9eab950de4431e45b21bc90e1884403,
     type: 3}
+--- !u!114 &8021881566387631504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7797129529865964798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3a2abc86a79474184bebcdd5406f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 0}
+  snapshots: []
