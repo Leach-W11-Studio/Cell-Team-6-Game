@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1070584414386011193}
   - component: {fileID: 1070584414386011206}
   - component: {fileID: 1070584414386011207}
+  - component: {fileID: 3009704850421567967}
   m_Layer: 0
   m_Name: WaterPop Pickup
   m_TagString: Untagged
@@ -61,6 +62,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -112,3 +114,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &3009704850421567967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070584414386011204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f5b080dd5a91e458711ea08f662a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

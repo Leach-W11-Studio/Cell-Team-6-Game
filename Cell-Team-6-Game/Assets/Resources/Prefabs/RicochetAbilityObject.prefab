@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9160560261032176629}
   - component: {fileID: 9160560261032176628}
   - component: {fileID: 9160560261032176635}
+  - component: {fileID: 4532973382567040992}
   m_Layer: 0
   m_Name: RicochetAbilityObject
   m_TagString: Untagged
@@ -47,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -112,3 +114,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityObject: {fileID: 884546724813912708, guid: 4f03de7b0e025f84fb8f4bb820bb35e1,
     type: 3}
+--- !u!114 &4532973382567040992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160560261032176634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f5b080dd5a91e458711ea08f662a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

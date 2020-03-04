@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1430131554273104550}
   - component: {fileID: 1430131554273104551}
   - component: {fileID: 1430131554273104544}
+  - component: {fileID: -1171410578008734928}
   m_Layer: 0
   m_Name: RiotShieldPickup
   m_TagString: Untagged
@@ -47,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -265,3 +267,15 @@ PolygonCollider2D:
       - {x: 0.05672069, y: -0.3260248}
       - {x: 0.06911344, y: -0.3250715}
       - {x: 0.08817922, y: -0.32316494}
+--- !u!114 &-1171410578008734928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430131554273104545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f5b080dd5a91e458711ea08f662a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
