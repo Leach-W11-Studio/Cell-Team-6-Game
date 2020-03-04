@@ -45,11 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pools:
   - tag: Bullet
-    prefab: {fileID: 6576466730651800169, guid: 83d4a893221056744a7e5383ab569b4a,
+    prefab: {fileID: 3215105696302279398, guid: 83d4a893221056744a7e5383ab569b4a,
       type: 3}
     size: 100
   - tag: PlayerBullet
-    prefab: {fileID: 6044363271187527088, guid: a10e76e8133bb9646b1a96c168883145,
+    prefab: {fileID: 2610944719572602175, guid: a10e76e8133bb9646b1a96c168883145,
       type: 3}
     size: 200
   - tag: DoubleBullet
@@ -61,7 +61,7 @@ MonoBehaviour:
       type: 3}
     size: 3
   - tag: MegaBullet
-    prefab: {fileID: 1988737336566540124, guid: dd50b153b003e694e91825ae469c3c36,
+    prefab: {fileID: 3099422548653011693, guid: dd50b153b003e694e91825ae469c3c36,
       type: 3}
     size: 50
   - tag: RicochetBullet
