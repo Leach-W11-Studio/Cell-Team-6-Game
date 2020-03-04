@@ -92,6 +92,7 @@ public abstract class FSM : MonoBehaviour
         {
             FSMStates.Add(state);
         }
+        state.SetParentFSM(this);
     }
 
     /// <summary>

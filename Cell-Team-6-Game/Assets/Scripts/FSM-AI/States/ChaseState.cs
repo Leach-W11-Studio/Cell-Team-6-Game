@@ -33,12 +33,12 @@ public class ChaseState : FSMState
         if (selfHealthScript.currentHealth <= 0)
         {
             agent.Stop();
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
         else if (Vector2.Distance(self.transform.position, player.position) > agroRange)
         {
             agent.Stop();
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);
+            parentFSM.SetTransition(FSMTransitions.PlayerOutOfRange);
         }
     }
 
