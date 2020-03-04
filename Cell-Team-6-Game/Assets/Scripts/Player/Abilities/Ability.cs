@@ -17,6 +17,7 @@ public abstract class Ability : MonoBehaviour
     public Sprite abilityNull;
 
     //public sound variable
+    // For note to mention to steve, scripts uses inheritence
        
     private void Start()
     {
