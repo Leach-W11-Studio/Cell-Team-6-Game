@@ -7,35 +7,46 @@ using UnityEngine.UI;
 public class AbilityElement : MonoBehaviour
 {
     private Sprite abilitySprite;
+    private Sprite abilityNull;
     private float abilityCooldown;
+    private float cooldownCounter;
     private Ability abilityObject;
     private bool currentState;
 
     public Color OnCooldownColor = Color.gray;
 
-    public void Build(Sprite sprite, float cooldown, Ability ability)
+    public void Build(Sprite sprite, Sprite nullSprite, float cooldown, Ability ability)
     {
         abilitySprite = sprite;
         abilityCooldown = cooldown;
         abilityObject = ability;
+        abilityNull = nullSprite;
 
         gameObject.GetComponent<Image>().sprite = abilitySprite;
-        currentState = true;
+        gameObject.transform.GetChild(0).GetComponent<Image>().sprite = abilityNull;
+        gameObject.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
     }
 
     private void Update()
     {
-        if(currentState != abilityObject.castable)
+        //gameObject.transform.GetChild(0).GetComponent<Image>().fillAmount -= 1 / cooldownCounter * Time.deltaTime;
+        if (abilityObject.castable == false)
         {
-            currentState = abilityObject.castable;
-            if(currentState)
+            if (gameObject.transform.GetChild(0).GetComponent<Image>().fillAmount <= 0)
             {
-                gameObject.GetComponent<Image>().color = Color.white;
+                gameObject.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
             }
             else
             {
-                gameObject.GetComponent<Image>().color = OnCooldownColor;
+                Debug.Log(cooldownCounter);
+                Debug.Log(gameObject.transform.GetChild(0).GetComponent<Image>().fillAmount);
+                cooldownCounter -= Time.deltaTime;
+                gameObject.transform.GetChild(0).GetComponent<Image>().fillAmount -= 1 / abilityCooldown * Time.deltaTime;
             }
+        }
+        else
+        {
+            gameObject.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
         }
     }
 }

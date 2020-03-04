@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7091185942397025468}
   - component: {fileID: 323022617290801610}
   m_Layer: 0
-  m_Name: RocochetAbility
+  m_Name: RicochetAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,5 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityCooldown: 6
   castable: 0
+  abilityIcon: {fileID: 21300000, guid: 3587c666fa7eea84dae89565ca5b0051, type: 3}
+  abilityNull: {fileID: 21300000, guid: 67a11ed3a1ebad442a363ad9f77dcdb4, type: 3}
   RicochetBulletName: RicochetBullet
   abilityDuration: 3

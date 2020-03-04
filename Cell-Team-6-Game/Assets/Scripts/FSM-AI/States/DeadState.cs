@@ -21,7 +21,8 @@ public class DeadState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-
+        //Sets layer to uninteractable instantly upon death
+        self.layer = 13;
     }
 
     public override void OnStateExit(Transform player, GameObject self)

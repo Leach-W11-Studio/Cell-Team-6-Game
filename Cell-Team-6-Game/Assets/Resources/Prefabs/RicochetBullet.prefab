@@ -148,14 +148,14 @@ TrailRenderer:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.44864458
+        time: 0.47968096
         value: 0
-        inSlope: 1.5547676
-        outSlope: 1.5547676
+        inSlope: 2.2953174
+        outSlope: 2.2953174
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 1
       - serializedVersion: 3
         time: 0.57276464
         value: 0.2829457
@@ -177,12 +177,12 @@ TrailRenderer:
       - serializedVersion: 3
         time: 0.80221295
         value: 0
-        inSlope: 0.08114354
-        outSlope: 0.08114354
+        inSlope: 3.3260062
+        outSlope: 3.3260062
         tangentMode: 0
         weightedMode: 0
         inWeight: 1
-        outWeight: 0.33333334
+        outWeight: 1
       - serializedVersion: 3
         time: 0.9108277
         value: 0.11852009
@@ -278,7 +278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6576466730651800169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.42, y: -1.46, z: 0}
+  m_LocalPosition: {x: 1.95, y: -2.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1906854646130046781}
@@ -336,6 +336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentDamage: 10
   power: 0.04
+  spin: 1
+  maxSpinSpeed: 200
   velocity: {x: 0, y: 0, z: 0}
   layers:
     serializedVersion: 2
