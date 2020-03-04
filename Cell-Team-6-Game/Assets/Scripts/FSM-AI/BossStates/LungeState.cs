@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LashState : FSMState
+public class LungeState : FSMState
 {
     private float outOfRange;
     private float attackSpeed;
 
     public override void Act(Transform player, GameObject self)
     {
-        //If within a certain distance use the lash attack
-            //Else use lash attack
         throw new System.NotImplementedException();
     }
 
@@ -20,18 +18,21 @@ public class LashState : FSMState
         {
             self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
-        if (Vector3.Distance(self.transform.position, player.position) > self.GetComponent<BossEnemy>().lashDistance)
+
+        if (Vector3.Distance(self.transform.position, player.position) > self.GetComponent<BossEnemy>().projectileDistance)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);  
+            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);
+        }
+
+        if (Vector3.Distance(self.transform.position, player.position) < self.GetComponent<BossEnemy>().lashDistance)
+        {
+            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerTooClose);
         }
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        if(self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
-        {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.Phase2LashRange);
-        }
+        throw new System.NotImplementedException();
     }
 
     public override void OnStateExit(Transform player, GameObject self)
