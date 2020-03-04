@@ -26,6 +26,7 @@ public class BossIdleState : FSMState
         }
 
         elapsed = 0;
+        //Lots of different transitions will need to be implemented here
     }
 
     public override void OnStateExit(Transform player, GameObject self)

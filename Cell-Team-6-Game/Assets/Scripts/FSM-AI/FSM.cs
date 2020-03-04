@@ -20,6 +20,7 @@ public enum FSMStateID
     //Boss States
     BossIdle,
     Lash,
+    Lunge,
     GrappleLash,
     Projectile,
     Tracking,
@@ -38,12 +39,14 @@ public enum FSMTransitions
 
     //BossTransitions
     InLashRange,
+    InLungeRange,
+    Phase2LashRange,
     InProjectileRange,
-    VerticalLash,
+    VerticalLash, //Adam's Phases
     HorizontalLash,
     Shoot,
+    Phase2ProjectileRange, //Paytons Phase2Projectile Phase
     WallTime,
-    OutOfRange,
 }
 
 public abstract class FSM : MonoBehaviour
