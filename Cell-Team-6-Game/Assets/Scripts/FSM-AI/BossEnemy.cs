@@ -15,10 +15,13 @@ public class BossEnemy : FSM
     public HealthScript healthScript;
     public float shootTime;
     public float shootInterval;
+
+    public List<Animator> tentacles;
     protected override void Initalize()
     {
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
+        tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
         BuildFSM();
     }
     protected virtual void BuildFSM()

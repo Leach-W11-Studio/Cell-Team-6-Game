@@ -21,6 +21,10 @@ public class BossIdleState : FSMState
         health = self.GetComponent<HealthScript>();
         stateMachine = self.GetComponent<BossEnemy>();
 
+        foreach(Animator tentacle in stateMachine.tentacles) {
+            tentacle.Play("Idle", 0, Random.Range(0, 1));
+        }
+
         elapsed = 0;
     }
 
