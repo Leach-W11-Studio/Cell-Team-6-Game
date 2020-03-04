@@ -6,22 +6,35 @@ public class ProjectileAttackState : FSMState
 {
     private float attackSpeed;
     private float projectileVelocity;
+    private float toocloseRange;
+
     public override void Act(Transform player, GameObject self)
     {
         throw new System.NotImplementedException();
     }
 
+    public override void Reason(Transform player, GameObject self)
+    {
+        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
+        {
+            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+        }
+        if (Vector3.Distance(self.transform.position, player.position) < self.GetComponent<BossEnemy>().projectileDistance)
+        {
+            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerTooClose);
+        }
+
+    }
+
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
+        {
+            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.Phase2ProjectileRange);
+        }
     }
 
     public override void OnStateExit(Transform player, GameObject self)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Reason(Transform player, GameObject self)
     {
         throw new System.NotImplementedException();
     }

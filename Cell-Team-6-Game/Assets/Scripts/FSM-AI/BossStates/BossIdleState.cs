@@ -11,7 +11,7 @@ public class BossIdleState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //Lots of different transitions will need to be implemented here
     }
 
     public override void OnStateExit(Transform player, GameObject self)
