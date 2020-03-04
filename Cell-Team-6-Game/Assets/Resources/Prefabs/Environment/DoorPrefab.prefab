@@ -45,6 +45,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -149,6 +150,7 @@ GameObject:
   - component: {fileID: 903214975984349273}
   - component: {fileID: 903214975984349274}
   - component: {fileID: 903214975984349275}
+  - component: {fileID: 542141405024828652}
   m_Layer: 9
   m_Name: DoorPrefab
   m_TagString: Untagged
@@ -185,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b631f0852e1423b971f8c993fe7f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DoorAnim: {fileID: 0}
 --- !u!95 &903214975984349274
 Animator:
   serializedVersion: 3
@@ -230,6 +233,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.5095322, y: 1.5576612}
   m_EdgeRadius: 0
+--- !u!114 &542141405024828652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903214975984349277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 1
+  extraOffset: 0
+  invertPolygon: 0
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1 &903214976770172828
 GameObject:
   m_ObjectHideFlags: 0

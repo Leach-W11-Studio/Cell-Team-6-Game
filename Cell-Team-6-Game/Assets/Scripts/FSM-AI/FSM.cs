@@ -39,6 +39,9 @@ public enum FSMTransitions
     //BossTransitions
     InLashRange,
     InProjectileRange,
+    VerticalLash,
+    HorizontalLash,
+    Shoot,
     WallTime,
     OutOfRange,
 }

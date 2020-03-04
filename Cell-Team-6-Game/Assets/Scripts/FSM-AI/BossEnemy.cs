@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class BossEnemy : FSM
 {
+    [System.Serializable]
+    public class LashRange {
+        public Vector2 position;
+        public float radius;
+    }
+
+    [SerializeField]
+    public LashRange lashRange;
     public HealthScript healthScript;
+    public float shootTime;
+    public float shootInterval;
     protected override void Initalize()
     {
         //currentHealth = initalHealth;
@@ -38,6 +48,13 @@ public class BossEnemy : FSM
         AddFSMState(dead);
     }
 
+    public bool InLashRange (Transform other) {
+        if (Vector2.Distance(other.position, transform.TransformPoint(lashRange.position)) < lashRange.radius) {
+            return true;
+        }
+        else {return false;}
+    }
+
     protected override void FSMUpdate()
     {
         //throw new System.NotImplementedException();
@@ -46,5 +63,10 @@ public class BossEnemy : FSM
     protected override void FSMFixedUpdate()
     {
         //throw new System.NotImplementedException();
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.TransformPoint(lashRange.position), lashRange.radius);
     }
 }

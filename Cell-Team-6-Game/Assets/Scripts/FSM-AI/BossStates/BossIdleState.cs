@@ -2,16 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof (HealthScript))]
 public class BossIdleState : FSMState
 {
+    private HealthScript health;
+    private BossEnemy stateMachine;
+    private float elapsed;
+
+    Vector2 lastPlayerPos;
+
     public override void Act(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        elapsed += Time.deltaTime;
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        health = self.GetComponent<HealthScript>();
+        stateMachine = self.GetComponent<BossEnemy>();
+
+        elapsed = 0;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
@@ -21,6 +31,19 @@ public class BossIdleState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        if (health.isDead || health.currentHealth <= 0) {
+            stateMachine.SetTransition(FSMTransitions.OutOfHealth);
+        }
+
+        if (stateMachine.InLashRange(player)) {
+            stateMachine.SetTransition(FSMTransitions.InLashRange);
+        }
+        else {
+            if (elapsed < stateMachine.shootInterval) {
+                stateMachine.SetTransition(FSMTransitions.Shoot);
+            }
+        }
+
+        lastPlayerPos = player.position;
     }
 }
