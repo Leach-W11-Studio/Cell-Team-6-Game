@@ -36,6 +36,7 @@ public class ShootState : FSMState
     {
         if (selfHealthScript.currentHealth <= 0)
         {
+            gun.shoot = false;
             self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
         else if (Vector2.Distance(self.transform.position, player.position) > self.GetComponent<BaseEnemy>().agroDistance)
