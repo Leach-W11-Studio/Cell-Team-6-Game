@@ -11,6 +11,11 @@ public class BossIdleState : FSMState
 
     Vector2 lastPlayerPos;
 
+    public BossIdleState()
+    {
+        stateID = FSMStateID.BossIdle;
+    }
+
     public override void Act(Transform player, GameObject self)
     {
         elapsed += Time.deltaTime;

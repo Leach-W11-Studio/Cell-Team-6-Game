@@ -25,6 +25,8 @@ public enum FSMStateID
     Projectile,
     Tracking,
     WallSpawn,
+    BossDead,
+    LashReady,
 }
 
 public enum FSMTransitions
@@ -37,7 +39,7 @@ public enum FSMTransitions
     PlayerTooClose,
     CloserDistanceReached,
 
-    //BossTransitions
+    //BossTransitions - To remove later
     InLashRange,
     InLungeRange,
     Phase2LashRange,
@@ -47,6 +49,14 @@ public enum FSMTransitions
     Shoot,
     Phase2ProjectileRange, //Paytons Phase2Projectile Phase
     WallTime,
+
+    //Updated Boss Transitions
+    InMeleeRange,
+    InRad1,
+    InRad2,
+    GreaterThanRad2,
+    OORad2AndChance, //Out of Rad 2, and random chance to switch to shoot proc'd
+    HealthLessThanThreshold,
 }
 
 public abstract class FSM : MonoBehaviour

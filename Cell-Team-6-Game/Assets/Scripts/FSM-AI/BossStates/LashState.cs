@@ -7,6 +7,11 @@ public class LashState : FSMState
     private float outOfRange;
     private float attackSpeed;
 
+    public LashState()
+    {
+        stateID = FSMStateID.Lash;
+    }
+
     public override void Act(Transform player, GameObject self)
     {
         //If within a certain distance use the lash attack

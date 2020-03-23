@@ -7,6 +7,11 @@ public class LungeState : FSMState
     private float outOfRange;
     private float attackSpeed;
 
+    public LungeState()
+    {
+        stateID = FSMStateID.Lunge;
+    }
+
     public override void Act(Transform player, GameObject self)
     {
         throw new System.NotImplementedException();

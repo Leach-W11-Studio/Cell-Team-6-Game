@@ -12,6 +12,11 @@ public class ProjectileAttackState : FSMState
     private BossEnemy stateMachine;
     private float toocloseRange;
 
+    public ProjectileAttackState()
+    {
+        stateID = FSMStateID.Projectile;
+    }
+
     public override void Act(Transform player, GameObject self)
     {
         elapsed += Time.deltaTime;
