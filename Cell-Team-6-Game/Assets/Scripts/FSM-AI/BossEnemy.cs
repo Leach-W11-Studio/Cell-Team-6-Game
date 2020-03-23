@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Radius
+{
+    Rad1,
+    Rad2,
+    Rad3,
+}
+
 public class BossEnemy : FSM
 {
     [System.Serializable]
-    public class LashRange {
+    public class RadRanges
+    {
         public Vector2 position;
-        public float radius;
+        public float rad1;
+        public float rad2;
     }
 
     [SerializeField]
-    public LashRange lashRange;
+    public RadRanges radRange;
     public HealthScript healthScript;
     public float shootTime;
     public float shootInterval;
@@ -96,11 +105,22 @@ public class BossEnemy : FSM
         AddFSMState(dead);
     }
 
-    public bool InLashRange (Transform other) {
-        if (Vector2.Distance(other.position, transform.TransformPoint(lashRange.position)) < lashRange.radius) {
-            return true;
+    public Radius RadRangeCheck(Transform other) //According to the C# documentation, this suposedly works.
+    {                                            //If anyone has any issues, Just mention and I'll switch it to if/elseif statements
+        float distance = Vector2.Distance(other.position, transform.TransformPoint(radRange.position));
+
+        switch (distance)
+        {
+            case float dist when (dist <= radRange.rad1):
+                return Radius.Rad1;
+            case float dist when (dist <= radRange.rad2):
+                return Radius.Rad2;
+            case float dist when (dist > radRange.rad2):
+                return Radius.Rad3;
+            default:
+                return Radius.Rad3;
+
         }
-        else {return false;}
     }
 
     protected override void FSMUpdate()
@@ -113,8 +133,10 @@ public class BossEnemy : FSM
         //throw new System.NotImplementedException();
     }
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.TransformPoint(lashRange.position), lashRange.radius);
+        Gizmos.DrawWireSphere(transform.TransformPoint(radRange.position), radRange.rad1);
+        Gizmos.DrawWireSphere(transform.TransformPoint(radRange.position), radRange.rad2);
     }
 }

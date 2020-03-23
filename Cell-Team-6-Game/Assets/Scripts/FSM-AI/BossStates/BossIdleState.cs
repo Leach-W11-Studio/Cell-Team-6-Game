@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof (HealthScript))]
+[RequireComponent(typeof(HealthScript))]
 public class BossIdleState : FSMState
 {
     private HealthScript health;
@@ -26,7 +26,8 @@ public class BossIdleState : FSMState
         health = self.GetComponent<HealthScript>();
         stateMachine = self.GetComponent<BossEnemy>();
 
-        foreach(Animator tentacle in stateMachine.tentacles) {
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
             tentacle.Play("Idle", 0, Random.Range(0, 1));
         }
 
@@ -41,19 +42,30 @@ public class BossIdleState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (health.isDead || health.currentHealth <= 0) {
+        if (health.isDead || health.currentHealth <= 0)
+        {
             stateMachine.SetTransition(FSMTransitions.OutOfHealth);
         }
 
-        if (stateMachine.InLashRange(player)) {
-            stateMachine.SetTransition(FSMTransitions.InLashRange);
+        else if (stateMachine.RadRangeCheck(player) == Radius.Rad1)
+        {
+            stateMachine.SetTransition(FSMTransitions.InRad1);
         }
-        else {
+        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2)
+        {
+            stateMachine.SetTransition(FSMTransitions.InRad2);
+        }
+        else if (stateMachine.RadRangeCheck(player) == Radius.Rad3)
+        {
+            stateMachine.SetTransition(FSMTransitions.GreaterThanRad2);
+        }
+
+        /* else { WHYYYYY
             if (elapsed < stateMachine.shootInterval) {
                 stateMachine.SetTransition(FSMTransitions.Shoot);
             }
-        }
+        } */
 
-        lastPlayerPos = player.position;
+        lastPlayerPos = player.position; //Is this referenced by anything?
     }
 }

@@ -9,6 +9,8 @@ public class LashReadyState : FSMState
         stateID = FSMStateID.LashReady;
     }
 
+    private BossEnemy stateMachine;
+
     public override void Act(Transform player, GameObject self)
     {
         //throw new System.NotImplementedException();
@@ -16,7 +18,7 @@ public class LashReadyState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        //throw new System.NotImplementedException();
+        stateMachine = self.GetComponent<BossEnemy>();
     }
 
     public override void OnStateExit(Transform player, GameObject self)
