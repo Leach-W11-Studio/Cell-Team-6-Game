@@ -37,7 +37,7 @@ public class BossEnemy : FSM
         Phase2Threshold = 200;
         BuildFSM();
     }
-    protected virtual void BuildFSM()
+    protected virtual void BuildFSM() //To Finish
     {
         BossIdleState bossIdle = new BossIdleState();
         bossIdle.AddTransitionState(FSMStateID.Lash, FSMTransitions.InLashRange);
@@ -105,6 +105,11 @@ public class BossEnemy : FSM
         AddFSMState(dead);
     }
 
+    /// <summary>
+    /// Returns the raidus range of the other object in relation to the current object.
+    /// </summary>
+    /// <param name="other">The other object for which range is to be measured from</param>
+    /// <returns></returns>
     public Radius RadRangeCheck(Transform other) //According to the C# documentation, this suposedly works.
     {                                            //If anyone has any issues, Just mention and I'll switch it to if/elseif statements
         float distance = Vector2.Distance(other.position, transform.TransformPoint(radRange.position));
