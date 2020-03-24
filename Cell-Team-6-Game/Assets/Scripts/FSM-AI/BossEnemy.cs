@@ -29,6 +29,7 @@ public class BossEnemy : FSM
     public float Phase2Threshold;
     public float lashDistance;
     public float projectileDistance;
+    public int shootChance = 10;
     protected override void Initalize()
     {
         //currentHealth = initalHealth;
@@ -39,17 +40,43 @@ public class BossEnemy : FSM
     }
     protected virtual void BuildFSM() //To Finish
     {
+        //Phase 1 Stuff
         BossIdleState bossIdle = new BossIdleState();
-        bossIdle.AddTransitionState(FSMStateID.Lash, FSMTransitions.InLashRange);
-        bossIdle.AddTransitionState(FSMStateID.GrappleLash, FSMTransitions.Phase2LashRange);
-        bossIdle.AddTransitionState(FSMStateID.Lunge, FSMTransitions.InLungeRange);
-        bossIdle.AddTransitionState(FSMStateID.Projectile, FSMTransitions.InProjectileRange);
-        bossIdle.AddTransitionState(FSMStateID.Tracking, FSMTransitions.Phase2ProjectileRange);
+        bossIdle.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        //Add transition for HealthLessThanThreshold here - Goes to phase 2
         //---------------------------------
-        bossIdle.AddTransitionState(FSMStateID.WallSpawn, FSMTransitions.WallTime);
-        bossIdle.AddTransitionState(FSMStateID.Dead, FSMTransitions.OutOfHealth);
+        bossIdle.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
+        bossIdle.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
 
-        GrappleLashState grappleLash = new GrappleLashState();
+        LashReadyState lashReady = new LashReadyState(shootChance);
+        lashReady.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        lashReady.AddTransitionState(FSMStateID.Lash, FSMTransitions.InRad1);
+        lashReady.AddTransitionState(FSMStateID.Projectile, FSMTransitions.OORad1AndChance);
+        lashReady.AddTransitionState(FSMStateID.Lunge, FSMTransitions.InRad2);
+
+        LashState lash = new LashState();
+        lash.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        lash.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
+
+        LungeState lunge = new LungeState();
+        lunge.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        lunge.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
+
+        ProjectileAttackState projectile = new ProjectileAttackState();
+        projectile.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        projectile.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
+
+        DeadState dead = new DeadState();
+
+        AddFSMState(bossIdle);
+        AddFSMState(lashReady);
+        AddFSMState(lash);
+        AddFSMState(lunge);
+        AddFSMState(projectile);
+        AddFSMState(dead);
+
+        #region Depricated Code
+        /* GrappleLashState grappleLash = new GrappleLashState();
         grappleLash.AddTransitionState(FSMStateID.Lunge, FSMTransitions.PlayerOutOfRange);
         //---------------------------------
         grappleLash.AddTransitionState(FSMStateID.WallSpawn, FSMTransitions.WallTime);
@@ -102,7 +129,8 @@ public class BossEnemy : FSM
         AddFSMState(projectileAttack);
         AddFSMState(trackRoundState);
         AddFSMState(wallSpawnState);
-        AddFSMState(dead);
+        AddFSMState(dead); */
+        #endregion
     }
 
     /// <summary>
