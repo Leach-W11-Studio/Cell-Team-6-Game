@@ -6,6 +6,7 @@ public class LungeState : FSMState
 {
     private float outOfRange;
     private float attackSpeed;
+    private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
     public LungeState()
     {
@@ -14,30 +15,27 @@ public class LungeState : FSMState
 
     public override void Act(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //Behavior for Lash Attack here. Note that this is only the Lash attack. Decisions happen elsewhere
     }
 
     public override void Reason(Transform player, GameObject self)
     {
+        //Dead Check
         if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
 
-        if (Vector3.Distance(self.transform.position, player.position) > self.GetComponent<BossEnemy>().projectileDistance)
+        //Completion Check
+        else if (behaviorComplete)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);
-        }
-
-        if (Vector3.Distance(self.transform.position, player.position) < self.GetComponent<BossEnemy>().lashDistance)
-        {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerTooClose);
+            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
         }
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        behaviorComplete = false;
     }
 
     public override void OnStateExit(Transform player, GameObject self)

@@ -55,8 +55,9 @@ public enum FSMTransitions
     InRad1,
     InRad2,
     GreaterThanRad2,
-    OORad2AndChance, //Out of Rad 2, and random chance to switch to shoot proc'd
+    OORad1AndChance, //Out of Rad 2, and random chance to switch to shoot proc'd
     HealthLessThanThreshold,
+    BehaviorComplete,
 }
 
 public abstract class FSM : MonoBehaviour

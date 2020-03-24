@@ -42,18 +42,20 @@ public class BossIdleState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
+        //Health Checks
         if (health.isDead || health.currentHealth <= 0)
         {
             stateMachine.SetTransition(FSMTransitions.OutOfHealth);
         }
-
-        else if (stateMachine.RadRangeCheck(player) == Radius.Rad1)
+        else if (health.currentHealth <= stateMachine.Phase2Threshold)
         {
-            stateMachine.SetTransition(FSMTransitions.InRad1);
+            stateMachine.SetTransition(FSMTransitions.HealthLessThanThreshold);
         }
+
+        //Range Checks
         else if (stateMachine.RadRangeCheck(player) == Radius.Rad2)
         {
-            stateMachine.SetTransition(FSMTransitions.InRad2);
+            stateMachine.SetTransition(FSMTransitions.InMeleeRange);
         }
         else if (stateMachine.RadRangeCheck(player) == Radius.Rad3)
         {

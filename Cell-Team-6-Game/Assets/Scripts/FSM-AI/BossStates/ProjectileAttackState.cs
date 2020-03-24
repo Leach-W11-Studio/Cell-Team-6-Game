@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ProjectileAttackState : FSMState
 {
+    //These three should be set in the constructor - Ben
     private float attackSpeed;
     private float projectileVelocity;
     private float elapsed;
     private HealthScript health;
 
     private BossEnemy stateMachine;
-    private float toocloseRange;
+    private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
     public ProjectileAttackState()
     {
@@ -24,37 +25,39 @@ public class ProjectileAttackState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        stateMachine = self.GetComponent<BossEnemy>();
-        health = self.GetComponent<HealthScript>();
-
         elapsed = 0f;
-        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
+        //Death Check
+        if (stateMachine.healthScript.currentHealth <= 0)
         {
             self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
-        if (Vector3.Distance(self.transform.position, player.position) < self.GetComponent<BossEnemy>().projectileDistance)
-        {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerTooClose);
-        }
 
+        //Completion Check
+        else if (behaviorComplete)
+        {
+            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+        }
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
+        /* if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
         {
             self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.Phase2ProjectileRange);
-        }
+        } Please don't do transitions on state enter. This is untested behavior. */
+        stateMachine = self.GetComponent<BossEnemy>();
+        health = self.GetComponent<HealthScript>();
+        behaviorComplete = false;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        if (health.currentHealth <= 0 || health.isDead) {
+        /* if (health.currentHealth <= 0 || health.isDead) {
             stateMachine.SetTransition(FSMTransitions.OutOfHealth);
         }
 
         if (elapsed < stateMachine.shootTime) {
             stateMachine.SetTransition(FSMTransitions.none);
-        }
+        } Same as above. Also never use FSMTransitions.none. That's a placeholder and will by design cause an error everytime it is used */
     }
 }
