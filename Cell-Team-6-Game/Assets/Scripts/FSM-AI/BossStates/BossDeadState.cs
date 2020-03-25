@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BossDeadState : FSMState
 {
+    public BossDeadState()
+    {
+        stateID = FSMStateID.BossDead;
+    }
+
     public override void Act(Transform player, GameObject self)
     {
     }
