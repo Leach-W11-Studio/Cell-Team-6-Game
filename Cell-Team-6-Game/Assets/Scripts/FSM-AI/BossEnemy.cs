@@ -86,11 +86,11 @@ public class BossEnemy : FSM
         DeadState dead = new DeadState();
 
 
+        AddFSMState(projectileAttack);
         AddFSMState(bossIdle);
         AddFSMState(lashState);
         AddFSMState(lungeState);
         AddFSMState(grappleLash);
-        AddFSMState(projectileAttack);
         AddFSMState(trackRoundState);
         AddFSMState(wallSpawnState);
         AddFSMState(dead);
@@ -116,5 +116,8 @@ public class BossEnemy : FSM
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.TransformPoint(lashRange.position), lashRange.radius);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, projectileDistance);
     }
 }

@@ -27,6 +27,10 @@ public class SimpleBullet : MonoBehaviour, IShootable
 
     void IShootable.Shoot()
     {
+        Shoot();
+    }
+
+    virtual protected void Shoot() {
         rb.velocity = Vector2.zero;
         rb.AddForce(transform.up * power);
 

@@ -21,9 +21,7 @@ public class BossIdleState : FSMState
         health = self.GetComponent<HealthScript>();
         stateMachine = self.GetComponent<BossEnemy>();
 
-        foreach(Animator tentacle in stateMachine.tentacles) {
-            tentacle.Play("Idle", 0, Random.Range(0, 1));
-        }
+        stateMachine.StartCoroutine(StartAnimation());
 
         elapsed = 0;
         //Lots of different transitions will need to be implemented here
@@ -50,5 +48,13 @@ public class BossIdleState : FSMState
         }
 
         lastPlayerPos = player.position;
+    }
+
+    private IEnumerator StartAnimation() {
+        float timeRange = 1f;
+        foreach(Animator tentacle in stateMachine.tentacles) {
+            yield return new WaitForSeconds(Random.Range(0, timeRange));
+            tentacle.SetBool("Idle", true);
+        }
     }
 }
