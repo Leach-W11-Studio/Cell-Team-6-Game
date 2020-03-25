@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectileAttackState : FSMState
 {
+    //These three should be set in the constructor - Ben
     private float attackSpeed;
     private float projectileVelocity;
     private float elapsed;
@@ -13,29 +14,36 @@ public class ProjectileAttackState : FSMState
     private float toocloseRange;
     private float shootCone = 0.5f; //Value between 0 and 1;
     private float lastShot;
+    private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
+
+    public ProjectileAttackState()
+    {
+        stateID = FSMStateID.Projectile;
+    }
 
     public override void Act(Transform player, GameObject self)
     {
-        elapsed += Time.deltaTime;
-
         if (elapsed - lastShot > stateMachine.shootInterval) {
             Shoot(self.transform);
         }
+        
+        elapsed += Time.deltaTime;
     }
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
+        //Death Check
+        if (health.currentHealth <= 0)
         {
             self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
         }
-        if (elapsed > stateMachine.shootTime) {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.none);
-        }
-        if (Vector3.Distance(self.transform.position, player.position) < self.GetComponent<BossEnemy>().projectileDistance)
+
+        //Completion Check
+        else if (elapsed > stateMachine.shootTime)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerTooClose);
+            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
         }
+
 
     }
 
@@ -43,32 +51,37 @@ public class ProjectileAttackState : FSMState
     {
         stateMachine = self.GetComponent<BossEnemy>();
         health = self.GetComponent<HealthScript>();
-
-        Debug.Log("Transitioning to Projectile State", self);
+        Debug.Log("Boss in projectile state", health);
         stateMachine.StartCoroutine(StartAnimation());
         elapsed = 0f;
 
-        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
+        /* if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
         {
             self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.Phase2ProjectileRange);
-        }
+        } Please don't do transitions on state enter. This is untested behavior. */
+        stateMachine = self.GetComponent<BossEnemy>();
+        health = self.GetComponent<HealthScript>();
+        behaviorComplete = false;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
         StopAnimation();
-        if (health.currentHealth <= 0 || health.isDead) {
+        /* if (health.currentHealth <= 0 || health.isDead) {
             stateMachine.SetTransition(FSMTransitions.OutOfHealth);
         }
 
         if (elapsed < stateMachine.shootTime) {
             stateMachine.SetTransition(FSMTransitions.none);
-        }
+        } Same as above. Also never use FSMTransitions.none. That's a placeholder and will by design cause an error everytime it is used */
     }
 
     private void Shoot(Transform self) {
+        lastShot = elapsed;
         Vector2 shootVector = RandomShootVector(self);
         Debug.DrawRay(self.position, shootVector * 50, Color.yellow);
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shootVector);
+        ObjectQueue.Instance.SpawnFromPool("BossBulletPhase1", stateMachine.muzzle.position, rotation);
     }
 
     private Vector2 RandomShootVector(Transform self) {

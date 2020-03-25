@@ -25,6 +25,8 @@ public enum FSMStateID
     Projectile,
     Tracking,
     WallSpawn,
+    BossDead,
+    LashReady,
 }
 
 public enum FSMTransitions
@@ -37,7 +39,7 @@ public enum FSMTransitions
     PlayerTooClose,
     CloserDistanceReached,
 
-    //BossTransitions
+    //BossTransitions - To remove later
     InLashRange,
     InLungeRange,
     Phase2LashRange,
@@ -47,6 +49,15 @@ public enum FSMTransitions
     Shoot,
     Phase2ProjectileRange, //Paytons Phase2Projectile Phase
     WallTime,
+
+    //Updated Boss Transitions
+    InMeleeRange,
+    InRad1,
+    InRad2,
+    GreaterThanRad2,
+    OORad1AndChance, //Out of Rad 2, and random chance to switch to shoot proc'd
+    HealthLessThanThreshold,
+    BehaviorComplete,
 }
 
 public abstract class FSM : MonoBehaviour
@@ -72,6 +83,14 @@ public abstract class FSM : MonoBehaviour
     public FSMState CurrentState { get { return currentState; } }
 
     private List<FSMState> FSMStates = new List<FSMState>();
+
+    public void Activate() {
+        Active = true;
+    }
+
+    public void Deactivate() {
+        Active = false;
+    }
 
     /// <summary>
     /// Adds an FSM state to the list of currently avalable states. First added state is treated as inital state as well

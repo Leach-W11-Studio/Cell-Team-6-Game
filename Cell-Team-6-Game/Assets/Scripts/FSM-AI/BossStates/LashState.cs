@@ -6,37 +6,45 @@ public class LashState : FSMState
 {
     private float outOfRange;
     private float attackSpeed;
+    private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
+
+    public LashState()
+    {
+        stateID = FSMStateID.Lash;
+    }
 
     public override void Act(Transform player, GameObject self)
     {
-        //If within a certain distance use the lash attack
-            //Else use lash attack
-        throw new System.NotImplementedException();
+        //Behavior for Lash Attack here. Note that this is only the Lash attack. Decisions happen elsewhere
     }
 
     public override void Reason(Transform player, GameObject self)
     {
+        //Dead Check
         if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
-        if (Vector3.Distance(self.transform.position, player.position) > self.GetComponent<BossEnemy>().lashDistance)
+
+        //Completion Check
+        else if (behaviorComplete)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);  
+            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
         }
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        if(self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
+        /* if(self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
         {
             self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.Phase2LashRange);
-        }
+        } Why tho? */
+        behaviorComplete = false;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
 }
