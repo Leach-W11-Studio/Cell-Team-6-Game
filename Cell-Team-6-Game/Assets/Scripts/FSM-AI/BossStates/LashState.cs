@@ -6,11 +6,11 @@ public class LashState : FSMState
 {
     private float outOfRange;
     private float attackSpeed;
+    private BossEnemy stateMachine;
+    private float RandomTent;
 
     public override void Act(Transform player, GameObject self)
     {
-        //If within a certain distance use the lash attack
-            //Else use lash attack
         throw new System.NotImplementedException();
     }
 
@@ -28,10 +28,14 @@ public class LashState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        if(self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
+        stateMachine = self.GetComponent<BossEnemy>();
+        RandomTent = Mathf.Round(Random.Range(0, stateMachine.tentacles.Count));
+        stateMachine.tentacles[(int)RandomTent].Play("Lash");
+
+        /*if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
         {
             self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.Phase2LashRange);
-        }
+        }*/
     }
 
     public override void OnStateExit(Transform player, GameObject self)
