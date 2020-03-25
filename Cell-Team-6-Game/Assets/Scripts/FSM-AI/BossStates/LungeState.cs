@@ -9,10 +9,15 @@ public class LungeState : FSMState
     private BossEnemy stateMachine;
     private float RandomTent;
     private Vector2 playerpos;
+    private float animtime;
 
     public override void Act(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        animtime -= Time.deltaTime;
+        if (animtime <= 0)
+        {
+            behaviorComplete = true;
+        }
     }
 
     public override void Reason(Transform player, GameObject self)
@@ -35,6 +40,7 @@ public class LungeState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
+        animtime = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         RandomTent = Mathf.Round(Random.Range(0, stateMachine.tentacles.Count));
         playerpos.x = player.transform.position.x - self.transform.position.x;
@@ -42,7 +48,7 @@ public class LungeState : FSMState
         float newRot = Mathf.Atan2(playerpos.y, playerpos.x) * Mathf.Rad2Deg;
         newRot -= 90.0f;
         stateMachine.tentacles[(int)RandomTent].transform.rotation = Quaternion.Euler(new Vector3(0, 0, newRot));
-        stateMachine.tentacles[(int)RandomTent].Play("Lunge");
+        stateMachine.tentacles[(int)RandomTent].Play("ForwardWhip");
     }
 
     public override void OnStateExit(Transform player, GameObject self)

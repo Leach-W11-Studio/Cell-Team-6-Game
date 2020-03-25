@@ -8,10 +8,15 @@ public class LashState : FSMState
     private float attackSpeed;
     private BossEnemy stateMachine;
     private float RandomTent;
+    private float animtime;
 
     public override void Act(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        animtime -= Time.deltaTime;
+        if(animtime <= 0)
+        {
+            behaviorComplete = true;
+        }
     }
 
     public override void Reason(Transform player, GameObject self)
@@ -28,9 +33,10 @@ public class LashState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
+        animtime = 1.5f;
         stateMachine = self.GetComponent<BossEnemy>();
         RandomTent = Mathf.Round(Random.Range(0, stateMachine.tentacles.Count));
-        stateMachine.tentacles[(int)RandomTent].Play("Lash");
+        stateMachine.tentacles[(int)RandomTent].Play("HorizontalSlash");
 
         /*if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
         {
