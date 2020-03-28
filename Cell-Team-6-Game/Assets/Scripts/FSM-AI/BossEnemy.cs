@@ -71,8 +71,8 @@ public class BossEnemy : FSM
 
         DeadState dead = new DeadState();
 
-        AddFSMState(bossIdle);
         AddFSMState(projectile);
+        AddFSMState(bossIdle);
         AddFSMState(lashReady);
         AddFSMState(lash);
         AddFSMState(lunge);
