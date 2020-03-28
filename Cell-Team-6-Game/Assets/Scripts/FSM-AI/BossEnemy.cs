@@ -37,7 +37,7 @@ public class BossEnemy : FSM
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
-        Phase2Threshold = 200;
+        //Phase2Threshold = 200;
         muzzle = transform.Find("Muzzle");
         BuildFSM();
     }
@@ -154,7 +154,7 @@ public class BossEnemy : FSM
             case float dist when (dist > radRange.rad2):
                 return Radius.Rad3;
             default:
-                return Radius.Rad3;
+                return Radius.Rad1;
 
         }
     }

@@ -54,7 +54,7 @@ public class BossIdleState : FSMState
         }
 
         //Range Checks - This only chooses whether to shoot or ready lash. Logic for choosing lash is in LashReadyState.
-        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2)
+        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2 || stateMachine.RadRangeCheck(player) == Radius.Rad1)
         {
             stateMachine.SetTransition(FSMTransitions.InMeleeRange);
         }

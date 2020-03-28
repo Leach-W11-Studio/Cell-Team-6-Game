@@ -86,10 +86,12 @@ public abstract class FSM : MonoBehaviour
 
     public void Activate() {
         Active = true;
+        Debug.Log("FSM.Active Called");
     }
 
     public void Deactivate() {
         Active = false;
+        //Debug.Log("FSM.Deactive Called");
     }
 
     /// <summary>
