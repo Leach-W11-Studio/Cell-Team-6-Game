@@ -81,7 +81,7 @@ public class ProjectileAttackState : FSMState
         Vector2 shootVector = RandomShootVector(self);
         Debug.DrawRay(self.position, shootVector * 50, Color.yellow);
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shootVector);
-        ObjectQueue.Instance.SpawnFromPool("BossBulletPhase2", stateMachine.muzzle.position, rotation);
+        ObjectQueue.Instance.SpawnFromPool("BossBulletPhase1", stateMachine.muzzle.position, rotation);
     }
 
     private Vector2 RandomShootVector(Transform self) {

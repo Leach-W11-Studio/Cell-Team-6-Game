@@ -6,17 +6,22 @@ public class BossBulletPhase2 : SimpleBullet
 {
 
     public float rotationSpeed;
+    [Tooltip("Max distance in meeters this bullet is allowed to displace relative to it's starting point.")]
     public float maxDistance;
+    [Tooltip("Max time in seconds for this bullet to live.")]
+    public float maxTime = 3f;
 
     private Vector2 startingPos;
     private float variedRotationSpeed;
     private Transform player;
+    private float elapsed = 0;
 
     override protected void Shoot() {
         startingPos = transform.position;
         //variedRotationSpeed = Random.Range(rotationSpeed * 0.2f, rotationSpeed);
         variedRotationSpeed = rotationSpeed;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        elapsed = 0;
 
         base.Shoot();
     }
@@ -34,7 +39,7 @@ public class BossBulletPhase2 : SimpleBullet
 
         if (enabled)
         {
-            if (Vector2.Distance(transform.position, startingPos) > maxDistance)
+            if (Vector2.Distance(transform.position, startingPos) > maxDistance || elapsed > maxTime)
             {
                 gameObject.SetActive(false);
             }
@@ -42,6 +47,8 @@ public class BossBulletPhase2 : SimpleBullet
             if (player) {
                 Aim();
             }
+
+            elapsed += Time.deltaTime;
         }
 
     }

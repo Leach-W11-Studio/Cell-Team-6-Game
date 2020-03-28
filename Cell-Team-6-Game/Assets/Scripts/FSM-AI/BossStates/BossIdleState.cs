@@ -75,7 +75,7 @@ public class BossIdleState : FSMState
     private void StopAnimation() {
         foreach (Animator tentacle in stateMachine.tentacles)
         {
-            tentacle.SetBool("Idle", true);
+            tentacle.SetBool("Idle", false);
         }
     }
 

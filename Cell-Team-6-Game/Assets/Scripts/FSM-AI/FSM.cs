@@ -86,6 +86,7 @@ public abstract class FSM : MonoBehaviour
 
     public void Activate() {
         Active = true;
+        FollowCamera.instance.AddTarget(transform);
     }
 
     public void Deactivate() {
