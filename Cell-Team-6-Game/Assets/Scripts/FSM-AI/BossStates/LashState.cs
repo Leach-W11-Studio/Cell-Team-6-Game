@@ -9,6 +9,7 @@ public class LashState : FSMState
     private BossEnemy stateMachine;
     private float RandomTent;
     private float animtime;
+    private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
     public override void Act(Transform player, GameObject self)
     {
@@ -18,16 +19,23 @@ public class LashState : FSMState
             behaviorComplete = true;
         }
     }
+    public LashState()
+    {
+        stateID = FSMStateID.Lash;
+    }
 
     public override void Reason(Transform player, GameObject self)
     {
+        //Dead Check
         if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
-        if (Vector3.Distance(self.transform.position, player.position) > self.GetComponent<BossEnemy>().lashDistance)
+
+        //Completion Check
+        else if (behaviorComplete)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);  
+            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
         }
     }
 
@@ -38,15 +46,12 @@ public class LashState : FSMState
         RandomTent = Mathf.Round(Random.Range(0, stateMachine.tentacles.Count));
         stateMachine.tentacles[(int)RandomTent].Play("HorizontalSlash");
 
-        /*if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
-        {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.Phase2LashRange);
-        }*/
+        behaviorComplete = false;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
 }
