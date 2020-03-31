@@ -19,6 +19,8 @@ public enum FSMStateID
 
     //Boss States
     BossIdle,
+    BossIdlePhase2,
+    Phase2Setup,
     Lash,
     Lunge,
     GrappleLash,
@@ -57,6 +59,7 @@ public enum FSMTransitions
     GreaterThanRad2,
     OORad1AndChance, //Out of Rad 2, and random chance to switch to shoot proc'd
     HealthLessThanThreshold,
+    WallSpawnTriggered,
     BehaviorComplete,
 }
 
@@ -83,6 +86,19 @@ public abstract class FSM : MonoBehaviour
     public FSMState CurrentState { get { return currentState; } }
 
     private List<FSMState> FSMStates = new List<FSMState>();
+
+    public FSMState GetFSMState(FSMStateID stateID)
+    {
+        if (FSMStates.Exists(x => x.StateID == stateID))
+        {
+            return FSMStates.Find(x => x.StateID == stateID);
+        }
+        else
+        {
+            Debug.LogError("Error: " + stateID.ToString() + " Is not present within FSMStates");
+            return null;
+        }
+    }
 
     /// <summary>
     /// Adds an FSM state to the list of currently avalable states. First added state is treated as inital state as well

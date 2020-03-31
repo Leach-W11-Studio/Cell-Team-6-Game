@@ -5,11 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(HealthScript))]
 public class BossIdleState : FSMState
 {
-    private HealthScript health;
-    private BossEnemy stateMachine;
-    private float elapsed;
+    protected HealthScript health;
+    protected BossEnemy stateMachine;
+    protected float elapsed;
 
-    Vector2 lastPlayerPos;
+    protected Vector2 lastPlayerPos;
 
     public BossIdleState()
     {
