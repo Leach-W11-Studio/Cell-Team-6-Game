@@ -5,11 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(HealthScript))]
 public class BossIdleState : FSMState
 {
-    private HealthScript health;
-    private BossEnemy stateMachine;
-    private float elapsed;
+    protected HealthScript health;
+    protected BossEnemy stateMachine;
+    protected float elapsed;
 
-    Vector2 lastPlayerPos;
+    protected Vector2 lastPlayerPos;
 
     public BossIdleState()
     {
@@ -26,10 +26,7 @@ public class BossIdleState : FSMState
         health = self.GetComponent<HealthScript>();
         stateMachine = self.GetComponent<BossEnemy>();
 
-        foreach (Animator tentacle in stateMachine.tentacles)
-        {
-            tentacle.Play("Idle", 0, Random.Range(0, 1));
-        }
+        stateMachine.StartCoroutine(StartAnimation());
 
         elapsed = 0;
         //Lots of different transitions will need to be implemented here
@@ -37,7 +34,7 @@ public class BossIdleState : FSMState
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        StopAnimation();
     }
 
     public override void Reason(Transform player, GameObject self)
@@ -53,7 +50,7 @@ public class BossIdleState : FSMState
         }
 
         //Range Checks - This only chooses whether to shoot or ready lash. Logic for choosing lash is in LashReadyState.
-        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2)
+        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2 || stateMachine.RadRangeCheck(player) == Radius.Rad1)
         {
             stateMachine.SetTransition(FSMTransitions.InMeleeRange);
         }
@@ -69,5 +66,20 @@ public class BossIdleState : FSMState
         } */
 
         lastPlayerPos = player.position; //Is this referenced by anything?
+    }
+
+    private void StopAnimation() {
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            tentacle.SetBool("Idle", false);
+        }
+    }
+
+    private IEnumerator StartAnimation() {
+        float timeRange = 1f;
+        foreach(Animator tentacle in stateMachine.tentacles) {
+            yield return new WaitForSeconds(Random.Range(0, timeRange));
+            tentacle.SetBool("Idle", true);
+        }
     }
 }

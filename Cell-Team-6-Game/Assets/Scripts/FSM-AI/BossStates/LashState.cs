@@ -6,16 +6,24 @@ public class LashState : FSMState
 {
     private float outOfRange;
     private float attackSpeed;
+    private BossEnemy stateMachine;
+    private float animtime;
+    private float Range;
+    private Animator chosenTent;
+    private bool initialize = true;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
-
-    public LashState()
-    {
-        stateID = FSMStateID.Lash;
-    }
 
     public override void Act(Transform player, GameObject self)
     {
-        //Behavior for Lash Attack here. Note that this is only the Lash attack. Decisions happen elsewhere
+        animtime -= Time.deltaTime;
+        if(animtime <= 0)
+        {
+            behaviorComplete = true;
+        }
+    }
+    public LashState()
+    {
+        stateID = FSMStateID.Lash;
     }
 
     public override void Reason(Transform player, GameObject self)
@@ -35,16 +43,32 @@ public class LashState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        /* if(self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
-        {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.Phase2LashRange);
-        } Why tho? */
+        Range = 0.0f;
+        animtime = 1.5f;
+        stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            if (initialize == true)
+            {
+                Range = Vector2.Distance(tentacle.transform.position, player.position);
+                initialize = false;
+            }
+            else
+            {
+                if (Vector2.Distance(tentacle.transform.position, player.position) < Range)
+                {
+                    Range = Vector2.Distance(tentacle.transform.position, player.position);
+                    chosenTent = tentacle;
+                }
+            }
+        }
+        chosenTent.SetBool("IsHorizontal", true);
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        //throw new System.NotImplementedException();
+        chosenTent.SetBool("IsHorizontal", false);
     }
 
 }
