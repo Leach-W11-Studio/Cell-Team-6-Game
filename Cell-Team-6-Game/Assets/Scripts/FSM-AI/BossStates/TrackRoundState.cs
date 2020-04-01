@@ -8,6 +8,11 @@ public class TrackRoundState : FSMState
     private float projectileVelocity;
     private float meleeDistance;
 
+    public TrackRoundState()
+    {
+        stateID = FSMStateID.Tracking;
+    }
+
     public override void Act(Transform player, GameObject self)
     {
         throw new System.NotImplementedException();

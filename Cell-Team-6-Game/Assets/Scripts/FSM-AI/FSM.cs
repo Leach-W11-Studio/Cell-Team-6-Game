@@ -20,10 +20,13 @@ public enum FSMStateID
     //Boss States
     BossIdle,
     Lash,
+    Lunge,
     GrappleLash,
     Projectile,
     Tracking,
     WallSpawn,
+    BossDead,
+    LashReady,
 }
 
 public enum FSMTransitions
@@ -36,11 +39,25 @@ public enum FSMTransitions
     PlayerTooClose,
     CloserDistanceReached,
 
-    //BossTransitions
+    //BossTransitions - To remove later
     InLashRange,
+    InLungeRange,
+    Phase2LashRange,
     InProjectileRange,
+    VerticalLash, //Adam's Phases
+    HorizontalLash,
+    Shoot,
+    Phase2ProjectileRange, //Paytons Phase2Projectile Phase
     WallTime,
-    OutOfRange,
+
+    //Updated Boss Transitions
+    InMeleeRange,
+    InRad1,
+    InRad2,
+    GreaterThanRad2,
+    OORad1AndChance, //Out of Rad 2, and random chance to switch to shoot proc'd
+    HealthLessThanThreshold,
+    BehaviorComplete,
 }
 
 public abstract class FSM : MonoBehaviour
@@ -67,6 +84,15 @@ public abstract class FSM : MonoBehaviour
 
     private List<FSMState> FSMStates = new List<FSMState>();
 
+    public void Activate() {
+        Active = true;
+        FollowCamera.instance.AddTarget(transform);
+    }
+
+    public void Deactivate() {
+        Active = false;
+    }
+
     /// <summary>
     /// Adds an FSM state to the list of currently avalable states. First added state is treated as inital state as well
     /// </summary>
@@ -92,6 +118,7 @@ public abstract class FSM : MonoBehaviour
         {
             FSMStates.Add(state);
         }
+        state.SetParentFSM(this);
     }
 
     /// <summary>
@@ -146,7 +173,7 @@ public abstract class FSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Active = false;
+        //Active = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = gameObject.GetComponent<PolyNavAgent>();
         enemyAnim = gameObject.GetComponent<Animator>();
