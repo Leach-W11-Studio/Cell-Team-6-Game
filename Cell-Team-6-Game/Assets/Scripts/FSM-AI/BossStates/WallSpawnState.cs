@@ -51,7 +51,7 @@ public class WallSpawnState : FSMState
         //Death Check
         if (stateMachine.healthScript.currentHealth <= 0)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
 
         //Completion Check

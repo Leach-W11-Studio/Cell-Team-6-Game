@@ -28,6 +28,7 @@ public class BossEnemy : FSM
     public float shootCone;
 
     public List<Animator> tentacles;
+    public List<GameObject> spawnWalls;
     public float Phase2Threshold;
     public float lashDistance;
     public float projectileDistance;
