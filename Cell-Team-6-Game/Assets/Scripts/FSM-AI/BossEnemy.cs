@@ -24,6 +24,8 @@ public class BossEnemy : FSM
     public HealthScript healthScript;
     public float shootTime;
     public float shootInterval;
+    [Range(0f, 1f)]
+    public float shootCone;
 
     public List<Animator> tentacles;
     public float Phase2Threshold;
@@ -176,5 +178,11 @@ public class BossEnemy : FSM
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.TransformPoint(radRange.position), radRange.rad2);
+
+        Vector2 perp = Vector2.Perpendicular(-transform.up);
+        Vector2 positiveCone = Vector2.Lerp(-transform.up, perp, shootCone).normalized;
+        Vector2 negativeCone = Vector2.Lerp(-transform.up, -perp, shootCone).normalized;
+        Debug.DrawRay(transform.position, positiveCone * 50, Color.yellow);
+        Debug.DrawRay(transform.position, negativeCone * 50, Color.yellow);
     }
 }

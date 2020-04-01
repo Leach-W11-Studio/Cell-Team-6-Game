@@ -11,10 +11,10 @@ public class BossBulletPhase1 : SimpleBullet
     public float maxDistance = 10;
     public float minVariance = 0.2f;
     
-    private float variedAplitude;
-    private float variedPeriod;
-    private Vector2 up = Vector3.up;
-    private Vector2 startPos;
+    public float variedAplitude;
+    public float variedPeriod;
+    public Vector2 up = Vector3.up;
+    public Vector2 startPos;
 
     override protected void Shoot()
     {
