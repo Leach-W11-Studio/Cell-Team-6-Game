@@ -9,19 +9,20 @@ public class BossBulletPhase1 : SimpleBullet
     public float period;
     public float distance = 0;
     public float maxDistance = 10;
+    public float minVariance = 0.2f;
     
-    private float variedAplitude;
-    private float variedPeriod;
-    private Vector2 up = Vector3.up;
-    private Vector2 startPos;
+    public float variedAplitude;
+    public float variedPeriod;
+    public Vector2 up = Vector3.up;
+    public Vector2 startPos;
 
     override protected void Shoot()
     {
         rb.velocity = Vector2.zero;
         distance = 0;
 
-        variedAplitude = Random.Range(amplitude * 0.2f, amplitude);
-        variedPeriod = Random.Range(period * 0.2f, period);
+        variedAplitude = Random.Range(amplitude * minVariance, amplitude);
+        variedPeriod = Random.Range(period * minVariance, period);
         startPos = transform.position;
         up = transform.up;
     }
@@ -73,7 +74,7 @@ public class BossBulletPhase1 : SimpleBullet
         return axis + point;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Vector2 perp = Vector2.Perpendicular(up);
         if (!Application.isPlaying)

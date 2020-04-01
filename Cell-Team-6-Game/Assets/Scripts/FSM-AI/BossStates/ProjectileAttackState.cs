@@ -12,7 +12,7 @@ public class ProjectileAttackState : FSMState
 
     private BossEnemy stateMachine;
     private float toocloseRange;
-    private float shootCone = 0.5f; //Value between 0 and 1;
+    private float shootCone; //Value between 0 and 1;
     private float lastShot;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
@@ -50,6 +50,7 @@ public class ProjectileAttackState : FSMState
     public override void OnStateEnter(Transform player, GameObject self)
     {
         stateMachine = self.GetComponent<BossEnemy>();
+        shootCone = stateMachine.shootCone;
         health = self.GetComponent<HealthScript>();
         Debug.Log("Boss in projectile state", health);
         stateMachine.StartCoroutine(StartAnimation());

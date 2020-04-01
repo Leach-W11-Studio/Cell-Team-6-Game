@@ -5,11 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(HealthScript))]
 public class BossIdleState : FSMState
 {
-    private HealthScript health;
-    private BossEnemy stateMachine;
-    private float elapsed;
+    protected HealthScript health;
+    protected BossEnemy stateMachine;
+    protected float elapsed;
 
-    Vector2 lastPlayerPos;
+    protected Vector2 lastPlayerPos;
 
     public BossIdleState()
     {
@@ -50,7 +50,7 @@ public class BossIdleState : FSMState
         }
 
         //Range Checks - This only chooses whether to shoot or ready lash. Logic for choosing lash is in LashReadyState.
-        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2)
+        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2 || stateMachine.RadRangeCheck(player) == Radius.Rad1)
         {
             stateMachine.SetTransition(FSMTransitions.InMeleeRange);
         }
@@ -71,7 +71,7 @@ public class BossIdleState : FSMState
     private void StopAnimation() {
         foreach (Animator tentacle in stateMachine.tentacles)
         {
-            tentacle.SetBool("Idle", true);
+            tentacle.SetBool("Idle", false);
         }
     }
 

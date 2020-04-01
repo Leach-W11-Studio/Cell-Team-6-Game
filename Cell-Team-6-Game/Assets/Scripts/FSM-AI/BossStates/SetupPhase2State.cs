@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallSpawnState : FSMState
+public class SetupPhase2State : FSMState
 {
     private bool behaviorComplete;
-    private int wallResetThreshold;
-    private List<BossWalls> wallList;
     private BossEnemy stateMachine;
 
-    public WallSpawnState(List<BossWalls> listOfWalls, int wallThreshold)
+    public SetupPhase2State()
     {
-        stateID = FSMStateID.WallSpawn;
-        wallList = listOfWalls;
-        wallResetThreshold = wallThreshold;
+        stateID = FSMStateID.Phase2Setup;
     }
 
     public override void Act(Transform player, GameObject self)
@@ -24,21 +20,8 @@ public class WallSpawnState : FSMState
     public override void OnStateEnter(Transform player, GameObject self)
     {
         stateMachine = self.GetComponent<BossEnemy>();
-        behaviorComplete = false;
-
-        int activeWallCounter = 0;
-        foreach (var wall in wallList)
-        {
-            if (wall.isActive) { activeWallCounter++; }
-        }
-        if (activeWallCounter <= wallResetThreshold)
-        {
-            //Put animation trigger here once we have an animation
-            foreach (var wall in wallList)
-            {
-                if (!wall.isActive) { wall.Enable(); }
-            }
-        }
+        stateMachine.RebuildFSMForPhase2();
+        behaviorComplete = true; //Currently set to true as soon as enters phase, feel free to change if you want something else to happen.
     }
 
     public override void OnStateExit(Transform player, GameObject self)
@@ -48,8 +31,8 @@ public class WallSpawnState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        //Death Check
-        if (stateMachine.healthScript.currentHealth <= 0)
+        //Dead Check
+        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
         {
             parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
