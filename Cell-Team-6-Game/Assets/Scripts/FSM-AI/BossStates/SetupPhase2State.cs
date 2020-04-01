@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackRoundState : FSMState
+public class SetupPhase2State : FSMState
 {
-    private float attackSpeed;
-    private float projectileVelocity;
-    private float meleeDistance;
     private bool behaviorComplete;
     private BossEnemy stateMachine;
 
-    public TrackRoundState()
+    public SetupPhase2State()
     {
-        stateID = FSMStateID.Tracking;
+        stateID = FSMStateID.Phase2Setup;
     }
 
     public override void Act(Transform player, GameObject self)
@@ -22,8 +19,9 @@ public class TrackRoundState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        behaviorComplete = false;
         stateMachine = self.GetComponent<BossEnemy>();
+        stateMachine.RebuildFSMForPhase2();
+        behaviorComplete = true; //Currently set to true as soon as enters phase, feel free to change if you want something else to happen.
     }
 
     public override void OnStateExit(Transform player, GameObject self)
@@ -33,10 +31,10 @@ public class TrackRoundState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        //Death Check
-        if (stateMachine.healthScript.currentHealth <= 0)
+        //Dead Check
+        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
 
         //Completion Check

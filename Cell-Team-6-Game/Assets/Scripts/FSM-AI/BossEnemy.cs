@@ -33,22 +33,34 @@ public class BossEnemy : FSM
     public float projectileDistance;
     public int shootChance = 10;
 
+    //Walls Stuff
+    public List<BossWalls> bossWallList = new List<BossWalls>();
+    public float wallCheckInterval = 10f;
+    [Tooltip("The number of remaining walls at which the ball will once again spawn walls")]
+    public int wallResetThreshold = 2;
+
+    public bool doWallSpawnTrigger { get; protected set; } //Will set the trigger for wall spawn, given the need for complex timing logic.
+
     public Transform muzzle;
     protected override void Initalize()
     {
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
+        doWallSpawnTrigger = false;
         //Phase2Threshold = 200;
         muzzle = transform.Find("Muzzle");
         BuildFSM();
     }
+
+    private void ResetWallCheck() { doWallSpawnTrigger = true; }
+
     protected virtual void BuildFSM() //To Finish
     {
         //Phase 1 Stuff
         BossIdleState bossIdle = new BossIdleState();
         bossIdle.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
-        //Add transition for HealthLessThanThreshold here - Goes to phase 2
+        bossIdle.AddTransitionState(FSMStateID.Phase2Setup, FSMTransitions.HealthLessThanThreshold);
         //---------------------------------
         bossIdle.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
         bossIdle.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
@@ -71,6 +83,10 @@ public class BossEnemy : FSM
         projectile.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         projectile.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
 
+        SetupPhase2State phase2Setup = new SetupPhase2State();
+        phase2Setup.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        phase2Setup.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+
         DeadState dead = new DeadState();
 
         AddFSMState(bossIdle);
@@ -78,6 +94,7 @@ public class BossEnemy : FSM
         AddFSMState(lashReady);
         AddFSMState(lash);
         AddFSMState(lunge);
+        AddFSMState(phase2Setup);
         AddFSMState(dead);
 
         #region Depricated Code
@@ -136,6 +153,33 @@ public class BossEnemy : FSM
         AddFSMState(wallSpawnState);
         AddFSMState(dead); */
         #endregion
+    }
+
+    public virtual void RebuildFSMForPhase2()
+    {
+        InvokeRepeating("ResetWallCheck", wallCheckInterval, wallCheckInterval);
+
+        BossIdleStatePhase2 bossIdle2 = new BossIdleStatePhase2();
+        bossIdle2.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        bossIdle2.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
+        bossIdle2.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
+        bossIdle2.AddTransitionState(FSMStateID.WallSpawn, FSMTransitions.WallSpawnTriggered);
+
+        RemoveFSMState(FSMStateID.BossIdle);
+        AddFSMState(bossIdle2);
+
+        var lashState = GetFSMState(FSMStateID.Lash);
+        lashState.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        var lungeState = GetFSMState(FSMStateID.Lunge);
+        lungeState.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        var projectile = GetFSMState(FSMStateID.Projectile);
+        projectile.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+
+        WallSpawnState wallSpawn = new WallSpawnState(bossWallList, wallResetThreshold);
+        wallSpawn.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        wallSpawn.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+
+        AddFSMState(wallSpawn);
     }
 
     /// <summary>

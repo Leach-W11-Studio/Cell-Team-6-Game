@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GrappleLashState : FSMState
 {
+    private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
+
     public GrappleLashState()
     {
         stateID = FSMStateID.GrappleLash;
@@ -11,21 +13,31 @@ public class GrappleLashState : FSMState
 
     public override void Act(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        behaviorComplete = false;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void Reason(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //Dead Check
+        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
+        {
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
+        }
+
+        //Completion Check
+        else if (behaviorComplete)
+        {
+            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+        }
     }
 }
