@@ -77,7 +77,7 @@ public abstract class FSM : MonoBehaviour
 
     public PolyNavAgent navAgent;
     public Animator enemyAnim;
-    
+
     /// <summary>
     /// Whether or not the enemy is active and executing their relevent functions
     /// </summary>
@@ -105,6 +105,17 @@ public abstract class FSM : MonoBehaviour
             Debug.LogError("Error: " + stateID.ToString() + " Is not present within FSMStates");
             return null;
         }
+    }
+    
+    public void Activate()
+    {
+        Active = true;
+        FollowCamera.instance.AddTarget(transform);
+    }
+
+    public void Deactivate()
+    {
+        Active = false;
     }
 
     /// <summary>
@@ -187,7 +198,7 @@ public abstract class FSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Active = false;
+        //Active = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = gameObject.GetComponent<PolyNavAgent>();
         enemyAnim = gameObject.GetComponent<Animator>();

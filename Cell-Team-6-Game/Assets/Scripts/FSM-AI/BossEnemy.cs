@@ -24,6 +24,8 @@ public class BossEnemy : FSM
     public HealthScript healthScript;
     public float shootTime;
     public float shootInterval;
+    [Range(0f, 1f)]
+    public float shootCone;
 
     public List<Animator> tentacles;
     public float Phase2Threshold;
@@ -39,13 +41,15 @@ public class BossEnemy : FSM
 
     public bool doWallSpawnTrigger { get; protected set; } //Will set the trigger for wall spawn, given the need for complex timing logic.
 
+    public Transform muzzle;
     protected override void Initalize()
     {
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
-        Phase2Threshold = 200;
         doWallSpawnTrigger = false;
+        //Phase2Threshold = 200;
+        muzzle = transform.Find("Muzzle");
         BuildFSM();
     }
 
@@ -86,10 +90,10 @@ public class BossEnemy : FSM
         DeadState dead = new DeadState();
 
         AddFSMState(bossIdle);
+        AddFSMState(projectile);
         AddFSMState(lashReady);
         AddFSMState(lash);
         AddFSMState(lunge);
-        AddFSMState(projectile);
         AddFSMState(phase2Setup);
         AddFSMState(dead);
 
@@ -140,11 +144,11 @@ public class BossEnemy : FSM
         DeadState dead = new DeadState();
 
 
+        AddFSMState(projectileAttack);
         AddFSMState(bossIdle);
         AddFSMState(lashState);
         AddFSMState(lungeState);
         AddFSMState(grappleLash);
-        AddFSMState(projectileAttack);
         AddFSMState(trackRoundState);
         AddFSMState(wallSpawnState);
         AddFSMState(dead); */
@@ -196,7 +200,7 @@ public class BossEnemy : FSM
             case float dist when (dist > radRange.rad2):
                 return Radius.Rad3;
             default:
-                return Radius.Rad3;
+                return Radius.Rad1;
 
         }
     }
@@ -215,6 +219,14 @@ public class BossEnemy : FSM
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.TransformPoint(radRange.position), radRange.rad1);
+
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.TransformPoint(radRange.position), radRange.rad2);
+
+        Vector2 perp = Vector2.Perpendicular(-transform.up);
+        Vector2 positiveCone = Vector2.Lerp(-transform.up, perp, shootCone).normalized;
+        Vector2 negativeCone = Vector2.Lerp(-transform.up, -perp, shootCone).normalized;
+        Debug.DrawRay(transform.position, positiveCone * 50, Color.yellow);
+        Debug.DrawRay(transform.position, negativeCone * 50, Color.yellow);
     }
 }
