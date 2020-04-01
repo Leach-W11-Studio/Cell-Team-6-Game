@@ -31,7 +31,13 @@ public class BossEnemy : FSM
     public float projectileDistance;
     public int shootChance = 10;
 
-    public bool doWallSpawnTrigger {get; protected set;} //Will set the trigger for wall spawn, given the need for complex timing logic.
+    //Walls Stuff
+    public List<BossWalls> bossWallList = new List<BossWalls>();
+    public float wallCheckInterval = 10f;
+    [Tooltip("The number of remaining walls at which the ball will once again spawn walls")]
+    public int wallResetThreshold = 2;
+
+    public bool doWallSpawnTrigger { get; protected set; } //Will set the trigger for wall spawn, given the need for complex timing logic.
 
     protected override void Initalize()
     {
@@ -39,8 +45,12 @@ public class BossEnemy : FSM
         healthScript = GetComponent<HealthScript>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
         Phase2Threshold = 200;
+        doWallSpawnTrigger = false;
         BuildFSM();
     }
+
+    private void ResetWallCheck() { doWallSpawnTrigger = true; }
+
     protected virtual void BuildFSM() //To Finish
     {
         //Phase 1 Stuff
@@ -143,7 +153,9 @@ public class BossEnemy : FSM
 
     public virtual void RebuildFSMForPhase2()
     {
-        BossIdleState bossIdle2 = new BossIdleStatePhase2();
+        InvokeRepeating("ResetWallCheck", wallCheckInterval, wallCheckInterval);
+
+        BossIdleStatePhase2 bossIdle2 = new BossIdleStatePhase2();
         bossIdle2.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         bossIdle2.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
         bossIdle2.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
@@ -159,7 +171,7 @@ public class BossEnemy : FSM
         var projectile = GetFSMState(FSMStateID.Projectile);
         projectile.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
 
-        WallSpawnState wallSpawn = new WallSpawnState();
+        WallSpawnState wallSpawn = new WallSpawnState(bossWallList, wallResetThreshold);
         wallSpawn.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         wallSpawn.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
 

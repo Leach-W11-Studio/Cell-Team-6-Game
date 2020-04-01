@@ -6,6 +6,7 @@ using PolyNav;
 /// <summary>
 /// Contains all fms states to be implimented in any FSM of this project
 /// </summary>
+[System.Serializable]
 public enum FSMStateID
 {
     none = 0,
@@ -84,6 +85,12 @@ public abstract class FSM : MonoBehaviour
 
     private FSMState currentState;
     public FSMState CurrentState { get { return currentState; } }
+
+    /// <summary>
+    /// Used to show State in inspector. DO NOT EDIT
+    /// </summary>
+    [Tooltip("Used to show State in inspector. DO NOT EDIT")]
+    public FSMStateID CurrentStateID = FSMStateID.none;
 
     private List<FSMState> FSMStates = new List<FSMState>();
 
@@ -196,6 +203,9 @@ public abstract class FSM : MonoBehaviour
             currentState.Reason(playerTransform, gameObject);
             FSMUpdate();
         }
+
+        //Code to show Current State in Inspector
+        CurrentStateID = currentState.StateID;
     }
 
     void FixedUpdate()
