@@ -10,7 +10,7 @@ public class SimpleBullet : MonoBehaviour, IShootable
     public bool spin = true;
     public float maxSpinSpeed = 200;
     protected Rigidbody2D rb;
-    GameObject spriteObject;
+    public GameObject spriteObject;
 
     public Vector3 velocity;
     private Vector3 direction;
@@ -22,6 +22,9 @@ public class SimpleBullet : MonoBehaviour, IShootable
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Start() {
         spriteObject = transform.GetChild(0).gameObject;
     }
 
