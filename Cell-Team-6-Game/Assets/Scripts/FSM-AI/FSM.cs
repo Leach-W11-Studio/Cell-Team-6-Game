@@ -84,6 +84,15 @@ public abstract class FSM : MonoBehaviour
 
     private List<FSMState> FSMStates = new List<FSMState>();
 
+    public void Activate() {
+        Active = true;
+        FollowCamera.instance.AddTarget(transform);
+    }
+
+    public void Deactivate() {
+        Active = false;
+    }
+
     /// <summary>
     /// Adds an FSM state to the list of currently avalable states. First added state is treated as inital state as well
     /// </summary>
@@ -164,7 +173,7 @@ public abstract class FSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Active = false;
+        //Active = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = gameObject.GetComponent<PolyNavAgent>();
         enemyAnim = gameObject.GetComponent<Animator>();
