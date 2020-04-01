@@ -27,10 +27,6 @@ public class BossIdleState : FSMState
         stateMachine = self.GetComponent<BossEnemy>();
 
         stateMachine.StartCoroutine(StartAnimation());
-        foreach (Animator tentacle in stateMachine.tentacles)
-        {
-            tentacle.Play("Idle", 0, Random.Range(0, 1));
-        }
 
         elapsed = 0;
         //Lots of different transitions will need to be implemented here

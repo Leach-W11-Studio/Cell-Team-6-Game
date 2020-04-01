@@ -26,6 +26,7 @@ public class BossEnemy : FSM
     public float shootInterval;
 
     public List<Animator> tentacles;
+    public List<GameObject> spawnWalls;
     public float Phase2Threshold;
     public float lashDistance;
     public float projectileDistance;
@@ -37,7 +38,11 @@ public class BossEnemy : FSM
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
-        //Phase2Threshold = 200;
+        spawnWalls = new List<GameObject>(transform.Find("Boss Walls").GetComponentsInChildren<GameObject>());
+        foreach (GameObject wall in spawnWalls)
+        {
+            wall.SetActive(false);
+        }
         muzzle = transform.Find("Muzzle");
         BuildFSM();
     }
