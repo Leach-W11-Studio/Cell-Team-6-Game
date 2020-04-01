@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GrappleLashState : FSMState
 {
+    public GrappleLashState()
+    {
+        stateID = FSMStateID.GrappleLash;
+    }
+
     public override void Act(Transform player, GameObject self)
     {
         throw new System.NotImplementedException();

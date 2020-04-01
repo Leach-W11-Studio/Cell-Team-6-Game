@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class WallSpawnState : FSMState
 {
+    public WallSpawnState()
+    {
+        stateID = FSMStateID.WallSpawn;
+    }
+
     public override void Act(Transform player, GameObject self)
     {
         throw new System.NotImplementedException();
