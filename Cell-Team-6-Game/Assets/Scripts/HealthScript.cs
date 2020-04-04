@@ -147,7 +147,10 @@ public class HealthScript : MonoBehaviour
         {
             if (isDead == false)
             {
-                PlayerAnim.SetTrigger("IsDead");
+                if (!isBoss)
+                {
+                    PlayerAnim.SetTrigger("IsDead");
+                }
                 isDead = true;
                 //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 StartCoroutine("DieWait", waitTime);
