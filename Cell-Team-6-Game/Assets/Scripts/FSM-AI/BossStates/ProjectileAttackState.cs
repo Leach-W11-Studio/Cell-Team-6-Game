@@ -16,6 +16,8 @@ public class ProjectileAttackState : FSMState
     private float lastShot;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
+    private bool animDone;
+
     public ProjectileAttackState()
     {
         stateID = FSMStateID.Projectile;
@@ -32,19 +34,20 @@ public class ProjectileAttackState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        //Death Check
-        if (health.currentHealth <= 0)
+        if (animDone)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            //Death Check
+            if (health.currentHealth <= 0)
+            {
+                self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            }
+
+            //Completion Check
+            else if (elapsed > stateMachine.shootTime)
+            {
+                parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+            }
         }
-
-        //Completion Check
-        else if (elapsed > stateMachine.shootTime)
-        {
-            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
-        }
-
-
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
@@ -103,9 +106,12 @@ public class ProjectileAttackState : FSMState
 
     private IEnumerator StartAnimation() {
         float timeRange = 1f;
+        animDone = false;
         foreach(Animator tentacle in stateMachine.tentacles) {
             yield return new WaitForSeconds(Random.Range(0, timeRange));
             tentacle.SetBool("Shooting", true);
         }
+
+        animDone = true;
     }
 }
