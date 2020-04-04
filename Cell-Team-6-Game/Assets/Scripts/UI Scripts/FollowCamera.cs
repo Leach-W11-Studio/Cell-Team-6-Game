@@ -61,6 +61,10 @@ public class FollowCamera : MonoBehaviour
         }
     }
 
+    public void RemoveTarget(Transform target) {
+        targets.Remove(target);
+    }
+
     void CleanupTargets() {
         for (int i = 0; i < targets.Count; i++) {
             if (targets[i] == null) {
