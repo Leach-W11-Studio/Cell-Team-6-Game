@@ -67,11 +67,19 @@ public class LashState : FSMState
             }
         }
         chosenTent.SetBool("IsHorizontal", true);
+        foreach(CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        {
+            bone.enabled = true;
+        }
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
         chosenTent.SetBool("IsHorizontal", false);
+        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        {
+            bone.enabled = false;
+        }
     }
 
 }
