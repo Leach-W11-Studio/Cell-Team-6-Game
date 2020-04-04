@@ -25,11 +25,12 @@ public class SimpleBullet : MonoBehaviour, IShootable
     }
 
     void Start() {
-        spriteObject = transform.GetChild(0).gameObject;
+        
     }
 
     void IShootable.Shoot()
     {
+        spriteObject = transform.GetChild(0).gameObject;
         Shoot();
     }
 
