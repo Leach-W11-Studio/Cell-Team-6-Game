@@ -29,7 +29,6 @@ public class BossBulletPhase2 : SimpleBullet
     // Start is called before the first frame update
     void Start()
     {
-        Shoot();
     }
 
     // Update is called once per frame
