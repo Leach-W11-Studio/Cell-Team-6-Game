@@ -140,7 +140,7 @@ public class HealthScript : MonoBehaviour
                 isDead = true;
                 //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 StartCoroutine("DieWait", waitTime);
-                //GameMaster.gameMaster.LoseGame();
+                GameMaster.gameMaster.LoseGame();
             }
         }
         else
