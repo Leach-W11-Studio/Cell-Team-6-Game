@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1201129987600845650}
   - component: {fileID: 4095734159791008571}
+  - component: {fileID: 4679451844510206431}
   m_Layer: 0
   m_Name: Straight Wall 3
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3703478329285233889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.77, y: 0.836, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,3 +82,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &4679451844510206431
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3703478329285233889}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0077804103, y: -2.573769}
+  m_SpriteTilingProperty:
+    border: {x: 0.47368422, y: 0.05263158, z: 1, w: 0.7894737}
+    pivot: {x: 0.5, y: 1}
+    oldSize: {x: 19.31579, y: 1.7368422}
+    newSize: {x: 0.3, y: 4.9601183}
+    adaptiveTilingThreshold: 0
+    drawMode: 2
+    adaptiveTiling: 1
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.31289774, y: 5.147538}
+  m_EdgeRadius: 0
