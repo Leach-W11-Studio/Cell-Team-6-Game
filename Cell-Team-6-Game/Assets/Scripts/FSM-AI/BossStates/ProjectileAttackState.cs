@@ -55,6 +55,7 @@ public class ProjectileAttackState : FSMState
         Debug.Log("Boss in projectile state", health);
         stateMachine.StartCoroutine(StartAnimation());
         elapsed = 0f;
+        lastShot = 0f;
 
         /* if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
         {
