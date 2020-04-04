@@ -67,11 +67,19 @@ public class LungeState : FSMState
             }
         }
         chosenTent.SetBool("IsVertical", true);
+        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        {
+            bone.enabled = true;
+        }
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
         chosenTent.SetBool("IsVertical", false);
+        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        {
+            bone.enabled = false;
+        }
     }
 
 }
