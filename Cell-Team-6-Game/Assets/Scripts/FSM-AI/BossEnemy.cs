@@ -88,7 +88,7 @@ public class BossEnemy : FSM
         phase2Setup.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         phase2Setup.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
 
-        DeadState dead = new DeadState();
+        BossDeadState dead = new BossDeadState();
 
         AddFSMState(bossIdle);
         AddFSMState(projectile);
