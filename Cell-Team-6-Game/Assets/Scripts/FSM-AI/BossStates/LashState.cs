@@ -53,15 +53,15 @@ public class LashState : FSMState
         {
             if (initialize == true)
             {
-                Range = Vector2.Distance(tentacle.transform.position, player.position);
+                Range = Vector2.Distance(tentacle.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).transform.position, player.position);
                 initialize = false;
                 chosenTent = tentacle;
             }
             else
             {
-                if (Vector2.Distance(tentacle.transform.position, player.position) < Range)
+                if (Vector2.Distance(tentacle.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).transform.position, player.position) < Range)
                 {
-                    Range = Vector2.Distance(tentacle.transform.position, player.position);
+                    Range = Vector2.Distance(tentacle.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).transform.position, player.position);
                     chosenTent = tentacle;
                 }
             }
