@@ -25,6 +25,12 @@ public class PlayerHealthBar : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         Debug.Log("Awake");
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthScript>();
         maxHealth = playerHealth.maxHealth;
@@ -34,21 +40,16 @@ public class PlayerHealthBar : MonoBehaviour
 
         hearts = new List<GameObject>();
         heartsContainer = transform.Find("Hearts").GetComponent<RectTransform>();
-        for (int i = 0; i < maxHealth; i++) {
+        for (int i = 0; i < maxHealth; i++)
+        {
             GameObject heart = Instantiate(heartPrefab, heartsContainer);
-            RectTransform rt = heart.GetComponent<RectTransform>(); 
+            RectTransform rt = heart.GetComponent<RectTransform>();
             rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, heartSize);
             rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, heartSize);
             hearts.Add(heart);
         }
         Arrange();
         lastMaxHealth = playerHealth.maxHealth;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
