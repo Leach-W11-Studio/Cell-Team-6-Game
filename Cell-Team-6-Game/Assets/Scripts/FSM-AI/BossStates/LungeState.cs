@@ -9,7 +9,7 @@ public class LungeState : FSMState
     private BossEnemy stateMachine;
     private float animtime;
     private float Range;
-    private bool initialize = true;
+    private bool initialize;
     private Animator chosenTent;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
     
@@ -48,12 +48,14 @@ public class LungeState : FSMState
         animtime = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
+        initialize = true;
         foreach (Animator tentacle in stateMachine.tentacles)
         {
             if (initialize == true)
             {
                 Range = Vector2.Distance(tentacle.transform.position, player.position);
                 initialize = false;
+                chosenTent = tentacle;
             }
             else
             {
