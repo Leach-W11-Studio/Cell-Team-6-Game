@@ -99,6 +99,36 @@ public class PlaySounds : MonoBehaviour
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
     }
 
+     public void PlayBossDeath()
+    {
+        string snd = gameObject.name + "_bd";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        Debug.Log("Riot Shield Stow Sound Played");
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
 
+
+    public void PlayBossPhaseTransition()
+    {
+        string snd = gameObject.name + "_bpt";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        Debug.Log("Riot Shield Stow Sound Played");
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
+    public void PlayBossSummonWall()
+    {
+        string snd = gameObject.name + "_bsw";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        Debug.Log("Riot Shield Stow Sound Played");
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
+
+    public void PlayTrackingRounds()
+    {
+        string snd = gameObject.name + "_btr";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        Debug.Log("Riot Shield Stow Sound Played");
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
 
 }
