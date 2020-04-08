@@ -87,11 +87,17 @@ MonoBehaviour:
   power: 30
   spin: 1
   maxSpinSpeed: 200
+  spriteObject: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
-  amplitude: 10
+  amplitude: 0
   period: 0.25
   distance: 40
   maxDistance: 100
+  minVariance: 0.2
+  variedAplitude: 0
+  variedPeriod: 0
+  up: {x: 0, y: 1}
+  startPos: {x: 0, y: 0}
 --- !u!1 &5135349752723630498
 GameObject:
   m_ObjectHideFlags: 0

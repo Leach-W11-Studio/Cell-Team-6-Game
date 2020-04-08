@@ -30,6 +30,9 @@ public enum FSMStateID
     WallSpawn,
     BossDead,
     LashReady,
+
+    //Experimental Boss
+    EXProjectile,
 }
 
 public enum FSMTransitions

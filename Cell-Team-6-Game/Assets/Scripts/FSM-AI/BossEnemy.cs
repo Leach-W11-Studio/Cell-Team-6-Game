@@ -80,12 +80,12 @@ public class BossEnemy : FSM
         bossIdle.AddTransitionState(FSMStateID.Phase2Setup, FSMTransitions.HealthLessThanThreshold);
         //---------------------------------
         bossIdle.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
-        bossIdle.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
+        bossIdle.AddTransitionState(FSMStateID.EXProjectile, FSMTransitions.GreaterThanRad2);
 
         LashReadyState lashReady = new LashReadyState(shootChance);
         lashReady.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         lashReady.AddTransitionState(FSMStateID.Lash, FSMTransitions.InRad1);
-        lashReady.AddTransitionState(FSMStateID.Projectile, FSMTransitions.OORad1AndChance);
+        lashReady.AddTransitionState(FSMStateID.EXProjectile, FSMTransitions.OORad1AndChance);
         lashReady.AddTransitionState(FSMStateID.Lunge, FSMTransitions.InRad2);
 
         LashState lash = new LashState();
@@ -96,7 +96,7 @@ public class BossEnemy : FSM
         lunge.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         lunge.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
 
-        ProjectileAttackState projectile = new ProjectileAttackState();
+        ExProjectileAttack projectile = new ExProjectileAttack();
         projectile.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         projectile.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
 

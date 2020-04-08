@@ -1334,6 +1334,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 373857811, guid: fe451f07b1b2148c2914cf57a89d1f94, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1943273198779000141, guid: fe451f07b1b2148c2914cf57a89d1f94,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3812,7 +3816,7 @@ PrefabInstance:
     - target: {fileID: 6028044762301661378, guid: 7787fb3966e22ca488dc37f12ede122c,
         type: 3}
       propertyPath: shootCone
-      value: 0.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6028044762301661378, guid: 7787fb3966e22ca488dc37f12ede122c,
         type: 3}
@@ -3823,6 +3827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: radRange.rad2
       value: 36.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028044762301661378, guid: 7787fb3966e22ca488dc37f12ede122c,
+        type: 3}
+      propertyPath: shootInterval
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6028044762301661379, guid: 7787fb3966e22ca488dc37f12ede122c,
         type: 3}
