@@ -103,7 +103,7 @@ public class PlaySounds : MonoBehaviour
     {
         string snd = gameObject.name + "_bd";
         string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
-        Debug.Log("Riot Shield Stow Sound Played");
+        Debug.Log("Boss Death Sound Played");
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
     }
 
@@ -112,23 +112,38 @@ public class PlaySounds : MonoBehaviour
     {
         string snd = gameObject.name + "_bpt";
         string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
-        Debug.Log("Riot Shield Stow Sound Played");
+        Debug.Log("Phase Change Sound Played");
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
     }
     public void PlayBossSummonWall()
     {
         string snd = gameObject.name + "_bsw";
         string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
-        Debug.Log("Riot Shield Stow Sound Played");
+        Debug.Log("Summon Wall Sound Played");
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
     }
 
-    public void PlayTrackingRounds()
+    public void PlayGrappleSound()
+    {
+        string snd = gameObject.name + "_bg";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        Debug.Log("Grapple Sound Played");
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
+
+     public void PlayLashAttack()
+    {
+        string snd = gameObject.name + "_bla";
+        string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
+        Debug.Log("Lash Attack Sound Played");
+        if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
+    }
+
+     public void PlayTrackingRounds()
     {
         string snd = gameObject.name + "_btr";
         string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
-        Debug.Log("Riot Shield Stow Sound Played");
+        Debug.Log("Tracking Rounds Sound Played");
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
     }
-
 }
