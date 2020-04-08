@@ -20,6 +20,7 @@ public class SceneChanger : MonoBehaviour
 
     private void Start()
     {
+        Variables = FindObjectOfType<PlayerController>().GetComponent<HealthScript>();
         File.Delete(Application.persistentDataPath + "/AbilitySave.txt");
         Abilitysave.listSave.Clear();
     }
@@ -34,7 +35,7 @@ public class SceneChanger : MonoBehaviour
 
     public void loadnext()
     {
-        SceneManager.LoadScene(Next_Level);
+        GameMaster.gameMaster.LoadLevel(Next_Level);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
