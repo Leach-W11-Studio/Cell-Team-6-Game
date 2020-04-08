@@ -139,9 +139,11 @@ public class PlaySounds : MonoBehaviour
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
     }
 
-     public void PlayTrackingRounds()
+    
+
+     public void PlayBossRoar()
     {
-        string snd = gameObject.name + "_btr";
+        string snd = gameObject.name + "_br";
         string transsnd = SoundTranslation.GetSoundIDTranslation(snd);
         Debug.Log("Tracking Rounds Sound Played");
         if (transsnd.Length > 0) SoundManager.PlaySound(gameObject.GetHashCode(), transsnd);
