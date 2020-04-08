@@ -18,6 +18,7 @@ public class HealthScript : MonoBehaviour
     public UnityEvent onTakeDamage;
     public bool isDead = false;
     public bool isplayer = false; //Testing Remove Later
+    public bool isBoss = false;
     private int Damage;
     private int Deathtime;
     private Animator PlayerAnim;
@@ -109,13 +110,13 @@ public class HealthScript : MonoBehaviour
             if (collision.gameObject.CompareTag("Enemy") && !invincible) {
                 HealthScript enemyHealth = collision.gameObject.GetComponent<HealthScript>();
                 if (enemyHealth) {
-                    if (!enemyHealth.isDead) {
+                    if (!enemyHealth.isDead && !enemyHealth.isBoss) {
                         Destroy(collision.gameObject);
                         Player_Take_Damage();
                     }
                 }
             }
-            else {
+            else if (collision.gameObject.CompareTag("EnemyBullet")) {
                 collision.gameObject.SetActive(false);
                 Player_Take_Damage();
             }
@@ -139,14 +140,17 @@ public class HealthScript : MonoBehaviour
                 isDead = true;
                 //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 StartCoroutine("DieWait", waitTime);
-                //GameMaster.gameMaster.LoseGame();
+                GameMaster.gameMaster.LoseGame();
             }
         }
         else
         {
             if (isDead == false)
             {
-                PlayerAnim.SetTrigger("IsDead");
+                if (!isBoss)
+                {
+                    PlayerAnim.SetTrigger("IsDead");
+                }
                 isDead = true;
                 //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 StartCoroutine("DieWait", waitTime);
@@ -159,6 +163,9 @@ public class HealthScript : MonoBehaviour
     {
         yield return new WaitForSeconds(Deathtime);
         // Debug.Break();
-        Destroy(gameObject, waitTime);
+        if (!isBoss)
+        {
+            Destroy(gameObject, waitTime);
+        }
     }
 }

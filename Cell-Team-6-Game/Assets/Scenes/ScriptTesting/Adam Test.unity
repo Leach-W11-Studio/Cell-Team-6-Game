@@ -148,7 +148,7 @@ PrefabInstance:
     - target: {fileID: 1816301911787820825, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1816301911787820827, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
@@ -222,7 +222,7 @@ PrefabInstance:
     - target: {fileID: 1816301911787820825, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1816301911787820827, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
@@ -434,7 +434,7 @@ PrefabInstance:
     - target: {fileID: 1816301911787820825, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1816301911787820827, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
@@ -1344,7 +1344,7 @@ PrefabInstance:
     - target: {fileID: 1816301911787820825, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1816301911787820827, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
@@ -2198,20 +2198,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 631388244, guid: 7787fb3966e22ca488dc37f12ede122c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -10.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 6028044762301661378, guid: 7787fb3966e22ca488dc37f12ede122c,
-        type: 3}
-      propertyPath: Active
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6028044762301661378, guid: 7787fb3966e22ca488dc37f12ede122c,
-        type: 3}
-      propertyPath: shootCone
-      value: 0.661
-      objectReference: {fileID: 0}
     - target: {fileID: 6028044762301661379, guid: 7787fb3966e22ca488dc37f12ede122c,
         type: 3}
       propertyPath: m_Name
@@ -2895,6 +2881,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
       value: 38.33399
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420311846129535585, guid: 0b174b020f4f2884e9dfc981feca656e,
+        type: 3}
+      propertyPath: m_LocalAABB.m_Center.z
+      value: -0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420311846129535585, guid: 0b174b020f4f2884e9dfc981feca656e,
+        type: 3}
+      propertyPath: m_LocalAABB.m_Extent.z
+      value: 0.005
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7304620934935924596, guid: 0b174b020f4f2884e9dfc981feca656e, type: 3}

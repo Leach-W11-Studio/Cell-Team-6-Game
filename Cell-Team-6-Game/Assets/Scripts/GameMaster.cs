@@ -33,6 +33,13 @@ public class GameMaster : MonoBehaviour
         canvas = FindObjectOfType<Canvas>();
     }
 
+    public void Update()
+    {
+        if (Input.GetButtonDown("Console")) { 
+            Debug.developerConsoleVisible = !Debug.developerConsoleVisible;
+        }
+    }
+
     public void RestartLevel() {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         LoadLevel(sceneIndex);
@@ -40,7 +47,13 @@ public class GameMaster : MonoBehaviour
 
     public void LoadLevel(int sceneIndex) {
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync(sceneIndex);
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+    public void LoadLevel(string sceneName)
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(sceneName);
     }
 
     public void Quit() {

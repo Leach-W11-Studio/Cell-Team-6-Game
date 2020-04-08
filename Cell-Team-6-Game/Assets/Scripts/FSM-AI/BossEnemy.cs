@@ -28,7 +28,10 @@ public class BossEnemy : FSM
     public float shootCone;
 
     public List<Animator> tentacles;
+    public List<CircleCollider2D> bones;
     public List<GameObject> spawnWalls;
+    public Dictionary<Animator, List<CircleCollider2D>> tentacleColliders;
+
     public float Phase2Threshold;
     public float lashDistance;
     public float projectileDistance;
@@ -48,6 +51,19 @@ public class BossEnemy : FSM
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
+        tentacleColliders = new Dictionary<Animator, List<CircleCollider2D>>();
+        //Sets the bones for each tentcle in a dictionary... can be referenced via tentacleColliders[tentacle]
+        foreach (var tentacle in tentacles)
+        {
+            bones = new List<CircleCollider2D>(tentacle.transform.GetComponentsInChildren<CircleCollider2D>());
+            Debug.Log(bones.Count);
+            tentacleColliders.Add(tentacle, bones);
+            //Sets bones inactive
+            foreach (var bone in bones)
+            {
+                bone.enabled = false;
+            }
+        }
         doWallSpawnTrigger = false;
         //Phase2Threshold = 200;
         muzzle = transform.Find("Muzzle");
@@ -88,7 +104,7 @@ public class BossEnemy : FSM
         phase2Setup.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         phase2Setup.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
 
-        DeadState dead = new DeadState();
+        BossDeadState dead = new BossDeadState();
 
         AddFSMState(bossIdle);
         AddFSMState(projectile);

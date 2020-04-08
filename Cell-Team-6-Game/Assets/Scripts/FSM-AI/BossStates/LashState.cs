@@ -10,7 +10,7 @@ public class LashState : FSMState
     private float animtime;
     private float Range;
     private Animator chosenTent;
-    private bool initialize = true;
+    private bool initialize;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
     public override void Act(Transform player, GameObject self)
@@ -47,28 +47,39 @@ public class LashState : FSMState
         animtime = 1.5f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
+        initialize = true;
+
         foreach (Animator tentacle in stateMachine.tentacles)
         {
             if (initialize == true)
             {
-                Range = Vector2.Distance(tentacle.transform.position, player.position);
+                Range = Vector2.Distance(tentacle.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).transform.position, player.position);
                 initialize = false;
+                chosenTent = tentacle;
             }
             else
             {
-                if (Vector2.Distance(tentacle.transform.position, player.position) < Range)
+                if (Vector2.Distance(tentacle.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).transform.position, player.position) < Range)
                 {
-                    Range = Vector2.Distance(tentacle.transform.position, player.position);
+                    Range = Vector2.Distance(tentacle.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).transform.position, player.position);
                     chosenTent = tentacle;
                 }
             }
         }
         chosenTent.SetBool("IsHorizontal", true);
+        foreach(CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        {
+            bone.enabled = true;
+        }
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
         chosenTent.SetBool("IsHorizontal", false);
+        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        {
+            bone.enabled = false;
+        }
     }
 
 }

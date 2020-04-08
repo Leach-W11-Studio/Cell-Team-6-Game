@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.U2D;
 using PolyNav;
 
-using UnityEditor;
+//using UnityEditor;
 
 [RequireComponent(typeof(CompositeCollider2D))]
 [RequireComponent(typeof(PolyNav.PolyNavObstacle))]
@@ -168,23 +168,4 @@ public class ProceduralWall : MonoBehaviour
     }
 
     
-}
-
-[CanEditMultipleObjects]
-[CustomEditor(typeof(ProceduralWall))]
-public class ProceduralWallEditor : Editor {
-    public override void OnInspectorGUI () {
-        serializedObject.Update();
-        MonoBehaviour mono = (MonoBehaviour)target;
-        ProceduralWall scriptTarget = mono.GetComponent<ProceduralWall>();
-        PolyNavObstacle pObstacle = mono.GetComponent<PolyNavObstacle>();
-        CompositeCollider2D collider = mono.GetComponent<CompositeCollider2D>();
-        base.OnInspectorGUI();
-
-        if (GUILayout.Button("Build Wall")) {
-            scriptTarget.Generate();
-        }
-
-        serializedObject.ApplyModifiedProperties();
-    }
 }

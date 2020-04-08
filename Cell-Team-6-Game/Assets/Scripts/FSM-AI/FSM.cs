@@ -116,6 +116,7 @@ public abstract class FSM : MonoBehaviour
     public void Deactivate()
     {
         Active = false;
+        FollowCamera.instance.RemoveTarget(transform);
     }
 
     /// <summary>

@@ -11,6 +11,8 @@ public class SimpleBullet : MonoBehaviour, IShootable
     public float maxSpinSpeed = 200;
     protected Rigidbody2D rb;
     public GameObject spriteObject;
+    //[Range(0, 1)]
+    //public float accuracy = 1;
 
     public Vector3 velocity;
     private Vector3 direction;
@@ -25,11 +27,13 @@ public class SimpleBullet : MonoBehaviour, IShootable
     }
 
     void Start() {
-        spriteObject = transform.GetChild(0).gameObject;
+        
     }
 
     void IShootable.Shoot()
     {
+        spriteObject = transform.GetChild(0).gameObject;
+        //AjustDirection();
         Shoot();
     }
 
@@ -39,6 +43,14 @@ public class SimpleBullet : MonoBehaviour, IShootable
 
         rotationSpeed = Random.Range(-maxSpinSpeed * 60, maxSpinSpeed * 60);
     }
+
+    //protected void AjustDirection() {
+    //    int direction = Random.Range(-1f, 1f) >= 0 ? 1 : -1; // Basically a coin flip. ensures a random choice of 1 or -1;
+    //    Vector2 perp = Vector2.Perpendicular(transform.up);
+    //    Vector2 randomDirection = Vector2.Lerp(transform.up, direction * perp, accuracy);
+
+    //    transform.up = randomDirection;
+    //}
 
     protected void Update() {
         velocity = (transform.position - lastPosition) / Time.deltaTime;
