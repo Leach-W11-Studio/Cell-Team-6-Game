@@ -30,7 +30,7 @@ public class LungeState : FSMState
     public override void Reason(Transform player, GameObject self)
     {
         //Dead Check
-        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
+        if (self.GetComponent<BossEnemy>().coreHealthScript.currentHealth <= 0)
         {
             parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }

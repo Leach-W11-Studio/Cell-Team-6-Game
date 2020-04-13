@@ -43,12 +43,12 @@ public class BossIdleState : FSMState
     {
         if (animDone)
         {
-            //Health Checks
+            //Health and State Checks
             if (health.isDead || health.currentHealth <= 0)
             {
                 stateMachine.SetTransition(FSMTransitions.OutOfHealth);
             }
-            else if (health.currentHealth <= stateMachine.Phase2Threshold)
+            else if (stateMachine.CheckTentacleCount() <= stateMachine.Phase2Threshold)
             {
                 stateMachine.SetTransition(FSMTransitions.HealthLessThanThreshold);
             }

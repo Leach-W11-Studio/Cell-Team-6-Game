@@ -49,7 +49,7 @@ public class WallSpawnState : FSMState
     public override void Reason(Transform player, GameObject self)
     {
         //Death Check
-        if (stateMachine.healthScript.currentHealth <= 0)
+        if (stateMachine.coreHealthScript.currentHealth <= 0)
         {
             parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
