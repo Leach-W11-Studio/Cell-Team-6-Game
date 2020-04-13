@@ -8,6 +8,7 @@ public class LungeState : FSMState
     private float attackSpeed;
     private BossEnemy stateMachine;
     private float animtime;
+    private float position;
     private float Range;
     private bool initialize;
     private Animator chosenTent;
@@ -49,6 +50,7 @@ public class LungeState : FSMState
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
         initialize = true;
+
         foreach (Animator tentacle in stateMachine.tentacles)
         {
             if (initialize == true)
@@ -66,20 +68,46 @@ public class LungeState : FSMState
                 }
             }
         }
+
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            if (tentacle != chosenTent)
+            {
+                position = tentacle.transform.position.x - chosenTent.transform.position.x;
+                if (position > 0.0f)
+                {
+                    //Set right side animation
+                }
+                else
+                {
+                    //set left side animation
+                }
+            }
+        }
         chosenTent.SetBool("IsVertical", true);
-        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        chosenTent.GetComponent<HealthScript>().invincible = false;
+        /*foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = true;
-        }
+        }*/
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
         chosenTent.SetBool("IsVertical", false);
-        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        chosenTent.GetComponent<HealthScript>().invincible = true;
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            if (tentacle != chosenTent)
+            {
+                //Set both left and right side animations false
+            }
+        }
+
+        /*foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = false;
-        }
+        }*/
     }
 
 }
