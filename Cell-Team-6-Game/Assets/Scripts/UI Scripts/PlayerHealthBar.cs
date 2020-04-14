@@ -15,7 +15,17 @@ public class PlayerHealthBar : MonoBehaviour
     public bool shield;
 
     RectTransform heartsContainer;
-    HealthScript playerHealth;
+    HealthScript _playerHealth;
+    HealthScript playerHealth {
+        get {
+            if (!_playerHealth) {
+                Debug.Log("Player health is null.");
+                _playerHealth = FindObjectOfType<PlayerController>().GetComponent<HealthScript>();
+            }
+            return _playerHealth;
+        }
+        set { _playerHealth = value; }
+    }
     Image shieldIcon;
 
     private float lastWidth;
@@ -23,10 +33,10 @@ public class PlayerHealthBar : MonoBehaviour
     private int lastMaxHealth;
     private List<GameObject> hearts;
 
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
         Debug.Log("Awake");
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthScript>();
         maxHealth = playerHealth.maxHealth;
         currentHealth = playerHealth.currentHealth;
         shield = playerHealth.sheild;
@@ -34,21 +44,16 @@ public class PlayerHealthBar : MonoBehaviour
 
         hearts = new List<GameObject>();
         heartsContainer = transform.Find("Hearts").GetComponent<RectTransform>();
-        for (int i = 0; i < maxHealth; i++) {
+        for (int i = 0; i < maxHealth; i++)
+        {
             GameObject heart = Instantiate(heartPrefab, heartsContainer);
-            RectTransform rt = heart.GetComponent<RectTransform>(); 
+            RectTransform rt = heart.GetComponent<RectTransform>();
             rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, heartSize);
             rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, heartSize);
             hearts.Add(heart);
         }
         Arrange();
         lastMaxHealth = playerHealth.maxHealth;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -67,7 +72,7 @@ public class PlayerHealthBar : MonoBehaviour
             }
             else {
                 for (int i = 0; i < difference; i++) {
-                    GameObject heart = Instantiate(heartPrefab, heartsContainer);
+                    GameObject heart = Instantiate<GameObject>(heartPrefab, heartsContainer);
                     RectTransform rt = heart.GetComponent<RectTransform>();
                     rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, heartSize);
                     rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, heartSize);

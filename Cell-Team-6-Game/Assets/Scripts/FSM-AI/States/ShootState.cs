@@ -6,7 +6,8 @@ public class ShootState : FSMState
 {
     float retreatDistance;
     private BulletSpawnerScript gun;
-    private HealthScript selfHealthScript;
+    //private HealthScript selfHealthScript; - Depricated
+    private BaseEnemy parentEnemyReference;
     private float rotationSpeed;
 
     public ShootState(BulletSpawnerScript bulletSpawner)
@@ -34,31 +35,29 @@ public class ShootState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (selfHealthScript.currentHealth <= 0)
+        if (parentEnemyReference.healthScript.currentHealth <= 0)
         {
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
-        else if (Vector2.Distance(self.transform.position, player.position) > self.GetComponent<BaseEnemy>().agroDistance)
+        else if (Vector2.Distance(self.transform.position, player.position) > parentEnemyReference.agroDistance)
         {
-            self.GetComponent<BaseEnemy>().spawnerScript.shoot = false;
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerOutOfRange);
+            parentFSM.SetTransition(FSMTransitions.PlayerOutOfRange);
         }
         else if (retreatDistance != 0 && Vector2.Distance(self.transform.position, player.position) <= retreatDistance)
         {
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.PlayerTooClose);
+            parentFSM.SetTransition(FSMTransitions.PlayerTooClose);
         }
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
         gun.shoot = true;
-
-        selfHealthScript = self.GetComponent<BaseEnemy>().healthScript;
-        rotationSpeed = self.GetComponent<BaseEnemy>().rotationSpeed;
+        parentEnemyReference = self.GetComponent<BaseEnemy>();
+        rotationSpeed = parentEnemyReference.rotationSpeed;
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-
+        gun.shoot = false;
     }
 }

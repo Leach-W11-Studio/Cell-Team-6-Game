@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6957792872896763430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7173847436805199381}
+  - component: {fileID: 4023686049341030750}
+  m_Layer: 0
+  m_Name: Object Pools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7173847436805199381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6957792872896763430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -7.7283792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4023686049341030750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6957792872896763430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b262e1e70496c0d449faf8cf66dbb11f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: Bullet
+    prefab: {fileID: 3215105696302279398, guid: 83d4a893221056744a7e5383ab569b4a,
+      type: 3}
+    size: 100
+  - tag: PlayerBullet
+    prefab: {fileID: 2610944719572602175, guid: a10e76e8133bb9646b1a96c168883145,
+      type: 3}
+    size: 200
+  - tag: DoubleBullet
+    prefab: {fileID: 2665330704865779302, guid: f03d109790c29764caa9be5918aedd47,
+      type: 3}
+    size: 3
+  - tag: SpreadBullet
+    prefab: {fileID: 5747052449422300957, guid: 15de70adb1add4c4ea638ee5807188c8,
+      type: 3}
+    size: 3
+  - tag: MegaBullet
+    prefab: {fileID: 3099422548653011693, guid: dd50b153b003e694e91825ae469c3c36,
+      type: 3}
+    size: 50
+  - tag: RicochetBullet
+    prefab: {fileID: 6576466730651800169, guid: 361492069517cf44081bf83607b4b6ab,
+      type: 3}
+    size: 50
+  - tag: WaterBullet
+    prefab: {fileID: 770023900752319132, guid: d8933158051d0a54f8d4f5a05d603bea, type: 3}
+    size: 50
+  - tag: BossBulletPhase1
+    prefab: {fileID: 950891525745118312, guid: 3ccfccea91be43346b904aef5b0bfc13, type: 3}
+    size: 100
+  - tag: BossBulletPhase2
+    prefab: {fileID: 3215613283088651082, guid: f38a2756071130d47bd047df020d5320,
+      type: 3}
+    size: 100

@@ -9,6 +9,8 @@ public class IdleState : FSMState
         stateID = FSMStateID.Idle;
     }
 
+    private BaseEnemy parentEnemyReference;
+
     public override void Act(Transform player, GameObject self)
     {
         //Does nothing in this state. Act is therefore empty as of now.
@@ -16,19 +18,19 @@ public class IdleState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        if (self.GetComponent<BaseEnemy>().healthScript.currentHealth <= 0)
+        if (parentEnemyReference.healthScript.currentHealth <= 0)
         {
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
-        else if (Vector2.Distance(self.transform.position, player.position) <= self.GetComponent<BaseEnemy>().agroDistance)
+        else if (Vector2.Distance(self.transform.position, player.position) <= parentEnemyReference.agroDistance)
         {
-            self.GetComponent<BaseEnemy>().SetTransition(FSMTransitions.SawPlayer);
+            parentFSM.SetTransition(FSMTransitions.SawPlayer);
         }
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-
+        parentEnemyReference = self.GetComponent<BaseEnemy>();
     }
 
     public override void OnStateExit(Transform player, GameObject self)
