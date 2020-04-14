@@ -12,6 +12,7 @@ public class LashState : FSMState
     private float Range;
     private Animator chosenTent;
     private bool initialize;
+    private float Delay;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
     public override void Act(Transform player, GameObject self)
@@ -38,7 +39,9 @@ public class LashState : FSMState
         //Completion Check
         else if (behaviorComplete)
         {
-            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+            Delay -= Time.deltaTime;
+            if (Delay <= 0)
+                parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
         }
     }
 
@@ -46,6 +49,7 @@ public class LashState : FSMState
     {
         Range = 0.0f;
         animtime = 1.5f;
+        Delay = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
         initialize = true;

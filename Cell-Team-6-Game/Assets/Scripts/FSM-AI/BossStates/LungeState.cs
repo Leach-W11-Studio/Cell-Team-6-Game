@@ -11,6 +11,7 @@ public class LungeState : FSMState
     private float position;
     private float Range;
     private bool initialize;
+    private float Delay;
     private Animator chosenTent;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
     
@@ -39,7 +40,8 @@ public class LungeState : FSMState
         //Completion Check
         else if (behaviorComplete)
         {
-            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+            if (Delay <= 0)
+                parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
         }
     }
 
@@ -47,6 +49,7 @@ public class LungeState : FSMState
     {
         Range = 0.0f;
         animtime = 1.0f;
+        Delay = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
         initialize = true;
@@ -71,16 +74,17 @@ public class LungeState : FSMState
 
         foreach (Animator tentacle in stateMachine.tentacles)
         {
+            tentacle.SetBool("Idle", false);
             if (tentacle != chosenTent)
             {
                 position = tentacle.transform.position.x - chosenTent.transform.position.x;
                 if (position > 0.0f)
                 {
-                    //Set right side animation
+                    //set right animation here
                 }
                 else
                 {
-                    //set left side animation
+                    //Set left avoidance here
                 }
             }
         }
@@ -100,7 +104,7 @@ public class LungeState : FSMState
         {
             if (tentacle != chosenTent)
             {
-                //Set both left and right side animations false
+                //Set both avoidance animations here
             }
         }
 
