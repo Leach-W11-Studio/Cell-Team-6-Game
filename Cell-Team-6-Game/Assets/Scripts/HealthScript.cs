@@ -163,7 +163,7 @@ public class HealthScript : MonoBehaviour
     {
         yield return new WaitForSeconds(Deathtime);
         // Debug.Break();
-        if (!isBoss)
+        if (!isBoss && !GetComponent<BossWalls>())
         {
             Destroy(gameObject, waitTime);
         }
