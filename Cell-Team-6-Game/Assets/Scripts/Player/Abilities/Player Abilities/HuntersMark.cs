@@ -39,7 +39,7 @@ public class HuntersMark : Ability
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
-            float curDistance = Vector2.Distance(enemy.transform.position, transform.root.position);
+            float curDistance = Vector2.Distance(enemy.transform.position, transform.parent.parent.position);
             //Debug.Log(curDistance);
             if (curDistance < currentMinDistance)
             {
