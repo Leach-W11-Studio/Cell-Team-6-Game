@@ -27,6 +27,7 @@ public class BossEnemy : FSM
     [Range(0f, 1f)]
     public float shootCone;
 
+    public Animator CoreAnim;
     public List<Animator> tentacles;
     public List<CircleCollider2D> bones;
     public List<GameObject> spawnWalls;
@@ -50,6 +51,7 @@ public class BossEnemy : FSM
     {
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
+        //CoreAnim = transform.Find("Boss").GetComponent<Animator>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
         //tentacleColliders = new Dictionary<Animator, List<CircleCollider2D>>();
         //Sets the bones for each tentcle in a dictionary... can be referenced via tentacleColliders[tentacle]

@@ -40,6 +40,7 @@ public class LungeState : FSMState
         //Completion Check
         else if (behaviorComplete)
         {
+            Delay -= Time.deltaTime;
             if (Delay <= 0)
                 parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
         }
