@@ -27,10 +27,11 @@ public class BossEnemy : FSM
     [Range(0f, 1f)]
     public float shootCone;
 
+    public Animator CoreAnim;
     public List<Animator> tentacles;
     public List<CircleCollider2D> bones;
     public List<GameObject> spawnWalls;
-    public Dictionary<Animator, List<CircleCollider2D>> tentacleColliders;
+    //public Dictionary<Animator, List<CircleCollider2D>> tentacleColliders;
 
     public float Phase2Threshold;
     public float lashDistance;
@@ -50,10 +51,11 @@ public class BossEnemy : FSM
     {
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
+        //CoreAnim = transform.Find("Boss").GetComponent<Animator>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
-        tentacleColliders = new Dictionary<Animator, List<CircleCollider2D>>();
+        //tentacleColliders = new Dictionary<Animator, List<CircleCollider2D>>();
         //Sets the bones for each tentcle in a dictionary... can be referenced via tentacleColliders[tentacle]
-        foreach (var tentacle in tentacles)
+        /*foreach (var tentacle in tentacles)
         {
             bones = new List<CircleCollider2D>(tentacle.transform.GetComponentsInChildren<CircleCollider2D>());
             Debug.Log(bones.Count);
@@ -63,7 +65,7 @@ public class BossEnemy : FSM
             {
                 bone.enabled = false;
             }
-        }
+        }*/
         doWallSpawnTrigger = false;
         //Phase2Threshold = 200;
         muzzle = transform.Find("Muzzle");
@@ -224,7 +226,11 @@ public class BossEnemy : FSM
 
     protected override void FSMUpdate()
     {
-        //throw new System.NotImplementedException();
+        tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
+        if (tentacles.Count == 0)
+        {
+            healthScript.invincible = false;
+        }
     }
 
     protected override void FSMFixedUpdate()

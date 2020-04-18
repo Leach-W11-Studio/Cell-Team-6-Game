@@ -8,8 +8,10 @@ public class LungeState : FSMState
     private float attackSpeed;
     private BossEnemy stateMachine;
     private float animtime;
+    private float position;
     private float Range;
     private bool initialize;
+    private float Delay;
     private Animator chosenTent;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
     
@@ -38,7 +40,9 @@ public class LungeState : FSMState
         //Completion Check
         else if (behaviorComplete)
         {
-            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+            Delay -= Time.deltaTime;
+            if (Delay <= 0)
+                parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
         }
     }
 
@@ -46,9 +50,11 @@ public class LungeState : FSMState
     {
         Range = 0.0f;
         animtime = 1.0f;
+        Delay = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
         initialize = true;
+
         foreach (Animator tentacle in stateMachine.tentacles)
         {
             if (initialize == true)
@@ -66,20 +72,47 @@ public class LungeState : FSMState
                 }
             }
         }
+
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            tentacle.SetBool("Idle", false);
+            if (tentacle != chosenTent)
+            {
+                position = tentacle.transform.position.x - chosenTent.transform.position.x;
+                if (position > 0.0f)
+                {
+                    //set right animation here
+                }
+                else
+                {
+                    //Set left avoidance here
+                }
+            }
+        }
         chosenTent.SetBool("IsVertical", true);
-        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        chosenTent.GetComponent<HealthScript>().invincible = false;
+        /*foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = true;
-        }
+        }*/
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
         chosenTent.SetBool("IsVertical", false);
-        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        chosenTent.GetComponent<HealthScript>().invincible = true;
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            if (tentacle != chosenTent)
+            {
+                //Set both avoidance animations here
+            }
+        }
+
+        /*foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = false;
-        }
+        }*/
     }
 
 }
