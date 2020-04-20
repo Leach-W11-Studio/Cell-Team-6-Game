@@ -69,7 +69,7 @@ public class BossEnemy : FSM
 
         foreach (var wall in bossWallList) { wall.gameObject.SetActive(false); }
         //Sets the bones for each tentcle in a dictionary... can be referenced via tentacleColliders[tentacle]
-        /*foreach (var tentacle in tentacles)
+        foreach (var tentacle in tentacles)
         {
             bones = new List<CircleCollider2D>(tentacle.transform.GetComponentsInChildren<CircleCollider2D>());
             Debug.Log("There are " + bones.Count + " bones in this tentacle.", tentacle);
@@ -79,7 +79,7 @@ public class BossEnemy : FSM
             {
                 bone.enabled = false;
             }
-        }*/
+        }
         doWallSpawnTrigger = false;
         //Phase2Threshold = 200;
         muzzle = transform.Find("Muzzle");

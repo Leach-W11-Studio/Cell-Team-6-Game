@@ -202,6 +202,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d26604bd4cdad274b85ab5861037aec3, type: 3}
+--- !u!1 &143058759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1377047531489340014, guid: 7787fb3966e22ca488dc37f12ede122c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028044760969874381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &143058764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143058759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  currentHealth: 200
+  sheild: 0
+  invincible: 0
+  healthColor: {r: 0, g: 0, b: 0, a: 0}
+  sheildColor: {r: 0, g: 0, b: 0, a: 0}
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  isDead: 0
+  isplayer: 0
+  isBoss: 0
+  istentacle: 0
+  Deathtime: 0
 --- !u!1001 &237010248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -350,6 +382,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c18677f6451b2f4f9ed15a0983cfc62, type: 3}
+--- !u!1 &288293126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1377047532471327240, guid: 7787fb3966e22ca488dc37f12ede122c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028044760969874381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &288293131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288293126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  currentHealth: 200
+  sheild: 0
+  invincible: 0
+  healthColor: {r: 0, g: 0, b: 0, a: 0}
+  sheildColor: {r: 0, g: 0, b: 0, a: 0}
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  isDead: 0
+  isplayer: 0
+  isBoss: 0
+  istentacle: 0
+  Deathtime: 0
 --- !u!1001 &312124811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -656,6 +720,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d68234b21fed77b4996e3ab93f74bcbb, type: 3}
+--- !u!1 &789654463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6028044761214947615, guid: 7787fb3966e22ca488dc37f12ede122c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028044760969874381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &789654468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789654463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  currentHealth: 200
+  sheild: 0
+  invincible: 0
+  healthColor: {r: 0, g: 0, b: 0, a: 0}
+  sheildColor: {r: 0, g: 0, b: 0, a: 0}
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  isDead: 0
+  isplayer: 0
+  isBoss: 0
+  istentacle: 0
+  Deathtime: 0
 --- !u!1001 &812557286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1015,6 +1111,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 251ede5ea40bfab408d29cc949c499c3, type: 3}
+--- !u!1 &1274078063 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1377047531137322931, guid: 7787fb3966e22ca488dc37f12ede122c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028044760969874381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1274078068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274078063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  currentHealth: 200
+  sheild: 0
+  invincible: 0
+  healthColor: {r: 0, g: 0, b: 0, a: 0}
+  sheildColor: {r: 0, g: 0, b: 0, a: 0}
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  isDead: 0
+  isplayer: 0
+  isBoss: 0
+  istentacle: 0
+  Deathtime: 0
 --- !u!1 &1314069985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,6 +1497,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 898b956ed3bf541a4a1be5ce29d161f2, type: 3}
+--- !u!1 &1580230100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1377047531835523749, guid: 7787fb3966e22ca488dc37f12ede122c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028044760969874381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1580230105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580230100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08114a8ee5924eb285039f8084bca44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  currentHealth: 200
+  sheild: 0
+  invincible: 0
+  healthColor: {r: 0, g: 0, b: 0, a: 0}
+  sheildColor: {r: 0, g: 0, b: 0, a: 0}
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  isDead: 0
+  isplayer: 0
+  isBoss: 0
+  istentacle: 0
+  Deathtime: 0
 --- !u!1001 &1597918004
 PrefabInstance:
   m_ObjectHideFlags: 0
