@@ -245,9 +245,6 @@ public class BossEnemy : FSM
         {
             timeSinceWallSpawn += Time.deltaTime;
         }
-        else if (healthPercent <= Phase2Threshold) {
-            RebuildFSMForPhase2();
-        }
     }
 
     protected override void FSMFixedUpdate()
