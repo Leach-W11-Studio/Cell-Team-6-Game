@@ -6,7 +6,7 @@ public class HuntersMark : Ability
 {
     public HuntersMark()
     {
-        abilityName = "HuntersMark";
+        abilityName = "HuntersMarkAbility";
     }
 
     private GameObject[] enemies;

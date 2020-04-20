@@ -19,17 +19,19 @@ public class HealthScript : MonoBehaviour
     public bool isDead = false;
     public bool isplayer = false; //Testing Remove Later
     public bool isBoss = false;
+    public bool istentacle = false;
     private int Damage;
-    private int Deathtime;
+    public int Deathtime;
     private Animator PlayerAnim;
+    private Animator TentAnim;
     FollowCamera Shaker;
 
     void Start()
     {
         Shaker = GameObject.Find("Main Camera").GetComponent<FollowCamera>();
         PlayerAnim = gameObject.GetComponent<Animator>();
+        TentAnim = gameObject.GetComponentInChildren<Animator>();
         onTakeDamage = new UnityEvent();
-        Deathtime = 0;
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
 
@@ -129,8 +131,11 @@ public class HealthScript : MonoBehaviour
         //If it is not a player, and the collision is a player bullet, pass in the damage value from the bullet and call the enemy damage function
         else if (!isplayer && collision.gameObject.CompareTag("PlayerBullet"))
         {
-            Damage = collision.gameObject.GetComponent<SimpleBullet>().Damage();
-            Enemy_Take_Damage(Damage);
+            if (!invincible)
+            {
+                Damage = collision.gameObject.GetComponent<SimpleBullet>().Damage();
+                Enemy_Take_Damage(Damage);
+            }
             collision.gameObject.SetActive(false);
         }
     }
@@ -154,7 +159,13 @@ public class HealthScript : MonoBehaviour
             {
                 if (!isBoss)
                 {
-                    PlayerAnim.SetTrigger("IsDead");
+                    if (!istentacle)
+                        PlayerAnim.SetTrigger("IsDead");
+                    else
+                    {
+                        TentAnim.SetBool("Idle", false);
+                        TentAnim.SetTrigger("Die");
+                    }
                 }
                 isDead = true;
                 //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
@@ -170,7 +181,10 @@ public class HealthScript : MonoBehaviour
         // Debug.Break();
         if (!isBoss && !GetComponent<BossWalls>())
         {
-            Destroy(gameObject, waitTime);
+            if (!istentacle)
+                Destroy(gameObject, waitTime);
+            else
+                gameObject.SetActive(false);
         }
     }
 }

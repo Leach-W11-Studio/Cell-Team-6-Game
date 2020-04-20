@@ -84,6 +84,7 @@ public class BossIdleState : FSMState
         float timeRange = 1f;
         animDone = false;
         foreach(Animator tentacle in stateMachine.tentacles) {
+            tentacle.GetComponent<HealthScript>().invincible = true;
             yield return new WaitForSeconds(Random.Range(0, timeRange));
             tentacle.SetBool("Idle", true);
         }
