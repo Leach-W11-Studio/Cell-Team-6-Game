@@ -70,7 +70,7 @@ public class BossEnemy : FSM
         foreach (var tentacle in tentacles)
         {
             bones = new List<CircleCollider2D>(tentacle.transform.GetComponentsInChildren<CircleCollider2D>());
-            Debug.Log(bones.Count);
+            Debug.Log("There are " + bones.Count + " bones in this tentacle.", tentacle);
             tentacleColliders.Add(tentacle, bones);
             //Sets bones inactive
             foreach (var bone in bones)
