@@ -24,6 +24,7 @@ public enum FSMStateID
     Phase2Setup,
     Lash,
     Lunge,
+    Roar,
     GrappleLash,
     Projectile,
     Tracking,

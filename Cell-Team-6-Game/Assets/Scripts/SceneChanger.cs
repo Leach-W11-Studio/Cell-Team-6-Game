@@ -28,6 +28,7 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -83,9 +84,12 @@ public class SceneChanger : MonoBehaviour
         }
 
         BinaryFormatter binary = new BinaryFormatter();
-        using (FileStream w = File.Open(Application.persistentDataPath + "/AbilitySave.txt", FileMode.Open))
+        if (new FileInfo(Application.persistentDataPath + "/AbilitySave.txt").Exists)
         {
-            Abilitysave = (ListClass)binary.Deserialize(w);
+            using (FileStream w = File.Open(Application.persistentDataPath + "/AbilitySave.txt", FileMode.Open))
+            {
+                Abilitysave = (ListClass)binary.Deserialize(w);
+            }
         }
 
         AbilityCaster abil_cast = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<AbilityCaster>();

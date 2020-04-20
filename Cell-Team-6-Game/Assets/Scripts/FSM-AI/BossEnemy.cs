@@ -31,14 +31,23 @@ public class BossEnemy : FSM
 
     public float wallSpawnInterval;
 
+<<<<<<< HEAD
     [HideInInspector]
+=======
+    public Animator CoreAnim;
+>>>>>>> master
     public List<Animator> tentacles;
     [HideInInspector]
     public List<CircleCollider2D> bones;
+<<<<<<< HEAD
     [HideInInspector]
     public Dictionary<Animator, List<CircleCollider2D>> tentacleColliders;
     [HideInInspector]
     public float timeSinceWallSpawn = 0;
+=======
+    public List<GameObject> spawnWalls;
+    //public Dictionary<Animator, List<CircleCollider2D>> tentacleColliders;
+>>>>>>> master
 
     [Range(0f, 1f)]
     public float Phase2Threshold;
@@ -61,13 +70,18 @@ public class BossEnemy : FSM
     {
         //currentHealth = initalHealth;
         healthScript = GetComponent<HealthScript>();
+        //CoreAnim = transform.Find("Boss").GetComponent<Animator>();
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
+<<<<<<< HEAD
         tentacleColliders = new Dictionary<Animator, List<CircleCollider2D>>();
         bossWallList = new List<BossWalls>(gameObject.GetComponentsInChildren<BossWalls>());
 
         foreach (var wall in bossWallList) { wall.gameObject.SetActive(false); }
+=======
+        //tentacleColliders = new Dictionary<Animator, List<CircleCollider2D>>();
+>>>>>>> master
         //Sets the bones for each tentcle in a dictionary... can be referenced via tentacleColliders[tentacle]
-        foreach (var tentacle in tentacles)
+        /*foreach (var tentacle in tentacles)
         {
             bones = new List<CircleCollider2D>(tentacle.transform.GetComponentsInChildren<CircleCollider2D>());
             Debug.Log("There are " + bones.Count + " bones in this tentacle.", tentacle);
@@ -77,7 +91,7 @@ public class BossEnemy : FSM
             {
                 bone.enabled = false;
             }
-        }
+        }*/
         doWallSpawnTrigger = false;
         //Phase2Threshold = 200;
         muzzle = transform.Find("Muzzle");
@@ -240,13 +254,18 @@ public class BossEnemy : FSM
 
     protected override void FSMUpdate()
     {
+<<<<<<< HEAD
 
         if (phase2)
         {
             timeSinceWallSpawn += Time.deltaTime;
         }
-        else if (healthPercent <= Phase2Threshold) {
-            RebuildFSMForPhase2();
+=======
+        tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
+        if (tentacles.Count == 0)
+        {
+            healthScript.invincible = false;
+>>>>>>> master
         }
     }
 
