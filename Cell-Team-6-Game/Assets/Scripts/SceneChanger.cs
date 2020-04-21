@@ -14,9 +14,6 @@ public class ListClass
 public class SceneChanger : MonoBehaviour
 {
     public string Next_Level;
-    public Vector2 Next_Position;
-    private Vector2 Position_Load;
-    private Transform player_Trans;
     public HealthScript Variables;
     public ListClass Abilitysave = new ListClass(); 
     public List<Ability> currentAbilities;
@@ -26,7 +23,6 @@ public class SceneChanger : MonoBehaviour
         Variables = FindObjectOfType<PlayerController>().GetComponent<HealthScript>();
         File.Delete(Application.persistentDataPath + "/AbilitySave.txt");
         Abilitysave.listSave.Clear();
-        Position_Load = Next_Position;
     }
     void OnEnable()
     {
@@ -102,11 +98,6 @@ public class SceneChanger : MonoBehaviour
             var next_abil = (GameObject)Resources.Load("Prefabs/AbilityPrefabs/" + Abilityname);
             Debug.Log("Trying to add ability" + Abilityname);
             abil_cast.AddAbility(next_abil);
-        }
-        if (Position_Load != new Vector2(0, 0))
-        {
-            player_Trans = GameObject.FindGameObjectWithTag("Player").transform;
-            player_Trans.position = Position_Load;
         }
     }
 
