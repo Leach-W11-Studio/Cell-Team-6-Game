@@ -35,11 +35,10 @@ public class PlayerController : MonoBehaviour
         playerHealth = GetComponent<HealthScript>();
         playerSprite = transform.Find("PlayerSprite").GetComponent<SpriteRenderer>();
         PlayerAnim = gameObject.GetComponent<Animator>();
-        playerHealth.onTakeDamage.AddListener(() => {
+        playerHealth.onTakeDamage.AddListener(() =>
+        {
             StartCoroutine(Invincible());
         });
-        Freeze_Unfreeze();
-        Yeet(5, 1);
     }
 
     void Movement()
