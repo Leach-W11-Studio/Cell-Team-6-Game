@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
+    private float ogspeed;
     [Tooltip("The number to divide the moveSpeed by when walking")]
     public float walkModifier;
     public float explosionBufferTime;
@@ -34,7 +35,8 @@ public class PlayerController : MonoBehaviour
         playerHealth = GetComponent<HealthScript>();
         playerSprite = transform.Find("PlayerSprite").GetComponent<SpriteRenderer>();
         PlayerAnim = gameObject.GetComponent<Animator>();
-        playerHealth.onTakeDamage.AddListener(() => {
+        playerHealth.onTakeDamage.AddListener(() =>
+        {
             StartCoroutine(Invincible());
         });
     }
@@ -127,11 +129,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Freeze_Unfreeze()
+    {
+        if (moveSpeed > 0)
+        {
+            ogspeed = moveSpeed;
+            moveSpeed = 0;
+            transform.GetComponent<Animator>().enabled = false;
+        }
+        else
+        {
+            moveSpeed = ogspeed;
+            transform.GetComponent<Animator>().enabled = true;
+        }
+    }
+
+    public void Yeet(float sendspeed = 1, float flingtime = 2)
+    {
+        StartCoroutine(Yeetus(flingtime, sendspeed));
+    }
+
     void FixedUpdate()
     {
         Movement();
         MousePoint();
         Firing();
+    }
+
+    IEnumerator Yeetus(float flingtime, float sendspeed)
+    {
+        float elapsed = 0.0f;
+        while (elapsed < flingtime)
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y - sendspeed/10);
+            yield return new WaitForSeconds(Time.deltaTime);
+            elapsed += Time.deltaTime;
+        }
     }
     
     IEnumerator ExplosionBuffer() {
