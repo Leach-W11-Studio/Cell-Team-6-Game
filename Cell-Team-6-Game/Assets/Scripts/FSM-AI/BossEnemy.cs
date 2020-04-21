@@ -41,7 +41,6 @@ public class BossEnemy : FSM
     [HideInInspector]
     public float timeSinceWallSpawn = 0;
 
-    [Range(0f, 1f)]
     public float Phase2Threshold;
     public int shootChance = 10;
 
