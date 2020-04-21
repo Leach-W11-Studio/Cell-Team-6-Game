@@ -9,10 +9,17 @@ public class BossIdleStatePhase2 : BossIdleState
     {
         stateID = FSMStateID.BossIdlePhase2;
     }
+    public BossIdleStatePhase2(int numBeforeRoar)
+    {
+        stateID = FSMStateID.BossIdlePhase2;
+        roarThreshold = numBeforeRoar;
+    }
 
-    private float GetPercentWalls() {
+    private float GetPercentWalls()
+    {
         int activeWalls = 0;
-        foreach (var wall in stateMachine.bossWallList) {
+        foreach (var wall in stateMachine.bossWallList)
+        {
             if (wall.isActive) { activeWalls++; }
         }
 
@@ -27,13 +34,21 @@ public class BossIdleStatePhase2 : BossIdleState
             stateMachine.SetTransition(FSMTransitions.OutOfHealth);
         }
 
+        //Roar Check
+        else if (attacksSinceLastRoar >= roarThreshold)
+        {
+            attacksSinceLastRoar = 0;
+            stateMachine.SetTransition(FSMTransitions.PlayerInRangeTooLong);
+        }
+
         //Range Checks - This only chooses whether to shoot or ready lash. Logic for choosing lash is in LashReadyState.
         else if (GetPercentWalls() <= stateMachine.wallSpawnThreshold && stateMachine.timeSinceWallSpawn >= stateMachine.wallSpawnInterval)
         {
             stateMachine.SetTransition(FSMTransitions.WallSpawnTriggered);
         }
-        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2)
+        else if (stateMachine.RadRangeCheck(player) == Radius.Rad2 || stateMachine.RadRangeCheck(player) == Radius.Rad1)
         {
+            attacksSinceLastRoar++;
             stateMachine.SetTransition(FSMTransitions.InMeleeRange);
         }
         else if (stateMachine.RadRangeCheck(player) == Radius.Rad3)
