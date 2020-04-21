@@ -16,6 +16,7 @@ public class HealthScript : MonoBehaviour
     public Color healthColor;
     public Color sheildColor;
     public UnityEvent onTakeDamage;
+    public UnityEvent onCollidePlayer;
     public bool isDead = false;
     public bool isplayer = false; //Testing Remove Later
     public bool isBoss = false;
@@ -109,7 +110,8 @@ public class HealthScript : MonoBehaviour
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
             //Debug.Log("being hit");
-            if (collision.gameObject.CompareTag("Enemy") && !invincible) {
+            if (collision.gameObject.CompareTag("Enemy") && !invincible)
+            {
                 HealthScript enemyHealth = collision.gameObject.GetComponent<HealthScript>();
                 if (enemyHealth)
                 {
@@ -119,11 +121,13 @@ public class HealthScript : MonoBehaviour
                         Player_Take_Damage();
                     }
                 }
-                else {
+                else
+                {
                     Player_Take_Damage();
                 }
             }
-            else if (collision.gameObject.CompareTag("EnemyBullet")) {
+            else if (collision.gameObject.CompareTag("EnemyBullet"))
+            {
                 collision.gameObject.SetActive(false);
                 Player_Take_Damage();
             }
@@ -137,6 +141,10 @@ public class HealthScript : MonoBehaviour
                 Enemy_Take_Damage(Damage);
             }
             collision.gameObject.SetActive(false);
+        }
+
+        if (collision.gameObject.CompareTag("Player")) {
+            onCollidePlayer.Invoke();
         }
     }
 
