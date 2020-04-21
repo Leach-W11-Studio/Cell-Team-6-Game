@@ -11,6 +11,10 @@ public class GrappleLashState : FSMState
     private bool initialize = true;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
+    private Collider2D tentacleHead;
+
+    private PlayerController player;
+
     public override void Act(Transform player, GameObject self)
     {
         animtime -= Time.deltaTime;
@@ -46,6 +50,8 @@ public class GrappleLashState : FSMState
         animtime = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
+        this.player = player.GetComponent<PlayerController>();
+        tentacleHead = stateMachine.tentacleColliders[chosenTent][7];
         foreach (Animator tentacle in stateMachine.tentacles)
         {
             if (initialize == true)
@@ -63,6 +69,8 @@ public class GrappleLashState : FSMState
             }
         }
         chosenTent.SetBool("IsGrapple", true);
+
+        Debug.Log("Selected collider is " + tentacleHead, tentacleHead);
     }
 
     public override void OnStateExit(Transform player, GameObject self)
@@ -70,4 +78,10 @@ public class GrappleLashState : FSMState
         chosenTent.SetBool("IsGrapple", false);
     }
 
+    public void GrabPlayer() {
+
+        player.transform.parent = tentacleHead.transform;
+    }
+
+    public void ReleasePlayer() { }
 }
