@@ -9,6 +9,9 @@ public class BossIdleState : FSMState
     protected BossEnemy stateMachine;
     protected float elapsed;
 
+    protected int attacksSinceLastRoar;
+    protected int roarThreshold;
+
     protected Vector2 lastPlayerPos;
 
     private bool animDone;
@@ -16,7 +19,14 @@ public class BossIdleState : FSMState
     public BossIdleState()
     {
         stateID = FSMStateID.BossIdle;
+        roarThreshold = 5;
     }
+    public BossIdleState(int numBeforeRoar)
+    {
+        stateID = FSMStateID.BossIdle;
+        roarThreshold = numBeforeRoar;
+    }
+    
 
     public override void Act(Transform player, GameObject self)
     {
@@ -53,9 +63,17 @@ public class BossIdleState : FSMState
                 stateMachine.SetTransition(FSMTransitions.HealthLessThanThreshold);
             }
 
+            //Roar Check
+            else if (attacksSinceLastRoar >= roarThreshold)
+            {
+                attacksSinceLastRoar = 0;
+                stateMachine.SetTransition(FSMTransitions.PlayerInRangeTooLong);
+            }
+
             //Range Checks - This only chooses whether to shoot or ready lash. Logic for choosing lash is in LashReadyState.
             else if (stateMachine.RadRangeCheck(player) == Radius.Rad2 || stateMachine.RadRangeCheck(player) == Radius.Rad1)
             {
+                attacksSinceLastRoar++;
                 stateMachine.SetTransition(FSMTransitions.InMeleeRange);
             }
             else if (stateMachine.RadRangeCheck(player) == Radius.Rad3)
