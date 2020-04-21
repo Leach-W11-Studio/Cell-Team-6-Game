@@ -41,7 +41,7 @@ public class BossEnemy : FSM
     [HideInInspector]
     public float timeSinceWallSpawn = 0;
 
-    [Range(0f, 1f)]
+    //[Range(0f, 1f)]
     public float Phase2Threshold;
     public int shootChance = 10;
 
@@ -207,7 +207,7 @@ public class BossEnemy : FSM
         lashState.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
         var lungeState = GetFSMState(FSMStateID.Lunge);
         lungeState.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
-        var projectile = new ProjectileAttackState("BossBulletPhase2");
+        var projectile = GetFSMState(FSMStateID.Projectile);
         projectile.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
 
         WallSpawnState wallSpawn = new WallSpawnState(bossWallList);

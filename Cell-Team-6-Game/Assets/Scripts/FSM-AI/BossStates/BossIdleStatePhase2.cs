@@ -28,6 +28,10 @@ public class BossIdleStatePhase2 : BossIdleState
         }
 
         //Range Checks - This only chooses whether to shoot or ready lash. Logic for choosing lash is in LashReadyState.
+        else if (GetPercentWalls() <= stateMachine.wallSpawnThreshold && stateMachine.timeSinceWallSpawn >= stateMachine.wallSpawnInterval)
+        {
+            stateMachine.SetTransition(FSMTransitions.WallSpawnTriggered);
+        }
         else if (stateMachine.RadRangeCheck(player) == Radius.Rad2)
         {
             stateMachine.SetTransition(FSMTransitions.InMeleeRange);
@@ -35,10 +39,6 @@ public class BossIdleStatePhase2 : BossIdleState
         else if (stateMachine.RadRangeCheck(player) == Radius.Rad3)
         {
             stateMachine.SetTransition(FSMTransitions.GreaterThanRad2);
-        }
-        else if (GetPercentWalls() <= stateMachine.wallSpawnThreshold && stateMachine.timeSinceWallSpawn >= stateMachine.wallSpawnInterval)
-        {
-            stateMachine.SetTransition(FSMTransitions.WallSpawnTriggered);
         }
 
         /* else { WHYYYYY
