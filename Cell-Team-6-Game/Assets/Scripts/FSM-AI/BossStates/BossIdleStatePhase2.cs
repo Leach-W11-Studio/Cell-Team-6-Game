@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class BossIdleStatePhase2 : BossIdleState
@@ -7,6 +8,15 @@ public class BossIdleStatePhase2 : BossIdleState
     public BossIdleStatePhase2()
     {
         stateID = FSMStateID.BossIdlePhase2;
+    }
+
+    private float GetPercentWalls() {
+        int activeWalls = 0;
+        foreach (var wall in stateMachine.bossWallList) {
+            if (wall.isActive) { activeWalls++; }
+        }
+
+        return activeWalls / stateMachine.bossWallList.Count;
     }
 
     public override void Reason(Transform player, GameObject self)
@@ -26,7 +36,7 @@ public class BossIdleStatePhase2 : BossIdleState
         {
             stateMachine.SetTransition(FSMTransitions.GreaterThanRad2);
         }
-        else if (stateMachine.doWallSpawnTrigger)
+        else if (GetPercentWalls() <= stateMachine.wallSpawnThreshold && stateMachine.timeSinceWallSpawn >= stateMachine.wallSpawnInterval)
         {
             stateMachine.SetTransition(FSMTransitions.WallSpawnTriggered);
         }

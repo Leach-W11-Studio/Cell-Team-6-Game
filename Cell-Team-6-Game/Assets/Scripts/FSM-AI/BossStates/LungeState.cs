@@ -91,10 +91,10 @@ public class LungeState : FSMState
         }
         chosenTent.SetBool("IsVertical", true);
         chosenTent.GetComponent<HealthScript>().invincible = false;
-        /*foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = true;
-        }*/
+        }
     }
 
     public override void OnStateExit(Transform player, GameObject self)
@@ -109,10 +109,10 @@ public class LungeState : FSMState
             }
         }
 
-        /*foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = false;
-        }*/
+        }
     }
 
 }
