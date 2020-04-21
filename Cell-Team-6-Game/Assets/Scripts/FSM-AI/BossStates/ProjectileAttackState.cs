@@ -15,12 +15,14 @@ public class ProjectileAttackState : FSMState
     private float shootCone; //Value between 0 and 1;
     private float lastShot;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
+    private string bulletName;
 
     private bool animDone;
 
-    public ProjectileAttackState()
+    public ProjectileAttackState(string bulletName)
     {
         stateID = FSMStateID.Projectile;
+        this.bulletName = bulletName;
     }
 
     public override void Act(Transform player, GameObject self)
@@ -86,7 +88,7 @@ public class ProjectileAttackState : FSMState
         Vector2 shootVector = RandomShootVector(self);
         Debug.DrawRay(self.position, shootVector * 50, Color.yellow);
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shootVector);
-        ObjectQueue.Instance.SpawnFromPool("BossBulletPhase1", stateMachine.muzzle.position, rotation);
+        ObjectQueue.Instance.SpawnFromPool(bulletName, stateMachine.muzzle.position, rotation);
     }
 
     private Vector2 RandomShootVector(Transform self) {

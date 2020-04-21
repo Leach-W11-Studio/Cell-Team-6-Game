@@ -111,11 +111,16 @@ public class HealthScript : MonoBehaviour
             //Debug.Log("being hit");
             if (collision.gameObject.CompareTag("Enemy") && !invincible) {
                 HealthScript enemyHealth = collision.gameObject.GetComponent<HealthScript>();
-                if (enemyHealth) {
-                    if (!enemyHealth.isDead && !enemyHealth.isBoss) {
+                if (enemyHealth)
+                {
+                    if (!enemyHealth.isDead && !enemyHealth.isBoss)
+                    {
                         Destroy(collision.gameObject);
                         Player_Take_Damage();
                     }
+                }
+                else {
+                    Player_Take_Damage();
                 }
             }
             else if (collision.gameObject.CompareTag("EnemyBullet")) {
@@ -174,7 +179,7 @@ public class HealthScript : MonoBehaviour
     {
         yield return new WaitForSeconds(Deathtime);
         // Debug.Break();
-        if (!isBoss)
+        if (!isBoss && !GetComponent<BossWalls>())
         {
             if (!istentacle)
                 Destroy(gameObject, waitTime);

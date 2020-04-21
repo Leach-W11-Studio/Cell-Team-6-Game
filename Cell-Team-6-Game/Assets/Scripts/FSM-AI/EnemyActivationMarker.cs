@@ -21,8 +21,9 @@ public class EnemyActivationMarker : MonoBehaviour
 
         foreach (var character in enemiesToWake)
         {
-            if(character.gameObject.CompareTag("Enemy") && character.name != "Boss")
+            if(character.gameObject.CompareTag("Enemy") && character.name != "Boss" && character.transform.root.name != "Boss")
             {
+                Debug.Log(character.name, character);
                 character.gameObject.GetComponent<FSM>().Deactivate();
             }
         }
@@ -31,7 +32,7 @@ public class EnemyActivationMarker : MonoBehaviour
 
         foreach (var character in enemiesToWake)
         {
-            if(character.gameObject.CompareTag("Enemy") && character.name != "Boss")
+            if(character.gameObject.CompareTag("Enemy") && character.name != "Boss" && character.transform.root.name != "Boss")
             {
                 FSM enemyObject = character.gameObject.GetComponent<FSM>();
                 enemyObject.Activate();
