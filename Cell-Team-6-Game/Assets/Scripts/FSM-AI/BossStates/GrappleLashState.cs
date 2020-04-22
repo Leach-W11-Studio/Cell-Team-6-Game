@@ -73,7 +73,7 @@ public class GrappleLashState : FSMState
         tentacleHead = stateMachine.tentacleColliders[chosenTent][7];
         tentHealth = chosenTent.GetComponent<HealthScript>();
 
-        tentHealth.onCollidePlayer.AddListener(delegate { GrabPlayer(); });
+        tentHealth.onCollidePlayer.AddListener(GrabPlayer);
 
         stateMachine.StartCoroutine(GrabAnim());
 
@@ -88,24 +88,26 @@ public class GrappleLashState : FSMState
     {
         chosenTent.SetBool("IsGrapple", false);
         chosenTent.SetBool("IsHorizontal", false);
-        tentHealth.onCollidePlayer.RemoveListener(delegate { GrabPlayer(); });
+        tentHealth.onCollidePlayer.RemoveListener(GrabPlayer);
+        success = false;
         foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = false;
+        }
+        if (this.player.frozen) {
+            this.player.Freeze_Unfreeze();
         }
     }
 
     public void GrabPlayer() {
         if (success) { return; }
         playerOriginalParent = player.transform.parent;
-        Debug.Log("playerOriginalParent", playerOriginalParent);
         player.transform.parent = tentacleHead.transform;
         player.Freeze_Unfreeze();
         success = true;
     }
 
     public void ReleasePlayer() {
-        Debug.Log("playerOriginalParent", playerOriginalParent);
         player.transform.parent = playerOriginalParent;
     }
 
@@ -127,9 +129,8 @@ public class GrappleLashState : FSMState
         chosenTent.SetBool("IsHorizontal", true);
         yield return new WaitForSeconds(1.14f);
         ReleasePlayer();
-        player.Yeet();
+        player.Yeet(10, 1);
         player.Freeze_Unfreeze();
         behaviorComplete = true;
-        chosenTent.SetBool("IsHorizontal", false);
     }
 }

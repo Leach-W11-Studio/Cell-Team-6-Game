@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer playerSprite;
     private Animator PlayerAnim;
 
-    private bool frozen = false;
+    public bool frozen = false;
 
     private void Start()
     {
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
         while (elapsed < flingtime)
         {
             transform.position = new Vector2(transform.position.x, transform.position.y - sendspeed/10);
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForEndOfFrame();
             elapsed += Time.deltaTime;
         }
     }

@@ -209,6 +209,7 @@ public class BossEnemy : FSM
 
         RemoveFSMState(FSMStateID.BossIdle);
         RemoveFSMState(FSMStateID.Lunge);
+        RemoveFSMState(FSMStateID.Projectile);
         AddFSMState(bossIdle2);
 
         var lashState = GetFSMState(FSMStateID.Lash);
@@ -219,6 +220,8 @@ public class BossEnemy : FSM
         var projectile = new ProjectileAttackState("BossBulletPhase2");
         projectile.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
         projectile.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        var roar = GetFSMState(FSMStateID.Roar);
+        roar.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
 
         WallSpawnState wallSpawn = new WallSpawnState(bossWallList);
         wallSpawn.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
@@ -226,6 +229,7 @@ public class BossEnemy : FSM
 
         AddFSMState(wallSpawn);
         AddFSMState(lungeState);
+        AddFSMState(projectile);
     }
 
     /// <summary>

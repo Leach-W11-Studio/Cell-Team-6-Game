@@ -58,6 +58,10 @@ public class RoarState : FSMState
 
     public override void OnStateExit(Transform player, GameObject self)
     {
+        if (player.GetComponent<PlayerController>().frozen)
+        {
+            player.GetComponent<PlayerController>().Freeze_Unfreeze();
+        }
         /* chosenTent.SetBool("IsVertical", false);
         chosenTent.GetComponent<HealthScript>().invincible = true; */
         /* foreach (Animator tentacle in stateMachine.tentacles)
