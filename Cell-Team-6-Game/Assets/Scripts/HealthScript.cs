@@ -168,11 +168,19 @@ public class HealthScript : MonoBehaviour
                 if (!isBoss)
                 {
                     if (!istentacle)
-                        PlayerAnim.SetTrigger("IsDead");
-                    else
                     {
-                        TentAnim.SetBool("Idle", false);
-                        TentAnim.SetTrigger("Die");
+                        if (PlayerAnim)
+                        {
+                            PlayerAnim.SetTrigger("IsDead");
+                        }
+                        else
+                        {
+                            if (TentAnim)
+                            {
+                                TentAnim.SetBool("Idle", false);
+                                TentAnim.SetTrigger("Die");
+                            }
+                        }
                     }
                 }
                 isDead = true;

@@ -191,29 +191,34 @@ public class BossEnemy : FSM
 
     public virtual void RebuildFSMForPhase2()
     {
+        if (phase2) { return; }
         phase2 = true;
 
         BossIdleStatePhase2 bossIdle2 = new BossIdleStatePhase2();
         bossIdle2.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
-        bossIdle2.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
+        bossIdle2.AddTransitionState(FSMStateID.GrappleLash, FSMTransitions.InMeleeRange);
         bossIdle2.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
         bossIdle2.AddTransitionState(FSMStateID.WallSpawn, FSMTransitions.WallSpawnTriggered);
 
         RemoveFSMState(FSMStateID.BossIdle);
+        RemoveFSMState(FSMStateID.Lunge);
         AddFSMState(bossIdle2);
 
         var lashState = GetFSMState(FSMStateID.Lash);
         lashState.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
-        var lungeState = GetFSMState(FSMStateID.Lunge);
-        lungeState.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        var lungeState = new GrappleLashState();
+        lungeState.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        lungeState.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         var projectile = new ProjectileAttackState("BossBulletPhase2");
-        projectile.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        projectile.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        projectile.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
 
         WallSpawnState wallSpawn = new WallSpawnState(bossWallList);
         wallSpawn.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         wallSpawn.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
 
         AddFSMState(wallSpawn);
+        AddFSMState(lungeState);
     }
 
     /// <summary>

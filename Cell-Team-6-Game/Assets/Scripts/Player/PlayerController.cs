@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer playerSprite;
     private Animator PlayerAnim;
 
+    private bool frozen = false;
+
     private void Start()
     {
         gun = transform.GetComponentInChildren<PlayerGunScript>();
@@ -131,14 +133,16 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze_Unfreeze()
     {
-        if (moveSpeed > 0)
+        if (!frozen)
         {
+            frozen = true;
             ogspeed = moveSpeed;
             moveSpeed = 0;
             transform.GetComponent<Animator>().enabled = false;
         }
         else
         {
+            frozen = false;
             moveSpeed = ogspeed;
             transform.GetComponent<Animator>().enabled = true;
         }
