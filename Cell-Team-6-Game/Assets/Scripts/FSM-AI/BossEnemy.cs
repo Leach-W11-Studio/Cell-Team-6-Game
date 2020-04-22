@@ -21,7 +21,8 @@ public class BossEnemy : FSM
 
     [SerializeField]
     public RadRanges radRange;
-    public HealthScript healthScript;
+    public HealthScript coreHealthScript;
+    protected List<HealthScript> tentacleHealthScripts = new List<HealthScript>();
     public float shootTime;
     public float shootInterval;
     [Range(0f, 1f)]
@@ -41,7 +42,10 @@ public class BossEnemy : FSM
     [HideInInspector]
     public float timeSinceWallSpawn = 0;
 
-    public float Phase2Threshold;
+    [Tooltip("The number of remaining tentacles at which the boss transitions to phase 2")]
+    public int Phase2Threshold = 3;
+    public float lashDistance;
+    public float projectileDistance;
     public int shootChance = 10;
 
     [HideInInspector]
@@ -51,17 +55,17 @@ public class BossEnemy : FSM
 
     public Transform muzzle;
 
-    private bool phase2;
+    private bool phase2 = false;
     private float healthPercent {
         get {
-            return healthScript.currentHealth / healthScript.maxHealth;
+            return tentacles.Count / 5;
         }
     }
     protected override void Initalize()
     {
         //currentHealth = initalHealth;
-        healthScript = GetComponent<HealthScript>();
-        //CoreAnim = transform.Find("Boss").GetComponent<Animator>();
+        coreHealthScript = GetComponent<HealthScript>();
+        coreHealthScript.invincible = true;
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
         tentacleColliders = new Dictionary<Animator, List<CircleCollider2D>>();
         bossWallList = new List<BossWalls>(gameObject.GetComponentsInChildren<BossWalls>());
@@ -70,6 +74,10 @@ public class BossEnemy : FSM
         //Sets the bones for each tentcle in a dictionary... can be referenced via tentacleColliders[tentacle]
         foreach (var tentacle in tentacles)
         {
+            //Populates list of health scripts
+            tentacleHealthScripts.Add(tentacle.gameObject.GetComponent<HealthScript>());
+
+            //Animations and Bones
             bones = new List<CircleCollider2D>(tentacle.transform.GetComponentsInChildren<CircleCollider2D>());
             Debug.Log("There are " + bones.Count + " bones in this tentacle.", tentacle);
             tentacleColliders.Add(tentacle, bones);
@@ -86,6 +94,32 @@ public class BossEnemy : FSM
     }
 
     private void ResetWallCheck() { doWallSpawnTrigger = true; }
+
+    public void RemoveTentacle(HealthScript tentacleHealthScript)
+    {
+        if (tentacleHealthScripts.Contains(tentacleHealthScript))
+        {
+            tentacleHealthScripts.Remove(tentacleHealthScript);
+            tentacles.Remove(tentacleHealthScript.GetComponent<Animator>());
+        }
+        else
+        {
+            Debug.LogError("Warning: TentacleHealthScripts does not contain the referenced TentacleHealthScript");
+            return;
+        }
+
+        Debug.Log(tentacleHealthScripts.Count + " Tentacles remain in TentacleHealthScripts");
+        if (tentacleHealthScripts.Count <= 0)
+        {
+            coreHealthScript.invincible = false;
+            Debug.Log("Boss Core now vulnerable");
+        }
+    }
+
+    public int CheckTentacleCount()
+    {
+        return tentacleHealthScripts.Count;
+    }
 
     protected virtual void BuildFSM() //To Finish
     {
@@ -265,7 +299,7 @@ public class BossEnemy : FSM
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
         if (tentacles.Count == 0)
         {
-            healthScript.invincible = false;
+            coreHealthScript.invincible = false;
         }
     }
 

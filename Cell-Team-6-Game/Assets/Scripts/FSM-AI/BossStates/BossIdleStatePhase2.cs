@@ -64,4 +64,46 @@ public class BossIdleStatePhase2 : BossIdleState
 
         lastPlayerPos = player.position; //Is this referenced by anything?
     }
+
+    public override void OnStateEnter(Transform player, GameObject self)
+    {
+        health = self.GetComponent<HealthScript>();
+        stateMachine = self.GetComponent<BossEnemy>();
+
+        stateMachine.StartCoroutine(StartAnimation());
+
+        elapsed = 0;
+
+        if (player.GetComponent<PlayerController>().frozen)
+        {
+            player.GetComponent<PlayerController>().Freeze_Unfreeze();
+        }
+        //Lots of different transitions will need to be implemented here
+    }
+
+    private void StopAnimation()
+    {
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            tentacle.SetBool("Idle", false);
+        }
+    }
+
+    public override void OnStateExit(Transform player, GameObject self)
+    {
+        StopAnimation();
+    }
+
+    private IEnumerator StartAnimation()
+    {
+        float timeRange = 1f;
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            if (!tentacle) { continue; }
+            tentacle.GetComponent<HealthScript>().invincible = true;
+            yield return new WaitForSeconds(Random.Range(0, timeRange));
+            if (!tentacle) { continue; }
+            tentacle.SetBool("Idle", true);
+        }
+    }
 }
