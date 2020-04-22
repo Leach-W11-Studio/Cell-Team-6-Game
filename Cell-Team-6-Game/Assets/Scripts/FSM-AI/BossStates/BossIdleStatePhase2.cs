@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class BossIdleStatePhase2 : BossIdleState
@@ -28,6 +27,7 @@ public class BossIdleStatePhase2 : BossIdleState
 
     public override void Reason(Transform player, GameObject self)
     {
+        if (!stateMachine) { return; }
         //Health Checks
         if (health.isDead || health.currentHealth <= 0)
         {

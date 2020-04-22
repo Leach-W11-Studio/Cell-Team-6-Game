@@ -98,6 +98,7 @@ public class LashState : FSMState
 
     public override void OnStateExit(Transform player, GameObject self)
     {
+        if (!chosenTent) { return; }
         chosenTent.SetBool("IsHorizontal", false);
         chosenTent.GetComponent<HealthScript>().invincible = true;
         foreach (Animator tentacle in stateMachine.tentacles)

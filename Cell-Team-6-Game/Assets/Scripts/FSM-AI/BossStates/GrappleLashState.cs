@@ -77,7 +77,6 @@ public class GrappleLashState : FSMState
 
         stateMachine.StartCoroutine(GrabAnim());
 
-        Debug.Log("Selected collider is " + tentacleHead, tentacleHead);
         foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = true;
@@ -94,8 +93,12 @@ public class GrappleLashState : FSMState
         {
             bone.enabled = false;
         }
-        if (this.player.frozen) {
-            this.player.Freeze_Unfreeze();
+        if (this.player)
+        {
+            if (this.player.frozen)
+            {
+                this.player.Freeze_Unfreeze();
+            }
         }
     }
 
