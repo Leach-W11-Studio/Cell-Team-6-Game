@@ -63,6 +63,7 @@ public enum FSMTransitions
     HealthLessThanThreshold,
     WallSpawnTriggered,
     BehaviorComplete,
+    PlayerInRangeTooLong,
 }
 
 public abstract class FSM : MonoBehaviour
