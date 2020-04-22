@@ -12,7 +12,7 @@ public class RoarState : FSMState
     private float Range;
     private bool initialize;
     private float Delay;
-    private Animator chosenTent;
+    //private Animator chosenTent;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
 
     public override void Act(Transform player, GameObject self)
@@ -46,27 +46,27 @@ public class RoarState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        Range = 10.0f;
+        Range = 40.0f;
         animtime = 2.0f;
         Delay = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
 
-        stateMachine.CoreAnim.SetTrigger("RoarAnim");
+        //stateMachine.CoreAnim.SetTrigger("RoarAnim");
         stateMachine.StartCoroutine(AttackDelay(player, self));
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        chosenTent.SetBool("IsVertical", false);
-        chosenTent.GetComponent<HealthScript>().invincible = true;
-        foreach (Animator tentacle in stateMachine.tentacles)
+        /* chosenTent.SetBool("IsVertical", false);
+        chosenTent.GetComponent<HealthScript>().invincible = true; */
+        /* foreach (Animator tentacle in stateMachine.tentacles)
         {
             if (tentacle != chosenTent)
             {
                 //Set both avoidance animations here
             }
-        }
+        } */
 
         /*foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
@@ -77,10 +77,19 @@ public class RoarState : FSMState
     private IEnumerator AttackDelay(Transform player, GameObject self)
     {
         yield return new WaitForSeconds(Delay);
+        Debug.Log("RAGH!!!");
         if (Vector2.Distance(player.position, self.transform.position) <= Range)
         {
-            player.GetComponent<HealthScript>().TakeDamage(1);
+            player.GetComponent<PlayerController>().Yeet(10,2);
+            player.GetComponent<PlayerController>().Freeze_Unfreeze();
+            stateMachine.StartCoroutine(PlayerUnfreezeDelay(player));
         }
+    }
+
+    private IEnumerator PlayerUnfreezeDelay(Transform player)
+    {
+        yield return new WaitForSeconds(2.0f);
+        player.GetComponent<PlayerController>().Freeze_Unfreeze();
     }
 
 }

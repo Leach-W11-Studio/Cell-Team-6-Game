@@ -99,6 +99,7 @@ public class BossEnemy : FSM
         //---------------------------------
         bossIdle.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
         bossIdle.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
+        bossIdle.AddTransitionState(FSMStateID.Roar, FSMTransitions.PlayerInRangeTooLong);
 
         LashReadyState lashReady = new LashReadyState(shootChance);
         lashReady.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
@@ -118,6 +119,10 @@ public class BossEnemy : FSM
         projectile.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         projectile.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
 
+        RoarState roar = new RoarState();
+        roar.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        roar.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
+
         SetupPhase2State phase2Setup = new SetupPhase2State();
         phase2Setup.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         phase2Setup.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
@@ -126,6 +131,7 @@ public class BossEnemy : FSM
 
         AddFSMState(bossIdle);
         AddFSMState(projectile);
+        AddFSMState(roar);
         AddFSMState(lashReady);
         AddFSMState(lash);
         AddFSMState(lunge);
@@ -199,6 +205,7 @@ public class BossEnemy : FSM
         bossIdle2.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
         bossIdle2.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
         bossIdle2.AddTransitionState(FSMStateID.WallSpawn, FSMTransitions.WallSpawnTriggered);
+        bossIdle2.AddTransitionState(FSMStateID.Roar, FSMTransitions.PlayerInRangeTooLong);
 
         RemoveFSMState(FSMStateID.BossIdle);
         AddFSMState(bossIdle2);
