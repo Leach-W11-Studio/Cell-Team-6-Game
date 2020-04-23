@@ -10607,6 +10607,11 @@ PrefabInstance:
       propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 812877245717389960, guid: 7787fb3966e22ca488dc37f12ede122c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6028044762255318712, guid: 7787fb3966e22ca488dc37f12ede122c,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -10650,7 +10655,7 @@ PrefabInstance:
     - target: {fileID: 6028044762301661404, guid: 7787fb3966e22ca488dc37f12ede122c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -225.4
+      value: -232.3
       objectReference: {fileID: 0}
     - target: {fileID: 6028044762301661404, guid: 7787fb3966e22ca488dc37f12ede122c,
         type: 3}
