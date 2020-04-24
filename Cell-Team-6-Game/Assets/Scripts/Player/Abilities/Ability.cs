@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public abstract class Ability : MonoBehaviour
 {
     protected string abilityName;
@@ -16,12 +17,14 @@ public abstract class Ability : MonoBehaviour
     public Sprite abilityIcon;
     public Sprite abilityNull;
 
+    private int SoundManagerhash;
     //public sound variable
     // For note to mention to steve, scripts uses inheritence
        
     private void Start()
     {
         castable = true;
+        SoundManagerhash = GameObject.FindWithTag("SoundManager").GetHashCode();
     }
     protected virtual bool CastCondition() { return true; }
     public virtual void Cast()
@@ -33,7 +36,7 @@ public abstract class Ability : MonoBehaviour
             castable = false;
             CastAction();
             StartCoroutine(resetCooldown());
-            //@BP insert code here
+            SoundManager.PlaySound(SoundManagerhash, SoundTranslation.GetSoundIDTranslation(abilityName));
         }
         else
         {

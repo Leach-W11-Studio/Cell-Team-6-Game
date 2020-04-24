@@ -18,7 +18,10 @@ public class SoundManager : MonoBehaviour
          //   if(sound.clip != null)
          //   {
                 string SoundId = sound.gameObject.GetHashCode().ToString();
+            if (!SoundList.Contains(SoundId))
                 SoundList.Add(SoundId, sound);
+           // else
+               // Debug.LogError("!!! issue");
          //   }
         }
     }
