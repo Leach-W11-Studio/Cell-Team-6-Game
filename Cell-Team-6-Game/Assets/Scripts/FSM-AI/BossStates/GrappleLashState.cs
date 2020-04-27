@@ -46,14 +46,15 @@ public class GrappleLashState : FSMState
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        Range = 0.0f;
         animtime = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
         this.player = player.GetComponent<PlayerController>();
+        Range = stateMachine.radRange.rad2;
 
         foreach (Animator tentacle in stateMachine.tentacles)
         {
+            if (!tentacle) { continue; }
             if (initialize == true)
             {
                 Range = Vector2.Distance(tentacle.transform.position, player.position);
@@ -65,11 +66,13 @@ public class GrappleLashState : FSMState
                 {
                     Range = Vector2.Distance(tentacle.transform.position, player.position);
                     chosenTent = tentacle;
+                    Debug.Log(tentacle, tentacle);
+                    Debug.Log(chosenTent, chosenTent);
                 }
             }
         }
 
-        Debug.Log(stateMachine.tentacleColliders.Count);
+        if (!chosenTent) { behaviorComplete = true; return; }
 
         tentacleHead = stateMachine.tentacleColliders[chosenTent][7];
         tentHealth = chosenTent.GetComponent<HealthScript>();
@@ -87,16 +90,21 @@ public class GrappleLashState : FSMState
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        chosenTent.SetBool("IsGrapple", false);
-        chosenTent.SetBool("IsHorizontal", false);
-        tentHealth.onCollidePlayer.RemoveListener(GrabPlayer);
-        success = false;
-        tentHealth.invincible = true;
-
-        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+        if (chosenTent)
         {
-            bone.enabled = false;
+            chosenTent.SetBool("IsGrapple", false);
+            chosenTent.SetBool("IsHorizontal", false);
+            tentHealth.onCollidePlayer.RemoveListener(GrabPlayer);
+            tentHealth.invincible = true;
+
+            foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+            {
+                bone.enabled = false;
+            }
         }
+
+        success = false;
+
 
         if (this.player)
         {
