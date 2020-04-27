@@ -41,6 +41,11 @@ public class BossIdleState : FSMState
         stateMachine.StartCoroutine(StartAnimation());
 
         elapsed = 0;
+
+        if (player.GetComponent<PlayerController>().frozen)
+        {
+            player.GetComponent<PlayerController>().Freeze_Unfreeze();
+        }
         //Lots of different transitions will need to be implemented here
     }
 
@@ -53,12 +58,12 @@ public class BossIdleState : FSMState
     {
         if (animDone)
         {
-            //Health Checks
+            //Health and State Checks
             if (health.isDead || health.currentHealth <= 0)
             {
                 stateMachine.SetTransition(FSMTransitions.OutOfHealth);
             }
-            else if (health.currentHealth <= stateMachine.Phase2Threshold)
+            else if (stateMachine.CheckTentacleCount() <= stateMachine.Phase2Threshold)
             {
                 stateMachine.SetTransition(FSMTransitions.HealthLessThanThreshold);
             }
@@ -102,8 +107,10 @@ public class BossIdleState : FSMState
         float timeRange = 1f;
         animDone = false;
         foreach(Animator tentacle in stateMachine.tentacles) {
+            if (!tentacle) { continue; }
             tentacle.GetComponent<HealthScript>().invincible = true;
             yield return new WaitForSeconds(Random.Range(0, timeRange));
+            if (!tentacle) { continue; }
             tentacle.SetBool("Idle", true);
         }
 

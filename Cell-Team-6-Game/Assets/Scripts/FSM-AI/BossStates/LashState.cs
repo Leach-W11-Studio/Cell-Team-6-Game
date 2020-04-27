@@ -31,7 +31,7 @@ public class LashState : FSMState
     public override void Reason(Transform player, GameObject self)
     {
         //Dead Check
-        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
+        if (self.GetComponent<BossEnemy>().coreHealthScript.currentHealth <= 0)
         {
             parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
@@ -98,6 +98,7 @@ public class LashState : FSMState
 
     public override void OnStateExit(Transform player, GameObject self)
     {
+        if (!chosenTent) { return; }
         chosenTent.SetBool("IsHorizontal", false);
         chosenTent.GetComponent<HealthScript>().invincible = true;
         foreach (Animator tentacle in stateMachine.tentacles)

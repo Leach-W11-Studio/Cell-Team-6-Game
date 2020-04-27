@@ -16,10 +16,11 @@ public class HealthScript : MonoBehaviour
     public Color healthColor;
     public Color sheildColor;
     public UnityEvent onTakeDamage;
+    public UnityEvent onCollidePlayer;
     public bool isDead = false;
     public bool isplayer = false; //Testing Remove Later
     public bool isBoss = false;
-    public bool istentacle = false;
+    public bool isTentacle = false;
     private int Damage;
     public int Deathtime;
     private Animator PlayerAnim;
@@ -40,7 +41,7 @@ public class HealthScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentHealth == 0) { Die();}
+        if (currentHealth == 0) { Die(); }
     }
 
     public void ActivateSheild()
@@ -60,15 +61,19 @@ public class HealthScript : MonoBehaviour
         currentHealth++;
     }
 
-    public void TakeDamage(int damage) {
-        if (CompareTag("Player")) {
+    public void TakeDamage(int damage)
+    {
+        if (CompareTag("Player"))
+        {
             Player_Take_Damage(damage);
         }
-        else if (CompareTag("Enemy")) {
+        else if (CompareTag("Enemy"))
+        {
             Enemy_Take_Damage(damage);
         }
 
-        if (currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
             Die();
         }
     }
@@ -109,21 +114,24 @@ public class HealthScript : MonoBehaviour
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
             //Debug.Log("being hit");
-            if (collision.gameObject.CompareTag("Enemy") && !invincible) {
+            if (collision.gameObject.CompareTag("Enemy") && !invincible)
+            {
                 HealthScript enemyHealth = collision.gameObject.GetComponent<HealthScript>();
                 if (enemyHealth)
                 {
-                    if (!enemyHealth.isDead && !enemyHealth.isBoss)
+                    if (!enemyHealth.isDead && !enemyHealth.isBoss && !enemyHealth.isTentacle)
                     {
                         Destroy(collision.gameObject);
                         Player_Take_Damage();
                     }
                 }
-                else {
+                else
+                {
                     Player_Take_Damage();
                 }
             }
-            else if (collision.gameObject.CompareTag("EnemyBullet")) {
+            else if (collision.gameObject.CompareTag("EnemyBullet"))
+            {
                 collision.gameObject.SetActive(false);
                 Player_Take_Damage();
             }
@@ -137,6 +145,10 @@ public class HealthScript : MonoBehaviour
                 Enemy_Take_Damage(Damage);
             }
             collision.gameObject.SetActive(false);
+        }
+
+        if (collision.gameObject.CompareTag("Player")) {
+            onCollidePlayer.Invoke();
         }
     }
 
@@ -159,12 +171,20 @@ public class HealthScript : MonoBehaviour
             {
                 if (!isBoss)
                 {
-                    if (!istentacle)
-                        PlayerAnim.SetTrigger("IsDead");
-                    else
+                    if (!isTentacle)
                     {
-                        TentAnim.SetBool("Idle", false);
-                        TentAnim.SetTrigger("Die");
+                        if (PlayerAnim)
+                        {
+                            PlayerAnim.SetTrigger("IsDead");
+                        }
+                        else
+                        {
+                            if (TentAnim)
+                            {
+                                TentAnim.SetBool("Idle", false);
+                                TentAnim.SetTrigger("Die");
+                            }
+                        }
                     }
                 }
                 isDead = true;
@@ -181,10 +201,11 @@ public class HealthScript : MonoBehaviour
         // Debug.Break();
         if (!isBoss && !GetComponent<BossWalls>())
         {
-            if (!istentacle)
-                Destroy(gameObject, waitTime);
-            else
-                gameObject.SetActive(false);
+            if(isTentacle)
+            {
+                gameObject.GetComponentInParent<BossEnemy>().RemoveTentacle(this);
+            }
+            Destroy(gameObject, waitTime);
         }
     }
 }

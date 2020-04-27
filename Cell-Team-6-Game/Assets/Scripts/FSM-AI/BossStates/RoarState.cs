@@ -32,7 +32,7 @@ public class RoarState : FSMState
     public override void Reason(Transform player, GameObject self)
     {
         //Dead Check
-        if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= 0)
+        if (self.GetComponent<BossEnemy>().coreHealthScript.currentHealth <= 0)
         {
             parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
@@ -47,7 +47,7 @@ public class RoarState : FSMState
     public override void OnStateEnter(Transform player, GameObject self)
     {
         Range = 40.0f;
-        animtime = 2.0f;
+        animtime = 3.0f;
         Delay = 1.0f;
         stateMachine = self.GetComponent<BossEnemy>();
         behaviorComplete = false;
@@ -58,6 +58,13 @@ public class RoarState : FSMState
 
     public override void OnStateExit(Transform player, GameObject self)
     {
+        if (player.GetComponent<PlayerController>())
+        {
+            if (player.GetComponent<PlayerController>().frozen)
+            {
+                player.GetComponent<PlayerController>().Freeze_Unfreeze();
+            }
+        }
         /* chosenTent.SetBool("IsVertical", false);
         chosenTent.GetComponent<HealthScript>().invincible = true; */
         /* foreach (Animator tentacle in stateMachine.tentacles)
@@ -80,7 +87,7 @@ public class RoarState : FSMState
         Debug.Log("RAGH!!!");
         if (Vector2.Distance(player.position, self.transform.position) <= Range)
         {
-            player.GetComponent<PlayerController>().Yeet(10,2);
+            player.GetComponent<PlayerController>().Yeet(10,1);
             player.GetComponent<PlayerController>().Freeze_Unfreeze();
             stateMachine.StartCoroutine(PlayerUnfreezeDelay(player));
         }
