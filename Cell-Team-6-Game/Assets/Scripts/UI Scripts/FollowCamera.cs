@@ -18,8 +18,10 @@ public class FollowCamera : MonoBehaviour
 
     private Camera _cam;
 
-    private Camera cam {
-        get {
+    private Camera cam
+    {
+        get
+        {
             if (!_cam)
             {
                 _cam = GetComponent<Camera>();
@@ -36,7 +38,8 @@ public class FollowCamera : MonoBehaviour
             Destroy(instance.gameObject);
             instance = this;
         }
-        else {
+        else
+        {
             instance = this;
         }
 
@@ -55,46 +58,57 @@ public class FollowCamera : MonoBehaviour
         SetZoom();
     }
 
-    public void AddTarget(Transform target) {
-        if (!targets.Contains(target)) {
+    public void AddTarget(Transform target)
+    {
+        if (!targets.Contains(target))
+        {
             targets.Add(target);
         }
     }
 
-    public void RemoveTarget(Transform target) {
+    public void RemoveTarget(Transform target)
+    {
         targets.Remove(target);
     }
 
-    void CleanupTargets() {
-        for (int i = 0; i < targets.Count; i++) {
-            if (targets[i] == null) {
+    void CleanupTargets()
+    {
+        for (int i = 0; i < targets.Count; i++)
+        {
+            if (targets[i] == null)
+            {
                 targets.RemoveAt(i);
                 i--;
             }
         }
     }
 
-    Vector2 GetFocus(out float diagonal) {
-        if (targets.Count == 0) {
+    Vector2 GetFocus(out float diagonal)
+    {
+        if (targets.Count == 0)
+        {
             diagonal = 0;
             return new Vector2(transform.position.x, transform.position.y);
         }
 
-        if (targets.Count == 1) {
+        if (targets.Count == 1)
+        {
             diagonal = minZoom;
             return targets[0].position;
         }
 
         Bounds bounds = new Bounds(targets[0].position, Vector2.zero);
-        foreach (var target in targets) {
-            bounds.Encapsulate(target.position);
+        foreach (var target in targets)
+        {
+            if (target) { bounds.Encapsulate(target.position); } //Added null check
         }
 
         diagonal = (bounds.max - bounds.min).magnitude / 1.75f;
         return bounds.center;
     }
 
-    void Move() {
+    void Move()
+    {
         if (targets.Count == 0) { Debug.LogError("Could not locate target!"); FindPlayer(); return; }
 
         float zoom;
@@ -105,12 +119,14 @@ public class FollowCamera : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, new Vector3(focus.x, focus.y, transform.position.z), Time.fixedDeltaTime * acceleration);
     }
 
-    void SetZoom() {
+    void SetZoom()
+    {
         if (targetZoom < minZoom)
         {
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, minZoom, Time.deltaTime * acceleration);
         }
-        else {
+        else
+        {
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, Time.deltaTime * acceleration);
         }
     }
@@ -124,7 +140,7 @@ public class FollowCamera : MonoBehaviour
         {
             float x = original.x + (Random.Range(-1f, 1f) * magnitude);
             float y = original.y + (Random.Range(-1f, 1f) * magnitude);
-            transform.position = Vector3.Lerp(transform.position, new Vector3(x,y, original.z), Time.fixedDeltaTime*shakeSpeed);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, original.z), Time.fixedDeltaTime * shakeSpeed);
             //transform.position = new Vector3(x, y, original.z);
             elapsed += Time.deltaTime;
             yield return new WaitForEndOfFrame();
