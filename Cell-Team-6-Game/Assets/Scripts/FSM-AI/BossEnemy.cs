@@ -97,10 +97,12 @@ public class BossEnemy : FSM
 
     public void RemoveTentacle(HealthScript tentacleHealthScript)
     {
+        Animator anim = tentacleHealthScript.GetComponent<Animator>();
         if (tentacleHealthScripts.Contains(tentacleHealthScript))
         {
             tentacleHealthScripts.Remove(tentacleHealthScript);
             tentacles.Remove(tentacleHealthScript.GetComponent<Animator>());
+            tentacleColliders.Remove(anim);
         }
         else
         {
