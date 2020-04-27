@@ -6,7 +6,7 @@ public class HuntersMark : Ability
 {
     public HuntersMark()
     {
-        abilityName = "HuntersMark";
+        abilityName = "HuntersMarkAbility";
     }
 
     private GameObject[] enemies;
@@ -39,7 +39,8 @@ public class HuntersMark : Ability
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
-            float curDistance = Vector2.Distance(enemy.transform.position, transform.position);
+            float curDistance = Vector2.Distance(enemy.transform.position, transform.root.position);
+            //Debug.Log(curDistance);
             if (curDistance < currentMinDistance)
             {
                 closestEnemy = enemy;

@@ -24,6 +24,7 @@ public enum FSMStateID
     Phase2Setup,
     Lash,
     Lunge,
+    Roar,
     GrappleLash,
     Projectile,
     Tracking,
@@ -62,6 +63,7 @@ public enum FSMTransitions
     HealthLessThanThreshold,
     WallSpawnTriggered,
     BehaviorComplete,
+    PlayerInRangeTooLong,
 }
 
 public abstract class FSM : MonoBehaviour
@@ -116,6 +118,7 @@ public abstract class FSM : MonoBehaviour
     public void Deactivate()
     {
         Active = false;
+        FollowCamera.instance.RemoveTarget(transform);
     }
 
     /// <summary>

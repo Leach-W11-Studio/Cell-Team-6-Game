@@ -15,10 +15,14 @@ public class ProjectileAttackState : FSMState
     private float shootCone; //Value between 0 and 1;
     private float lastShot;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
+    private string bulletName;
 
-    public ProjectileAttackState()
+    private bool animDone;
+
+    public ProjectileAttackState(string bulletName)
     {
         stateID = FSMStateID.Projectile;
+        this.bulletName = bulletName;
     }
 
     public override void Act(Transform player, GameObject self)
@@ -32,19 +36,20 @@ public class ProjectileAttackState : FSMState
 
     public override void Reason(Transform player, GameObject self)
     {
-        //Death Check
-        if (health.currentHealth <= 0)
+        if (animDone)
         {
-            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            //Death Check
+            if (health.currentHealth <= 0)
+            {
+                self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+            }
+
+            //Completion Check
+            else if (elapsed > stateMachine.shootTime)
+            {
+                parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+            }
         }
-
-        //Completion Check
-        else if (elapsed > stateMachine.shootTime)
-        {
-            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
-        }
-
-
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
@@ -55,6 +60,7 @@ public class ProjectileAttackState : FSMState
         Debug.Log("Boss in projectile state", health);
         stateMachine.StartCoroutine(StartAnimation());
         elapsed = 0f;
+        lastShot = 0f;
 
         /* if (self.GetComponent<BossEnemy>().healthScript.currentHealth <= self.GetComponent<BossEnemy>().Phase2Threshold)
         {
@@ -82,7 +88,7 @@ public class ProjectileAttackState : FSMState
         Vector2 shootVector = RandomShootVector(self);
         Debug.DrawRay(self.position, shootVector * 50, Color.yellow);
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shootVector);
-        ObjectQueue.Instance.SpawnFromPool("BossBulletPhase1", stateMachine.muzzle.position, rotation);
+        ObjectQueue.Instance.SpawnFromPool(bulletName, stateMachine.muzzle.position, rotation);
     }
 
     private Vector2 RandomShootVector(Transform self) {
@@ -102,9 +108,12 @@ public class ProjectileAttackState : FSMState
 
     private IEnumerator StartAnimation() {
         float timeRange = 1f;
+        animDone = false;
         foreach(Animator tentacle in stateMachine.tentacles) {
             yield return new WaitForSeconds(Random.Range(0, timeRange));
             tentacle.SetBool("Shooting", true);
         }
+
+        animDone = true;
     }
 }

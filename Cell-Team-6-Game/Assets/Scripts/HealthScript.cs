@@ -16,19 +16,23 @@ public class HealthScript : MonoBehaviour
     public Color healthColor;
     public Color sheildColor;
     public UnityEvent onTakeDamage;
+    public UnityEvent onCollidePlayer;
     public bool isDead = false;
     public bool isplayer = false; //Testing Remove Later
+    public bool isBoss = false;
+    public bool isTentacle = false;
     private int Damage;
-    private int Deathtime;
+    public int Deathtime;
     private Animator PlayerAnim;
+    private Animator TentAnim;
     FollowCamera Shaker;
 
     void Start()
     {
         Shaker = GameObject.Find("Main Camera").GetComponent<FollowCamera>();
         PlayerAnim = gameObject.GetComponent<Animator>();
+        TentAnim = gameObject.GetComponentInChildren<Animator>();
         onTakeDamage = new UnityEvent();
-        Deathtime = 0;
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
 
@@ -37,7 +41,7 @@ public class HealthScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentHealth == 0) { Die();}
+        if (currentHealth == 0) { Die(); }
     }
 
     public void ActivateSheild()
@@ -57,15 +61,19 @@ public class HealthScript : MonoBehaviour
         currentHealth++;
     }
 
-    public void TakeDamage(int damage) {
-        if (CompareTag("Player")) {
+    public void TakeDamage(int damage)
+    {
+        if (CompareTag("Player"))
+        {
             Player_Take_Damage(damage);
         }
-        else if (CompareTag("Enemy")) {
+        else if (CompareTag("Enemy"))
+        {
             Enemy_Take_Damage(damage);
         }
 
-        if (currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
             Die();
         }
     }
@@ -106,16 +114,24 @@ public class HealthScript : MonoBehaviour
         if (isplayer && (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Enemy")))
         {
             //Debug.Log("being hit");
-            if (collision.gameObject.CompareTag("Enemy") && !invincible) {
+            if (collision.gameObject.CompareTag("Enemy") && !invincible)
+            {
                 HealthScript enemyHealth = collision.gameObject.GetComponent<HealthScript>();
-                if (enemyHealth) {
-                    if (!enemyHealth.isDead) {
+                if (enemyHealth)
+                {
+                    if (!enemyHealth.isDead && !enemyHealth.isBoss && !enemyHealth.isTentacle)
+                    {
                         Destroy(collision.gameObject);
                         Player_Take_Damage();
                     }
                 }
+                else
+                {
+                    Player_Take_Damage();
+                }
             }
-            else {
+            else if (collision.gameObject.CompareTag("EnemyBullet"))
+            {
                 collision.gameObject.SetActive(false);
                 Player_Take_Damage();
             }
@@ -123,9 +139,16 @@ public class HealthScript : MonoBehaviour
         //If it is not a player, and the collision is a player bullet, pass in the damage value from the bullet and call the enemy damage function
         else if (!isplayer && collision.gameObject.CompareTag("PlayerBullet"))
         {
-            Damage = collision.gameObject.GetComponent<SimpleBullet>().Damage();
-            Enemy_Take_Damage(Damage);
+            if (!invincible)
+            {
+                Damage = collision.gameObject.GetComponent<SimpleBullet>().Damage();
+                Enemy_Take_Damage(Damage);
+            }
             collision.gameObject.SetActive(false);
+        }
+
+        if (collision.gameObject.CompareTag("Player")) {
+            onCollidePlayer.Invoke();
         }
     }
 
@@ -139,14 +162,31 @@ public class HealthScript : MonoBehaviour
                 isDead = true;
                 //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 StartCoroutine("DieWait", waitTime);
-                //GameMaster.gameMaster.LoseGame();
+                GameMaster.gameMaster.LoseGame();
             }
         }
         else
         {
             if (isDead == false)
             {
-                PlayerAnim.SetTrigger("IsDead");
+                if (!isBoss)
+                {
+                    if (!isTentacle)
+                    {
+                        if (PlayerAnim)
+                        {
+                            PlayerAnim.SetTrigger("IsDead");
+                        }
+                        else
+                        {
+                            if (TentAnim)
+                            {
+                                TentAnim.SetBool("Idle", false);
+                                TentAnim.SetTrigger("Die");
+                            }
+                        }
+                    }
+                }
                 isDead = true;
                 //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 StartCoroutine("DieWait", waitTime);
@@ -159,6 +199,13 @@ public class HealthScript : MonoBehaviour
     {
         yield return new WaitForSeconds(Deathtime);
         // Debug.Break();
-        Destroy(gameObject, waitTime);
+        if (!isBoss && !GetComponent<BossWalls>())
+        {
+            if(isTentacle)
+            {
+                gameObject.GetComponentInParent<BossEnemy>().RemoveTentacle(this);
+            }
+            Destroy(gameObject, waitTime);
+        }
     }
 }

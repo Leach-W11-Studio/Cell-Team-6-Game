@@ -57,15 +57,23 @@ public class ConditionalDoorArea : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            door.playerInArea = true;
+            if (!door.defeated)
+            {
+                door.playerInArea = true;
+            }
+            else {
+                door.playerInArea = false;
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            door.playerInArea = false;
+            if (!door.defeated) { 
+                door.playerInArea = false;
+            }
         }
     }
 }
