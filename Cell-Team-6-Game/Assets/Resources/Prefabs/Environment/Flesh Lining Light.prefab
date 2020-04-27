@@ -44,7 +44,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -73,15 +73,15 @@ SpriteShapeRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1060410579
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
   - {fileID: 21300000, guid: 1ba530fce4592dc45aadad8dbb422a48, type: 3}
   m_LocalAABB:
-    m_Center: {x: 22.167326, y: 10.853442, z: -0.005}
-    m_Extent: {x: 28.774446, y: 17.581831, z: 0.005}
+    m_Center: {x: 25.105495, y: 33.894447, z: -0.005}
+    m_Extent: {x: 32.610752, y: 41.51757, z: 0.005}
 --- !u!114 &1655926483857174460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Spline:
-    m_IsOpenEnded: 0
+    m_IsOpenEnded: 1
     m_ControlPoints:
     - position: {x: -5.0752087, y: -4.119654, z: 0}
       leftTangent: {x: -2.0001411, y: 4.805441, z: 0}
@@ -384,3 +384,4 @@ MonoBehaviour:
   invertPolygon: 1
   edgeWidth: 1.7
   spriteShapeController: {fileID: 1655926483857174460}
+  shapeMesh: {fileID: 0}
