@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossBulletPhase2 : SimpleBullet
 {
 
-    public float rotationSpeed;
+    public float trackingSpeed;
     [Tooltip("Max distance in meeters this bullet is allowed to displace relative to it's starting point.")]
     public float maxDistance;
     [Tooltip("Max time in seconds for this bullet to live.")]
@@ -19,7 +19,7 @@ public class BossBulletPhase2 : SimpleBullet
     override protected void Shoot() {
         startingPos = transform.position;
         //variedRotationSpeed = Random.Range(rotationSpeed * 0.2f, rotationSpeed);
-        variedRotationSpeed = rotationSpeed;
+        variedRotationSpeed = trackingSpeed;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         elapsed = 0;
 
@@ -67,9 +67,9 @@ public class BossBulletPhase2 : SimpleBullet
     private void OnDrawGizmosSelected()
     {
         Debug.DrawRay(transform.position, transform.up * maxDistance, Color.red);
-        if (rotationSpeed > 0)
+        if (trackingSpeed > 0)
         {
-            float radius = power / rotationSpeed;
+            float radius = power / trackingSpeed;
             if (Application.isPlaying)
             {
                 radius = power / variedRotationSpeed;
