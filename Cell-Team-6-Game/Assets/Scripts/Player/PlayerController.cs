@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
         while (elapsed < flingtime)
         {
             transform.position = new Vector2(transform.position.x, transform.position.y - sendspeed/10);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
             elapsed += Time.deltaTime;
         }
     }

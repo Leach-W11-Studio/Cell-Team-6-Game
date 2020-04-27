@@ -146,7 +146,7 @@ public class GrappleLashState : FSMState
         chosenTent.SetBool("IsHorizontal", true);
         yield return new WaitForSeconds(1.14f);
         ReleasePlayer();
-        player.Yeet(10, 1);
+        player.Yeet(7, 1);
         player.Freeze_Unfreeze();
         behaviorComplete = true;
     }
