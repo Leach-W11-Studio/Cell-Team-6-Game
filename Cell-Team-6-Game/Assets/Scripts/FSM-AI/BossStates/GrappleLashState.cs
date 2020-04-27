@@ -9,6 +9,7 @@ public class GrappleLashState : FSMState
     private BossEnemy stateMachine;
     private float animtime;
     private float Range;
+    private float position;
     private Animator chosenTent;
     private bool initialize = true;
     private bool behaviorComplete = false; //Set to True when the behavior is complete. This triggers transition back to Idle
@@ -72,6 +73,23 @@ public class GrappleLashState : FSMState
             }
         }
 
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            tentacle.SetBool("Idle", false);
+            if (tentacle != chosenTent)
+            {
+                position = tentacle.transform.position.x - chosenTent.transform.position.x;
+                if (position > 0.0f)
+                {
+                    tentacle.SetBool("MoveRight", true);
+                }
+                else
+                {
+                    tentacle.SetBool("MoveLeft", true);
+                }
+            }
+        }
+
         if (!chosenTent) { behaviorComplete = true; return; }
 
         tentacleHead = stateMachine.tentacleColliders[chosenTent][7];
@@ -100,6 +118,15 @@ public class GrappleLashState : FSMState
             foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
             {
                 bone.enabled = false;
+            }
+        }
+
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
+            if (tentacle != chosenTent)
+            {
+                tentacle.SetBool("MoveLeft", false);
+                tentacle.SetBool("MoveRight", false);
             }
         }
 
