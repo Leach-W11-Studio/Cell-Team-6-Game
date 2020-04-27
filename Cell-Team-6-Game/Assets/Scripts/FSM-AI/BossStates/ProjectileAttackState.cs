@@ -111,7 +111,9 @@ public class ProjectileAttackState : FSMState
         animDone = false;
         foreach(Animator tentacle in stateMachine.tentacles) {
             yield return new WaitForSeconds(Random.Range(0, timeRange));
-            tentacle.SetBool("Shooting", true);
+            if (tentacle) { 
+                tentacle.SetBool("Shooting", true);
+            }
         }
 
         animDone = true;

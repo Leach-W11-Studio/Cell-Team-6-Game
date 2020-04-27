@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -67,6 +68,8 @@ public class GrappleLashState : FSMState
                 }
             }
         }
+
+        Debug.Log(stateMachine.tentacleColliders.Count);
 
         tentacleHead = stateMachine.tentacleColliders[chosenTent][7];
         tentHealth = chosenTent.GetComponent<HealthScript>();
