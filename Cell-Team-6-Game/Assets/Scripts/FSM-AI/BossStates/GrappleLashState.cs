@@ -21,9 +21,7 @@ public class GrappleLashState : FSMState
 
     private bool success = false;
 
-    public override void Act(Transform player, GameObject self)
-    {
-    }
+    public override void Act(Transform player, GameObject self) { }
 
     public GrappleLashState()
     {
@@ -89,10 +87,12 @@ public class GrappleLashState : FSMState
         chosenTent.SetBool("IsHorizontal", false);
         tentHealth.onCollidePlayer.RemoveListener(GrabPlayer);
         success = false;
+
         foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
             bone.enabled = false;
         }
+
         if (this.player)
         {
             if (this.player.frozen)
