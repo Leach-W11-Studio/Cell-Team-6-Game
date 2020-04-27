@@ -81,11 +81,11 @@ public class LungeState : FSMState
                 position = tentacle.transform.position.x - chosenTent.transform.position.x;
                 if (position > 0.0f)
                 {
-                    //set right animation here
+                    tentacle.SetBool("MoveRight", true);
                 }
                 else
                 {
-                    //Set left avoidance here
+                    tentacle.SetBool("MoveLeft", true);
                 }
             }
         }
@@ -106,7 +106,8 @@ public class LungeState : FSMState
         {
             if (tentacle != chosenTent)
             {
-                //Set both avoidance animations here
+                tentacle.SetBool("MoveLeft", false);
+                tentacle.SetBool("MoveRight", false);
             }
         }
 

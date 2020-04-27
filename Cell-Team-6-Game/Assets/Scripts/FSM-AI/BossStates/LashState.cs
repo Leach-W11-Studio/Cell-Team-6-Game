@@ -74,16 +74,17 @@ public class LashState : FSMState
 
         foreach (Animator tentacle in stateMachine.tentacles)
         {
+            tentacle.SetBool("Idle", false);
             if (tentacle != chosenTent)
             {
                 position = tentacle.transform.position.x - chosenTent.transform.position.x;
                 if (position > 0.0f)
                 {
-                    //Set right side animation
+                    tentacle.SetBool("MoveRight", true);
                 }
                 else
                 {
-                    //set left side animation
+                    tentacle.SetBool("MoveLeft", true);
                 }
             }
         }
@@ -105,7 +106,8 @@ public class LashState : FSMState
         {
             if (tentacle != chosenTent)
             {
-                //Set both left and right side animations false
+                tentacle.SetBool("MoveLeft", false);
+                tentacle.SetBool("MoveRight", false);
             }
         }
 

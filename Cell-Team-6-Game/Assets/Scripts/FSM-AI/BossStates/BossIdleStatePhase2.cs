@@ -97,7 +97,7 @@ public class BossIdleStatePhase2 : BossIdleState
 
     private IEnumerator StartAnimation()
     {
-        float timeRange = 1f;
+        float timeRange = .35f;
         foreach (Animator tentacle in stateMachine.tentacles)
         {
             if (!tentacle) { continue; }

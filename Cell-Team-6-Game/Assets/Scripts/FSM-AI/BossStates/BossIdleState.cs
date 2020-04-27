@@ -104,7 +104,7 @@ public class BossIdleState : FSMState
     }
 
     private IEnumerator StartAnimation() {
-        float timeRange = 1f;
+        float timeRange = 0.35f;
         animDone = false;
         foreach(Animator tentacle in stateMachine.tentacles) {
             if (!tentacle) { continue; }

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer playerSprite;
     private Animator PlayerAnim;
 
-    public bool frozen = false;
+    public bool frozen;
 
     private void Start()
     {
