@@ -116,11 +116,12 @@ public class GrappleLashState : FSMState
     }
 
     public void GrabPlayer() {
-        if (success) { return; }
+        if (success || tentHealth.isDead) { return; }
         playerOriginalParent = player.transform.parent;
         player.transform.parent = tentacleHead.transform;
         player.Freeze_Unfreeze();
         success = true;
+        tentHealth.invincible = true;
     }
 
     public void ReleasePlayer() {

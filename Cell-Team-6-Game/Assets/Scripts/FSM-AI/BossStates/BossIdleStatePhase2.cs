@@ -56,7 +56,7 @@ public class BossIdleStatePhase2 : BossIdleState
                 attacksSinceLastRoar++;
                 stateMachine.SetTransition(FSMTransitions.InMeleeRange);
             }
-            else if (stateMachine.RadRangeCheck(player) == Radius.Rad3)
+            else if (GetPercentWalls() >= 0.2 && stateMachine.RadRangeCheck(player) == Radius.Rad3)
             {
                 stateMachine.SetTransition(FSMTransitions.GreaterThanRad2);
             }
