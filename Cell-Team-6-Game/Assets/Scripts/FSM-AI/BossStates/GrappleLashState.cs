@@ -77,6 +77,7 @@ public class GrappleLashState : FSMState
         tentHealth.onCollidePlayer.AddListener(GrabPlayer);
 
         stateMachine.StartCoroutine(GrabAnim());
+        tentHealth.invincible = false;
 
         foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
@@ -90,6 +91,7 @@ public class GrappleLashState : FSMState
         chosenTent.SetBool("IsHorizontal", false);
         tentHealth.onCollidePlayer.RemoveListener(GrabPlayer);
         success = false;
+        tentHealth.invincible = true;
 
         foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
         {
