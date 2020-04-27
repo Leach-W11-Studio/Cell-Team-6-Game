@@ -23,6 +23,8 @@ public class BossHealthbar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        healthScript = FindObjectOfType<BossEnemy>().GetComponent<HealthScript>();
+
         healthBarVisable = transform.GetChild(0).GetComponent<RectTransform>();
         healthBarVisable.localScale = new Vector3(GetHealthPercent(), healthBarVisable.localScale.y, healthBarVisable.localScale.z);
     }
