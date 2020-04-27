@@ -562,6 +562,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4160563246998496866, guid: 3fdb00fae59c60a489f1db468e76c93a,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4160563247002667189, guid: 3fdb00fae59c60a489f1db468e76c93a,
         type: 3}
       propertyPath: maxHealth
@@ -1206,6 +1211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147860637674237666, guid: fe451f07b1b2148c2914cf57a89d1f94,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe451f07b1b2148c2914cf57a89d1f94, type: 3}

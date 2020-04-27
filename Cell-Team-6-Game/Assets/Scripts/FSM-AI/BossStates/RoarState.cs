@@ -87,7 +87,7 @@ public class RoarState : FSMState
         Debug.Log("RAGH!!!");
         if (Vector2.Distance(player.position, self.transform.position) <= Range)
         {
-            player.GetComponent<PlayerController>().Yeet(5,1);
+            player.GetComponent<PlayerController>().Yeet(7,1);
             player.GetComponent<PlayerController>().Freeze_Unfreeze();
             stateMachine.StartCoroutine(PlayerUnfreezeDelay(player));
         }
