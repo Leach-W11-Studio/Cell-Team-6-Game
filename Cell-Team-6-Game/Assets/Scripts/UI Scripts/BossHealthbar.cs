@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class BossHealthbar : MonoBehaviour
 {
     public HealthScript healthScript;
+    public Color normalColor;
+    public Color invulnColor;
 
     private bool m_visable;
     public bool visable
@@ -19,6 +21,7 @@ public class BossHealthbar : MonoBehaviour
     }
 
     private RectTransform healthBarVisable;
+    private Image healthBarVisImage;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,7 @@ public class BossHealthbar : MonoBehaviour
         visable = false;
 
         healthBarVisable = transform.GetChild(0).GetComponent<RectTransform>();
+        healthBarVisImage = healthBarVisable.gameObject.GetComponent<Image>();
         healthBarVisable.localScale = new Vector3(GetHealthPercent(), healthBarVisable.localScale.y, healthBarVisable.localScale.z);
     }
 
@@ -44,6 +48,9 @@ public class BossHealthbar : MonoBehaviour
     void Update()
     {
         healthBarVisable.localScale = new Vector3(GetHealthPercent(), healthBarVisable.localScale.y, healthBarVisable.localScale.z);
+        if (!healthScript.invincible) { healthBarVisImage.color = normalColor; }
+        else { healthBarVisImage.color = invulnColor; }
+
         if (GetHealthPercent() <= 0) { visable = false; }
     }
 }

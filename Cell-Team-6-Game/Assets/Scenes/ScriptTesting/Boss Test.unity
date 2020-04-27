@@ -1135,10 +1135,6 @@ PrefabInstance:
       propertyPath: healthScript
       value: 
       objectReference: {fileID: 1580230105}
-    - target: {fileID: 373857811, guid: fe451f07b1b2148c2914cf57a89d1f94, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 715093834, guid: fe451f07b1b2148c2914cf57a89d1f94, type: 3}
       propertyPath: healthScript
       value: 
@@ -1210,16 +1206,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147860637674237666, guid: fe451f07b1b2148c2914cf57a89d1f94,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8576354689736242212, guid: fe451f07b1b2148c2914cf57a89d1f94,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe451f07b1b2148c2914cf57a89d1f94, type: 3}
