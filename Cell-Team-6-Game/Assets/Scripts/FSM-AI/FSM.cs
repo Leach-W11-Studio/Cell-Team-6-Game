@@ -202,7 +202,7 @@ public abstract class FSM : MonoBehaviour
     void Start()
     {
         //Active = false;
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.Find("Player").transform;
         navAgent = gameObject.GetComponent<PolyNavAgent>();
         enemyAnim = gameObject.GetComponent<Animator>();
         Initalize();
