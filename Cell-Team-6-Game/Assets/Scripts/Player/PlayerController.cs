@@ -129,6 +129,8 @@ public class PlayerController : MonoBehaviour
         else {
             sheild.SetActive(false);
         }
+
+        if (transform.localScale.y != 1 || transform.localScale.x != 1) { transform.localScale = Vector3.one; }
     }
 
     public void Freeze_Unfreeze()
@@ -165,7 +167,7 @@ public class PlayerController : MonoBehaviour
         float elapsed = 0.0f;
         while (elapsed < flingtime)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - sendspeed/10);
+            transform.position = new Vector2(transform.position.x, transform.position.y - sendspeed / 10);
             yield return new WaitForFixedUpdate();
             elapsed += Time.deltaTime;
         }

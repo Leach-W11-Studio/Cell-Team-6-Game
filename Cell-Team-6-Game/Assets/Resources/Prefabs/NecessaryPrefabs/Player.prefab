@@ -90,6 +90,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99af4c71675b364a9884a791e86e228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.025
+  fireRate: 0.1
   megaRateMod: 3
   stunRateMod: 0
   bulletTypeToFire: 
@@ -221,6 +222,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -317,6 +319,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -371,7 +374,7 @@ GameObject:
   - component: {fileID: 5650575861138662417}
   - component: {fileID: 404911391}
   m_Layer: 12
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -415,6 +418,7 @@ MonoBehaviour:
   gun: {fileID: 0}
   isWalking: 0
   canExplode: 0
+  frozen: 0
 --- !u!114 &4160563247002667189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,10 +440,14 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  onCollidePlayer:
+    m_PersistentCalls:
+      m_Calls: []
   isDead: 0
   isplayer: 0
+  isBoss: 0
+  isTentacle: 0
+  Deathtime: 0
 --- !u!50 &4160563246998496866
 Rigidbody2D:
   serializedVersion: 4
@@ -491,6 +499,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

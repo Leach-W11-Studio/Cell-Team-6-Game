@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class PlayerGunScript : MonoBehaviour
@@ -41,7 +42,7 @@ public class PlayerGunScript : MonoBehaviour
     //public for debug purposes, will be set to private later
     public bool shooting;
 
-    private bool canShoot;
+    public bool canShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -67,30 +68,33 @@ public class PlayerGunScript : MonoBehaviour
     {
         if (canShoot)
         {
-            if (inventory.ContainsBullet(PlayerInventory.BulletType.SpreadShot))
-            {
-                ObjectQueue.Instance.SpawnFromPool("SpreadBullet", transform.position, transform.rotation);
-            }
-            if (inventory.ContainsBullet(PlayerInventory.BulletType.DualShot))
-            {
-                ObjectQueue.Instance.SpawnFromPool("DoubleBullet", transform.position, transform.rotation);
-            }
-            if (inventory.ContainsBullet(PlayerInventory.BulletType.MegaShot))
-            {
-                if (megaCountDown == megaRateMod)
-                {
-                    ObjectQueue.Instance.SpawnFromPool("MegaBullet", transform.position, transform.rotation);
-                    megaCountDown = 0;
-                }
-                megaCountDown += 1;
-            }
-            if (inventory.ContainsBullet(PlayerInventory.BulletType.StunShot)) { }
-            //Depricated due to new ability system
-            /* if(inventory.ContainsBullet(PlayerInventory.BulletType.RicochetShot)) {
-                ObjectQueue.Instance.SpawnFromPool("RicochetBullet", transform.position, transform.rotation);
-            } */
+            //if (inventory.ContainsBullet(PlayerInventory.BulletType.SpreadShot))
+            //{
+            //    ObjectQueue.Instance.SpawnFromPool("SpreadBullet", transform.position, transform.rotation);
+            //}
+            //if (inventory.ContainsBullet(PlayerInventory.BulletType.DualShot))
+            //{
+            //    ObjectQueue.Instance.SpawnFromPool("DoubleBullet", transform.position, transform.rotation);
+            //}
+            //if (inventory.ContainsBullet(PlayerInventory.BulletType.MegaShot))
+            //{
+            //    if (megaCountDown == megaRateMod)
+            //    {
+            //        ObjectQueue.Instance.SpawnFromPool("MegaBullet", transform.position, transform.rotation);
+            //        megaCountDown = 0;
+            //    }
+            //    megaCountDown += 1;
+            //}
+            //if (inventory.ContainsBullet(PlayerInventory.BulletType.StunShot)) { }
+            ////Depricated due to new ability system
+            ///* if(inventory.ContainsBullet(PlayerInventory.BulletType.RicochetShot)) {
+            //    ObjectQueue.Instance.SpawnFromPool("RicochetBullet", transform.position, transform.rotation);
+            //} */
 
-            if (!inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) { ObjectQueue.Instance.SpawnFromPool(bulletTypeToFire, transform.position, transform.rotation); }
+            //if (!inventory.ContainsBullet(PlayerInventory.BulletType.DualShot)) { ObjectQueue.Instance.SpawnFromPool(bulletTypeToFire, transform.position, transform.rotation); }
+
+            GameObject bullet = ObjectQueue.Instance.SpawnFromPool(bulletTypeToFire, transform.position, transform.rotation);
+            Debug.Log("bullet is " + bullet, bullet);
 
             canShoot = false;
             StartCoroutine(FireRateCheck());

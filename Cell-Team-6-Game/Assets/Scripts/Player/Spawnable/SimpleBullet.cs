@@ -20,6 +20,16 @@ public class SimpleBullet : MonoBehaviour, IShootable
     private Vector3 lastPosition;
     private float rotationSpeed;
 
+    private string tagToDamage {
+        get {
+            if (transform.CompareTag("PlayerBullet")) { return "Enemy"; }
+            else if (transform.CompareTag("EnemyBullet")) { return "Player"; }
+            else { return "Player"; }
+        }
+    }
+
+    private int elapsedTime = 0;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +50,7 @@ public class SimpleBullet : MonoBehaviour, IShootable
     virtual protected void Shoot() {
         rb.velocity = Vector2.zero;
         rb.AddForce(transform.up * power);
+        elapsedTime = 0;
 
         rotationSpeed = Random.Range(-maxSpinSpeed * 60, maxSpinSpeed * 60);
     }
@@ -65,6 +76,7 @@ public class SimpleBullet : MonoBehaviour, IShootable
 
         // Debug.DrawRay(transform.position, velocity, Color.green);
         lastPosition = transform.position;
+        elapsedTime++;
     }
 
     protected void SpinBullet() {
@@ -86,8 +98,12 @@ public class SimpleBullet : MonoBehaviour, IShootable
             hitObject.takeDamage(CurrentDamage);
         } */
 
-        if(!collision.gameObject.CompareTag("onlyTrigger"))
+        if(!collision.gameObject.CompareTag("onlyTrigger") && (collision.gameObject.CompareTag(tagToDamage) || collision.gameObject.CompareTag("Environment")))
         {
+            if (elapsedTime < 10) {
+                Debug.Log("Prematurely destroyed by " + collision, collision.gameObject);
+                Debug.Break(); 
+            }
             gameObject.SetActive(false);
         }
     }
