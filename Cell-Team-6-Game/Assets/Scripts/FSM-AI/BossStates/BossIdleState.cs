@@ -114,6 +114,8 @@ public class BossIdleState : FSMState
             tentacle.GetComponent<HealthScript>().invincible = true;
             yield return new WaitForSeconds(Random.Range(0, timeRange));
             if (!tentacle) { continue; }
+
+            foreach (AnimatorControllerParameter param in tentacle.parameters) { tentacle.SetBool(param.name, false); }
             tentacle.SetBool("Idle", true);
         }
 
