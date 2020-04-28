@@ -14,7 +14,7 @@ public class LungeState : FSMState
     private float Delay;
     private Animator chosenTent;
     private bool behaviorComplete; //Set to True when the behavior is complete. This triggers transition back to Idle
-    
+
     public override void Act(Transform player, GameObject self)
     {
         animtime -= Time.deltaTime;
@@ -37,6 +37,11 @@ public class LungeState : FSMState
             parentFSM.SetTransition(FSMTransitions.OutOfHealth);
         }
 
+        //Tentacle Is Dead Check
+        else if(!chosenTent)
+        {
+            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+        }
         //Completion Check
         else if (behaviorComplete)
         {
@@ -106,15 +111,21 @@ public class LungeState : FSMState
         {
             if (tentacle != chosenTent)
             {
-                tentacle.SetBool("MoveLeft", false);
-                tentacle.SetBool("MoveRight", false);
+                /* tentacle.SetBool("MoveLeft", false);
+                tentacle.SetBool("MoveRight", false); */
+            }
+            tentacle.SetBool("MoveLeft", false);
+            tentacle.SetBool("MoveRight", false);
+        }
+
+        if (stateMachine.tentacleColliders.ContainsKey(chosenTent))
+        {
+            foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
+            {
+                bone.enabled = false;
             }
         }
 
-        foreach (CircleCollider2D bone in stateMachine.tentacleColliders[chosenTent])
-        {
-            bone.enabled = false;
-        }
     }
 
 }

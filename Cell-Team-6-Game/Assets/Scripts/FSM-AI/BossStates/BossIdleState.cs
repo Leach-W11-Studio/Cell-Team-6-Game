@@ -26,7 +26,7 @@ public class BossIdleState : FSMState
         stateID = FSMStateID.BossIdle;
         roarThreshold = numBeforeRoar;
     }
-    
+
 
     public override void Act(Transform player, GameObject self)
     {
@@ -96,21 +96,26 @@ public class BossIdleState : FSMState
         lastPlayerPos = player.position; //Is this referenced by anything?
     }
 
-    private void StopAnimation() {
+    private void StopAnimation()
+    {
         foreach (Animator tentacle in stateMachine.tentacles)
         {
-            tentacle.SetBool("Idle", false);
+            if (tentacle) { tentacle.SetBool("Idle", false); }
         }
     }
 
-    private IEnumerator StartAnimation() {
+    private IEnumerator StartAnimation()
+    {
         float timeRange = 0.35f;
         animDone = false;
-        foreach(Animator tentacle in stateMachine.tentacles) {
+        foreach (Animator tentacle in stateMachine.tentacles)
+        {
             if (!tentacle) { continue; }
             tentacle.GetComponent<HealthScript>().invincible = true;
             yield return new WaitForSeconds(Random.Range(0, timeRange));
             if (!tentacle) { continue; }
+
+            foreach (AnimatorControllerParameter param in tentacle.parameters) { tentacle.SetBool(param.name, false); }
             tentacle.SetBool("Idle", true);
         }
 

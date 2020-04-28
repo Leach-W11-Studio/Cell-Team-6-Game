@@ -23,9 +23,16 @@ public class GameMaster : MonoBehaviour
             Destroy(gameMaster.gameObject);
             gameMaster = this;
         }
-        else {
+        else
+        {
             gameMaster = this;
         }
+
+        #if UNITY_EDITOR
+            Debug.unityLogger.logEnabled = true;
+        #else
+            Debug.unityLogger.logEnabled = false;
+        #endif
     }
 
     private void Start()
@@ -35,17 +42,20 @@ public class GameMaster : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetButtonDown("Console")) { 
+        if (Input.GetButtonDown("Console"))
+        {
             Debug.developerConsoleVisible = !Debug.developerConsoleVisible;
         }
     }
 
-    public void RestartLevel() {
+    public void RestartLevel()
+    {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         LoadLevel(sceneIndex);
     }
 
-    public void LoadLevel(int sceneIndex) {
+    public void LoadLevel(int sceneIndex)
+    {
         Time.timeScale = 1;
         SceneManager.LoadScene(sceneIndex);
     }
@@ -56,24 +66,28 @@ public class GameMaster : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void Quit() {
+    public void Quit()
+    {
         Application.Quit();
     }
 
-    public void PauseGame() {
+    public void PauseGame()
+    {
         paused = true;
         Time.timeScale = 0;
         if (pauseMenu) { Destroy(pauseMenu); }
         pauseMenu = Instantiate(pauseMenuPrefab, canvas.transform);
     }
 
-    public void UnPauseGame() {
+    public void UnPauseGame()
+    {
         paused = false;
         Time.timeScale = 1;
         if (pauseMenu) { pauseMenu.SetActive(false); }
     }
 
-    public void LoseGame() {
+    public void LoseGame()
+    {
         paused = true;
         defeated = true;
         Instantiate(defeatScreenPrefab, canvas.transform);
