@@ -1574,6 +1574,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+        type: 3}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: enemyAnim
@@ -1849,6 +1854,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+        type: 3}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: enemyAnim
@@ -2822,6 +2832,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+        type: 3}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: enemyAnim
@@ -8244,6 +8259,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+        type: 3}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: enemyAnim
@@ -8432,11 +8452,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
-    - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
-      propertyPath: enemyAnim
+      propertyPath: _map
       value: 
-      objectReference: {fileID: 2032786096}
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 1816301911787820825, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: m_Name
@@ -9689,6 +9709,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+        type: 3}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: enemyAnim
@@ -9952,7 +9977,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208289168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: -59.5, z: 0}
+  m_LocalPosition: {x: -10.41, y: -58.98, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -14475,6 +14500,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+        type: 3}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: enemyAnim
@@ -15677,6 +15707,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+        type: 3}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: enemyAnim
@@ -16361,12 +16396,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2026624892}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2032786096 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7544034619591615167, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
-    type: 3}
-  m_PrefabInstance: {fileID: 1026578036}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2039098906
 GameObject:
   m_ObjectHideFlags: 0
@@ -16410,6 +16439,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217484631}
     m_Modifications:
+    - target: {fileID: 928416514380308633, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
+        type: 3}
+      propertyPath: _map
+      value: 
+      objectReference: {fileID: 1907713646}
     - target: {fileID: 928416514380308638, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
         type: 3}
       propertyPath: enemyAnim

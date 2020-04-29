@@ -129,7 +129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   navAgent: {fileID: 0}
+  enemyAnim: {fileID: 7544034619591615167}
   Active: 0
+  CurrentStateID: 0
   healthScript: {fileID: 0}
   rotationSpeed: 5
   agroDistance: 100
@@ -159,6 +161,7 @@ MonoBehaviour:
       m_Calls: []
   isDead: 0
   isplayer: 0
+  isBoss: 0
 --- !u!61 &2538470988449376801
 BoxCollider2D:
   m_ObjectHideFlags: 0
