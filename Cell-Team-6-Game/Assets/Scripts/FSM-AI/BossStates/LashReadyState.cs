@@ -40,7 +40,7 @@ public class LashReadyState : FSMState
         Radius playerRad = stateMachine.RadRangeCheck(player);
 
         //Obligitory Dead Check
-        if (stateMachine.healthScript.isDead || stateMachine.healthScript.currentHealth <= 0)
+        if (stateMachine.coreHealthScript.isDead || stateMachine.coreHealthScript.currentHealth <= 0)
         {
             stateMachine.SetTransition(FSMTransitions.OutOfHealth);
         }

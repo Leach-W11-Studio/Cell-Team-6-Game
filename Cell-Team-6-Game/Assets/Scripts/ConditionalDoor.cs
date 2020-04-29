@@ -19,6 +19,9 @@ public class ConditionalDoor : DoorScript
     private void Start()
     {
         base.Start();
+        if (playerInArea) {
+            //onPlayerEnter.Invoke();
+        }
         conditionalArea = transform.Find("Condition Area").GetComponent<PolygonCollider2D>();
     }
 

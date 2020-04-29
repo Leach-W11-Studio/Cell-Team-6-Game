@@ -40,7 +40,7 @@ public abstract class Ability : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Cast attempted on " + abilityName + " but failed");
+            Debug.Log("Cast attempted on " + abilityName + " but failed");
         }
     }
     protected abstract void CastAction();

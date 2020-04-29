@@ -6,6 +6,7 @@ using PolyNav;
 /// <summary>
 /// Contains all fms states to be implimented in any FSM of this project
 /// </summary>
+[System.Serializable]
 public enum FSMStateID
 {
     none = 0,
@@ -19,8 +20,11 @@ public enum FSMStateID
 
     //Boss States
     BossIdle,
+    BossIdlePhase2,
+    Phase2Setup,
     Lash,
     Lunge,
+    Roar,
     GrappleLash,
     Projectile,
     Tracking,
@@ -57,7 +61,9 @@ public enum FSMTransitions
     GreaterThanRad2,
     OORad1AndChance, //Out of Rad 2, and random chance to switch to shoot proc'd
     HealthLessThanThreshold,
+    WallSpawnTriggered,
     BehaviorComplete,
+    PlayerInRangeTooLong,
 }
 
 public abstract class FSM : MonoBehaviour
@@ -73,7 +79,7 @@ public abstract class FSM : MonoBehaviour
 
     public PolyNavAgent navAgent;
     public Animator enemyAnim;
-    
+
     /// <summary>
     /// Whether or not the enemy is active and executing their relevent functions
     /// </summary>
@@ -82,15 +88,37 @@ public abstract class FSM : MonoBehaviour
     private FSMState currentState;
     public FSMState CurrentState { get { return currentState; } }
 
+    /// <summary>
+    /// Used to show State in inspector. DO NOT EDIT
+    /// </summary>
+    [Tooltip("Used to show State in inspector. DO NOT EDIT")]
+    public FSMStateID CurrentStateID = FSMStateID.none;
+
     private List<FSMState> FSMStates = new List<FSMState>();
 
-    public void Activate() {
+    public FSMState GetFSMState(FSMStateID stateID)
+    {
+        if (FSMStates.Exists(x => x.StateID == stateID))
+        {
+            return FSMStates.Find(x => x.StateID == stateID);
+        }
+        else
+        {
+            Debug.LogError("Error: " + stateID.ToString() + " Is not present within FSMStates");
+            return null;
+        }
+    }
+    
+    public void Activate()
+    {
         Active = true;
         FollowCamera.instance.AddTarget(transform);
     }
 
-    public void Deactivate() {
+    public void Deactivate()
+    {
         Active = false;
+        FollowCamera.instance.RemoveTarget(transform);
     }
 
     /// <summary>
@@ -189,6 +217,9 @@ public abstract class FSM : MonoBehaviour
             currentState.Reason(playerTransform, gameObject);
             FSMUpdate();
         }
+
+        //Code to show Current State in Inspector
+        CurrentStateID = currentState.StateID;
     }
 
     void FixedUpdate()

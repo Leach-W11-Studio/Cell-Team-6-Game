@@ -7,6 +7,8 @@ public class TrackRoundState : FSMState
     private float attackSpeed;
     private float projectileVelocity;
     private float meleeDistance;
+    private bool behaviorComplete;
+    private BossEnemy stateMachine;
 
     public TrackRoundState()
     {
@@ -15,21 +17,32 @@ public class TrackRoundState : FSMState
 
     public override void Act(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void OnStateEnter(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        behaviorComplete = false;
+        stateMachine = self.GetComponent<BossEnemy>();
     }
 
     public override void OnStateExit(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void Reason(Transform player, GameObject self)
     {
-        throw new System.NotImplementedException();
+        //Death Check
+        if (stateMachine.coreHealthScript.currentHealth <= 0)
+        {
+            self.GetComponent<BossEnemy>().SetTransition(FSMTransitions.OutOfHealth);
+        }
+
+        //Completion Check
+        else if (behaviorComplete)
+        {
+            parentFSM.SetTransition(FSMTransitions.BehaviorComplete);
+        }
     }
 }

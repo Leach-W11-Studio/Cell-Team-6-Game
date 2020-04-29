@@ -14,19 +14,25 @@ public class ListClass
 public class SceneChanger : MonoBehaviour
 {
     public string Next_Level;
+    public Vector2 Next_Position;
+    private Vector2 Position_Load;
+    private Transform player_Trans;
     public HealthScript Variables;
     public ListClass Abilitysave = new ListClass(); 
     public List<Ability> currentAbilities;
 
     private void Start()
     {
+        Variables = FindObjectOfType<PlayerController>().GetComponent<HealthScript>();
         File.Delete(Application.persistentDataPath + "/AbilitySave.txt");
         Abilitysave.listSave.Clear();
+        Position_Load = Next_Position;
     }
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -34,7 +40,7 @@ public class SceneChanger : MonoBehaviour
 
     public void loadnext()
     {
-        SceneManager.LoadScene(Next_Level);
+        GameMaster.gameMaster.LoadLevel(Next_Level);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -82,9 +88,12 @@ public class SceneChanger : MonoBehaviour
         }
 
         BinaryFormatter binary = new BinaryFormatter();
-        using (FileStream w = File.Open(Application.persistentDataPath + "/AbilitySave.txt", FileMode.Open))
+        if (new FileInfo(Application.persistentDataPath + "/AbilitySave.txt").Exists)
         {
-            Abilitysave = (ListClass)binary.Deserialize(w);
+            using (FileStream w = File.Open(Application.persistentDataPath + "/AbilitySave.txt", FileMode.Open))
+            {
+                Abilitysave = (ListClass)binary.Deserialize(w);
+            }
         }
 
         AbilityCaster abil_cast = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<AbilityCaster>();
@@ -93,6 +102,11 @@ public class SceneChanger : MonoBehaviour
             var next_abil = (GameObject)Resources.Load("Prefabs/AbilityPrefabs/" + Abilityname);
             Debug.Log("Trying to add ability" + Abilityname);
             abil_cast.AddAbility(next_abil);
+        }
+        if (Position_Load != new Vector2(0, 0))
+        {
+            player_Trans = GameObject.FindGameObjectWithTag("Player").transform;
+            player_Trans.position = Position_Load;
         }
     }
 

@@ -21,37 +21,118 @@ public class BossEnemy : FSM
 
     [SerializeField]
     public RadRanges radRange;
-    public HealthScript healthScript;
+    public HealthScript coreHealthScript;
+    protected List<HealthScript> tentacleHealthScripts = new List<HealthScript>();
     public float shootTime;
     public float shootInterval;
     [Range(0f, 1f)]
     public float shootCone;
+    [Range(0f, 1f)]
+    public float wallSpawnThreshold;
 
+    public Animator CoreAnim;
+    public float wallSpawnInterval;
+
+    [HideInInspector]
     public List<Animator> tentacles;
-    public float Phase2Threshold;
+    [HideInInspector]
+    public List<CircleCollider2D> bones;
+    [HideInInspector]
+    public Dictionary<Animator, List<CircleCollider2D>> tentacleColliders;
+    [HideInInspector]
+    public float timeSinceWallSpawn = 0;
+
+    [Tooltip("The number of remaining tentacles at which the boss transitions to phase 2")]
+    public int Phase2Threshold = 3;
     public float lashDistance;
     public float projectileDistance;
     public int shootChance = 10;
 
+    [HideInInspector]
+    public List<BossWalls> bossWallList = new List<BossWalls>();
+
+    public bool doWallSpawnTrigger { get; protected set; } //Will set the trigger for wall spawn, given the need for complex timing logic.
+
     public Transform muzzle;
+
+    private bool phase2 = false;
+    private float healthPercent {
+        get {
+            return tentacles.Count / 5;
+        }
+    }
     protected override void Initalize()
     {
         //currentHealth = initalHealth;
-        healthScript = GetComponent<HealthScript>();
+        coreHealthScript = GetComponent<HealthScript>();
+        coreHealthScript.invincible = true;
         tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
+        tentacleColliders = new Dictionary<Animator, List<CircleCollider2D>>();
+        bossWallList = new List<BossWalls>(gameObject.GetComponentsInChildren<BossWalls>());
+
+        foreach (var wall in bossWallList) { wall.gameObject.SetActive(false); }
+        //Sets the bones for each tentcle in a dictionary... can be referenced via tentacleColliders[tentacle]
+        foreach (var tentacle in tentacles)
+        {
+            //Populates list of health scripts
+            tentacleHealthScripts.Add(tentacle.gameObject.GetComponent<HealthScript>());
+
+            //Animations and Bones
+            bones = new List<CircleCollider2D>(tentacle.transform.GetComponentsInChildren<CircleCollider2D>());
+            Debug.Log("There are " + bones.Count + " bones in this tentacle.", tentacle);
+            tentacleColliders.Add(tentacle, bones);
+            //Sets bones inactive
+            foreach (var bone in bones)
+            {
+                bone.enabled = false;
+            }
+        }
+        doWallSpawnTrigger = false;
         //Phase2Threshold = 200;
         muzzle = transform.Find("Muzzle");
         BuildFSM();
     }
+
+    private void ResetWallCheck() { doWallSpawnTrigger = true; }
+
+    public void RemoveTentacle(HealthScript tentacleHealthScript)
+    {
+        if (tentacleHealthScripts.Contains(tentacleHealthScript))
+        {
+            tentacleHealthScripts.Remove(tentacleHealthScript);
+            tentacles.Remove(tentacleHealthScript.GetComponent<Animator>());
+        }
+        else
+        {
+            Debug.LogError("Warning: TentacleHealthScripts does not contain the referenced TentacleHealthScript");
+            return;
+        }
+
+        Debug.Log(tentacleHealthScripts.Count + " Tentacles remain in TentacleHealthScripts");
+        if (tentacleHealthScripts.Count <= 0)
+        {
+            coreHealthScript.invincible = false;
+            Debug.Log("Boss Core now vulnerable");
+        }
+    }
+
+    public int CheckTentacleCount()
+    {
+        return tentacleHealthScripts.Count;
+    }
+
     protected virtual void BuildFSM() //To Finish
     {
+        phase2 = false;
+
         //Phase 1 Stuff
         BossIdleState bossIdle = new BossIdleState();
         bossIdle.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
-        //Add transition for HealthLessThanThreshold here - Goes to phase 2
+        bossIdle.AddTransitionState(FSMStateID.Phase2Setup, FSMTransitions.HealthLessThanThreshold);
         //---------------------------------
         bossIdle.AddTransitionState(FSMStateID.LashReady, FSMTransitions.InMeleeRange);
         bossIdle.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
+        bossIdle.AddTransitionState(FSMStateID.Roar, FSMTransitions.PlayerInRangeTooLong);
 
         LashReadyState lashReady = new LashReadyState(shootChance);
         lashReady.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
@@ -67,17 +148,27 @@ public class BossEnemy : FSM
         lunge.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         lunge.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
 
-        ProjectileAttackState projectile = new ProjectileAttackState();
+        ProjectileAttackState projectile = new ProjectileAttackState("BossBulletPhase1");
         projectile.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
         projectile.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
 
-        DeadState dead = new DeadState();
+        RoarState roar = new RoarState();
+        roar.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        roar.AddTransitionState(FSMStateID.BossIdle, FSMTransitions.BehaviorComplete);
+
+        SetupPhase2State phase2Setup = new SetupPhase2State();
+        phase2Setup.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        phase2Setup.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+
+        BossDeadState dead = new BossDeadState();
 
         AddFSMState(bossIdle);
         AddFSMState(projectile);
+        AddFSMState(roar);
         AddFSMState(lashReady);
         AddFSMState(lash);
         AddFSMState(lunge);
+        AddFSMState(phase2Setup);
         AddFSMState(dead);
 
         #region Depricated Code
@@ -138,6 +229,43 @@ public class BossEnemy : FSM
         #endregion
     }
 
+    public virtual void RebuildFSMForPhase2()
+    {
+        if (phase2) { return; }
+        phase2 = true;
+
+        BossIdleStatePhase2 bossIdle2 = new BossIdleStatePhase2();
+        bossIdle2.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        bossIdle2.AddTransitionState(FSMStateID.GrappleLash, FSMTransitions.InMeleeRange);
+        bossIdle2.AddTransitionState(FSMStateID.Projectile, FSMTransitions.GreaterThanRad2);
+        bossIdle2.AddTransitionState(FSMStateID.WallSpawn, FSMTransitions.WallSpawnTriggered);
+        bossIdle2.AddTransitionState(FSMStateID.Roar, FSMTransitions.PlayerInRangeTooLong);
+
+        RemoveFSMState(FSMStateID.BossIdle);
+        RemoveFSMState(FSMStateID.Lunge);
+        RemoveFSMState(FSMStateID.Projectile);
+        AddFSMState(bossIdle2);
+
+        var lashState = GetFSMState(FSMStateID.Lash);
+        lashState.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        var lungeState = new GrappleLashState();
+        lungeState.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        lungeState.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        var projectile = new ProjectileAttackState("BossBulletPhase2");
+        projectile.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+        projectile.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        var roar = GetFSMState(FSMStateID.Roar);
+        roar.EditTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+
+        WallSpawnState wallSpawn = new WallSpawnState(bossWallList);
+        wallSpawn.AddTransitionState(FSMStateID.BossDead, FSMTransitions.OutOfHealth);
+        wallSpawn.AddTransitionState(FSMStateID.BossIdlePhase2, FSMTransitions.BehaviorComplete);
+
+        AddFSMState(wallSpawn);
+        AddFSMState(lungeState);
+        AddFSMState(projectile);
+    }
+
     /// <summary>
     /// Returns the raidus range of the other object in relation to the current object.
     /// </summary>
@@ -163,7 +291,16 @@ public class BossEnemy : FSM
 
     protected override void FSMUpdate()
     {
-        //throw new System.NotImplementedException();
+
+        if (phase2)
+        {
+            timeSinceWallSpawn += Time.deltaTime;
+        }
+        tentacles = new List<Animator>(transform.Find("Boss Body").GetComponentsInChildren<Animator>());
+        if (tentacles.Count == 0)
+        {
+            coreHealthScript.invincible = false;
+        }
     }
 
     protected override void FSMFixedUpdate()
