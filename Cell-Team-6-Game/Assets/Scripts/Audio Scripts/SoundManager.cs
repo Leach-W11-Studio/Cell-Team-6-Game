@@ -31,15 +31,18 @@ public class SoundManager : MonoBehaviour
         string SoundId = hash.ToString() ;
         Debug.Log("in play:" + SoundId);
         Debug.Log("in go:" + SoundId);
-
+        AudioSource toPlay = null;
         if (SoundList[SoundId] == null)
         {
-            Debug.Log("no Source error.");
-            return false;
-
+            Debug.Log("Playing from camera" + clip);
+            toPlay = GameObject.FindWithTag("SoundManager").GetComponent<AudioSource>();
         }
-        AudioSource toPlay = (AudioSource)SoundList[SoundId];
-        if(toPlay == null)
+        else { 
+             toPlay = (AudioSource)SoundList[SoundId];
+        }
+
+
+        if (toPlay == null)
         {
             Debug.Log("Source error.");
             return false;
