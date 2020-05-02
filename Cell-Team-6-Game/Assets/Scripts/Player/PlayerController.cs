@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     GameObject hitboxHighlight;
     PlayerInventory inventory;
-    HealthScript playerHealth;
+    public HealthScript playerHealth;
     GameObject sheild;
     SpriteRenderer playerSprite;
     private Animator PlayerAnim;

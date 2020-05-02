@@ -100,10 +100,6 @@ public class SimpleBullet : MonoBehaviour, IShootable
 
         if(!collision.gameObject.CompareTag("onlyTrigger") && (collision.gameObject.CompareTag(tagToDamage) || collision.gameObject.CompareTag("Environment")))
         {
-            if (elapsedTime < 10) {
-                Debug.Log("Prematurely destroyed by " + collision, collision.gameObject);
-                Debug.Break(); 
-            }
             gameObject.SetActive(false);
         }
     }

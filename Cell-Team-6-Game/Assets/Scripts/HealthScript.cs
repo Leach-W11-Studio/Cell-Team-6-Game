@@ -32,7 +32,6 @@ public class HealthScript : MonoBehaviour
         Shaker = GameObject.Find("Main Camera").GetComponent<FollowCamera>();
         PlayerAnim = gameObject.GetComponent<Animator>();
         TentAnim = gameObject.GetComponentInChildren<Animator>();
-        onTakeDamage = new UnityEvent();
         //currentHealth = maxHealth;
         if (transform.tag == "Player") { isplayer = true; }
 

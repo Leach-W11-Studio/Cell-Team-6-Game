@@ -3257,6 +3257,7 @@ GameObject:
   - component: {fileID: 62688084}
   - component: {fileID: 62688083}
   - component: {fileID: 62688085}
+  - component: {fileID: 62688086}
   m_Layer: 9
   m_Name: wall_1_B (2)
   m_TagString: Environment
@@ -3338,7 +3339,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3361,6 +3362,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &62688086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62688082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!4 &67857127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1201129987600845650, guid: dbf673bffd05b1c4aa9fc151a3a4e205,
@@ -4054,6 +4073,7 @@ GameObject:
   - component: {fileID: 109651211}
   - component: {fileID: 109651210}
   - component: {fileID: 109651212}
+  - component: {fileID: 109651213}
   m_Layer: 9
   m_Name: wall_1_B (5)
   m_TagString: Environment
@@ -4135,7 +4155,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4158,6 +4178,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &109651213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109651209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &114048568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5993,6 +6031,7 @@ GameObject:
   - component: {fileID: 229175955}
   - component: {fileID: 229175957}
   - component: {fileID: 229175956}
+  - component: {fileID: 229175958}
   m_Layer: 9
   m_Name: wall_1_B (18)
   m_TagString: Environment
@@ -6024,7 +6063,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -6097,6 +6136,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &229175958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229175954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!4 &229323579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1816301911787820827, guid: 0c18677f6451b2f4f9ed15a0983cfc62,
@@ -8016,6 +8073,7 @@ GameObject:
   - component: {fileID: 320373025}
   - component: {fileID: 320373024}
   - component: {fileID: 320373023}
+  - component: {fileID: 320373026}
   m_Layer: 9
   m_Name: wall_1_B (17)
   m_TagString: Environment
@@ -8033,7 +8091,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8120,6 +8178,24 @@ Transform:
   m_Father: {fileID: 2040887988}
   m_RootOrder: 73
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -170.23001}
+--- !u!114 &320373026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320373022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1 &321102030
 GameObject:
   m_ObjectHideFlags: 0
@@ -8904,6 +8980,7 @@ GameObject:
   - component: {fileID: 355407139}
   - component: {fileID: 355407138}
   - component: {fileID: 355407140}
+  - component: {fileID: 355407141}
   m_Layer: 9
   m_Name: wall_1_B (7)
   m_TagString: Environment
@@ -8985,7 +9062,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9008,6 +9085,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &355407141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355407137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &368144623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10676,6 +10771,7 @@ GameObject:
   - component: {fileID: 435821166}
   - component: {fileID: 435821165}
   - component: {fileID: 435821164}
+  - component: {fileID: 435821167}
   m_Layer: 9
   m_Name: wall_1_B (16)
   m_TagString: Environment
@@ -10693,7 +10789,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10780,6 +10876,24 @@ Transform:
   m_Father: {fileID: 2040887988}
   m_RootOrder: 70
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -173.139}
+--- !u!114 &435821167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435821163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!4 &437113184 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1201129987600845650, guid: dbf673bffd05b1c4aa9fc151a3a4e205,
@@ -11038,12 +11152,12 @@ PrefabInstance:
     - target: {fileID: 1943273198779000141, guid: fe451f07b1b2148c2914cf57a89d1f94,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3770654
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 1943273198779000141, guid: fe451f07b1b2148c2914cf57a89d1f94,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.0874703
+      value: 199.2
       objectReference: {fileID: 0}
     - target: {fileID: 1943273198779000141, guid: fe451f07b1b2148c2914cf57a89d1f94,
         type: 3}
@@ -11094,6 +11208,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943273198779000142, guid: fe451f07b1b2148c2914cf57a89d1f94,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7147860637674237666, guid: fe451f07b1b2148c2914cf57a89d1f94,
         type: 3}
@@ -20976,6 +21095,7 @@ GameObject:
   - component: {fileID: 882534784}
   - component: {fileID: 882534783}
   - component: {fileID: 882534785}
+  - component: {fileID: 882534786}
   m_Layer: 9
   m_Name: wall_1_B (10)
   m_TagString: Environment
@@ -21057,7 +21177,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -21080,6 +21200,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &882534786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882534782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!4 &885394363 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1201129987600845650, guid: dbf673bffd05b1c4aa9fc151a3a4e205,
@@ -23680,6 +23818,7 @@ GameObject:
   - component: {fileID: 928240840}
   - component: {fileID: 928240839}
   - component: {fileID: 928240841}
+  - component: {fileID: 928240842}
   m_Layer: 9
   m_Name: wall_1_B (4)
   m_TagString: Environment
@@ -23761,7 +23900,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -23784,6 +23923,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &928240842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928240838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1 &929859275
 GameObject:
   m_ObjectHideFlags: 0
@@ -24526,6 +24683,7 @@ GameObject:
   - component: {fileID: 974214414}
   - component: {fileID: 974214413}
   - component: {fileID: 974214415}
+  - component: {fileID: 974214416}
   m_Layer: 9
   m_Name: wall_1_B (1)
   m_TagString: Environment
@@ -24607,7 +24765,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24630,6 +24788,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &974214416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974214412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1 &979939020
 GameObject:
   m_ObjectHideFlags: 0
@@ -28336,6 +28512,7 @@ GameObject:
   - component: {fileID: 1055635540}
   - component: {fileID: 1055635539}
   - component: {fileID: 1055635538}
+  - component: {fileID: 1055635541}
   m_Layer: 9
   m_Name: wall_1_B (14)
   m_TagString: Environment
@@ -28353,7 +28530,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -28440,6 +28617,24 @@ Transform:
   m_Father: {fileID: 2040887988}
   m_RootOrder: 71
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -170.23001}
+--- !u!114 &1055635541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055635537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &1072783945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29437,6 +29632,7 @@ GameObject:
   - component: {fileID: 1143090452}
   - component: {fileID: 1143090451}
   - component: {fileID: 1143090450}
+  - component: {fileID: 1143090453}
   m_Layer: 9
   m_Name: wall_1_B (15)
   m_TagString: Environment
@@ -29454,7 +29650,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -29541,6 +29737,24 @@ Transform:
   m_Father: {fileID: 2040887988}
   m_RootOrder: 72
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -170.23001}
+--- !u!114 &1143090453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143090449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!4 &1145562522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3709743540041123029, guid: 610156cb322f54089a1856d4134e9da7,
@@ -32926,6 +33140,7 @@ GameObject:
   - component: {fileID: 1255928138}
   - component: {fileID: 1255928137}
   - component: {fileID: 1255928139}
+  - component: {fileID: 1255928140}
   m_Layer: 9
   m_Name: wall_1_B (8)
   m_TagString: Environment
@@ -33007,7 +33222,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33030,6 +33245,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &1255928140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255928136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &1260274539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35937,6 +36170,7 @@ GameObject:
   - component: {fileID: 1447575464}
   - component: {fileID: 1447575463}
   - component: {fileID: 1447575465}
+  - component: {fileID: 1447575466}
   m_Layer: 9
   m_Name: wall_1_B (3)
   m_TagString: Environment
@@ -36018,7 +36252,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -36041,6 +36275,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &1447575466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447575462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1 &1449792202
 GameObject:
   m_ObjectHideFlags: 0
@@ -39117,6 +39369,7 @@ GameObject:
   - component: {fileID: 1597441554}
   - component: {fileID: 1597441553}
   - component: {fileID: 1597441552}
+  - component: {fileID: 1597441555}
   m_Layer: 9
   m_Name: wall_1_B (12)
   m_TagString: Environment
@@ -39134,7 +39387,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -39221,6 +39474,24 @@ Transform:
   m_Father: {fileID: 2040887988}
   m_RootOrder: 68
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -171.492}
+--- !u!114 &1597441555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597441551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &1604635876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44987,6 +45258,7 @@ GameObject:
   - component: {fileID: 1821630730}
   - component: {fileID: 1821630729}
   - component: {fileID: 1821630728}
+  - component: {fileID: 1821630731}
   m_Layer: 9
   m_Name: wall_1_B (11)
   m_TagString: Environment
@@ -45004,7 +45276,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -45091,6 +45363,24 @@ Transform:
   m_Father: {fileID: 2040887988}
   m_RootOrder: 67
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -197.551}
+--- !u!114 &1821630731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821630727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!114 &1823440815 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 656598631131284015, guid: df6f94e3fdeb4a94cb6f4a59d5ac8549,
@@ -46204,6 +46494,7 @@ GameObject:
   - component: {fileID: 1912553540}
   - component: {fileID: 1912553539}
   - component: {fileID: 1912553541}
+  - component: {fileID: 1912553542}
   m_Layer: 9
   m_Name: wall_1_B
   m_TagString: Environment
@@ -46285,7 +46576,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -46308,6 +46599,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &1912553542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912553538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &1919684865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46769,6 +47078,7 @@ GameObject:
   - component: {fileID: 1940343762}
   - component: {fileID: 1940343761}
   - component: {fileID: 1940343763}
+  - component: {fileID: 1940343764}
   m_Layer: 9
   m_Name: wall_1_B (9)
   m_TagString: Environment
@@ -46850,7 +47160,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -46873,6 +47183,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &1940343764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940343760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &1940862317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47518,6 +47846,7 @@ GameObject:
   - component: {fileID: 1966277376}
   - component: {fileID: 1966277375}
   - component: {fileID: 1966277374}
+  - component: {fileID: 1966277377}
   m_Layer: 9
   m_Name: wall_1_B (13)
   m_TagString: Environment
@@ -47535,7 +47864,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -47622,6 +47951,24 @@ Transform:
   m_Father: {fileID: 2040887988}
   m_RootOrder: 69
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -137.95201}
+--- !u!114 &1966277377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966277373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &1966716736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49809,6 +50156,7 @@ GameObject:
   - component: {fileID: 1998131129}
   - component: {fileID: 1998131128}
   - component: {fileID: 1998131130}
+  - component: {fileID: 1998131131}
   m_Layer: 9
   m_Name: wall_1_B (6)
   m_TagString: Environment
@@ -49890,7 +50238,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -49913,6 +50261,24 @@ PolygonCollider2D:
       - {x: 1.775, y: -0.32999998}
       - {x: 1.8349999, y: -0.31}
       - {x: 1.8349999, y: -0.01}
+--- !u!114 &1998131131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998131127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f7f33d8fc7c0419b2308165807ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeType: 0
+  extraOffset: 0
+  invertPolygon: 1
+  edgeWidth: 1
+  spriteShapeController: {fileID: 0}
+  shapeMesh: {fileID: 0}
 --- !u!1001 &1998888045
 PrefabInstance:
   m_ObjectHideFlags: 0

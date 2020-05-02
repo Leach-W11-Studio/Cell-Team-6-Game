@@ -1,10 +1,23 @@
-﻿using System.Collections;
+﻿using PolyNav;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
     public Animator DoorAnim;
+
+    private PolyNavObstacle _navObstacle;
+    private PolyNavObstacle navObstacle {
+        get {
+            if (!_navObstacle)
+            {
+                _navObstacle = GetComponent<PolyNavObstacle>();
+            }
+
+            return _navObstacle;
+        }
+    }
     
     protected virtual void Start()
     {
@@ -12,10 +25,12 @@ public class DoorScript : MonoBehaviour
     }
 
     public virtual void Open() {
+        navObstacle.enabled = false;
         DoorAnim.SetBool("isopen", true);
     }
 
     public virtual void Close() {
+        navObstacle.enabled = true;
         DoorAnim.SetBool("isopen", false);
     }
 
